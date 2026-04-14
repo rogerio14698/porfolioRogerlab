@@ -1,0 +1,11 @@
+/*variables*/
+@import url('style/variables/normalize.css');
+@import url('style/variables/global.css');
+@import url('style/variables/root.css');
+@import url('style/variables/btn.css');
+
+/*Pages*/
+@import url('style/pages/nav.css');
+@import url('style/pages/home.css');
+
+
