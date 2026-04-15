@@ -1,6 +1,69 @@
-
-.landing, .publications, .projects, .about, .contact {
-    height: 80vh;
+body {
     background-color: #333;
-    margin-bottom: 20px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.mainContent {
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: .3fr 2fr 4fr;
+    width: 100%;
+    background-color: #050610;
+    min-height: 90vh;
+    margin: 20px;
+}
+
+#mainShaderBg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.mainContent > *:not(#mainShaderBg) {
+    position: relative;
+    z-index: 1;
+}
+
+/*Bordes*/
+.textoLanding {
+    border: 10px solid #000;
+    border-left: none;
+}
+
+.navInner {
+    border-bottom: 10px solid black;
+    border-top: 10px solid #000;
+}
+.themeToggle{
+    	border-right: 10px solid #000;
+}
+/*Fin de los bordes*/
+
+
+.textoLanding {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+.textoLanding p {
+    color: #333;
+    max-width: 600px;
+    text-align: justify;
+    margin-right: auto;
+    margin-bottom: 100px;
+}
+
+.textoLanding {
+    padding: 30px;
+
 }

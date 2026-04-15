@@ -8,7 +8,7 @@ html {
 body {
   margin: 0;
   padding: 0;
-  background-color: #222;
+  font-family: 'Courier Prime', 'Courier New', Courier, monospace;
 }
 h1, h2, h3, h4, h5, h6, p, a, ul, ol, li {
   margin: 0;
@@ -21,8 +21,6 @@ a, ul, ol {
   list-style-type: none;
 }
 
-.container {
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto;
+.alinearTitulo{
+  align-self: flex-start;
 }
