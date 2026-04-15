@@ -4,6 +4,9 @@
     align-items: flex-start;
     justify-content: space-around;
     padding: 0 12px;
+    font-family: var(--fuenteTitulo);
+
+
 }
 
 .navText{
@@ -15,13 +18,16 @@
     padding: 20px;
 }
 .navText h1{
-    font-size: 2rem;
-    color: #333;
+    font-weight: 100;
+    font-size: var(--tamanoTitulo);
+    color: var(--colorTextoLight);
 
 }
 .navText p{
-    color: #555;
-    margin-left: 20px;
+    color: var(--colorTextoLight);
+    margin-left: auto;
+    text-decoration: underline;
+    font-weight: 100;
 
 }
 

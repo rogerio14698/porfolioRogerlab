@@ -17,9 +17,9 @@
 </head>
 
 <body class="layout">
+    <canvas id="mainShaderBg" aria-hidden="false"></canvas>
     @yield('nav')
     <main class="mainContent">
-        <canvas id="mainShaderBg" aria-hidden="false"></canvas>
         @yield('content')
     </main>
 

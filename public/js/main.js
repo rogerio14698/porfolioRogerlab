@@ -9,7 +9,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
             var theme = btn.getAttribute('data-theme');
             if (!mainContent) return;
-            mainContent.style.backgroundColor = theme === 'light' ? '#eeeeee' : '#050610';
+            document.body.style.backgroundColor = theme === 'light' ? '#eeeeee' : '#050610';
+            mainContent.style.backgroundColor = theme === 'light' ? 'rgba(245, 245, 245, 0.88)' : 'rgba(12, 14, 24, 0.88)';
         });
     });
 
@@ -195,14 +196,13 @@ document.addEventListener('DOMContentLoaded', function () {
     var pMaxPSLoc = gl.getUniformLocation(pProg, 'u_maxPointSize');
     var pMouseLoc = gl.getUniformLocation(pProg, 'u_mouse');
 
-    /* ── Mouse tracking (on whole container) ── */
+    /* ── Mouse tracking (whole page) ── */
     var mouseUV = [-1.0, -1.0];
-    mainContent.addEventListener('mousemove', function (e) {
-        var rect = canvas.getBoundingClientRect();
-        mouseUV[0] = (e.clientX - rect.left) / rect.width;
-        mouseUV[1] = 1.0 - (e.clientY - rect.top) / rect.height;
+    window.addEventListener('mousemove', function (e) {
+        mouseUV[0] = e.clientX / window.innerWidth;
+        mouseUV[1] = 1.0 - (e.clientY / window.innerHeight);
     });
-    mainContent.addEventListener('mouseleave', function () {
+    window.addEventListener('mouseleave', function () {
         mouseUV[0] = -1.0;
         mouseUV[1] = -1.0;
     });
@@ -244,15 +244,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     /* ── Resize ── */
     function resizeCanvas() {
-        var rect = mainContent.getBoundingClientRect();
         var dpr = Math.min(window.devicePixelRatio || 1, 1);
-        var w = Math.floor(rect.width * dpr);
-        var h = Math.floor(rect.height * dpr);
+        var w = Math.floor(window.innerWidth * dpr);
+        var h = Math.floor(window.innerHeight * dpr);
         if (canvas.width !== w || canvas.height !== h) {
             canvas.width = w;
             canvas.height = h;
-            canvas.style.width = rect.width + 'px';
-            canvas.style.height = rect.height + 'px';
+            canvas.style.width = window.innerWidth + 'px';
+            canvas.style.height = window.innerHeight + 'px';
         }
         gl.viewport(0, 0, canvas.width, canvas.height);
     }

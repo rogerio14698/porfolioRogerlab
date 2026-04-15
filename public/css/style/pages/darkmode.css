@@ -37,5 +37,5 @@
 /* Efecto opcional: Que el cuadrado gire o resalte cuando esté activo */
 .themeBtn.active .themeBtnIndicator {
 	border: 1px solid #fff;
-    background: #222;
+    background: #222;  
 }
