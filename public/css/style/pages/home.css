@@ -9,7 +9,7 @@
     min-height: 22vh;
     height: auto;
     padding: 20px;
-    border: 2px solid #999;
+    border: 1px solid var(--colorBorde);
     border-bottom: none;
 }
 
@@ -84,7 +84,7 @@
     width: calc(90% - var(--aside-space));
     margin-left: var(--aside-space);
     margin-bottom: auto;
-    border: 2px solid var(--colorBorde);
+    border: 1px solid var(--colorBorde);
     border-top: none;
     position: relative;
     overflow: visible;
