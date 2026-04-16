@@ -1,10 +1,9 @@
 <footer class="contenedorFooter">
-    <p>&copy; 2024 Roger Lab. Todos los derechos reservados.</p>
+    <p>&copy; {{ date('Y') }} Roger Lab. All Rights Reserved.</p>
 
     <div class="info">
-        <p>Contacto: rogerlucas14698@gmail.com</p>
-        <p>Teléfono: +123 456 7890</p>
-        <p>Dirección: Calle Falsa 123, Ciudad, País</p>
+        <small>rogerlucas14698@gmail.com</small>
+        <small>Teléfono: +123 456 7890</small>
     </div>
 
     <div class="privacy">

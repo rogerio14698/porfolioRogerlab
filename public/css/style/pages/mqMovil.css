@@ -1,0 +1,106 @@
+@media (max-width: 768px) {
+
+    .titulo {
+        height: fit-content;
+        padding: 18px;
+    }
+
+    .titulo h1 {
+        font-size: var(--tamanoTituloMobile);
+    }
+
+    .titulo p {
+        padding-left: 1.5ch;
+        gap: 12px;
+        font-size: var(--tamanoEnlacesMobile);
+    }
+
+    .contenidoMain {
+        width: 100%;
+        margin-left: 0;
+        height: auto;
+        gap: 18px;
+        padding-bottom: 20px;
+        border-top: none;
+    }
+
+    .nav {
+        font-size: var(--tamanoEnlacesMobile);
+        width: 100%;
+    }
+
+    .nav ul {
+        margin-left: 18px;
+    }
+
+    .nav li {
+        padding: 12px 0;
+    }
+
+    .asideLeft {
+        position: static;
+        left: auto;
+        top: auto;
+        transform: none;
+        width: 100%;
+        height: auto;
+        padding: 0;
+        flex-direction: row;
+        justify-content: stretch;
+        background-color: transparent;
+    }
+
+    .asideLeft button {
+        writing-mode: initial;
+        flex: 1;
+        height: auto;
+        min-height: 48px;
+        font-size: var(--tamanoEnlacesMobile);
+        border-bottom: 1px solid var(--colorBorde);
+    }
+
+    .asideLeft button.active {
+        border-left: none;
+        border-bottom: 2px solid var(--colorBorde);
+    }
+
+    .textoAbout {
+        padding: 18px;
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .textoAbout p {
+        font-size: var(--tamanoTextoMobile);
+    }
+
+    .contenedorFooter {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        padding: 16px;
+    }
+
+    .contenedorFooter>p {
+        max-width: none;
+    }
+
+    .contenedorFooter>p,
+    .contenedorFooter .info p,
+    .contenedorFooter .privacy a {
+        font-size: 0.9rem;
+    }
+
+    .contenedorFooter .info {
+        width: 100%;
+        padding-left: 0;
+        padding-top: 12px;
+        border-left: none;
+        border-top: 1px solid color-mix(in srgb, var(--colorBorde) 55%, transparent);
+        gap: 10px;
+    }
+
+    .contenedorFooter .privacy {
+        width: 100%;
+    }
+}

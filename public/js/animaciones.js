@@ -1,65 +1,69 @@
 /**
  * animaciones.js
- * Efecto minimalista japonés equivalente a Framer Motion:
- *   - Texto dividido por palabras (stagger)
- *   - Fade-in suave + movimiento y: 10px → 0
- *   - Disparo por scroll con IntersectionObserver (= whileInView)
- *   - Easing personalizado cubic-bezier(0.2, 0.65, 0.3, 0.9)
+ * Efecto typewriter minimo para el texto About.
+ * Usa el texto del propio parrafo como string y mantiene su flujo normal.
  */
 (function () {
   'use strict';
 
-  const STAGGER_S   = 0.055;  // equivale a staggerChildren * ~2.5 (palabras vs letras)
-  const DELAY_S     = 0.3;    // equivale a delayChildren: 0.3
-  const DURATION_S  = 1.0;    // equivale a duration: 1
-  const EASING      = 'cubic-bezier(0.2, 0.65, 0.3, 0.9)';
-  const THRESHOLD   = 0.25;   // % visible para disparar (viewport)
+  const START_DELAY_MS = 300;
+  const LETTER_DELAY_MS = 18;
+  const DURATION_S = 0.9;
+  const EASING = 'cubic-bezier(0.2, 0.65, 0.3, 0.9)';
+  const THRESHOLD = 0.25;
 
-  function buildWordSpans(paragraph) {
-    const words = paragraph.innerText.trim().split(/\s+/);
-    paragraph.innerHTML = '';
-
-    words.forEach(function (word, i) {
-      const span        = document.createElement('span');
-      const delay       = (DELAY_S + i * STAGGER_S).toFixed(3);
-      const transition  = [
-        'opacity '   + DURATION_S + 's ' + EASING + ' ' + delay + 's',
-        'transform ' + DURATION_S + 's ' + EASING + ' ' + delay + 's',
-      ].join(', ');
-
-      span.textContent  = word;
-      span.style.cssText =
-        'display:inline-block;' +
-        'margin-right:0.28em;'  +
-        'opacity:0;'            +
-        'transform:translateY(10px);' +
-        'will-change:opacity,transform;' +
-        'transition:' + transition + ';';
-
-      paragraph.appendChild(span);
-    });
+  function prepareParagraph(paragraph) {
+    paragraph.style.opacity = '0';
+    paragraph.style.transform = 'translateY(10px)';
+    paragraph.style.willChange = 'opacity, transform';
+    paragraph.style.transition = [
+      'opacity ' + DURATION_S + 's ' + EASING,
+      'transform ' + DURATION_S + 's ' + EASING
+    ].join(', ');
   }
 
-  function revealWords(paragraph) {
-    paragraph.querySelectorAll('span').forEach(function (span) {
-      span.style.opacity   = '1';
-      span.style.transform = 'translateY(0)';
-    });
+  function getParagraphText(paragraph) {
+    return paragraph.textContent.replace(/\s+/g, ' ').trim();
+  }
+
+  function typeParagraph(paragraph) {
+    var fullText = getParagraphText(paragraph);
+    var currentIndex = 0;
+
+    paragraph.style.minHeight = paragraph.offsetHeight + 'px';
+    paragraph.textContent = '';
+    paragraph.style.opacity = '1';
+    paragraph.style.transform = 'translateY(0)';
+
+    function writeNextLetter() {
+      currentIndex += 1;
+      paragraph.textContent = fullText.slice(0, currentIndex);
+
+      if (currentIndex < fullText.length) {
+        window.setTimeout(writeNextLetter, LETTER_DELAY_MS);
+        return;
+      }
+
+      paragraph.style.minHeight = '';
+      paragraph.style.willChange = 'auto';
+    }
+
+    window.setTimeout(writeNextLetter, START_DELAY_MS);
   }
 
   function init() {
-    var section   = document.querySelector('.textoAbout');
+    var section = document.querySelector('.textoAbout');
     if (!section) return;
     var paragraph = section.querySelector('p');
     if (!paragraph) return;
 
-    buildWordSpans(paragraph);
+    prepareParagraph(paragraph);
 
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
-          revealWords(paragraph);
-          observer.unobserve(section);   // once: true
+          typeParagraph(paragraph);
+          observer.unobserve(section);
         }
       });
     }, { threshold: THRESHOLD });

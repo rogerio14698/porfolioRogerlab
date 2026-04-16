@@ -6,8 +6,11 @@
 
 /*Pages*/
 @import url('style/pages/nav.css');
-@import url('style/pages/darkmode.css');
 @import url('style/pages/home.css');
+/*Version mq de ordenador pantalla grande*/
 
 
-
+/*Media Queries*/
+@import url('style/pages/mqDesktopXS.css');
+@import url('style/pages/mqMovil.css');
+@import url('style/pages/mqMovilxs.css');

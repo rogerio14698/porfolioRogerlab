@@ -20,8 +20,8 @@
             </ul>
         </nav>
         <aside class="asideLeft">
-            <button class="themeBtn active" data-theme="dark">Dark theme</button>
-            <button class="themeBtn" data-theme="light">Light theme</button>
+            <button class="themeBtn  active" data-theme="dark">Dark theme <span class="figurabtnDark"></span></button>
+            <button class="themeBtn " data-theme="light">Light theme <span class="figurabtnLight"></span></button>
         </aside>
         <section class="textoAbout">
             <p>I enjoy web development because it allows me to transform ideas into practical solutions,

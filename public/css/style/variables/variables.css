@@ -1,6 +1,4 @@
-
-
-:root{
+:root {
 
     --colorModoDarkFondo: #222;
     --colorModoLightFondo: #999;
@@ -8,31 +6,41 @@
 
     --colorLineaLight: #999;
     --colorLineaDark: #fff;
-    
+
+    --colorbtnDark: #333;
+    --colorbtnLight: #fff;
+
     --colorTextoLight: #d6d6d6;
     --colorTextoDark: #4e4e4e;
-    --colorBorde: #999;
+    --colorBorde: #999999;
+    --colorBordeLight: #444;
     --borde: 2px solid var(--colorBorde);
 
     /*Color de btns Dark mode*/
-    
-    --fuenteTitulo: 'Poiret One', sans-serif;
+
+    --fuenteTitulo: 'Poiret One', sans-serif3;
     --grosorTitulo: 400;
     --estiloTitulo: normal;
 
-    --fuenteEnlaces: 'Kode Mono', monospace;
+    --fuenteTexto: 'Kode Mono', monospace;
     /* <weight>: Use a value from 400 to 700 */
-    --grosorEnlaces: 400;
-    --estiloEnlaces: normal;
+    --grosorTexto: 400;
+    --estiloTexto: normal;
 
 
-    --tamanoTitulo: 9rem;
-    --tamanoEnlaces: 2.3rem;
-    --tamanoTexto: 2rem;
+    --tamanoTitulo: 5rem;
+    --tamanoEnlaces: 1.7rem;
+    --tamanoTexto: 1.2rem;
 
     --tamanoTituloMobile: 2.5rem;
     --tamanoEnlacesMobile: 1rem;
     --tamanoTextoMobile: 0.9rem;
+
+    --tamanoTituloTablet: 2.2rem;
+    --tamanoEnlacesTablet: 1.2rem;
+    --tamanoTextoTablet: 1.1rem;
+
+
 
     --btnLight: #999;
     --btnDark: #222;

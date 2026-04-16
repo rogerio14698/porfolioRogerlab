@@ -1,0 +1,73 @@
+@media (max-width: 1300px) {
+
+
+    .titulo {
+        height: 18vh;
+    }
+
+    .titulo h1 {
+        font-size: var(--tamanoTituloTablet);
+    }
+
+    .titulo p {
+        font-size: var(--tamanoEnlacesTablet);
+    }
+
+    .contenidoMain {
+        width: calc(94% - var(--aside-space));
+        height: clamp(360px, 72vh, 760px);
+    }
+
+    .nav {
+        font-size: var(--tamanoEnlacesTablet);
+    }
+
+    .nav ul {
+        margin-left: 24px;
+    }
+
+    .nav li {
+        padding: 8px 0;
+    }
+
+    .nav:last-child li {
+        padding: 0;
+    }
+
+    .textoAbout {
+        padding-right: 10px;
+        width: 80%;
+        margin-bottom: 40px;
+    }
+
+    .textoAbout p {
+        font-size: var(--tamanoTextoTablet);
+    }
+
+    .asideLeft button {
+        font-size: clamp(10px, 4vw, 22px);
+    }
+
+    .contenedorFooter {
+        gap: 16px;
+        padding: 16px 20px;
+    }
+
+    .contenedorFooter>p,
+    .contenedorFooter .info p,
+    .contenedorFooter .privacy a {
+        font-size: 0.85rem;
+    }
+
+    .contenedorFooter>p {
+        max-width: 200px;
+    }
+
+    .contenedorFooter .info {
+        padding-left: 16px;
+    }
+
+    .contenedorFooter .privacy {
+        min-width: 150px;
+    }
+}
