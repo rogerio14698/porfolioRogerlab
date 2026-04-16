@@ -1,32 +1,39 @@
 
 
 :root{
-    --bodyLight: #E3E3E3;
-    --bodyDark: #333;
+    --bodyLight: #222;
+    --bodyDark: #222;
 
-    --colorModoDarkFondo: #E3E3E3;
-    --colorModoLightFondo: #3F3D3D;
+    --colorModoDarkFondo: #222;
+    --colorModoLightFondo: #999;
 
 
-    --colorLineaLight: #3F3D3D;
-    --colorLineaDark: #E3E3E3;
+    --colorLineaLight: #999;
+    --colorLineaDark: #fff;
     
     --colorTextoLight: #222;
-    --colorTextoDark: #d9d9d9;
-    --colorBorde: #222;
+    --colorTextoDark: #fff;
+    --colorBorde: #999;
     --borde: 2px solid var(--colorBorde);
 
     /*Color de btns Dark mode*/
     
-    --fuenteTitulo: 'Julious Sans One', sans-serif;
-    --fuenteEnlaces: 'Open Sans', sans-serif;
+    --fuenteTitulo: 'Poiret One', sans-serif;
+    --grosorTitulo: 400;
+    --estiloTitulo: normal;
+
+    --fuenteEnlaces: 'Kode Mono', monospace;
+    /* <weight>: Use a value from 400 to 700 */
+    --grosorEnlaces: 400;
+    --estiloEnlaces: normal;
+
 
     --tamanoTitulo: 3rem;
     --tamanoEnlaces: 1.2rem;
     --tamanoTexto: 1rem;
 
 
-    --btnLight: #F5F5F5;
-    --btnDark: #434343;
+    --btnLight: #999;
+    --btnDark: #222;
 
 }

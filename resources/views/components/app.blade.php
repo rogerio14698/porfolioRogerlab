@@ -11,18 +11,16 @@
     <!--Google Fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&family=Poiret+One&display=swap" rel="stylesheet">
     <!--Enlace a la carpeta de public/css -->
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 </head>
 
-<body class="layout">
-    <canvas id="mainShaderBg" aria-hidden="false"></canvas>
-    @yield('nav')
-    <main class="mainContent">
+<body>
+    <canvas id="mainShaderBg" aria-hidden="true"></canvas>
+    <div class="mainContent contenedor">
         @yield('content')
-    </main>
-
+    </div>
     <script src="{{ asset('js/main.js') }}"></script>
 </body>
 

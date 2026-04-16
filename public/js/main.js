@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '  return 130.0*dot(m,g);',
         '}',
         'float flowAngle(vec2 p,float t){',
-        '  return snoise(p*2.5+t*0.15)*6.2832;',
+        '  return snoise(p*3.5+t*0.15)*6.2832;',
         '}'
     ].join('\n');
 
@@ -130,39 +130,80 @@ document.addEventListener('DOMContentLoaded', function () {
         '  float aspect = u_resolution.x / u_resolution.y;',
         '  vec2 pos = a_particle.xy;',
         '  float depth = a_particle.z;',
-        '  vec2 center = vec2(0.5, 0.5);',
-        '  vec2 toPos = pos - center;',
-        '  float angleRot = u_time * 0.2 * (0.5 + depth);',
-        '  float cosA = cos(angleRot);',
-        '  float sinA = sin(angleRot);',
-        '  vec2 rotatedPos = vec2(',
-        '    toPos.x * cosA - toPos.y * sinA,',
-        '    toPos.x * sinA + toPos.y * cosA',
-        '  ) + center;',
-        '  vec2 uvPos = rotatedPos;',
+        '',
+        '  vec2 uvPos = pos;',
+        '',
+        '  /* Dunas / meandros: capas de ruido simplex superpuestas */',
+        '  float t = u_time * 0.08;',
+        '',
+        '  /* Capa 1 — ondulación principal amplia (las dunas grandes) */',
+        '  float n1 = snoise(vec2(pos.x * 1.8 + t, pos.y * 1.2 - t * 0.3));',
+        '',
+        '  /* Capa 2 — crestas secundarias más cerradas */',
+        '  float n2 = snoise(vec2(pos.x * 3.5 - t * 0.5, pos.y * 2.8 + t * 0.2));',
+        '',
+        '  /* Capa 3 — detalle fino: borde arenoso */',
+        '  float n3 = snoise(vec2(pos.x * 7.0 + t * 0.3, pos.y * 5.0 - t * 0.15));',
+        '',
+        '  /* Combinar: la capa grande domina, las pequeñas añaden textura */',
+        '  float combined = n1 * 0.6 + n2 * 0.3 + n3 * 0.1;',
+        '',
+        '  /* Ángulo de flujo: convertir a dirección suave */',
+        '  float flowDir = combined * 3.1416;',
+        '',
+        '  /* Amplitud por profundidad: partículas lejanas se mueven menos */',
+        '  float amp = (0.08 + 0.025 * depth);',
+        '',
+        '  /* Desplazamiento: curvas suaves predominantemente horizontales */',
+        '  uvPos.x += cos(flowDir) * amp * 0.2;',
+        '  uvPos.y += sin(flowDir) * amp * 1.5;',
+        '',
+        '  /* Deriva lenta general → sensación de viento o corriente */',
+        '  uvPos.x += sin(t * 0.4 + pos.y * 4.0) * 0.222;',
+        '  uvPos.y += cos(t * 0.25 + pos.x * 3.0) * 0.006;',
+        '',
+        '  /* samplePos calculado DESPUÉS de la onda → coincide con posición visual real */',
         '  vec2 samplePos = vec2(uvPos.x * aspect, uvPos.y);',
         '',
-        '  /* D: distort flow field near cursor */',
+        '  /* Agujero negro: radio ~30px en coordenadas UV */',
         '  vec2 mouseAsp = vec2(u_mouse.x * aspect, u_mouse.y);',
-        '  float distToMouse = length(samplePos - mouseAsp);',
-        '  float influence = smoothstep(0.35, 0.0, distToMouse);',
-        '  float angle = flowAngle(samplePos, u_time * 0.5);',
-        '  float distortAngle = atan(samplePos.y - mouseAsp.y, samplePos.x - mouseAsp.x);',
-        '  angle = mix(angle, distortAngle + 1.5708, influence * 0.8);',
+        '  vec2 toMouse = samplePos - mouseAsp;',
+        '  float distToMouse = length(toMouse);',
+        '  float BH_RADIUS = 0.001;',
+        '  float BH_ORBIT  = 0.003;',
         '',
-        '  float spd = 0.008 * (0.5 + 0.5 * depth);',
-        '  spd += influence * 0.015;',
-        '  uvPos += vec2(cos(angle) / aspect, sin(angle)) * spd;',
+        '  /* Zona de influencia: suave entre orbit y el doble */',
+        '  float pull = smoothstep(BH_ORBIT * 2.0, BH_RADIUS, distToMouse);',
+        '',
+        '  /* Ángulo hacia el ratón y perpendicular (tangente de órbita) */',
+        '  float radialAngle  = atan(toMouse.y, toMouse.x);',
+        '  float tangentAngle = radialAngle + 1.5708;',
+        '',
+        '  /* Fuerza: cerca del centro → empuja hacia afuera (horizonte) */',
+        '  float repulse = smoothstep(BH_RADIUS, BH_ORBIT, distToMouse) * 0.015;',
+        '  float orbit   = pull * 0.01;',
+        '',
+        '  /* Componente radial: aleja del centro */',
+        '  vec2 radialDir  = normalize(toMouse) / vec2(aspect, 1.0);',
+        '  /* Componente tangencial: hace girar alrededor */',
+        '  vec2 tangentDir = vec2(cos(tangentAngle) / aspect, sin(tangentAngle));',
+        '',
+        '  uvPos += radialDir  * repulse;',
+        '  uvPos += tangentDir * orbit;',
+        '',
+        '  /* Brillo extra en el halo */',
+        '  float haloBrightness = smoothstep(BH_ORBIT * 2.0, BH_RADIUS, distToMouse);',
+        '  float influence = haloBrightness;',
         '  uvPos = fract(uvPos);',
         '  vec2 ndc = vec2(uvPos.x * 2.0 - 1.0, uvPos.y * 2.0 - 1.0);',
         '  gl_Position = vec4(ndc, 0.0, 1.0);',
         '',
         '  /* E: boost size & brightness near cursor */',
         '  float sizeMult = 1.0 + influence * 1.5;',
-        '  float trail = 0.02 * sizeMult;',
+        '  float trail = 0.005 * sizeMult;',
         '  float pointPx = trail * 2.0 * u_resolution.y;',
         '  gl_PointSize = min(pointPx, u_maxPointSize);',
-        '  float particleSize = 0.003 * (0.4 + 0.8 * depth) * sizeMult;',
+        '  float particleSize = 0.002* (0.4 + 0.8 * depth) * sizeMult;',
         '  v_sizeNorm = particleSize / trail;',
         '  v_brightness = (0.3 + 0.7 * depth) * (1.0 + influence * 2.0);',
         '  v_grey = mix(0.15, 0.95, uvPos.y * 0.6 + depth * 0.4);',
@@ -208,7 +249,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     /* ── Build 64 particle seeds (runs once) ── */
-    var GRID = 8;
+    var GRID = 200;
     var NUM = GRID * GRID;
 
     function fract(x) { return x - Math.floor(x); }
@@ -229,7 +270,7 @@ document.addEventListener('DOMContentLoaded', function () {
             var py = sy + 0.5 / GRID;
             px += (hash21(sx, sy) - 0.5) * 0.6 / GRID;
             py += (hash21(sx + 7.7, sy + 7.7) - 0.5) * 0.6 / GRID;
-            var depth = hash21(sx + 3.3, sy + 3.3);
+            var depth = hash21(sx + 3.9, sy + 3.3);
             data[idx++] = px;
             data[idx++] = py;
             data[idx++] = depth;
@@ -260,14 +301,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     /* ── Render loop (~30 fps) ── */
     var lastFrame = 0;
-    var FRAME_INTERVAL = 1000 / 30;
+    var FRAME_INTERVAL = 1000 / 45; // 10 fps cap for testing, set to 16.67 for 60 fps
 
     function render(time) {
         requestAnimationFrame(render);
         if (time - lastFrame < FRAME_INTERVAL) return;
         lastFrame = time;
 
-        var t = time * 0.001;
+        var t = time * 0.0003;
         var w = canvas.width, h = canvas.height;
 
         /* Pass 1 — Background (opaque) */
