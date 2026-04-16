@@ -11,16 +11,21 @@
     <!--Google Fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&family=Poiret+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&family=Poiret+One&display=swap"
+        rel="stylesheet">
     <!--Enlace a la carpeta de public/css -->
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 </head>
 
-<body>
+<body data-theme="dark">
     <canvas id="mainShaderBg" aria-hidden="true"></canvas>
     <div class="mainContent contenedor">
         @yield('content')
+
+    @include('components.footer')
     </div>
+    <script src="{{ asset('js/theme.js') }}" defer></script>
+    <script src="{{ asset('js/animaciones.js') }}" defer></script>
     <script src="{{ asset('js/main.js') }}"></script>
 </body>
 

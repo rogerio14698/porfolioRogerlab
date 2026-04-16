@@ -1,8 +1,6 @@
 
 
 :root{
-    --bodyLight: #222;
-    --bodyDark: #222;
 
     --colorModoDarkFondo: #222;
     --colorModoLightFondo: #999;
@@ -11,8 +9,8 @@
     --colorLineaLight: #999;
     --colorLineaDark: #fff;
     
-    --colorTextoLight: #222;
-    --colorTextoDark: #fff;
+    --colorTextoLight: #d6d6d6;
+    --colorTextoDark: #4e4e4e;
     --colorBorde: #999;
     --borde: 2px solid var(--colorBorde);
 
@@ -28,10 +26,13 @@
     --estiloEnlaces: normal;
 
 
-    --tamanoTitulo: 3rem;
+    --tamanoTitulo: 9rem;
     --tamanoEnlaces: 1.2rem;
-    --tamanoTexto: 1rem;
+    --tamanoTexto: 2rem;
 
+    --tamanoTituloMobile: 1.8rem;
+    --tamanoEnlacesMobile: 1rem;
+    --tamanoTextoMobile: 0.9rem;
 
     --btnLight: #999;
     --btnDark: #222;

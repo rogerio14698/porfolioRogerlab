@@ -1,4 +1,4 @@
-<div class="contenedorFooter">
+<footer class="contenedorFooter">
     <p>&copy; 2024 Roger Lab. Todos los derechos reservados.</p>
 
     <div class="info">
@@ -13,4 +13,4 @@
         <a href="#">Cookies</a>
     </div>
 
-</div>
+</footer>

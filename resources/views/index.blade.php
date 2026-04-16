@@ -19,16 +19,18 @@
             </ul>
         </nav>
         <section class="textoAbout">
-             <p>I enjoy web development because it allows me to transform ideas into practical solutions,
+            <p>I enjoy web development because it allows me to transform ideas into practical solutions,
                 and my goal is to deliver agile, effective, and high-quality work to every challenge that arises.
                 I relish analyzing projects, streamlining what isn't working, improving existing systems, and ensuring
                 things are clearer, more stable, and easier to maintain from day one.
             </p>
         </section>
-        <aside class="asideLeft">
-            <button class="themeBtn active" data-theme="dark">Dark theme</button>
-            <button class="themeBtn" data-theme="light">Light theme</button>
-        </aside>
+
     </main>
+    <aside class="asideLeft">
+        <button class="themeBtn active" data-theme="dark">Dark theme</button>
+        <button class="themeBtn" data-theme="light">Light theme</button>
+    </aside>
+    
 
 @endsection

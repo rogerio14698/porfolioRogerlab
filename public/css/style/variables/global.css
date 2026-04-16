@@ -6,11 +6,26 @@ html {
 }
 
 body {
+  /* ── Variables activas: tema oscuro (por defecto) ── */
+  --_fondo:       var(--colorModoDarkFondo);  /* #222       */
+  --_fondoPanel:  rgba(34,  34,  34,  0.90); /* ~#222222e5 */
+  --_texto:       var(--colorTextoLight);     /* #d6d6d6    */
+  --_linea:       var(--colorLineaDark);      /* #fff       */
+
   margin: 0;
   padding: 0;
-  background-color: #222;
-  color: #fff;
+  background-color: var(--_fondo);
+  color: var(--_texto);
   overflow-x: hidden;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* ── Tema claro ── */
+body[data-theme="light"] {
+  --_fondo:       var(--colorModoLightFondo); /* #999       */
+  --_fondoPanel:  rgba(187, 187, 187, 0.92);
+  --_texto:       var(--colorTextoDark);      /* #4e4e4e    */
+  --_linea:       var(--colorLineaLight);     /* #999       */
 }
 h1, h2, h3, h4, h5, h6, p, a, ul, ol, li {
   margin: 0;

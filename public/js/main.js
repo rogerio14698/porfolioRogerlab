@@ -1,21 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const themeBtns = document.querySelectorAll('.themeBtn');
-    const mainContent = document.querySelector('.mainContent');
-
-    themeBtns.forEach(function (btn) {
-        btn.addEventListener('click', function () {
-            themeBtns.forEach(function (b) { b.classList.remove('active'); });
-            btn.classList.add('active');
-
-            var theme = btn.getAttribute('data-theme');
-            if (!mainContent) return;
-            document.body.style.backgroundColor = theme === 'light' ? '#eeeeee' : '#050610';
-            mainContent.style.backgroundColor = theme === 'light' ? 'rgba(245, 245, 245, 0.88)' : 'rgba(12, 14, 24, 0.88)';
-        });
-    });
-
     const canvas = document.getElementById('mainShaderBg');
-    if (!canvas || !mainContent) return;
+    if (!canvas) return;
 
     const gl = canvas.getContext('webgl');
     if (!gl) return;
@@ -248,8 +233,12 @@ document.addEventListener('DOMContentLoaded', function () {
         mouseUV[1] = -1.0;
     });
 
-    /* ── Build 64 particle seeds (runs once) ── */
-    var GRID = 200;
+    /* ── Partículas según tamaño de pantalla ── */
+    var w0 = window.innerWidth;
+    var GRID = w0 >= 1200 ? 145
+             : w0 >= 900  ? 100
+             : w0 >= 600  ? 60
+             :               35;
     var NUM = GRID * GRID;
 
     function fract(x) { return x - Math.floor(x); }
