@@ -19,10 +19,12 @@
 
 <body data-theme="dark">
     <canvas id="mainShaderBg" aria-hidden="true"></canvas>
+
     <div class="mainContent contenedor">
+        @include('components.header')
         @yield('content')
 
-    @include('components.footer')
+        @include('components.footer')
     </div>
     <script src="{{ asset('js/theme.js') }}" defer></script>
     <script src="{{ asset('js/animaciones.js') }}" defer></script>

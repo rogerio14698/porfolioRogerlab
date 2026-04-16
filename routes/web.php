@@ -2,17 +2,24 @@
 
 use Illuminate\Support\Facades\Route;
 
-//Vista por defecto, redirecciona a la landing page
-Route::get('/', function () {return view('index');});
+Route::redirect('/', '/home');
 
-//Ruta de incio, landing page
-Route::get('/home', function () {return view('index');})->name('home');
+Route::get('/home', function () {
+    $section = 'home';
+    return view('index', compact('section'));
+})->name('home');
 
-//Ruta de contacto
-Route::get('/contact', function () {return view('rogerlab-Paginas.contacto');})->name('contact');
+Route::get('/about', function () {
+    $section = 'about';
+    return view('index', compact('section'));
+})->name('about');
 
-//Routa projects
-Route::get('/projects', function () {return view('rogerlab-Paginas.projects');})->name('projects');
+Route::get('/projects', function () {
+    $section = 'projects';
+    return view('index', compact('section'));
+})->name('projects');
 
-//Ruta de servicios
-Route::get('/about', function () {return view('rogerlab-Paginas.about');})->name('about');
+Route::get('/contact', function () {
+    $section = 'contact';
+    return view('index', compact('section'));
+})->name('contact');
