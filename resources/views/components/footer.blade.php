@@ -2,8 +2,8 @@
     <p>&copy; {{ date('Y') }} Roger Lab. All Rights Reserved.</p>
 
     <div class="info">
-        <small>rogerlucas14698@gmail.com</small>
-        <small>Teléfono: +123 456 7890</small>
+        <p>rogerlucas14698@gmail.com</p>
+        <p>+123 456 7890</p>
     </div>
 
     <div class="privacy">
