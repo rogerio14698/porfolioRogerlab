@@ -18,7 +18,7 @@
     @elseif ($section === 'cookiesPrivacy')
         @include('components.cookiesPrivacy')
     @else
-         @include('components.notFound')
+        @include('components.notFound')
     @endif
 
 </main>

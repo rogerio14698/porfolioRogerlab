@@ -1,9 +1,7 @@
-
-.seccionProjects{
+.seccionProjects {
     padding: 24px;
     margin-top: auto;
     gap: 250px;
-    
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -11,26 +9,27 @@
     overflow-y: hidden;
     align-items: center;
     width: 60%;
-
+    min-height: 90%;
     margin-left: auto;
-    scroll-snap-type: x mandatory; /*Esto funciona como el imán*/
+    scroll-snap-type: x mandatory;
+    /*Esto funciona como el imán*/
     scroll-behavior: smooth;
-
     position: relative;
     top: -150px;
 
 }
 
-.cardProject{
+.cardProject {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 100%;
-    flex: 0 0 500px;
+    min-height: 100%;
+    flex: 1 0 400px;
     scroll-snap-align: start;
     border-right: 2px solid var(--colorBorde);
 }
-.cardProject button{
+
+.cardProject button {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -46,58 +45,63 @@
     color: var(--_texto);
     transition: background-color 0.3s ease, color 0.3s ease;
 }
-.cardProject button:hover{
+
+.cardProject button:hover {
     background-color: var(--colorBorde);
     color: var(--_fondoPanel);
 }
-.cardProject button:active{
+
+.cardProject button:active {
     background-color: var(--colorBorde);
     color: var(--_fondoPanel);
     transform: scale(0.98);
 }
 
 
-.cardProject:first-child{
+.cardProject:first-child {
     margin-left: 100px;
 }
 
-.logo{
+.logo {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 200px;
+    height: 100px;
     margin-bottom: 16px;
 }
-.logo img{
+
+.logo img {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
     border-radius: 50%;
     border: 2px solid var(--colorBorde);
 }
-.titleProject{
+
+.titleProject {
     display: flex;
     flex-direction: column;
-    justify-content: center;    
+    justify-content: center;
 }
 
-.titleProject h2{
+.titleProject h2 {
     font-size: var(--tamanoTituloProyecto);
     font-family: var(--fuenteTexto);
     font-weight: var(--grosorTitulo);
-    text-decoration:underline dotted var(--colorBorde);
+    text-decoration: underline dotted var(--colorBorde);
     margin-bottom: 8px;
 }
-.titleProject p{
+
+.titleProject p {
     font-size: var(--tamanoTextoProyecto);
     font-family: var(--fuenteTexto);
     text-decoration: underline;
     margin-bottom: 20px;
-    
+
 }
 
-.description{
+.description {
     font-size: var(--tamanoTextoProyecto);
     font-family: var(--fuenteTexto);
     font-weight: var(--grosorTexto);
@@ -106,11 +110,10 @@
     text-align: justify;
     padding-right: 12px;
 }
-.description p::first-letter{
+
+.description p::first-letter {
     font-size: 1.5em;
     font-weight: bold;
     color: var(--colorBorde);
     margin-left: 16px;
 }
-
-

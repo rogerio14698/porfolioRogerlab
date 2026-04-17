@@ -73,21 +73,22 @@
     .textoAbout p {
         font-size: var(--tamanoTextoMobile);
     }
+
     /* pagina #about me*/
 
     .seccionAboutMe {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: justify;
-    margin-left: auto;
-    width: 80%;
-    padding: 24px;
-    /* position: relative; */
-    top: auto;
-    overflow-y: auto;
-    height: 550px;
-    scrollbar-width: thin
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: justify;
+        margin-left: auto;
+        width: 80%;
+        padding: 24px;
+        /* position: relative; */
+        top: auto;
+        overflow-y: auto;
+        height: 550px;
+        scrollbar-width: thin
     }
 
 
@@ -96,50 +97,51 @@
     /*Fin de la página #about me*/
 
     /*Version mq de movil pantalla pequeña*/
-     /*Formulario de contacto*/
-    .seccionContact{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: justify;
-    margin-left: auto;
-    width: 80%;
-    padding: 24px;
-    /* position: relative; */
-    top: auto;
+    /*Formulario de contacto*/
+    .seccionContact {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: justify;
+        margin-left: auto;
+        width: 80%;
+        padding: 24px;
+        /* position: relative; */
+        top: auto;
     }
 
     /*Fin de la versión mq de movil pantalla pequeña*/
 
     /*Seccion proyectos*/
-    .seccionProjects{
-    padding: 8px;
-    margin-top: auto;
-    gap: 100px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    overflow-y: hidden;
-    align-items: center;
-    width: 90%;
-    max-width: 400px;
-    margin-left: 10px;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    position: static;
-    top: auto;
+    .seccionProjects {
+        padding: 8px;
+        margin-top: auto;
+        gap: 100px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        align-items: center;
+        width: 90%;
+        min-height: auto;
+        max-width: 400px;
+        margin-left: 10px;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        position: static;
+        top: auto;
     }
 
-    .logo{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: -25%;
-    width: 100%;
-    height: 100px;
-    margin-bottom: 16px;
-}
+    .logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: -25%;
+        width: 100%;
+        height: 100px;
+        margin-bottom: 16px;
+    }
 
 
     /*Fin de la seccion de proyectos*/
@@ -152,10 +154,13 @@
         gap: 16px;
         padding: 16px;
     }
-    .contenedorFooter , .info, .privacy {
+
+    .contenedorFooter,
+    .info,
+    .privacy {
         flex-direction: column;
         gap: 20px;
-        
+
     }
 
     .contenedorFooter>p,
