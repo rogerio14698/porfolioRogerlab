@@ -32,6 +32,14 @@
     --tamanoEnlaces: 1.7rem;
     --tamanoTexto: 1.2rem;
 
+    --tamanoTituloProyecto: 1.8rem;
+    --tamanoTextoProyecto: 0.8rem;
+    --tamanoTituloProyectoMobile: 2rem;
+    --tamanoTextoProyectoMobile: 0.9rem;
+    --tamanoTituloProyectoTablet: 2.2rem;
+    --tamanoTextoProyectoTablet: 1.1rem;
+
+
     --tamanoTituloMobile: 3.5rem;
     --tamanoEnlacesMobile: 1rem;
     --tamanoTextoMobile: 0.9rem;

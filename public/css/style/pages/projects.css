@@ -1,11 +1,70 @@
 
 .seccionProjects{
     padding: 24px;
-    margin-top: 10px;
+    margin-top: auto;
+    gap: 250px;
+    
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    align-items: center;
+    width: 60%;
+
+    margin-left: auto;
+    scroll-snap-type: x mandatory; /*Esto funciona como el imán*/
+    scroll-behavior: smooth;
+
+    position: relative;
+    top: -150px;
+
+}
+
+.cardProject{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: #2b2b2b;
+    justify-content: space-evenly;
+    flex: 0 0 380px;
+    min-width: 380px;
+    scroll-snap-align: start;
 }
+.cardProject:first-child{
+    margin-left: 100px;
+}
+
+.logo{
+    width: 100%;
+    height: 200px;
+    background-color: var(--colorBorde);
+    margin-bottom: 16px;
+}
+.titleProject{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;    
+}
+
+.titleProject h2{
+    font-size: var(--tamanoTituloProyecto);
+    font-family: var(--fuenteTexto);
+    font-weight: var(--grosorTitulo);
+    text-decoration:underline dotted var(--colorBorde);
+    margin-bottom: 8px;
+}
+.titleProject p{
+    font-size: var(--tamanoTextoProyecto);
+    font-family: var(--fuenteTexto);
+    text-decoration: underline;
+    margin-bottom: 20px;
+}
+
+.description{
+    font-size: var(--tamanoTextoProyecto);
+    font-family: var(--fuenteTexto);
+    font-weight: var(--grosorTexto);
+    color: var(--colorTextoLight);
+    margin-bottom: 16px;
+}
+
+

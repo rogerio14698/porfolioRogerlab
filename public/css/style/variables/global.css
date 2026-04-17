@@ -40,6 +40,7 @@ a, ul, ol {
 
 ::-webkit-scrollbar
 {
+  width: 5px;
   height: 5px;
 }
 ::-webkit-scrollbar-track
@@ -48,7 +49,7 @@ a, ul, ol {
 }
 ::-webkit-scrollbar-thumb
 {  background: var(--colorBorde);
-  border-radius: 50%;
+  
 }
 ::-webkit-scrollbar-thumb:hover
 {  background: var(--colorBordeHover);

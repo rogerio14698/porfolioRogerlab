@@ -4,19 +4,20 @@
         </div>
 
         <div class="titleProject">
-            <h2>Projects</h2>
-            <p>Fecha Proyecto | Desing & Development</p>
+            <h2>Biblioteca DAW</h2>
+            <p>April.13 | Desing & Development</p>
         </div>
 
         <div class="description">
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Doloremque nemo, facere repudiandae ullam esse
-                placeat, provident excepturi minus, nostrum labore consequatur doloribus nulla id
-                veniam officiis similique recusandae numquam praesentium!
+            <p>It was my final project for the DAW (Desarrollo de Aplicaciones Web) module. 
+                It is a library management system that allows users to manage their book collections, 
+                borrow and return books, and search for books in the library's catalog. The project was developed using Laravel,
+                a PHP framework, and MySQL for the database.
             </p>
             <br>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi ipsa, et molestias optio iure aliquid
-                soluta
-                quaerat vitae voluptatibus minima commodi hic asperiores omnis rerum illo rem nihil harum delectus.</p>
+            <p>In this project, I focused on implementing a user-friendly interface and ensuring the system's 
+                functionality met the requirements of the DAW module.
+            </p>
         </div>
         @include('components.btnEnlaceRepositorio')
     </div>
