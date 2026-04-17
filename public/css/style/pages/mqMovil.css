@@ -1,8 +1,8 @@
 @media (max-width: 768px) {
 
     .titulo {
-        height: fit-content;
         padding: 18px;
+        height: 10vh;
     }
 
     .titulo h1 {
@@ -73,16 +73,53 @@
     .textoAbout p {
         font-size: var(--tamanoTextoMobile);
     }
+    /* pagina #about me*/
+
+    .seccionAboutMe {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: justify;
+    margin-left: auto;
+    width: 80%;
+    padding: 24px;
+    /* position: relative; */
+    top: auto;
+    overflow-y: auto;
+    height: 550px;
+    scrollbar-width: thin
+    }
+
+
+
+
+    /*Fin de la página #about me*/
+
+    /*Version mq de movil pantalla pequeña*/
+     /*Formulario de contacto*/
+    .seccionContact{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: justify;
+    margin-left: auto;
+    width: 80%;
+    padding: 24px;
+    /* position: relative; */
+    top: auto;
+    }
+
+
+    /*Fin de la versión mq de movil pantalla pequeña*/
 
     .contenedorFooter {
-        flex-direction: column;
-        align-items: flex-start;
         gap: 16px;
         padding: 16px;
     }
-
-    .contenedorFooter>p {
-        max-width: none;
+    .contenedorFooter , .info, .privacy {
+        flex-direction: column;
+        gap: 20px;
+        
     }
 
     .contenedorFooter>p,

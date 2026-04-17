@@ -9,7 +9,16 @@
         @include('components.projects')
     @elseif ($section === 'contact')
         @include('components.contact')
+        {{--Esto ya no es el navegador, son las diferentes secciones de uso de la web --}}
+        {{--Tambien renderizan en el contenido principal --}}
+    @elseif ($section === 'privacyPolicy')
+        @include('components.privacyPolicy')
+    @elseif ($section === 'termsOfService')
+        @include('components.termsOfService')
+    @elseif ($section === 'cookiesPrivacy')
+        @include('components.cookiesPrivacy')
     @else
-        <p>Section not found.</p>
+         @include('components.notFound')
     @endif
+
 </main>

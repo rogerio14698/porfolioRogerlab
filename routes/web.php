@@ -23,3 +23,25 @@ Route::get('/contact', function () {
     $section = 'contact';
     return view('index', compact('section'));
 })->name('contact');
+
+
+Route::get('/privacy-policy', function () {
+    $section = 'privacyPolicy';
+    return view('index', compact('section'));
+})->name('privacy-policy');
+
+
+Route::get('/terms-of-service', function () {
+    $section = 'termsOfService';
+    return view('index', compact('section'));
+})->name('terms-of-service');
+
+Route::get('/cookies-privacy', function () {
+    $section = 'cookiesPrivacy';
+    return view('index', compact('section'));
+})->name('cookies-privacy');
+
+Route::get('/{any}', function () {
+    $section = 'notFound';
+    return view('index', compact('section'));
+})->where('any', '.*')->name('not-found');

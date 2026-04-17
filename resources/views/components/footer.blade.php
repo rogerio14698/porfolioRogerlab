@@ -3,13 +3,13 @@
 
     <div class="info">
         <p>rogerlucas14698@gmail.com</p>
-        <p>+123 456 7890</p>
+        <p>+34 629 948 107</p>
     </div>
 
     <div class="privacy">
-        <a href="#">Política de privacidad</a>
-        <a href="#">Términos de servicio</a>
-        <a href="#">Cookies</a>
+        <a href="{{ route('privacy-policy') }}">Privacy Policy</a>
+        <a href="{{ route('terms-of-service') }}">Terms of Service</a>
+        <a href="{{ route('cookies-privacy') }}">Cookies Policy</a>
     </div>
 
 </footer>

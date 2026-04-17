@@ -6,7 +6,6 @@
     background-color: var(--_fondoPanel);
     transition: background-color 0.5s ease;
     width: 100%;
-    min-height: 22vh;
     height: auto;
     padding: 20px;
     border: 1px solid var(--colorBorde);
@@ -78,7 +77,7 @@
 
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     align-items: flex-start;
     height: clamp(400px, 80vh, 900px);
     width: calc(90% - var(--aside-space));
@@ -148,9 +147,9 @@
     margin-left: auto;
     width: 50%;
     overflow-y: auto;
+    margin-top: auto;
+    margin-bottom: 200px;
     scroll-padding: 5px;
-    scrollbar-width: thin;
-    scrollbar-color: #888 #333;
 
 }
 

@@ -8,6 +8,7 @@
     width: 60%;
 
     padding: 24px;
+    margin-top: auto;
     position: relative;
     top: -200px;
 }
@@ -33,10 +34,7 @@
 {
     font-size: 130%;
 } 
-.seccionAboutMe::-webkit-scrollbar
-{
-    display: none;
-}
+
 
 .seccionAboutMe button{
     display: flex;

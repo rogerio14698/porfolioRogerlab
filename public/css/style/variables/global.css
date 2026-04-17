@@ -37,6 +37,24 @@ a, ul, ol {
   color: inherit;
   list-style-type: none;
 }
+
+::-webkit-scrollbar
+{
+  height: 5px;
+}
+::-webkit-scrollbar-track
+{
+  background: transparent;
+}
+::-webkit-scrollbar-thumb
+{  background: var(--colorBorde);
+  border-radius: 50%;
+}
+::-webkit-scrollbar-thumb:hover
+{  background: var(--colorBordeHover);
+}
+
+
 #mainShaderBg {
     position: fixed;
     top: 0;
