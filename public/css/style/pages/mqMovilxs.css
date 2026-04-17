@@ -50,6 +50,34 @@
         background-color: transparent;
     }
 
+    .seccionAboutMe{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: justify;
+        margin-left: auto;
+        width: 100%;
+        padding: 16px;
+        margin-top: auto;
+        position: relative;
+        top: auto;
+    }
+    .seccionAboutMe h2 {
+        font-size: 1.3rem;
+        font-family: var(--fuenteTexto);
+        font-weight: var(--grosorTitulo);
+        text-decoration: underline dotted var(--colorBorde);
+        margin-bottom: 16px;
+    }
+    .seccionAboutMe p {
+        font-size: 0.8rem;
+        font-family: var(--fuenteTexto);
+        font-weight: var(--grosorTexto);
+        text-transform: uppercase;
+        text-align: justify;
+        padding: 8px;
+    }
+
     .asideLeft button {
         writing-mode: initial;
         flex: 1;

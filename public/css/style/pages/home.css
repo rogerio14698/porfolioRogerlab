@@ -16,7 +16,7 @@
     font-family: var(--fuenteTitulo);
     font-weight: var(--grosorTitulo);
     font-style: var(--estiloTitulo);
-    font-size: var(--tamanoTitulo);
+    font-size: 8rem;
     color: var(--_texto);
     transition: color 0.5s ease;
 }
@@ -31,7 +31,7 @@
     font-family: var(--fuenteTexto);
     font-weight: var(--grosorTexto);
     font-style: var(--estiloTexto);
-    font-size: var(--tamanoTexto);
+    font-size: 2.5rem;
     color: var(--_texto);
     transition: color 0.5s ease;
 }
@@ -164,7 +164,7 @@
     font-family: var(--fuenteTexto);
     font-weight: var(--grosorTexto);
     font-style: var(--estiloTexto);
-    font-size: var(--tamanoTexto);
+    font-size: 1.5rem;
     color: var(--_texto);
     line-height: 1.5;
     transition: color 0.5s ease;

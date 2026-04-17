@@ -2,7 +2,7 @@
 
     .titulo {
         padding: 18px;
-        height: 10vh;
+        height: 16vh;
     }
 
     .titulo h1 {
@@ -12,7 +12,7 @@
     .titulo p {
         padding-left: 1.5ch;
         gap: 12px;
-        font-size: var(--tamanoTitulotoMovil);
+        font-size: 1.5rem;
     }
 
     .contenidoMain {
@@ -87,7 +87,6 @@
         /* position: relative; */
         top: auto;
         overflow-y: auto;
-        height: 550px;
         scrollbar-width: thin
     }
 
