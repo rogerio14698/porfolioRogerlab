@@ -1,22 +1,23 @@
 <div class="cardProject">
         <div class="logo">
-            <img src="" alt="Logo-projects">
+            <img src="{{asset('img/logoPortfolio.png')}}" alt="Logo-projects-Portfolio">
         </div>
 
         <div class="titleProject">
-            <h2>Projects</h2>
-            <p>Fecha Proyecto | Desing & Development</p>
+            <h2>Web Portfolio</h2>
+            <p>Apr.2026 | Design & Development</p>
         </div>
 
         <div class="description">
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Doloremque nemo, facere repudiandae ullam esse
-                placeat, provident excepturi minus, nostrum labore consequatur doloribus nulla id
-                veniam officiis similique recusandae numquam praesentium!
+            <p>
+                Diseñado y desarrollado un portfolio web personal utilizando Laravel, HTML, CSS y JavaScript para mostrar mis proyectos y habilidades de manera profesional y atractiva. 
+                El portfolio incluye secciones para proyectos destacados, experiencia laboral, habilidades técnicas y un formulario de contacto, 
+                con un diseño responsivo y moderno que se adapta a diferentes dispositivos.
             </p>
             <br>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi ipsa, et molestias optio iure aliquid
-                soluta
-                quaerat vitae voluptatibus minima commodi hic asperiores omnis rerum illo rem nihil harum delectus.</p>
+            <p>
+                Con referencias de diferentes portfolios y sitios web de diseño, he creado un diseño único y personalizado que refleja mi estilo y personalidad.
+            </p>
         </div>
         @include('components.btnEnlaceRepositorio')
     </div>

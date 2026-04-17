@@ -1,6 +1,6 @@
 <div class="cardProject">
         <div class="logo">
-            <img src="" alt="Logo-projects">
+            <img src="{{asset('img/logoDAW-conTransparencia.png')}}" alt="Logo-projects">
         </div>
 
         <div class="titleProject">

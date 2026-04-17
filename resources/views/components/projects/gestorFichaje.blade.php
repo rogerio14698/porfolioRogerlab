@@ -1,11 +1,11 @@
 <div class="cardProject">
         <div class="logo">
-            <img src="" alt="Logo-projects">
+            <img src="{{asset('img/logoGestorFichaje.png')}}" alt="Logo-projects-GestorFichaje">
         </div>
 
         <div class="titleProject">
-            <h2>Projects</h2>
-            <p>Fecha Proyecto | Desing & Development</p>
+            <h2>Gestor Fichaje</h2>
+            <p>Jan.2026 | Development</p>
         </div>
 
         <div class="description">

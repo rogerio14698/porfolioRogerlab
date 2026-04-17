@@ -74,6 +74,19 @@
     }
 
     /*Fin de la página #about me*/
+
+    /*Seccion de projectos*/
+    .logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: -25%;
+    width: 100%;
+    height: 100px;
+    margin-bottom: 16px;
+}
+
+    /*Fin de la seccion de proyectos*/
     
 
     .seccionContact{
