@@ -1,33 +1,29 @@
-@media (max-width: 1300px) {
-
+@media (max-width: 1370px) {
 
     .titulo {
         height: 18vh;
     }
 
     .titulo h1 {
-        font-size: var(--tamanoTituloTablet);
+        font-size: var(--tamanoTituloDesktopXL);
     }
 
     .titulo p {
-        font-size: var(--tamanoEnlacesTablet);
+        font-size: var(--tamanoTextoDesktopXL);
     }
 
     .contenidoMain {
         width: calc(94% - var(--aside-space));
-        height: clamp(360px, 72vh, 760px);
-    }
-    .nav{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: flex-start;
-    font-family: var(--fuenteTexto);
-    font-size: var(--tamanoEnlaces);
+        height: clamp(360px, 100vh, 760px);
     }
 
     .nav {
-        font-size: var(--tamanoEnlacesTablet);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: flex-start;
+        font-family: var(--fuenteTexto);
+        font-size: var(--tamanoEnlacesDesktopXL);
     }
 
     .nav ul {
@@ -49,57 +45,134 @@
     }
 
     .textoAbout p {
-        font-size: var(--tamanoTextoTablet);
+        font-size: 1.2rem;
     }
 
     .asideLeft button {
         font-size: clamp(10px, 4vw, 22px);
     }
 
-     /* pagina #about me*/
-
-    .seccionAboutMe {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: justify;
-    margin-left: auto;
-    width: 80%;
-    padding: 24px;
-    /* position: relative; */
-    top: auto;
-    overflow-y: auto;
-    height: 550px;
-    scrollbar-width: thin
+    /* pagina #about me*/
+    #dynamic-section {
+        width: 100%;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
     }
 
-    /*Fin de la página #about me*/
-
-    /*Seccion de projectos*/
-    .logo{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: -25%;
-    width: 100%;
-    height: 60px;
+    .seccionAboutMe {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: justify;
+        margin-left: auto;
+        width: 60%;
+        padding: 24px;
+        position: static;
+        top: auto;
+        overflow-y: auto;
+        height: 550px;
+        scrollbar-width: thin;
+    }
+    .seccionAboutMe h2 {
+    font-size: 2rem;
+    text-decoration: underline dotted var(--colorBorde);
     margin-bottom: 16px;
 }
 
-    /*Fin de la seccion de proyectos*/
-    
+    /*Seccion de projectos*/
 
-    .seccionContact{
+    .seccionProjects {
+        margin-left: auto;
+        margin-top: auto;
+        width: 70%;
+        padding: 5px;
+        gap: 70px;
+        flex: 1;
+        align-items: stretch;
+        top: -50px;
+        height: 600px;
+    }
+
+    .description {
+        font-size: var(--tamanoTextoProyecto);
+        font-family: var(--fuenteTexto);
+        font-weight: var(--grosorTexto);
+        color: var(--colorTextoLight);
+        margin-bottom: 40px;
+        text-align: justify;
+        padding-right: 12px;
+    }
+    .cardProject{
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    text-align: justify;
-    margin-left: auto;
-    width: 80%;
-    padding: 24px;
-    /* position: relative; */
-    top: auto;
+    justify-content: space-between;
+    min-height: 100%;
+    flex: 1 0 700px;
+    scroll-snap-align: start;
+    border-right: 2px solid var(--colorBorde);
     }
+
+    .cardProject button {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        width: 50%;
+        padding: 4px;
+        margin: 0 auto;
+        font-size: var(--tamanoEnlaces);
+        font-family: var(--fuenteTexto);
+        font-weight: var(--grosorTexto);
+        cursor: pointer;
+        border: 1px solid var(--colorBorde);
+        background-color: transparent;
+        color: var(--_texto);
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+
+
+
+    .cardProject:first-child {
+        margin-left: 0;
+    }
+
+    .logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: -25%;
+        width: 100%;
+        height: 80px;
+        margin-bottom: auto;
+    }
+
+    /*Seccion de contacto*/
+
+    .seccionContact {
+        margin-left: auto;
+        margin-top: auto;
+        width: 60%;
+        padding: 24px;
+    }
+
+    .seccionContact h2 {
+        font-size: 2rem;
+        font-family: var(--fuenteTexto);
+        font-weight: var(--grosorTitulo);
+        text-decoration: underline dotted var(--colorBorde);
+        margin-bottom: 24px;
+    }
+
+    .seccionContact form {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        width: 100%;
+    }
+
+    /*Footer*/
 
     .contenedorFooter {
         gap: 16px;

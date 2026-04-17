@@ -6,13 +6,13 @@
     }
 
     .titulo h1 {
-        font-size: var(--tamanoTituloMobile);
+        font-size: var(--tamanoTituloMovileXS);
     }
 
     .titulo p {
         padding-left: 1ch;
         gap: 10px;
-        font-size: var(--tamanoTextoMobile);
+        font-size: var(--tamanoTextoMovileXS);
     }
 
     .contenidoMain {
@@ -25,7 +25,7 @@
     }
 
     .nav {
-        font-size: var(--tamanoEnlacesMobile);
+        font-size: var(--tamanoEnlaceMovileXS);
         width: 100%;
     }
 
@@ -55,7 +55,7 @@
         flex: 1;
         height: auto;
         min-height: 48px;
-        font-size: var(--tamanoEnlacesMobile);
+        font-size: var(--tamanoEnlaceMovileXS);
         border-bottom: 1px solid var(--colorBorde);
     }
 
@@ -71,7 +71,7 @@
     }
 
     .textoAbout p {
-        font-size: var(--tamanoTextoMobile);
+        font-size: var(--tamanoTextoMovileXS);
     }
 
     /*Formulario de contacto*/
@@ -86,6 +86,25 @@
         /* position: relative; */
         top: auto;
     }
+
+    .formLabel textarea {
+    min-height: 80px;
+    max-height: 80px;
+    max-width: 70%;
+    min-width: 70%;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+.formLabel input, .formLabel textarea {
+    width: 70%;
+    padding: 8px;
+    border: 1px solid var(--colorBorde);
+    background-color: transparent;
+    color: var(--_texto);
+    overflow-y: auto;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
 
 
     /*Fin del formulario de contacto*/

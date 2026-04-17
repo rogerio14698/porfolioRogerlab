@@ -27,28 +27,26 @@
     --grosorTexto: 400;
     --estiloTexto: normal;
 
+    /*----------Mq de 1370px--------------------*/
+    --tamanoTituloDesktopXL: 5rem;
+    --tamanoEnlacesDesktopXL: 1.2rem;
+    --tamanoTextoDesktopXL: .8rem;
 
-    --tamanoTitulo: 5rem;
-    --tamanoEnlaces: 1.7rem;
-    --tamanoTexto: 1.2rem;
+    /*----------Base superiores a 1370px--------------------*/
+    --tamanoTitulo: var(--tamanoTituloDesktopXL);
+    --tamanoEnlaces: var(--tamanoEnlacesDesktopXL);
+    --tamanoTexto: var(--tamanoTextoDesktopXL);
 
-    --tamanoTituloProyecto: 1.8rem;
-    --tamanoTextoProyecto: 0.8rem;
-    --tamanoTituloProyectoMobile: 2rem;
-    --tamanoTextoProyectoMobile: 0.9rem;
-    --tamanoTituloProyectoTablet: 2.2rem;
-    --tamanoTextoProyectoTablet: 1.1rem;
+    /*---------------------------------*/
+    /*----------Mq de 576px--------------------*/
+    --tamanoTituloMovileXS: 2rem;
+    --tamanoTextoMovileXS: 0.9rem;
+    --tamanoEnlaceMovileXS: 0.9rem;
 
-
+    /*----------Mq de 768px--------------------*/
+    --tamanoTitulotoMovil: 2.2rem;
+    --tamanoTextoMovil: 1.1rem;
     --tamanoTituloMobile: 3.5rem;
-    --tamanoEnlacesMobile: 1rem;
-    --tamanoTextoMobile: 0.9rem;
-
-    --tamanoTituloTablet: 2.2rem;
-    --tamanoEnlacesTablet: 1.2rem;
-    --tamanoTextoTablet: 1.1rem;
-
-
 
     --btnLight: #999;
     --btnDark: #222;

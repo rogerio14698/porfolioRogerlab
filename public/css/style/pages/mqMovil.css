@@ -12,7 +12,7 @@
     .titulo p {
         padding-left: 1.5ch;
         gap: 12px;
-        font-size: var(--tamanoEnlacesMobile);
+        font-size: var(--tamanoTitulotoMovil);
     }
 
     .contenidoMain {
@@ -25,7 +25,7 @@
     }
 
     .nav {
-        font-size: var(--tamanoEnlacesMobile);
+        font-size: var(--tamanoTextoMovil);
         width: 100%;
     }
 
@@ -55,7 +55,7 @@
         flex: 1;
         height: auto;
         min-height: 48px;
-        font-size: var(--tamanoEnlacesMobile);
+        font-size: var(--tamanoTextoMovil);
         border-bottom: 1px solid var(--colorBorde);
     }
 
@@ -71,7 +71,7 @@
     }
 
     .textoAbout p {
-        font-size: var(--tamanoTextoMobile);
+        font-size: var(--tamanoTextoMovil);
     }
 
     /* pagina #about me*/

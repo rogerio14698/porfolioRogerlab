@@ -1,4 +1,4 @@
-.seccionAboutMe{
+.seccionAboutMe {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -13,33 +13,32 @@
     top: -200px;
 }
 
-.seccionAboutMe h2
-{
-    font-size: var(--tamanoTituloTablet);
+.seccionAboutMe h2 {
+    font-size: var(--tamanoTitulo);
     font-family: var(--fuenteTexto);
     font-weight: var(--grosorTitulo);
-    text-decoration:underline dotted var(--colorBorde);
+    text-decoration: underline dotted var(--colorBorde);
     margin-bottom: 24px;
 }
-.seccionAboutMe p
-{
-    font-size: var(--tamanoTextoTablet);
+
+.seccionAboutMe p {
+    font-size: var(--tamanoTexto);
     font-family: var(--fuenteTexto);
     font-weight: var(--grosorTexto);
     text-transform: uppercase;
-    text-align: justify ;
+    text-align: justify;
     padding: 8px;
 }
-.seccionAboutMe p::first-letter
-{
+
+.seccionAboutMe p::first-letter {
     font-size: 130%;
-} 
+}
 
 
-.seccionAboutMe button{
+.seccionAboutMe button {
     display: flex;
     justify-content: space-between;
-    font-size: var(--tamanoEnlacesTablet);
+    font-size: var(--tamanoEnlaces);
     font-family: var(--fuenteTexto);
     font-weight: var(--grosorTexto);
     padding: 8px 16px;
@@ -50,11 +49,13 @@
     transition: background-color 0.3s ease, color 0.3s ease;
     width: 100%;
 }
-.seccionAboutMe button:hover{
+
+.seccionAboutMe button:hover {
     background-color: var(--colorBorde);
     color: var(--_fondoPanel);
 }
-.seccionAboutMe button:active{
+
+.seccionAboutMe button:active {
     background-color: var(--_fondoPanel);
     color: var(--colorBorde);
     transform: translate(0, 2px);

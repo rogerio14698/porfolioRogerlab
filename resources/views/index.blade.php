@@ -1,6 +1,6 @@
 @extends('components.app')
 
-@section('title', 'Inicio')
+@section('title', $pageTitle ?? 'Inicio')
 
 @section('content')
 

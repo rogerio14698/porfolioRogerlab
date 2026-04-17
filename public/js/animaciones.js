@@ -51,9 +51,25 @@
     window.setTimeout(writeNextLetter, START_DELAY_MS);
   }
 
-  function init() {
-    var section = document.querySelector('.textoAbout');
+  function findSection(root) {
+    if (!root) {
+      return document.querySelector('.textoAbout');
+    }
+
+    if (root.matches && root.matches('.textoAbout')) {
+      return root;
+    }
+
+    return root.querySelector('.textoAbout');
+  }
+
+  function init(root) {
+    var section = findSection(root || document);
     if (!section) return;
+    if (section.dataset.typewriterReady === 'true') return;
+
+    section.dataset.typewriterReady = 'true';
+
     var paragraph = section.querySelector('p');
     if (!paragraph) return;
 
@@ -76,4 +92,9 @@
   } else {
     init();
   }
+
+  document.addEventListener('partial:navigation:loaded', function (event) {
+    var root = event.detail && event.detail.container ? event.detail.container : document;
+    init(root);
+  });
 }());

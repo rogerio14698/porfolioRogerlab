@@ -7,9 +7,9 @@
     </div>
 
     <div class="privacy">
-        <a href="{{ route('privacy-policy') }}">Privacy Policy</a>
-        <a href="{{ route('terms-of-service') }}">Terms of Service</a>
-        <a href="{{ route('cookies-privacy') }}">Cookies Policy</a>
+        <a href="{{ route('privacy-policy') }}" data-partial-nav>Privacy Policy</a>
+        <a href="{{ route('terms-of-service') }}" data-partial-nav>Terms of Service</a>
+        <a href="{{ route('cookies-privacy') }}" data-partial-nav>Cookies Policy</a>
     </div>
 
 </footer>
