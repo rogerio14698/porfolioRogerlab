@@ -6,9 +6,15 @@
         personales que eran más que nada pruebas.
     </p>
     <p data-i18n="about.learning.body_2">
+        Durante mis practicas participe en proyectos reales dentro de empresa, colaborando en tareas de desarrollo,
+        revision de flujos y mejora de estructuras internas, lo que me ayudo a trabajar con mas criterio tecnico,
+        organizacion y enfoque profesional.
+    </p>
+    <p data-i18n="about.learning.body_3">
         Después quise aprofundizar y empecé a hacer cursos en Udemy y
         posteriormente el grado en Desarrollo de Aplicaciones Web.
     </p>
+    <button type="button" data-pdf-url="{{ asset('documentacion/Informe%20de%20Seguimiento%20de%20Pr%C3%A1cticas%20en%20Empresa%20(FCT).pdf') }}" onclick="window.open(this.dataset.pdfUrl, '_blank', 'noopener,noreferrer')"><span data-i18n="about.learning.button">Ver informe de practicas</span> <span>&rarr;</span></button>
     <br>
     <h2 data-i18n="about.methodology.title">¿Cuál es mi metodología de trabajo?</h2>
     <p data-i18n="about.methodology.body_1">

@@ -3,7 +3,11 @@
 
     <div class="info">
         <p>rogerlucas14698@gmail.com</p>
-        <p>+34 629 948 107</p>
+        <a href="https://wa.me/34629948107?text=Hola%20Roger,%20quiero%20contactarte%20sobre%20tu%20portafolio">+34 629 948 107</a>
+        <div class="social-icons">
+            <a href="https://www.linkedin.com/in/rogerio-lucas-viana-51a149258/"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://github.com/rogerio14698"><i class="fa-brands fa-github"></i></a>
+        </div>
     </div>
 
     <div class="privacy">
