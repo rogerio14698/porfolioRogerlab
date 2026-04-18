@@ -1,8 +1,15 @@
 html {
   box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--colorBorde) 45%, transparent) transparent;
 }
 *, *:before, *:after {
   box-sizing: inherit;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--colorBorde) 45%, transparent) transparent;
 }
 
 body {
@@ -38,21 +45,22 @@ a, ul, ol {
   list-style-type: none;
 }
 
-::-webkit-scrollbar
-{
-  width: 5px;
-  height: 5px;
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
 }
-::-webkit-scrollbar-track
-{
+
+::-webkit-scrollbar-track {
   background: transparent;
 }
-::-webkit-scrollbar-thumb
-{  background: var(--colorBorde);
-  
+
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--colorBorde) 45%, transparent);
+  border-radius: 999px;
 }
-::-webkit-scrollbar-thumb:hover
-{  background: var(--colorBordeHover);
+
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--colorBorde) 65%, transparent);
 }
 
 

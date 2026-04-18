@@ -1,3 +1,64 @@
+function ensureTurnstileScript() {
+    if (window.turnstile || document.querySelector('script[data-turnstile-script]')) {
+        return;
+    }
+
+    var script = document.createElement('script');
+    script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+    script.async = true;
+    script.defer = true;
+    script.setAttribute('data-turnstile-script', 'true');
+    script.addEventListener('load', function () {
+        renderTurnstileWidgets(document);
+    });
+    document.head.appendChild(script);
+}
+
+function renderTurnstileWidgets(root) {
+    if (!root) {
+        return;
+    }
+
+    var widgets = root.querySelectorAll('[data-turnstile-widget]');
+
+    if (!widgets.length) {
+        return;
+    }
+
+    if (!window.turnstile) {
+        ensureTurnstileScript();
+        return;
+    }
+
+    widgets.forEach(function (widget) {
+        if (widget.dataset.turnstileRendered === 'true') {
+            return;
+        }
+
+        var siteKey = widget.dataset.sitekey;
+
+        if (!siteKey) {
+            return;
+        }
+
+        window.turnstile.render(widget, {
+            sitekey: siteKey,
+            theme: widget.dataset.theme || 'auto',
+            action: widget.dataset.action || 'contact'
+        });
+
+        widget.dataset.turnstileRendered = 'true';
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    renderTurnstileWidgets(document);
+});
+
+document.addEventListener('partial:navigation:loaded', function (event) {
+    renderTurnstileWidgets(event.detail && event.detail.container ? event.detail.container : document);
+});
+
 document.addEventListener('DOMContentLoaded', function () {
     const canvas = document.getElementById('mainShaderBg');
     if (!canvas) return;

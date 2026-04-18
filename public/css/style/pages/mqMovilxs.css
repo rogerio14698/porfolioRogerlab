@@ -121,7 +121,6 @@
     max-width: 70%;
     min-width: 70%;
     overflow-y: auto;
-    scrollbar-width: none;
 }
 .formLabel input, .formLabel textarea {
     width: 70%;
@@ -131,11 +130,60 @@
     color: var(--_texto);
     overflow-y: auto;
     overflow-x: auto;
-    scrollbar-width: none;
 }
+
+    .contactAlert,
+    .contactFormMeta p {
+        font-size: 0.85rem;
+    }
+
+    .contactTurnstile {
+        overflow-x: auto;
+    }
 
 
     /*Fin del formulario de contacto*/
+
+    .legalSection {
+        width: 100%;
+        padding: 16px;
+        margin-left: auto;
+        margin-top: auto;
+        position: static;
+        top: auto;
+        max-height: none;
+        overflow-y: visible;
+        gap: 14px;
+    }
+
+    .legalSection h1 {
+        font-size: 1.7rem;
+    }
+
+    .legalSection h2 {
+        font-size: 1.2rem;
+    }
+
+    .legalSection h3 {
+        font-size: 1rem;
+    }
+
+    .legalSection p,
+    .legalSection li,
+    .legalSection th,
+    .legalSection td {
+        font-size: 0.85rem;
+        line-height: 1.6;
+    }
+
+    .legalSection th,
+    .legalSection td {
+        padding: 10px;
+    }
+
+    .legalSection table {
+        min-width: 340px;
+    }
 
     .contenedorFooter {
         flex-direction: column;

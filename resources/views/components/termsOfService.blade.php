@@ -1,37 +1,41 @@
-
-
-    <h1>Terms of Service</h1>
+<section class="legalSection legalSection--terms" aria-labelledby="terms-title">
+    <h1 id="terms-title">Terms of Service</h1>
+    <p class="legalSection__intro">
+        By accessing this portfolio, you agree to use its content responsibly and in accordance with the conditions described below.
+    </p>
 
     <h2>1. Use of Content</h2>
     <p>
-        The projects, source code snippets, and designs displayed on this portfolio are for <strong>demonstration purposes only</strong>. Unless explicitly stated (e.g., via an Open Source license), the intellectual property belongs to the site owner. You may not scrape, copy, or redistribute the content without written permission.
+        The projects, source code snippets, and designs displayed on this portfolio are for <strong>demonstration purposes only</strong>. Unless explicitly stated through an open-source license or written notice, the intellectual property belongs to the site owner.
     </p>
+    <ul>
+        <li>You may review the published work for personal reference.</li>
+        <li>You may not scrape, copy, redistribute, or commercialize the content without prior written permission.</li>
+    </ul>
 
     <h2>2. Disclaimer of Warranties</h2>
     <p>
-        The information on this website is provided on an "as is" basis. To the fullest extent permitted by law, this website:
-        <ul>
-            <li>Excludes all representations and warranties relating to this website and its contents.</li>
-            <li>Does not guarantee that the code samples or projects shown are bug-free or suitable for production environments.</li>
-        </ul>
+        The information on this website is provided on an "as is" basis. While the portfolio is maintained with care, no guarantee is made that the materials are always complete, current, bug-free, or suitable for production use.
     </p>
 
     <h2>3. Limitation of Liability</h2>
     <p>
-        Under no circumstances shall the site owner be liable for any direct, indirect, special, or consequential damages that result from the use of, or the inability to use, the materials on this site or the performance of the projects displayed.
+        Under no circumstances shall the site owner be liable for any direct, indirect, incidental, or consequential damages resulting from the use of, or inability to use, the information, code samples, or projects shown on this website.
     </p>
 
     <h2>4. Cookies and Tracking</h2>
     <p>
-        This website may use cookies to improve user experience (such as remembering your language preferences) or to analyze traffic via tools like Google Analytics. By using the site, you consent to the use of these cookies in accordance with our Privacy Policy.
+        This website may use cookies to improve user experience, remember preferences, or gather anonymous traffic insights. By continuing to browse the site, you acknowledge this use in accordance with the Privacy Policy and Cookie Policy.
+    </p>
+
+    <h2>5. External Links</h2>
+    <p>
+        This website may include links to third-party websites such as repositories, professional profiles, or live demos. Those links are provided for convenience only, and the site owner is not responsible for their content or availability.
     </p>
 
     <hr>
 
-    <h2>Privacy Policy</h2>
-    <p>
-        <em>(Incorporate your existing privacy policy here)</em>
-    </p>
-    <p>
+    <p class="legalSection__meta">
         <strong>Last Updated:</strong> April 2026
     </p>
+</section>

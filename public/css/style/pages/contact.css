@@ -26,6 +26,52 @@
     width: 100%;
 }
 
+.contactForm {
+    width: 100%;
+}
+
+.contactAlert {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid color-mix(in srgb, var(--colorBorde) 55%, transparent);
+    font-family: var(--fuenteTexto);
+    font-size: var(--tamanoTexto);
+    line-height: 1.6;
+    background-color: color-mix(in srgb, var(--_fondoPanel) 70%, transparent);
+}
+
+.contactAlert--success,
+.contactAlert--info {
+    border-color: color-mix(in srgb, var(--colorBorde) 80%, transparent);
+}
+
+.contactAlert--error {
+    border-color: color-mix(in srgb, #d97706 65%, transparent);
+}
+
+.contactFormMeta {
+    padding: 4px 0;
+}
+
+.contactFormMeta p {
+    font-family: var(--fuenteTexto);
+    font-size: var(--tamanoTexto);
+    line-height: 1.7;
+}
+
+.contactHoneypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.contactTurnstile {
+    width: 100%;
+    min-height: 65px;
+}
+
 .formLabel {
     display: flex;
     flex-direction: row;
@@ -44,7 +90,12 @@
     color: var(--_texto);
     overflow-y: auto;
     overflow-x: auto;
-    scrollbar-width: none;
+}
+
+.formLabel input:focus,
+.formLabel textarea:focus {
+    outline: 1px solid color-mix(in srgb, var(--colorBorde) 75%, transparent);
+    outline-offset: 2px;
 }
 
 .formLabel textarea {
@@ -53,7 +104,6 @@
     max-width: 80%;
     min-width: 80%;
     overflow-y: auto;
-    scrollbar-width: none;
 
 }
 

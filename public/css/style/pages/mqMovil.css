@@ -84,14 +84,10 @@
         margin-left: auto;
         width: 80%;
         padding: 24px;
-        /* position: relative; */
         top: auto;
         overflow-y: auto;
-        scrollbar-width: thin
+        scrollbar-width: thin;
     }
-
-
-
 
     /*Fin de la página #about me*/
 
@@ -105,49 +101,121 @@
         margin-left: auto;
         width: 80%;
         padding: 24px;
-        /* position: relative; */
         top: auto;
     }
 
     /*Fin de la versión mq de movil pantalla pequeña*/
 
     /*Seccion proyectos*/
+
     .seccionProjects {
-        padding: 8px;
-        margin-top: auto;
-        gap: 100px;
         display: flex;
         flex-direction: row;
         flex-wrap: nowrap;
+        align-items: stretch;
+        width: min(90%, 560px);
+        min-height: auto;
+        margin-top: auto;
+        margin-right: auto;
+        margin-left: auto;
+        padding: 8px 0 16px 0;
+        gap: 20px;
         overflow-x: auto;
         overflow-y: hidden;
-        align-items: center;
-        width: 90%;
-        min-height: auto;
-        max-width: 400px;
-        margin-left: 10px;
         scroll-snap-type: x mandatory;
         scroll-behavior: smooth;
         position: static;
         top: auto;
     }
 
+    .cardProject {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: auto;
+        flex: 0 0 min(320px, 85vw);
+        padding-right: 16px;
+        scroll-snap-align: start;
+        border-right: 2px solid var(--colorBorde);
+    }
+
+    .cardProject:first-child {
+        margin-left: 0;
+    }
+
+    .cardProject button {
+        width: 100%;
+        max-width: 280px;
+        min-height: 44px;
+    }
+
     .logo {
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-left: -25%;
+        margin-left: 0;
         width: 100%;
-        height: 100px;
+        height: 80px;
         margin-bottom: 16px;
     }
 
+    .logo img {
+        max-width: 80px;
+    }
+
+    .titleProject h2 {
+        font-size: clamp(1.35rem, 4vw, 1.8rem);
+    }
+
+    .titleProject p,
+    .description {
+        font-size: var(--tamanoTextoMovil);
+    }
+
+    .description {
+        padding-right: 0;
+    }
 
     /*Fin de la seccion de proyectos*/
 
+    .legalSection {
+        width: 80%;
+        margin-left: auto;
+        margin-top: auto;
+        padding: 24px;
+        position: static;
+        top: auto;
+        max-height: none;
+        overflow-y: visible;
+    }
 
+    .legalSection h1 {
+        font-size: clamp(1.9rem, 6vw, 2.6rem);
+    }
 
+    .legalSection h2 {
+        font-size: 1.45rem;
+    }
 
+    .legalSection h3 {
+        font-size: 1.1rem;
+    }
+
+    .legalSection p,
+    .legalSection li,
+    .legalSection th,
+    .legalSection td {
+        font-size: var(--tamanoTextoMovil);
+    }
+
+    .legalSection__tableWrap {
+        border-inline: none;
+    }
+
+    .contactAlert,
+    .contactFormMeta p {
+        font-size: var(--tamanoTextoMovil);
+    }
 
     .contenedorFooter {
         gap: 16px;
@@ -159,7 +227,6 @@
     .privacy {
         flex-direction: column;
         gap: 20px;
-
     }
 
     .contenedorFooter>p,

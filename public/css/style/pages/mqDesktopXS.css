@@ -172,6 +172,33 @@
         width: 100%;
     }
 
+    .legalSection {
+        width: 60%;
+        margin-left: auto;
+        margin-top: auto;
+        padding: 24px;
+        position: static;
+        top: auto;
+        max-height: 550px;
+        overflow-y: auto;
+        scrollbar-width: thin;
+    }
+
+    .legalSection h1 {
+        font-size: 2rem;
+    }
+
+    .legalSection h2 {
+        font-size: 1.6rem;
+    }
+
+    .legalSection p,
+    .legalSection li,
+    .legalSection th,
+    .legalSection td {
+        font-size: 0.95rem;
+    }
+
     /*Footer*/
 
     .contenedorFooter {

@@ -1,0 +1,112 @@
+.legalSection {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    width: 60%;
+    margin-left: auto;
+    margin-top: auto;
+    padding: 24px;
+    position: relative;
+    top: -150px;
+    max-height: 72vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    text-align: left;
+}
+
+.legalSection h1,
+.legalSection h2,
+.legalSection h3 {
+    font-family: var(--fuenteTexto);
+    font-weight: var(--grosorTitulo);
+    text-decoration: underline dotted var(--colorBorde);
+    text-wrap: balance;
+}
+
+.legalSection h1 {
+    font-size: var(--tamanoTitulo);
+    margin-bottom: 8px;
+}
+
+.legalSection h2 {
+    font-size: clamp(1.45rem, 2vw, 2rem);
+    margin-top: 12px;
+}
+
+.legalSection h3 {
+    font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+    margin-top: 4px;
+}
+
+.legalSection p,
+.legalSection li,
+.legalSection th,
+.legalSection td {
+    font-family: var(--fuenteTexto);
+    font-size: var(--tamanoTexto);
+    font-weight: var(--grosorTexto);
+    line-height: 1.7;
+    color: var(--_texto);
+}
+
+.legalSection p {
+    text-align: justify;
+}
+
+.legalSection strong {
+    color: var(--_texto);
+}
+
+.legalSection em {
+    opacity: 0.9;
+}
+
+.legalSection ul {
+    list-style: disc;
+    padding-left: 20px;
+}
+
+.legalSection li + li {
+    margin-top: 8px;
+}
+
+.legalSection hr {
+    width: 100%;
+    border: 0;
+    border-top: 1px solid color-mix(in srgb, var(--colorBorde) 55%, transparent);
+    margin: 8px 0;
+}
+
+.legalSection__intro,
+.legalSection__meta {
+    opacity: 0.9;
+}
+
+.legalSection__tableWrap {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid color-mix(in srgb, var(--colorBorde) 45%, transparent);
+}
+
+.legalSection table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 420px;
+}
+
+.legalSection th,
+.legalSection td {
+    padding: 12px 14px;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid color-mix(in srgb, var(--colorBorde) 35%, transparent);
+}
+
+.legalSection th {
+    background-color: color-mix(in srgb, var(--_fondoPanel) 70%, transparent);
+}
+
+.legalSection tr:last-child td {
+    border-bottom: 0;
+}

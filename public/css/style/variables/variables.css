@@ -18,8 +18,8 @@
 
     /*Color de btns Dark mode*/
 
-    --fuenteTitulo: 'Poiret One', sans-serif3;
-    --grosorTitulo: 400;
+    --fuenteTitulo: 'Saira Stencil', sans-serif3;
+    --grosorTitulo: 100;
     --estiloTitulo: normal;
 
     --fuenteTexto: 'Kode Mono', monospace;
@@ -28,7 +28,7 @@
     --estiloTexto: normal;
 
     /*----------Mq de 1370px--------------------*/
-    --tamanoTituloDesktopXL: 3.5rem;
+    --tamanoTituloDesktopXL: 2.6rem;
     --tamanoEnlacesDesktopXL: 1.2rem;
     --tamanoTextoDesktopXL: .8rem;
 
@@ -46,7 +46,6 @@
     /*----------Mq de 768px--------------------*/
     --tamanoTitulotoMovil: 2.2rem;
     --tamanoTextoMovil: 1.1rem;
-    --tamanoTituloMobile: 3.5rem;
 
     --btnLight: #999;
     --btnDark: #222;

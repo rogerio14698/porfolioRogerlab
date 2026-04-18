@@ -1,16 +1,19 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 
-function renderSection(string $section, string $pageTitle, int $status = 200)
-{
-    $data = compact('section', 'pageTitle');
+if (! function_exists('renderSection')) {
+    function renderSection(string $section, string $pageTitle, int $status = 200)
+    {
+        $data = compact('section', 'pageTitle');
 
-    if (request()->ajax()) {
-        return response()->view('components.sectionContent', $data, $status);
+        if (request()->ajax()) {
+            return response()->view('components.sectionContent', $data, $status);
+        }
+
+        return response()->view('index', $data, $status);
     }
-
-    return response()->view('index', $data, $status);
 }
 
 Route::redirect('/', '/home');
@@ -30,6 +33,14 @@ Route::get('/projects', function () {
 Route::get('/contact', function () {
     return renderSection('contact', 'Contact');
 })->name('contact');
+
+Route::post('/contact', [ContactController::class, 'store'])
+    ->middleware('throttle:contact-form')
+    ->name('contact.submit');
+
+Route::get('/contact/verify/{contactMessage}/{token}', [ContactController::class, 'verify'])
+    ->middleware('signed')
+    ->name('contact.verify');
 
 
 Route::get('/privacy-policy', function () {

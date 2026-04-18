@@ -16,7 +16,7 @@
     font-family: var(--fuenteTitulo);
     font-weight: var(--grosorTitulo);
     font-style: var(--estiloTitulo);
-    font-size: 8rem;
+    font-size: 6rem;
     color: var(--_texto);
     transition: color 0.5s ease;
 }
@@ -31,7 +31,7 @@
     font-family: var(--fuenteTexto);
     font-weight: var(--grosorTexto);
     font-style: var(--estiloTexto);
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     color: var(--_texto);
     transition: color 0.5s ease;
 }
@@ -39,14 +39,13 @@
 .titulo p::after {
     content: "";
     flex: 1;
-    height: 1px;
+    height: 5px;
     background-color: var(--_linea);
     transition: background-color 0.5s ease;
     transform-origin: left center;
-    animation: subtitleLineReveal 900ms ease-out forwards,
-        subtitleLineFlow 3.2s ease-in-out 900ms infinite;
+    animation: subtitleLineReveal 5000ms ease-out forwards,
+        subtitleLineFlow 3.2s ease-in-out 2000ms infinite;
 }
-
 @keyframes subtitleLineReveal {
     from {
         transform: scaleX(0);
