@@ -89,6 +89,38 @@
         scrollbar-width: thin;
     }
 
+    .articles {
+        width: 80%;
+        padding: 24px;
+        position: static;
+        top: auto;
+        margin-right: auto;
+    }
+
+    .articles h2 {
+        font-size: clamp(1.35rem, 4vw, 1.8rem);
+    }
+
+    .articles p,
+    .articles li,
+    .articles td,
+    .articles th,
+    .articles blockquote {
+        font-size: var(--tamanoTextoMovil);
+    }
+
+    .articles table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .articles .articleSource,
+    .articles .articleSource:visited {
+        width: 100%;
+        max-width: 280px;
+    }
+
     /*Fin de la página #about me*/
 
     /*Version mq de movil pantalla pequeña*/

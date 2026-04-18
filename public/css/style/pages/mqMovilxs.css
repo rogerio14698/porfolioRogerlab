@@ -78,6 +78,44 @@
         padding: 8px;
     }
 
+    .articles {
+        width: 100%;
+        padding: 16px;
+        margin-left: 0;
+        position: static;
+        top: auto;
+        gap: 18px;
+    }
+
+    .articles section {
+        padding: 14px 16px;
+    }
+
+    .articles h2 {
+        font-size: 1.3rem;
+    }
+
+    .articles p,
+    .articles li,
+    .articles td,
+    .articles th,
+    .articles blockquote {
+        font-size: var(--tamanoTextoMovileXS);
+    }
+
+    .articles table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .articles .articleSource,
+    .articles .articleSource:visited {
+        width: 100%;
+        min-width: 0;
+        font-size: var(--tamanoEnlaceMovileXS);
+    }
+
     .asideLeft button {
         writing-mode: initial;
         flex: 1;

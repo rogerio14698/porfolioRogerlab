@@ -1,8 +1,12 @@
-<div id="dynamic-section" data-section="{{ $section }}" data-page-title="{{ $pageTitle ?? 'Inicio' }}">
+<div id="dynamic-section" data-section="{{ $section }}"
+    data-page-title="{{ $pageTitle ?? ('RogerLab | Desarrollador Web Freelance en ' . config('seo.city')) }}"
+    data-meta-description="{{ $pageMetaDescription ?? ('Desarrollo web profesional en ' . config('seo.city') . ' y ' . config('seo.region') . '. Especialista en paginas web, landing pages y aplicaciones web a medida para negocios.') }}">
     @if ($section === 'home')
         @include('components.textoAbout')
     @elseif ($section === 'about')
         @include('components.about')
+    @elseif ($section === 'articles')
+        @include('components.articles')
     @elseif ($section === 'projects')
         @include('components.projects')
     @elseif ($section === 'contact')

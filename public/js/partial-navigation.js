@@ -61,6 +61,61 @@
         }));
     }
 
+    function updateHeadMetadata(container) {
+        if (!container) {
+            return;
+        }
+
+        var pageTitle = container.dataset.pageTitle;
+        var metaDescription = container.dataset.metaDescription;
+        var currentUrl = window.location.href;
+        var canonicalLink = document.querySelector('link[rel="canonical"]');
+
+        if (pageTitle) {
+            document.title = pageTitle;
+        }
+
+        if (metaDescription) {
+            [
+                'meta[name="description"]',
+                'meta[property="og:description"]',
+                'meta[name="twitter:description"]'
+            ].forEach(function (selector) {
+                var metaTag = document.querySelector(selector);
+
+                if (metaTag) {
+                    metaTag.setAttribute('content', metaDescription);
+                }
+            });
+        }
+
+        [
+            'meta[property="og:title"]',
+            'meta[name="twitter:title"]'
+        ].forEach(function (selector) {
+            var metaTag = document.querySelector(selector);
+
+            if (metaTag && pageTitle) {
+                metaTag.setAttribute('content', pageTitle);
+            }
+        });
+
+        [
+            'meta[property="og:url"]',
+            'meta[name="twitter:url"]'
+        ].forEach(function (selector) {
+            var metaTag = document.querySelector(selector);
+
+            if (metaTag) {
+                metaTag.setAttribute('content', currentUrl);
+            }
+        });
+
+        if (canonicalLink) {
+            canonicalLink.setAttribute('href', currentUrl);
+        }
+    }
+
     async function fetchSection(url) {
         var response = await fetch(url, {
             headers: {
@@ -105,10 +160,7 @@
             }
 
             currentContainer.replaceWith(nextContainer);
-
-            if (nextContainer.dataset.pageTitle) {
-                document.title = nextContainer.dataset.pageTitle;
-            }
+            updateHeadMetadata(nextContainer);
 
             if (settings.pushState !== false) {
                 window.history.pushState({ url: url }, '', url);

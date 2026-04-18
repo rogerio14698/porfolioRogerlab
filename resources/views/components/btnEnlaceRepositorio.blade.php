@@ -1,1 +1,1 @@
-<button>Repositorio <span>&rarr;</span></button>
+<button><span data-i18n="about.repository.button">Repositorio</span> <span>&rarr;</span></button>

@@ -81,6 +81,23 @@
     margin-bottom: 16px;
 }
 
+    .articles {
+        width: 60%;
+        padding: 24px;
+        position: static;
+        top: auto;
+        height: 550px;
+    }
+
+    .articles h2 {
+        font-size: 2rem;
+    }
+
+    .articles .articleSource,
+    .articles .articleSource:visited {
+        width: 50%;
+    }
+
     /*Seccion de projectos*/
 
     .seccionProjects {

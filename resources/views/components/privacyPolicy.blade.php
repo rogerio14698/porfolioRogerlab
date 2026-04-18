@@ -1,4 +1,5 @@
 <section class="legalSection legalSection--privacy" aria-labelledby="privacy-title">
+
     <h1 id="privacy-title">Privacy Policy</h1>
     <p class="legalSection__intro">
         This Privacy Policy explains what information may be collected when you use this portfolio website, how that information is used, and how it is protected.

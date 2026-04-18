@@ -14,7 +14,7 @@
     @endif
 
     <div class="contactHoneypot" aria-hidden="true">
-        <label for="company">Company</label>
+        <label for="company" data-i18n="contact.form.company">Empresa</label>
         <input
             id="company"
             name="company"
@@ -28,7 +28,8 @@
     <x-contact.field
         id="name"
         name="name"
-        label="Name"
+        label="Nombre"
+        labelKey="contact.form.name"
         placeholder="Roger"
         :value="old('name')"
         maxlength="120"
@@ -38,8 +39,10 @@
     <x-contact.field
         id="subject"
         name="subject"
-        label="Subject"
-        placeholder="Project inquiry"
+        label="Asunto"
+        labelKey="contact.form.subject"
+        placeholder="Necesito una web para mi negocio"
+        placeholderKey="contact.form.subject_placeholder"
         :value="old('subject')"
         maxlength="150"
         required
@@ -49,8 +52,10 @@
         id="email"
         name="email"
         type="email"
-        label="Email"
+        label="Correo electronico"
+        labelKey="contact.form.email"
         placeholder="example@email.com"
+        placeholderKey="contact.form.email_placeholder"
         :value="old('email')"
         inputmode="email"
         autocomplete="email"
@@ -61,17 +66,17 @@
     <x-contact.textarea
         id="message"
         name="message"
-        label="Message"
-        placeholder="Tell me about your project, context, and timeline."
+        label="Mensaje"
+        labelKey="contact.form.message"
+        placeholder="Cuentame tu proyecto, el contexto y el plazo que tienes en mente."
+        placeholderKey="contact.form.message_placeholder"
         :value="old('message')"
         maxlength="5000"
         required
     />
 
     <div class="contactFormMeta">
-        <p>
-            Before the message reaches the administrator, you must confirm your email address via a verification link.
-        </p>
+        <p data-i18n="contact.form.notice">Antes de que el mensaje llegue al administrador, debes confirmar tu direccion de correo mediante un enlace de verificacion.</p>
     </div>
 
     <div
@@ -83,6 +88,6 @@
     ></div>
 
     <div class="formLabel">
-        <button type="submit">Send</button>
+        <button type="submit" data-i18n="contact.form.submit">Enviar mensaje</button>
     </div>
 </form>

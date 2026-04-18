@@ -1,4 +1,5 @@
 <section class="legalSection legalSection--cookies" aria-labelledby="cookies-title">
+
     <h1 id="cookies-title">Cookie Policy</h1>
     <p class="legalSection__meta">Last updated: April 17, 2026</p>
 

@@ -1,5 +1,5 @@
 <footer class="contenedorFooter">
-    <p>&copy; {{ date('Y') }} Roger Lab. All Rights Reserved.</p>
+    <p data-i18n="footer.rights" data-i18n-year="{{ date('Y') }}">&copy; {{ date('Y') }} Roger Lab. Todos los derechos reservados.</p>
 
     <div class="info">
         <p>rogerlucas14698@gmail.com</p>
@@ -7,9 +7,9 @@
     </div>
 
     <div class="privacy">
-        <a href="{{ route('privacy-policy') }}" data-partial-nav>Privacy Policy</a>
-        <a href="{{ route('terms-of-service') }}" data-partial-nav>Terms of Service</a>
-        <a href="{{ route('cookies-privacy') }}" data-partial-nav>Cookies Policy</a>
+        <a href="{{ route('privacy-policy') }}" data-partial-nav data-i18n="footer.privacy">Politica de privacidad</a>
+        <a href="{{ route('terms-of-service') }}" data-partial-nav data-i18n="footer.terms">Terminos del servicio</a>
+        <a href="{{ route('cookies-privacy') }}" data-partial-nav data-i18n="footer.cookies">Politica de cookies</a>
     </div>
 
 </footer>

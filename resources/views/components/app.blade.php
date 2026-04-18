@@ -1,10 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Default Title')</title>
+    <title>@yield('title', 'RogerLab | Desarrollador Web Freelance en ' . config('seo.city'))</title>
+    <meta name="description" content="@yield('meta_description', 'Desarrollo web a medida en ' . config('seo.city') . ' y ' . config('seo.region') . '. Especialista en aplicaciones web, rendimiento y optimizacion de conversion para negocios.')">
+    <link rel="canonical" href="{{ url()->current() }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:title" content="@yield('title', 'RogerLab | Desarrollador Web Freelance en ' . config('seo.city'))">
+    <meta property="og:description" content="@yield('meta_description', 'Desarrollo web profesional en ' . config('seo.city') . ' y ' . config('seo.region') . ' para negocios que necesitan una web rapida, clara y orientada a resultados.')">
+    <meta property="og:image" content="{{ asset('images/og-image.jpg') }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="{{ url()->current() }}">
+    <meta name="twitter:title" content="@yield('title', 'RogerLab | Desarrollador Web Freelance en ' . config('seo.city'))">
+    <meta name="twitter:description" content="@yield('meta_description', 'Desarrollo web profesional en ' . config('seo.city') . ' y ' . config('seo.region') . ' para negocios que quieren captar clientes online.')">
+    <meta name="twitter:image" content="{{ asset('images/og-image.jpg') }}">
+
+
+
+
 
     <!--Carga de font awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -32,6 +48,7 @@
     <script src="{{ asset('js/theme.js') }}" defer></script>
     <script src="{{ asset('js/animaciones.js') }}" defer></script>
     <script src="{{ asset('js/partial-navigation.js') }}" defer></script>
+    <script src="{{ asset('js/language-switcher.js') }}" defer></script>
     <script src="{{ asset('js/main.js') }}"></script>
 </body>
 
