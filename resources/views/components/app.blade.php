@@ -17,6 +17,7 @@
     <meta name="twitter:title" content="@yield('title', 'RogerLab | Desarrollador Web Freelance en ' . config('seo.city'))">
     <meta name="twitter:description" content="@yield('meta_description', 'Desarrollo web profesional en ' . config('seo.city') . ' y ' . config('seo.region') . ' para negocios que quieren captar clientes online.')">
     <meta name="twitter:image" content="{{ asset('images/og-image.jpg') }}">
+    <meta name="theme-color" content="#222222">
 
 
 
@@ -34,6 +35,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Saira+Stencil:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <!--Enlace a la carpeta de public/css -->
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('img/favicon/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('img/favicon/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('img/favicon/favicon-16x16.png') }}">
+    <link rel="shortcut icon" href="{{ asset('img/favicon/favicon.ico') }}" type="image/x-icon">
+    <link rel="manifest" href="{{ asset('img/favicon/site.webmanifest') }}">
 </head>
 
 <body data-theme="dark">
