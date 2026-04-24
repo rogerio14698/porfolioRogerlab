@@ -51,6 +51,7 @@
     <script src="{{ asset('js/animaciones.js') }}" defer></script>
     <script src="{{ asset('js/partial-navigation.js') }}" defer></script>
     <script src="{{ asset('js/language-switcher.js') }}" defer></script>
+    <script src="{{ asset('js/ahorcado.js') }}" defer></script>
     <script src="{{ asset('js/main.js') }}"></script>
 </body>
 

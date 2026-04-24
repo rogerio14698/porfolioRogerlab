@@ -10,6 +10,4 @@
     <p id="mensaje"></p>
 
     <button id="btn-reiniciar" data-i18n="games.hangman.restart">Reiniciar juego</button>
-
-    <script type="module" src="{{ asset('js/ahorcado.js') }}"></script>
 </section>
