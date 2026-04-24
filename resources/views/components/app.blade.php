@@ -19,10 +19,6 @@
     <meta name="twitter:image" content="{{ asset('images/og-image.jpg') }}">
     <meta name="theme-color" content="#222222">
 
-
-
-
-
     <!--Carga de font awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <!--Google Fonts-->
