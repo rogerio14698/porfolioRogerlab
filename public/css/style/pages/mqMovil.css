@@ -208,6 +208,35 @@
         padding-right: 0;
     }
 
+    .contenedorJuego {
+        grid-template-columns: 1fr;
+        width: 80%;
+        padding: 18px;
+        gap: 10px;
+    }
+
+    .contenedorJuego > a {
+        width: 100%;
+        justify-content: center;
+    }
+
+    #tablero {
+        font-size: clamp(1rem, 5vw, 1.4rem);
+        letter-spacing: 0.18em;
+    }
+
+    #vidas,
+    #letrasIncorrectas,
+    #mensaje {
+        font-size: var(--tamanoTextoMovil);
+    }
+
+    #btn-intentar,
+    #btn-reiniciar,
+    #input-letra {
+        width: 100%;
+    }
+
     /*Fin de la seccion de proyectos*/
 
     .legalSection {

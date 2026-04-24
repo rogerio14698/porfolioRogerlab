@@ -216,6 +216,15 @@
         font-size: 0.95rem;
     }
 
+    .contenedorJuego {
+        width: min(72%, 700px);
+        padding: 20px;
+    }
+
+    #tablero {
+        font-size: clamp(1.1rem, 2.1vw, 1.7rem);
+    }
+
     /*Footer*/
 
     .contenedorFooter {

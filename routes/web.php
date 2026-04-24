@@ -54,6 +54,24 @@ Route::get('/projects', function () {
     );
 })->name('projects');
 
+Route::get('/juegos', function () {
+    return renderSection(
+        'juegos',
+        'Juegos JavaScript | RogerLab',
+        'Diviértete con juegos interactivos desarrollados en JavaScript, juegos como el ahorcado, y juegos de rol desarollado en el grado de Desarrollo de Aplicaciones Web'
+    );
+})->name('juegos');
+
+Route::get('/juegos/ahorcado', function () {
+    return renderSection(
+        'ahorcado',
+        'Juego del Ahorcado | RogerLab',
+        'Juega al ahorcado en una experiencia interactiva desarrollada con JavaScript dentro de RogerLab.'
+    );
+})->name('juegos.ahorcado');
+
+
+
 Route::get('/contact', function () {
     return renderSection(
         'contact',

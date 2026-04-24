@@ -9,6 +9,10 @@
         @include('components.articles')
     @elseif ($section === 'projects')
         @include('components.projects')
+    @elseif ($section === 'juegos')
+        @include('components.juegos')
+    @elseif ($section === 'ahorcado')
+        @include('components.games.ahorcado.juegoAhorcado')
     @elseif ($section === 'contact')
         @include('components.contact')
         {{--Esto ya no es el navegador, son las diferentes secciones de uso de la web --}}
