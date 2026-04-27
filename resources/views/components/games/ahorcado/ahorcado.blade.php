@@ -5,9 +5,9 @@
         </div>
         <div class="descripcionJuego">
             <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident quod, incidunt illum, quis explicabo assumenda commodi voluptates laborum voluptatem totam nihil eligendi earum unde possimus natus autem voluptate voluptas tempora.
+                Este juego del ahorcado pone a prueba tu vocabulario y rapidez mental: debes adivinar la palabra oculta letra por letra antes de completar el dibujo. Incluye una interfaz clara, feedback inmediato en cada intento y una experiencia pensada para jugar de forma fluida desde cualquier dispositivo.
             </p> <br>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde itaque quaerat, et reprehenderit adipisci corporis earum magnam rerum architecto? A fugiat unde saepe consequuntur, ad voluptates. Consequuntur, tenetur? Voluptates, molestias!</p>
+            <p>Lo desarrollé como parte de mi portafolio para demostrar lógica de programación, manejo del estado del juego y organización del código en componentes reutilizables. El objetivo fue combinar funcionalidad, rendimiento y una presentación visual consistente con el resto del sitio.</p>
             <a href="{{ route('juegos.ahorcado') }}" data-partial-nav data-i18n="games.hangman.card.cta">Jugar al ahorcado</a>
         </div>
 </div>
