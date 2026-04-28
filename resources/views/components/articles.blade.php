@@ -1,4 +1,5 @@
 <section class="articles">
+    @include('components.articles.menosCodigoMasSoluciones')
     @include('components.articles.visitasCliente')
     @include('components.articles.precioPaginaWeb')
     @include('components.articles.landingPageVSFullWeb')
