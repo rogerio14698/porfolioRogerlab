@@ -157,25 +157,6 @@
 
     /*Seccion proyectos*/
 
-    .projectsScrollHint {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        width: min(90%, 560px);
-        margin: 8px auto 10px;
-        padding: 6px 10px;
-        border: 1px dashed color-mix(in srgb, var(--colorBorde) 65%, transparent);
-        font-family: var(--fuenteTexto);
-        font-size: 0.9rem;
-        color: var(--_texto);
-        opacity: 0.9;
-    }
-
-    .projectsScrollHint::after {
-        content: "↔";
-        animation: projectsSwipeHint 1.4s ease-in-out infinite;
-    }
-
     .seccionProjects {
         display: flex;
         flex-direction: row;
@@ -186,38 +167,14 @@
         margin-top: auto;
         margin-right: auto;
         margin-left: auto;
-        padding: 8px 10px 16px;
+        padding: 8px 0 16px 0;
         gap: 20px;
         overflow-x: auto;
         overflow-y: hidden;
         scroll-snap-type: x mandatory;
-        scroll-padding-inline: 10px;
         scroll-behavior: smooth;
-        -webkit-overflow-scrolling: touch;
-        overscroll-behavior-x: contain;
-        touch-action: pan-x;
-        scrollbar-width: thin;
-        scrollbar-color: var(--colorBorde) transparent;
         position: static;
         top: auto;
-        cursor: grab;
-    }
-
-    .seccionProjects:active {
-        cursor: grabbing;
-    }
-
-    .seccionProjects::-webkit-scrollbar {
-        height: 8px;
-    }
-
-    .seccionProjects::-webkit-scrollbar-thumb {
-        background-color: color-mix(in srgb, var(--colorBorde) 75%, transparent);
-        border-radius: 999px;
-    }
-
-    .seccionProjects::-webkit-scrollbar-track {
-        background-color: color-mix(in srgb, var(--_fondoPanel) 80%, transparent);
     }
 
     .cardProject {
@@ -228,7 +185,6 @@
         flex: 0 0 min(320px, 85vw);
         padding-right: 16px;
         scroll-snap-align: start;
-        scroll-snap-stop: always;
         border-right: 2px solid var(--colorBorde);
     }
 
@@ -267,17 +223,6 @@
 
     .description {
         padding-right: 0;
-    }
-
-    @keyframes projectsSwipeHint {
-        0%,
-        100% {
-            transform: translateX(0);
-        }
-
-        50% {
-            transform: translateX(4px);
-        }
     }
 
     .contenedorJuego {

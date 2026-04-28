@@ -226,25 +226,6 @@
         padding: 8px;
     }
 
-    .projectsScrollHint {
-        width: 100%;
-        margin: 8px auto;
-        padding: 6px 8px;
-        font-size: 0.8rem;
-    }
-
-    .seccionProjects {
-        width: 100%;
-        gap: 14px;
-        padding: 6px 8px 14px;
-        scroll-padding-inline: 8px;
-    }
-
-    .cardProject {
-        flex: 0 0 min(300px, 88vw);
-        padding-right: 12px;
-    }
-
 
     /*Fin del formulario de contacto*/
 

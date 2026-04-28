@@ -1,29 +1,109 @@
 (function () {
     'use strict';
 
-    var palabras = [
-        'panadero', 'hola', 'casa', 'perro', 'gato', 'libro', 'ventana', 'puerta', 'mesa', 'silla',
-        'coche', 'avion', 'tren', 'camion', 'bicicleta', 'escuela', 'profesor', 'alumno', 'clase', 'pizarra',
-        'luz', 'sombra', 'sol', 'luna', 'estrella', 'cielo', 'nube', 'mar', 'rio', 'montana',
-        'bosque', 'flor', 'arbol', 'fruta', 'manzana', 'pera', 'uva', 'platano', 'naranja', 'sandia',
-        'telefono', 'ordenador', 'raton', 'teclado', 'pantalla', 'internet', 'programa', 'juego', 'musica', 'cancion',
-        'pelicula', 'teatro', 'danza', 'arte', 'pintura', 'escultura', 'fotografia', 'poema', 'novela', 'historia',
-        'tiempo', 'reloj', 'calendario', 'dia', 'noche', 'manana', 'tarde', 'siglo', 'ropa', 'zapato',
-        'camisa', 'pantalon', 'sombrero', 'abrigo', 'falda', 'vestido', 'bufanda', 'guante', 'ciudad', 'pueblo',
-        'aldea', 'calle', 'plaza', 'parque', 'puente', 'carretera', 'edificio', 'iglesia', 'hospital', 'farmacia',
-        'tienda', 'mercado', 'restaurante', 'hotel', 'bar', 'cafeteria', 'cine', 'museo', 'dinero', 'moneda',
-        'billete', 'banco', 'tarjeta', 'precio', 'compra', 'venta', 'oferta', 'ahorro', 'trabajo', 'empleo',
-        'jefe', 'companero', 'jardin', 'campo', 'playa', 'isla', 'desierto', 'oceano', 'volcan', 'cueva',
-        'valle', 'pajaro', 'pez', 'insecto', 'abeja', 'hormiga', 'mariposa', 'caballo', 'vaca', 'oveja'
-    ];
+    var SUPPORTED_LANGUAGES = ['es', 'en', 'pt'];
+
+    var wordsByLanguage = {
+        es: [
+            'panadero', 'casa', 'perro', 'gato', 'libro', 'ventana', 'puerta', 'mesa', 'silla', 'coche',
+            'avion', 'tren', 'camion', 'bicicleta', 'escuela', 'profesor', 'alumno', 'clase', 'pizarra', 'estrella',
+            'cielo', 'nube', 'mar', 'rio', 'montana', 'bosque', 'flor', 'arbol', 'manzana', 'naranja',
+            'telefono', 'ordenador', 'raton', 'teclado', 'pantalla', 'internet', 'programa', 'juego', 'musica', 'cancion',
+            'pelicula', 'teatro', 'danza', 'pintura', 'poema', 'novela', 'historia', 'reloj', 'calendario', 'zapato'
+        ],
+        en: [
+            'bakery', 'house', 'dog', 'cat', 'book', 'window', 'door', 'table', 'chair', 'car',
+            'plane', 'train', 'truck', 'bicycle', 'school', 'teacher', 'student', 'classroom', 'board', 'star',
+            'sky', 'cloud', 'sea', 'river', 'mountain', 'forest', 'flower', 'tree', 'apple', 'orange',
+            'phone', 'computer', 'mouse', 'keyboard', 'screen', 'internet', 'program', 'game', 'music', 'song',
+            'movie', 'theater', 'dance', 'painting', 'poem', 'novel', 'story', 'clock', 'calendar', 'market'
+        ],
+        pt: [
+            'padaria', 'casa', 'cao', 'gato', 'livro', 'janela', 'porta', 'mesa', 'cadeira', 'carro',
+            'aviao', 'comboio', 'camiao', 'bicicleta', 'escola', 'professor', 'aluno', 'turma', 'quadro', 'estrela',
+            'ceu', 'nuvem', 'mar', 'rio', 'montanha', 'floresta', 'flor', 'arvore', 'maca', 'laranja',
+            'telefone', 'computador', 'rato', 'teclado', 'ecra', 'internet', 'programa', 'jogo', 'musica', 'cancao',
+            'filme', 'teatro', 'danca', 'pintura', 'poema', 'romance', 'historia', 'relogio', 'calendario', 'mercado'
+        ]
+    };
+
+    var messages = {
+        es: {
+            lives: 'Vidas',
+            wrongLetters: 'Letras incorrectas',
+            lost: 'Perdiste. La palabra era: {word}',
+            won: 'Ganaste!',
+            invalidLetter: 'Introduce solo una letra valida.',
+            alreadyFound: 'Ya encontraste esa letra.',
+            alreadyTried: 'Ya intentaste esa letra.'
+        },
+        en: {
+            lives: 'Lives',
+            wrongLetters: 'Wrong letters',
+            lost: 'You lost. The word was: {word}',
+            won: 'You won!',
+            invalidLetter: 'Enter only one valid letter.',
+            alreadyFound: 'You already found that letter.',
+            alreadyTried: 'You already tried that letter.'
+        },
+        pt: {
+            lives: 'Vidas',
+            wrongLetters: 'Letras incorretas',
+            lost: 'Perdeste. A palavra era: {word}',
+            won: 'Ganhaste!',
+            invalidLetter: 'Introduce apenas uma letra valida.',
+            alreadyFound: 'Ja encontraste essa letra.',
+            alreadyTried: 'Ja tentaste essa letra.'
+        }
+    };
 
     var state = {
+        language: 'es',
         palabra: '',
         letrasCorrectas: [],
         letrasIncorrectas: [],
         vidas: 10,
         letrasUnicas: 0
     };
+
+    var languageListenerBound = false;
+
+    function getLanguage() {
+        var language = document.documentElement.lang || 'es';
+        return SUPPORTED_LANGUAGES.indexOf(language) >= 0 ? language : 'es';
+    }
+
+    function t(key, params) {
+        var dictionary = messages[state.language] || messages.es;
+        var template = dictionary[key] || '';
+
+        if (!params) {
+            return template;
+        }
+
+        return template.replace(/\{(\w+)\}/g, function (_, token) {
+            return params[token] || '';
+        });
+    }
+
+    function handleLanguageChanged(event) {
+        var nextLanguage = (event.detail && event.detail.language) || 'es';
+        var ui = getUi();
+
+        if (SUPPORTED_LANGUAGES.indexOf(nextLanguage) < 0) {
+            return;
+        }
+
+        if (!isReady(ui) || ui.root.dataset.hangmanInit !== 'true') {
+            return;
+        }
+
+        state.language = nextLanguage;
+
+        // Keep game progress while refreshing labels/messages to the selected language.
+        mostrarTablero(ui);
+        verificarEstado(ui);
+    }
 
     function getUi() {
         return {
@@ -46,7 +126,8 @@
     }
 
     function elegirPalabra() {
-        state.palabra = palabras[Math.floor(Math.random() * palabras.length)];
+        var words = wordsByLanguage[state.language] || wordsByLanguage.es;
+        state.palabra = words[Math.floor(Math.random() * words.length)];
         state.letrasUnicas = new Set(state.palabra).size;
     }
 
@@ -56,26 +137,27 @@
         });
 
         ui.tablero.textContent = oculto.join(' ');
-        ui.vidas.textContent = 'Vidas: ' + state.vidas;
-        ui.incorrectas.textContent = 'Letras incorrectas: ' + state.letrasIncorrectas.join(' - ');
+        ui.vidas.textContent = t('lives') + ': ' + state.vidas;
+        ui.incorrectas.textContent = t('wrongLetters') + ': ' + state.letrasIncorrectas.join(' - ');
     }
 
     function verificarEstado(ui) {
         if (state.vidas <= 0) {
-            ui.mensaje.textContent = 'Perdiste. La palabra era: ' + state.palabra;
+            ui.mensaje.textContent = t('lost', { word: state.palabra });
             ui.btnIntentar.disabled = true;
             ui.input.disabled = true;
             return;
         }
 
         if (state.letrasCorrectas.length === state.letrasUnicas) {
-            ui.mensaje.textContent = 'Ganaste!';
+            ui.mensaje.textContent = t('won');
             ui.btnIntentar.disabled = true;
             ui.input.disabled = true;
         }
     }
 
     function reiniciar(ui) {
+        state.language = getLanguage();
         state.palabra = '';
         state.letrasCorrectas = [];
         state.letrasIncorrectas = [];
@@ -95,8 +177,8 @@
         var letra = ui.input.value.toLowerCase();
         ui.input.value = '';
 
-        if (!/^[a-zñ]$/.test(letra)) {
-            alert('Introduce solo una letra valida.');
+        if (!/^[a-z]$/.test(letra)) {
+            alert(t('invalidLetter'));
             return;
         }
 
@@ -104,13 +186,13 @@
             if (!state.letrasCorrectas.includes(letra)) {
                 state.letrasCorrectas.push(letra);
             } else {
-                alert('Ya encontraste esa letra.');
+                alert(t('alreadyFound'));
             }
         } else if (!state.letrasIncorrectas.includes(letra)) {
             state.letrasIncorrectas.push(letra);
             state.vidas -= 1;
         } else {
-            alert('Ya intentaste esa letra.');
+            alert(t('alreadyTried'));
         }
 
         mostrarTablero(ui);
@@ -146,6 +228,12 @@
         }
 
         ui.root.dataset.hangmanInit = 'true';
+
+        if (!languageListenerBound) {
+            document.addEventListener('rogerlab:language-changed', handleLanguageChanged);
+            languageListenerBound = true;
+        }
+
         bind(ui);
         reiniciar(ui);
     }

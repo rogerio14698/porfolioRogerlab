@@ -16,6 +16,8 @@
             'games.back': 'Volver a juegos',
             'games.hangman.card.alt': 'Juego del ahorcado',
             'games.hangman.card.title': 'Juego del ahorcado',
+            'games.hangman.card.body_1': 'Este juego del ahorcado pone a prueba tu vocabulario y rapidez mental: debes adivinar la palabra oculta letra por letra antes de completar el dibujo. Incluye una interfaz clara, feedback inmediato en cada intento y una experiencia pensada para jugar de forma fluida desde cualquier dispositivo.',
+            'games.hangman.card.body_2': 'Lo desarrolle como parte de mi portafolio para demostrar logica de programacion, manejo del estado del juego y organizacion del codigo en componentes reutilizables. El objetivo fue combinar funcionalidad, rendimiento y una presentacion visual consistente con el resto del sitio.',
             'games.hangman.card.cta': 'Jugar al ahorcado',
             'games.hangman.input_placeholder': 'Escribe una letra',
             'games.hangman.try': 'Intentar',
@@ -112,6 +114,8 @@
             'games.back': 'Back to games',
             'games.hangman.card.alt': 'Hangman game',
             'games.hangman.card.title': 'Hangman game',
+            'games.hangman.card.body_1': 'This hangman game tests your vocabulary and mental speed: you must guess the hidden word letter by letter before completing the drawing. It includes a clear interface, immediate feedback on every attempt, and an experience designed to play smoothly from any device.',
+            'games.hangman.card.body_2': 'I developed it as part of my portfolio to showcase programming logic, game state management, and code organization into reusable components. The goal was to combine functionality, performance, and a visual presentation consistent with the rest of the site.',
             'games.hangman.card.cta': 'Play hangman',
             'games.hangman.input_placeholder': 'Type a letter',
             'games.hangman.try': 'Try',
@@ -208,6 +212,8 @@
             'games.back': 'Voltar aos jogos',
             'games.hangman.card.alt': 'Jogo da forca',
             'games.hangman.card.title': 'Jogo da forca',
+            'games.hangman.card.body_1': 'Este jogo da forca poe a prova o teu vocabulario e rapidez mental: tens de adivinhar a palavra escondida letra a letra antes de completar o desenho. Inclui uma interface clara, feedback imediato em cada tentativa e uma experiencia pensada para jogar de forma fluida em qualquer dispositivo.',
+            'games.hangman.card.body_2': 'Desenvolvi-o como parte do meu portfolio para demonstrar logica de programacao, gestao do estado do jogo e organizacao do codigo em componentes reutilizaveis. O objetivo foi combinar funcionalidade, desempenho e uma apresentacao visual consistente com o resto do site.',
             'games.hangman.card.cta': 'Jogar forca',
             'games.hangman.input_placeholder': 'Escreve uma letra',
             'games.hangman.try': 'Tentar',
@@ -375,6 +381,10 @@
         });
 
         syncLanguageButtons(activeLanguage);
+
+        document.dispatchEvent(new CustomEvent('rogerlab:language-changed', {
+            detail: { language: activeLanguage }
+        }));
     }
 
     function handleLanguageSelection(event) {

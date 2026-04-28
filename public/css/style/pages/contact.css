@@ -26,6 +26,50 @@
     width: 100%;
 }
 
+.contactPdfRow {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 0 0 18px;
+    width: 100%;
+}
+
+.contactPdfTitle {
+    margin: 0;
+    font-family: var(--fuenteTitulo);
+    font-size: clamp(1rem, 1.3vw, 1.2rem);
+    font-weight: var(--grosorTitulo);
+}
+
+.contactPdfLinks {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.contactPdfLink {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 34px;
+    padding: 6px 12px;
+    border: 1px solid var(--colorBorde);
+    color: var(--_texto);
+    text-decoration: none;
+    font-family: var(--fuenteTexto);
+    font-size: var(--tamanoTexto);
+    line-height: 1;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.contactPdfLink:hover,
+.contactPdfLink:focus-visible {
+    background-color: var(--colorBorde);
+    color: var(--_fondoPanel);
+}
+
 .contactForm {
     width: 100%;
 }

@@ -114,6 +114,22 @@ Route::get('/cookies-privacy', function () {
     );
 })->name('cookies-privacy');
 
+Route::get('/pdf-cv/english', function () {
+    $path = resource_path('views/components/pdf-cv/RogerioLucas-cv-English.pdf');
+
+    abort_unless(file_exists($path), 404);
+
+    return response()->file($path, ['Content-Type' => 'application/pdf']);
+})->name('pdf-cv.english');
+
+Route::get('/pdf-cv/spanish', function () {
+    $path = resource_path('views/components/pdf-cv/RogerioLucas-Spanish-cv.pdf');
+
+    abort_unless(file_exists($path), 404);
+
+    return response()->file($path, ['Content-Type' => 'application/pdf']);
+})->name('pdf-cv.spanish');
+
 Route::get('/{any}', function () {
     return renderSection(
         'notFound',

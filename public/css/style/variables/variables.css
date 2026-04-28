@@ -1,7 +1,7 @@
 :root {
 
     --colorModoDarkFondo: #222;
-    --colorModoLightFondo: #999;
+    --colorModoLightFondo: #ece8df;
 
 
     --colorLineaLight: #999;
@@ -10,8 +10,8 @@
     --colorbtnDark: #333;
     --colorbtnLight: #fff;
 
-    --colorTextoLight: #d6d6d6;
-    --colorTextoDark: #4e4e4e;
+    --colorTextoLight: #dddddd;
+    --colorTextoDark: #1f1f1f;
     --colorBorde: #999999;
     --colorBordeLight: #444;
     --borde: 2px solid var(--colorBorde);

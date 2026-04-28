@@ -19,10 +19,6 @@
 
 }
 
-.projectsScrollHint {
-    display: none;
-}
-
 .cardProject {
     display: flex;
     flex-direction: column;
@@ -109,7 +105,7 @@
     font-size: var(--tamanoTextoProyecto);
     font-family: var(--fuenteTexto);
     font-weight: var(--grosorTexto);
-    color: var(--_textoSoft);
+    color: var(--colorTextoLight);
     margin-bottom: 16px;
     margin-top: auto;
     text-align: justify;

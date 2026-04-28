@@ -1,6 +1,4 @@
-<p class="projectsScrollHint">Desliza para ver mas proyectos →</p>
-
-<section class="seccionProjects" aria-label="Carrusel horizontal de proyectos">
+<section class="seccionProjects">
     @include('components.projects.bibliotecaDAW')
     @include('components.projects.gestorContenido')
     @include('components.projects.gestorFichaje')
