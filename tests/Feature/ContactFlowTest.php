@@ -22,7 +22,7 @@ class ContactFlowTest extends TestCase
         $response = $this->post(route('contact.submit'), [
             'name' => 'Roger Lab',
             'subject' => 'Secure contact flow',
-            'email' => 'rogeriolucas14698@gmail.com',
+            'email' => 'rogeriolucas@rogerlab.es',
             'message' => 'This is a detailed message with enough length to pass validation.',
             'company' => '',
         ]);
@@ -30,7 +30,7 @@ class ContactFlowTest extends TestCase
         $response->assertRedirect(route('contact'));
 
         $this->assertDatabaseHas('contact_messages', [
-            'email' => 'rogeriolucas14698@gmail.com',
+            'email' => 'rogeriolucas@rogerlab.es',
             'status' => ContactMessage::STATUS_PENDING,
             'spam_reason' => null,
         ]);
@@ -48,7 +48,7 @@ class ContactFlowTest extends TestCase
         $contactMessage = ContactMessage::create([
             'name' => 'Roger Lab',
             'subject' => 'Verified delivery',
-            'email' => 'rogeriolucas14698@gmail.com',
+            'email' => 'rogeriolucas@rogerlab.es',
             'message' => 'This verified message should be delivered only after opt-in confirmation.',
             'status' => ContactMessage::STATUS_PENDING,
             'verification_token' => hash('sha256', $plainToken),
@@ -76,7 +76,7 @@ class ContactFlowTest extends TestCase
         $this->assertNull($contactMessage->verification_token);
 
         Mail::assertSent(AdminContactMessageMail::class, function (AdminContactMessageMail $mail) use ($contactMessage): bool {
-            return $mail->hasTo('rogeriolucas14698@gmail.com')
+            return $mail->hasTo('rogeriolucas@rogerlab.es')
                 && $mail->hasReplyTo($contactMessage->email)
                 && $mail->contactMessage->is($contactMessage);
         });

@@ -22,7 +22,7 @@ class AdminContactMessageMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            to: [new Address('rogeriolucas14698@gmail.com', 'Roger Lab')],
+            to: [new Address('rogeriolucas@rogerlab.es', 'Roger Lab')],
             replyTo: [new Address($this->contactMessage->email, $this->contactMessage->name)],
             subject: 'Nueva consulta desde la Web: '.$this->contactMessage->subject,
         );

@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'admin_email' => env('CONTACT_ADMIN_EMAIL', 'rogeriolucas14698@gmail.com'),
+    'admin_email' => env('CONTACT_ADMIN_EMAIL', 'rogeriolucas@rogerlab.es'),
     'verification_expire_minutes' => (int) env('CONTACT_VERIFICATION_EXPIRE_MINUTES', 1440),
     'disposable_domains' => [
         '10minutemail.com',
