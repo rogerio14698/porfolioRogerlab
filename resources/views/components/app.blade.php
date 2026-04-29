@@ -43,17 +43,14 @@
 
     <!--Carga de font awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <!--Google Fonts-->
+    <!-- Google Fonts: preconnect + todas las familias en una sola petición -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&family=Poiret+One&display=swap"rel="stylesheet">
-    <!-- google fonts-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Saira+Stencil:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&family=Poiret+One&family=Saira+Stencil:ital,wght@0,100..900;1,100..900&display=swap">
     <!--Enlace a la carpeta de public/css -->
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('img/favicon/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="144x144" href="{{ asset('img/favicon/favicon-144x144.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('img/favicon/favicon-32x32.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('img/favicon/favicon-16x16.png') }}">
     <link rel="shortcut icon" href="{{ asset('img/favicon/favicon.ico') }}" type="image/x-icon">
@@ -74,7 +71,7 @@
     <script src="{{ asset('js/partial-navigation.js') }}" defer></script>
     <script src="{{ asset('js/language-switcher.js') }}" defer></script>
     <script src="{{ asset('js/ahorcado.js') }}" defer></script>
-    <script src="{{ asset('js/main.js') }}"></script>
+    <script src="{{ asset('js/main.js') }}" defer></script>
 </body>
 
 </html>
