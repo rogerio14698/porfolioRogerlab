@@ -50,7 +50,7 @@
     <!--Enlace a la carpeta de public/css -->
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('img/favicon/apple-touch-icon.png') }}">
-    <link rel="icon" type="image/png" sizes="144x144" href="{{ asset('img/favicon/favicon-144x144.png') }}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('img/favicon/android-chrome-192x192.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('img/favicon/favicon-32x32.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('img/favicon/favicon-16x16.png') }}">
     <link rel="shortcut icon" href="{{ asset('img/favicon/favicon.ico') }}" type="image/x-icon">
