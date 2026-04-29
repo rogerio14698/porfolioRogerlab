@@ -131,6 +131,10 @@ Route::get('/pdf-cv/spanish', function () {
     return response()->file($path, ['Content-Type' => 'application/pdf']);
 })->name('pdf-cv.spanish');
 
+Route::get('/robots.txt', function () {
+    return response()->view('robots')->header('Content-Type', 'text/plain');
+})->name('robots.txt');
+
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap.xml');
 
 Route::get('/{any}', function () {

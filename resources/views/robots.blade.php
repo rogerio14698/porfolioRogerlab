@@ -7,4 +7,4 @@ Disallow: /temp
 Disallow: /*.json$
 Allow: /
 
-Sitemap: https://portfolio.rogerlab.es/sitemap.xml
+Sitemap: {{ url('/sitemap.xml') }}
