@@ -1,2 +1,10 @@
 User-agent: *
-Disallow:
+Disallow: /admin
+Disallow: /api
+Disallow: /test
+Disallow: /debug
+Disallow: /temp
+Disallow: /*.json$
+Allow: /
+
+Sitemap: /sitemap.xml

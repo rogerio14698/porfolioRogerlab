@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
 
 $seoCity = config('seo.city');
@@ -8,9 +9,9 @@ $seoRegion = config('seo.region');
 $seoCountry = config('seo.country');
 
 if (! function_exists('renderSection')) {
-    function renderSection(string $section, string $pageTitle, string $pageMetaDescription, int $status = 200)
+    function renderSection(string $section, string $pageTitle, string $pageMetaDescription, int $status = 200, string $robotsMeta = 'index,follow')
     {
-        $data = compact('section', 'pageTitle', 'pageMetaDescription');
+        $data = compact('section', 'pageTitle', 'pageMetaDescription', 'robotsMeta');
 
         if (request()->ajax()) {
             return response()->view('components.sectionContent', $data, $status);
@@ -130,11 +131,14 @@ Route::get('/pdf-cv/spanish', function () {
     return response()->file($path, ['Content-Type' => 'application/pdf']);
 })->name('pdf-cv.spanish');
 
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap.xml');
+
 Route::get('/{any}', function () {
     return renderSection(
         'notFound',
         'Pagina no encontrada | RogerLab',
         'La pagina que buscas no esta disponible. Puedes volver al inicio para explorar servicios, proyectos y formas de contacto.',
-        404
+        404,
+        'noindex,nofollow'
     );
 })->where('any', '.*')->name('not-found');

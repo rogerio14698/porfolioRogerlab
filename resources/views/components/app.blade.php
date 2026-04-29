@@ -4,20 +4,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @php
+        $defaultTitle = 'RogerLab | Desarrollador Web Freelance en ' . config('seo.city');
+        $defaultDescription = 'Desarrollo web a medida en ' . config('seo.city') . ' y ' . config('seo.region') . '. Especialista en aplicaciones web, rendimiento y optimizacion de conversion para negocios.';
+        $defaultOgImage = asset('img/profileIMG.png');
+    @endphp
     <title>@yield('title', 'RogerLab | Desarrollador Web Freelance en ' . config('seo.city'))</title>
     <meta name="description" content="@yield('meta_description', 'Desarrollo web a medida en ' . config('seo.city') . ' y ' . config('seo.region') . '. Especialista en aplicaciones web, rendimiento y optimizacion de conversion para negocios.')">
-    <link rel="canonical" href="{{ url()->current() }}">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:title" content="@yield('title', 'RogerLab | Desarrollador Web Freelance en ' . config('seo.city'))">
-    <meta property="og:description" content="@yield('meta_description', 'Desarrollo web profesional en ' . config('seo.city') . ' y ' . config('seo.region') . ' para negocios que necesitan una web rapida, clara y orientada a resultados.')">
-    <meta property="og:image" content="{{ asset('images/og-image.jpg') }}">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="{{ url()->current() }}">
-    <meta name="twitter:title" content="@yield('title', 'RogerLab | Desarrollador Web Freelance en ' . config('seo.city'))">
-    <meta name="twitter:description" content="@yield('meta_description', 'Desarrollo web profesional en ' . config('seo.city') . ' y ' . config('seo.region') . ' para negocios que quieren captar clientes online.')">
-    <meta name="twitter:image" content="{{ asset('images/og-image.jpg') }}">
+    <meta name="robots" content="@yield('robots_meta', 'index,follow')">
+    <link rel="canonical" href="@yield('canonical', url()->current())">
+    @foreach (($hreflangLinks ?? []) as $lang => $href)
+        <link rel="alternate" hreflang="{{ $lang }}" href="{{ $href }}">
+    @endforeach
+    <meta property="og:type" content="@yield('og_type', 'website')">
+    <meta property="og:url" content="@yield('og_url', url()->current())">
+    <meta property="og:title" content="@yield('og_title', $defaultTitle)">
+    <meta property="og:description" content="@yield('og_description', $defaultDescription)">
+    <meta property="og:image" content="@yield('og_image', $defaultOgImage)">
+    <meta name="twitter:card" content="@yield('twitter_card', 'summary_large_image')">
+    <meta name="twitter:url" content="@yield('twitter_url', url()->current())">
+    <meta name="twitter:title" content="@yield('twitter_title', $defaultTitle)">
+    <meta name="twitter:description" content="@yield('twitter_description', $defaultDescription)">
+    <meta name="twitter:image" content="@yield('twitter_image', $defaultOgImage)">
     <meta name="theme-color" content="#222222">
+    @hasSection('schema_json_ld')
+        @yield('schema_json_ld')
+    @else
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                "name": "{{ config('app.name') }}",
+                "url": "{{ url('/') }}",
+                "logo": "{{ asset('img/logoPortfolio.png') }}"
+            }
+        </script>
+    @endif
 
     <!--Carga de font awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
