@@ -9,8 +9,8 @@
         $defaultDescription = 'Desarrollo web a medida en ' . config('seo.city') . ' y ' . config('seo.region') . '. Especialista en aplicaciones web, rendimiento y optimizacion de conversion para negocios.';
         $defaultOgImage = asset('img/profileIMG.png');
     @endphp
-    <title>@yield('title', 'RogerLab | Desarrollador Web Freelance en ' . config('seo.city'))</title>
-    <meta name="description" content="@yield('meta_description', 'Desarrollo web a medida en ' . config('seo.city') . ' y ' . config('seo.region') . '. Especialista en aplicaciones web, rendimiento y optimizacion de conversion para negocios.')">
+    <title>@yield('title', $defaultTitle)</title>
+    <meta name="description" content="@yield('meta_description', $defaultDescription)">
     <meta name="robots" content="@yield('robots_meta', 'index,follow')">
     <link rel="canonical" href="@yield('canonical', url()->current())">
     @foreach (($hreflangLinks ?? []) as $lang => $href)
@@ -32,8 +32,8 @@
     @else
         <script type="application/ld+json">
             {
-                "@context": "https://schema.org",
-                "@type": "Organization",
+                "@@context": "https://schema.org",
+                "@@type": "Organization",
                 "name": "{{ config('app.name') }}",
                 "url": "{{ url('/') }}",
                 "logo": "{{ asset('img/logoPortfolio.png') }}"
