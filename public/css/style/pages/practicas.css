@@ -1,0 +1,325 @@
+.seccionPracticas {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 60%;
+    margin-left: auto;
+    margin-top: auto;
+    padding: 24px;
+    position: relative;
+    top: -170px;
+    gap: 12px;
+    overflow-y: auto;
+    text-align: justify;
+}
+
+.seccionPracticas h2 {
+    font-size: var(--tamanoTitulo);
+    font-family: var(--fuenteTexto);
+    font-weight: var(--grosorTitulo);
+    text-decoration: underline dotted var(--colorBorde);
+    margin-bottom: 10px;
+}
+
+.seccionPracticas h3 {
+    font-size: clamp(1.15rem, 2vw, 1.5rem);
+    font-family: var(--fuenteTexto);
+    font-weight: var(--grosorTitulo);
+    color: var(--_texto);
+    margin-top: 6px;
+}
+
+.seccionPracticas p {
+    font-size: var(--tamanoTexto);
+    font-family: var(--fuenteTexto);
+    font-weight: var(--grosorTexto);
+    text-transform: uppercase;
+    color: var(--_textoSoft);
+    line-height: 1.8;
+    padding: 6px 8px;
+}
+
+.seccionPracticas p::first-letter {
+    font-size: 130%;
+}
+
+.practicasCompetencias {
+    display: grid;
+    gap: 10px;
+    width: 100%;
+}
+
+.practicasCompetencias li {
+    border-left: 2px solid var(--colorBorde);
+    padding: 10px 12px;
+    font-size: var(--tamanoTexto);
+    font-family: var(--fuenteTexto);
+    line-height: 1.7;
+    text-transform: uppercase;
+    color: var(--_textoSoft);
+    background: color-mix(in srgb, var(--_fondoPanel) 78%, transparent);
+}
+
+.practicasDescargas {
+    width: 100%;
+    margin-top: 6px;
+    border-top: 1px solid color-mix(in srgb, var(--colorBorde) 50%, transparent);
+    padding-top: 14px;
+}
+
+.practicasModalTrigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 44px;
+    padding: 8px 10px;
+    border: 1px solid var(--colorBorde);
+    font-family: var(--fuenteTexto);
+    font-size: var(--tamanoEnlaces);
+    line-height: 1.2;
+    text-align: center;
+    white-space: nowrap;
+    color: var(--_texto);
+    background-color: transparent;
+    transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+    cursor: pointer;
+}
+
+.practicasModalTrigger:hover,
+.practicasModalTrigger:focus-visible {
+    background-color: var(--colorBorde);
+    color: var(--_fondoPanel);
+}
+
+.practicasModalTrigger:active {
+    transform: translateY(1px);
+}
+
+.practicasModal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+}
+
+.practicasModal.is-open {
+    display: block;
+}
+
+.practicasModal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.practicasModal__panel {
+    position: relative;
+    width: min(1080px, 96vw);
+    max-height: 90vh;
+    margin: 5vh auto;
+    overflow: auto;
+    border: 1px solid var(--colorBorde);
+    background: var(--_fondoPanel);
+    color: var(--_texto);
+    padding: 20px;
+    padding-top: 64px;
+}
+
+.practicasModal__close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 38px;
+    height: 38px;
+    border: 1px solid var(--colorBorde);
+    background: transparent;
+    color: var(--_texto);
+    cursor: pointer;
+    font-size: 1.5rem;
+    line-height: 1;
+    z-index: 2;
+}
+
+#practicasModalTitle {
+    margin-bottom: 14px;
+    font-family: var(--fuenteTexto);
+    font-size: clamp(1.1rem, 2.1vw, 1.5rem);
+}
+
+.practicasModalSection {
+    margin-bottom: 18px;
+}
+
+.practicasModalSection h4 {
+    margin-bottom: 8px;
+    border-bottom: 1px solid color-mix(in srgb, var(--colorBorde) 55%, transparent);
+    padding-bottom: 6px;
+}
+
+.practicasPeriodHeading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.practicasPeriodHeading__label {
+    display: inline-block;
+    font-size: calc(var(--tamanoTextoMovil) - 0.05rem);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--_texto);
+    border: 1px solid color-mix(in srgb, var(--colorBorde) 60%, transparent);
+    background: color-mix(in srgb, var(--_fondoPanel) 82%, var(--_texto) 18%);
+    padding: 4px 8px;
+}
+
+.practicasPeriodHeading__value {
+    font-size: var(--tamanoTextoMovil);
+    color: var(--_textoSoft);
+    font-weight: 600;
+}
+
+.practicasInfoGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.practicasInfoRow {
+    display: grid;
+    gap: 4px;
+    border: 1px solid color-mix(in srgb, var(--colorBorde) 55%, transparent);
+    padding: 8px;
+    background: color-mix(in srgb, var(--_fondoPanel) 85%, transparent);
+}
+
+.practicasInfoRow__label {
+    font-weight: 600;
+    font-size: var(--tamanoTextoMovil);
+    color: var(--_texto);
+}
+
+.practicasInfoRow__value {
+    font-size: var(--tamanoTextoMovil);
+    color: var(--_textoSoft);
+}
+
+.practicasDayList {
+    display: grid;
+    gap: 10px;
+}
+
+.practicasDayCard {
+    border: 1px solid color-mix(in srgb, var(--colorBorde) 55%, transparent);
+    background: color-mix(in srgb, var(--_fondoPanel) 87%, transparent);
+    padding: 10px;
+}
+
+.practicasDayCard__title {
+    margin: 0 0 8px;
+    font-size: var(--tamanoTextoMovil);
+    color: var(--_texto);
+}
+
+.practicasDayCard__row {
+    margin-bottom: 8px;
+}
+
+.practicasDayCard__row span,
+.practicasDayCard__meta span {
+    display: block;
+    font-size: calc(var(--tamanoTextoMovil) - 0.1rem);
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--_texto);
+    border-left: 2px solid var(--colorBorde);
+    padding-left: 6px;
+}
+
+.practicasDayCard__row p,
+.practicasDayCard__meta p {
+    margin: 2px 0 0;
+    font-size: var(--tamanoTextoMovil);
+    color: var(--_textoSoft);
+    text-transform: none;
+    line-height: 1.45;
+    padding: 0;
+}
+
+.practicasDayCard__meta {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+}
+
+@media (max-width: 768px) {
+    .seccionPracticas {
+        width: 80%;
+        top: auto;
+        position: static;
+    }
+
+    .seccionPracticas p,
+    .practicasCompetencias li {
+        font-size: var(--tamanoTextoMovil);
+    }
+
+    .practicasModal__panel {
+        width: min(96vw, 96vw);
+        margin: 2vh auto;
+        max-height: 95vh;
+        padding: 14px;
+        padding-top: 56px;
+    }
+
+    .practicasInfoGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .practicasDayCard__meta {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 576px) {
+    .seccionPracticas {
+        width: 100%;
+        padding: 16px;
+        gap: 10px;
+    }
+
+    .seccionPracticas h2 {
+        font-size: 1.3rem;
+    }
+
+    .seccionPracticas p,
+    .practicasCompetencias li {
+        font-size: var(--tamanoTextoMovileXS);
+        line-height: 1.6;
+    }
+
+    .practicasModalTrigger {
+        min-height: 40px;
+        font-size: var(--tamanoEnlaceMovileXS);
+        white-space: normal;
+    }
+
+    .practicasInfoRow__label,
+    .practicasInfoRow__value,
+    .practicasPeriodHeading__label,
+    .practicasPeriodHeading__value,
+    .practicasDayCard__title,
+    .practicasDayCard__row p,
+    .practicasDayCard__meta p {
+        font-size: var(--tamanoTextoMovileXS);
+    }
+
+    .practicasDayCard__row span,
+    .practicasDayCard__meta span {
+        font-size: calc(var(--tamanoTextoMovileXS) - 0.08rem);
+    }
+}

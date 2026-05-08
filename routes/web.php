@@ -39,6 +39,14 @@ Route::get('/about', function () {
     );
 })->name('about');
 
+Route::get('/mi-periodo-practicas', function () {
+    return renderSection(
+        'miPeriodoPracticas',
+        'Mi Periodo de Practicas (FCT) | RogerLab',
+        'Conoce mi experiencia profesional durante las practicas FCT en Mon Event SL: despliegues, mantenimiento de aplicaciones web y gestion de codigo legacy.'
+    );
+})->name('mi-periodo-practicas');
+
 Route::get('/articles', function () {
     return renderSection(
         'articles',

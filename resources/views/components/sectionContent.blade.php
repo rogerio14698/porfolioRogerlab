@@ -5,6 +5,8 @@
         @include('components.textoAbout')
     @elseif ($section === 'about')
         @include('components.about')
+    @elseif ($section === 'miPeriodoPracticas')
+        @include('components.miPeriodoPracticas')
     @elseif ($section === 'articles')
         @include('components.articles')
     @elseif ($section === 'projects')
