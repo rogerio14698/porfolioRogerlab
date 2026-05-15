@@ -28,4 +28,4 @@
     @else
         @include('components.notFound')
     @endif
-</div>
+</div> 

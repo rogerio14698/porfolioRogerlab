@@ -182,14 +182,12 @@
         flex-wrap: nowrap;
         align-items: stretch;
         width: min(90%, 560px);
-        min-height: auto;
         margin-top: auto;
         margin-right: auto;
         margin-left: auto;
-        padding: 8px 10px 16px;
-        gap: 20px;
+        padding: 5px;
         overflow-x: auto;
-        overflow-y: hidden;
+        overflow-y:visible;
         scroll-snap-type: x mandatory;
         scroll-padding-inline: 10px;
         scroll-behavior: smooth;

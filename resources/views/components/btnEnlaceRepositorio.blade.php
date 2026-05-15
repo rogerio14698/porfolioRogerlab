@@ -1,1 +1,3 @@
-<button onclick="window.open('https://github.com/rogerio14698', '_blank', 'noopener,noreferrer')"><span data-i18n="about.repository.button">Repositorio</span> <span>&rarr;</span></button>
+<button onclick="window.open('https://github.com/rogerio14698', '_blank', 'noopener,noreferrer')">
+    <span data-i18n="about.repository.button">Repositorio</span> <span>&rarr;</span>
+</button>

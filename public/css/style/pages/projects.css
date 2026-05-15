@@ -9,13 +9,13 @@
     overflow-y: hidden;
     align-items: center;
     width: 60%;
-    min-height: 90%;
+    height: 800px;
     margin-left: auto;
     scroll-snap-type: x mandatory;
     /*Esto funciona como el imán*/
     scroll-behavior: smooth;
     position: relative;
-    top: -150px;
+    margin-top: -150px;
 
 }
 
@@ -61,6 +61,25 @@
     transform: scale(0.98);
 }
 
+.cardProject button + button {
+    margin-top: 12px;
+}
+
+.cardProject button.btnRepo {
+    background-color: transparent;
+    color: var(--_texto);
+    border-color: var(--colorBorde);
+}
+
+.cardProject button.btnWeb {
+    background-color: var(--colorBorde);
+    color: var(--_fondoPanel);
+}
+
+.cardProject button.btnWeb:hover {
+    background-color: transparent;
+    color: var(--_texto);
+}
 
 .cardProject:first-child {
     margin-left: 100px;

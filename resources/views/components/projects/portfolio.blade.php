@@ -19,5 +19,4 @@
                 Con referencias de diferentes portfolios y sitios web de diseño, he creado un diseño único y personalizado que refleja mi estilo y personalidad.
             </p>
         </div>
-        @include('components.btnEnlaceRepositorio')
     </div>

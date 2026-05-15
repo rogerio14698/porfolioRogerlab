@@ -18,6 +18,13 @@
             <p data-i18n="projects.library.body_2">In this project, I focused on implementing a user-friendly interface and ensuring the system's 
                 functionality met the requirements of the DAW module.
             </p>
+            
         </div>
-        @include('components.btnEnlaceRepositorio')
+        <button class="btnRepo" onclick="window.open('https://github.com/rogerio14698/ProyectoBiblioteca-2DAW', '_blank', 'noopener,noreferrer')">
+            <span data-i18n="about.repository.button">Repositorio</span> <span>&rarr;</span>
+        </button>
+        <button class="btnWeb" onclick="window.open('https://rogerlab.es/biblioteca', '_blank', 'noopener,noreferrer')">
+            <span data-i18n="about.website.button">Web</span> <span>&rarr;</span>
+        </button>
+        
     </div>
