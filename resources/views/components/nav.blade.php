@@ -1,5 +1,10 @@
 <nav class="nav">
-    <ul>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-list" aria-label="Abrir menú">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    <ul id="nav-list">
         <li><a href="{{ route('home') }}" data-partial-nav data-i18n="nav.home">Inicio</a></li>
         <li><a href="{{ route('about') }}" data-partial-nav data-i18n="nav.about">Sobre mi</a></li>
         <li><a href="{{ route('mi-periodo-practicas') }}" data-partial-nav data-i18n="nav.fct">Practicas FCT</a></li>

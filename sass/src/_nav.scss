@@ -12,6 +12,42 @@
         font-size: t.fluido(0.8rem, 1rem);
     }
     font-size: 1rem;
+    trasition: background-color 0.5s ease;
+
+    .nav-toggle {
+        display: none;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        border: none;
+        background: transparent;
+        padding: 0.75rem;
+        margin-right: 1rem;
+        cursor: pointer;
+
+        span {
+            display: block;
+            width: 26px;
+            height: 3px;
+            margin: 4px 0;
+            background-color: var(--_texto);
+            transition: transform 0.3s ease, opacity 0.3s ease, width 0.3s ease;
+        }
+    }
+    //AQui se gestiona la animacion del menu una vez desplegado.
+    &.is-open .nav-toggle span:nth-child(1) {
+        transform: translateY(4px) translate(5px, 5px) rotate(45deg);
+        width: 40px;
+    }
+
+    &.is-open .nav-toggle span:nth-child(2) {
+        opacity: 0;
+    }
+
+    &.is-open .nav-toggle span:nth-child(3) {
+        transform: translateY(-4px) translate(5px, -5px) rotate(-45deg);
+        width: 40px;
+    }
 
     ul {
         display: flex;
@@ -104,6 +140,19 @@
             width: 100%;
             justify-content: flex-start;
             padding: 10px;
+        }
+
+        .nav-toggle {
+            display: flex;
+        }
+
+        ul {
+            display: none;
+            width: 100%;
+        }
+
+        &.is-open ul {
+            display: flex;
         }
 
     }
