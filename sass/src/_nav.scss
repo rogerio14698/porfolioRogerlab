@@ -47,4 +47,38 @@
     a:focus-visible::after {
         transform: scaleX(0.9);
     }
+
+    .sectionLanguageBar {
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    padding:t.fluido(4px, 8px);
+    //Aqui tengo que poner una mq para que en version movil aparezca debajo.
+    //border-bottom: 1px solid var(--colorBorde);
+
+    .selectIdioma {
+        display: flex;
+        gap: 5px;
+    }
+    .btnIdioma {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: t.fluido(30px, 40px);
+        padding: 4px 8px;
+        border: 3px solid var(--colorBorde);
+        background-color: transparent;
+        color: var(--_texto);
+        cursor: pointer;
+        font-family: v.$fuenteTexto;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+
+        &.is-active,
+        &:hover {
+            background-color: var(--colorBorde);
+            color: var(--_fondoPanel);
+        }
+    }
+}
 }
