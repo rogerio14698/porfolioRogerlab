@@ -1,4 +1,4 @@
-@media (max-width: 768px) {
+/*@media (max-width: 768px) {
 
     .titulo {
         padding: 18px;
@@ -74,7 +74,7 @@
         font-size: var(--tamanoTextoMovil);
     }
 
-    /* pagina #about me*/
+    /* pagina #about me
 
     .seccionAboutMe {
         display: flex;
@@ -124,7 +124,7 @@
     /*Fin de la página #about me*/
 
     /*Version mq de movil pantalla pequeña*/
-    /*Formulario de contacto*/
+    /*Formulario de contacto
     .seccionContact {
         display: flex;
         flex-direction: column;
@@ -155,7 +155,7 @@
 
     /*Fin de la versión mq de movil pantalla pequeña*/
 
-    /*Seccion proyectos*/
+    /*Seccion proyectos
 
     .projectsScrollHint {
         display: inline-flex;
@@ -307,7 +307,7 @@
         width: 100%;
     }
 
-    /*Fin de la seccion de proyectos*/
+    /*Fin de la seccion de proyectos
 
     .legalSection {
         width: 80%;
@@ -379,3 +379,4 @@
         width: 100%;
     }
 }
+*/

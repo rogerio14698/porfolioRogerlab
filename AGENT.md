@@ -1,3 +1,24 @@
+# AGENT.md - Registro de Decisiones Técnicas
+
+## Principio de Operación
+Este archivo sirve como memoria técnica para optimizar tiempos de respuesta y asegurar la consistencia del proyecto.
+
+## Historial de Cambios y Soluciones
+
+### 1. Infraestructura de Compilación
+- **Problema**: El CSS compilado se guardaba en carpetas incorrectas para producción.
+- **Solución**: Se ajustó `gulpfile.js` para que el destino sea `./public/css`, facilitando el acceso directo desde el servidor.
+
+### 2. Arquitectura Sass (SCSS)
+- **Problema**: Mezcla de sintaxis nativa de CSS (`var()`) con Sass, y errores tipográficos en el uso de `@use`.
+- **Solución**: Se estandarizó el uso de `@use 'variable' as v;` y se migraron las propiedades a variables de Sass (`v.$variable`) para centralizar el diseño.
+- **Optimización**: Se aplicó anidamiento (nesting) en las secciones (ej. `_textoAbout.scss`) para mejorar la legibilidad y mantenimiento del código, reflejando la jerarquía del DOM.
+
+### 3. Sistema de Temas (Dark/Light)
+- **Problema**: Las variables Sass son estáticas y no cambian en el navegador.
+- **Solución**: Se implementó un patrón híbrido en `_global.scss` donde las variables CSS dinámicas (`--_fondo`, `--_texto`) se alimentan de las variables Sass mediante interpolación `#{v.$variable}`, permitiendo que el JS cambie el tema sin perder la potencia de Sass.
+
+
 # AGENDS.md
 
 ## Principio Principal: Conversación Primitiva y Eficiente
@@ -61,3 +82,7 @@
 - [x] Registro de patrón para includes Blade y errores View not found.
 - [x] Registro de patrón responsive y orden de media queries.
 - [x] Registro de patrón para animaciones JS que no rompan texto justificado.
+
+
+---
+*Nota: Este agente debe consultarse antes de realizar cambios estructurales en el CSS o la configuración de Gulp.*

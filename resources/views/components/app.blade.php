@@ -62,8 +62,8 @@
 
     <div class="mainContent contenedor">
         @include('components.header')
+        @include('components.nav')
         @yield('content')
-
         @include('components.footer')
     </div>
     <script src="{{ asset('js/theme.js') }}" defer></script>

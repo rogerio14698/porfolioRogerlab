@@ -1,0 +1,39 @@
+@use "../../global/variable" as v;
+
+.contenedorFooter {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: var(--_fondoPanel);
+    margin-top: 8px;
+    padding: 8px 16px;
+    transition: background-color 0.5s ease;
+    p {
+        font-family: var(--fuenteTexto);
+        font-weight: var(--grosorTexto);
+        font-style: var(--estiloTexto);
+        font-size: 0.7rem;
+        color: var(--_texto);
+        transition: color 0.5s ease;
+    }
+    .info {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: row;
+        gap: 8px;
+        p {
+            border-bottom: 1px solid #fff;
+        }
+    }
+    .privacy {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: row;
+        gap: 8px;
+        font-family: var(--fuenteTexto);
+        font-size: 0.7rem;
+    }
+}

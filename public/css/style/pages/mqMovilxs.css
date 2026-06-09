@@ -1,3 +1,4 @@
+/*
 @media (max-width: 576px) {
 
     .titulo {
@@ -140,7 +141,7 @@
         font-size: var(--tamanoTextoMovileXS);
     }
 
-    /*Formulario de contacto*/
+    /*Formulario de contacto
     .seccionContact {
         display: flex;
         flex-direction: column;
@@ -149,7 +150,7 @@
         margin-left: auto;
         width: 100%;
         padding: 24px;
-        /* position: relative; */
+        /* position: relative; 
         top: auto;
     }
 
@@ -246,7 +247,7 @@
     }
 
 
-    /*Fin del formulario de contacto*/
+    /*Fin del formulario de contacto
 
     .legalSection {
         width: 100%;
@@ -319,3 +320,4 @@
         width: 100%;
     }
 }
+*/

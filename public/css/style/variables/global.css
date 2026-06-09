@@ -21,12 +21,7 @@ body {
   --_textoHover:  color-mix(in srgb, var(--_texto) 72%, #fff 28%);
   --_linea:       var(--colorLineaDark);      /* #fff       */
 
-  margin: 0;
-  padding: 0;
-  background-color: var(--_fondo);
-  color: var(--_texto);
-  overflow-x: hidden;
-  transition: background-color 0.5s ease, color 0.5s ease;
+  
 }
 
 /* ── Tema claro ── */

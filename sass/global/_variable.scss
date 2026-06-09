@@ -1,0 +1,51 @@
+// --- Colores Fondo ---
+$colorModoDarkFondo: #222;
+$colorModoLightFondo: #ece8df;
+
+// --- Líneas ---
+$colorLineaLight: #999;
+$colorLineaDark: #fff;
+
+// --- Botones ---
+$colorbtnDark: #333;
+$colorbtnLight: #fff;
+$btnLight: #999;
+$btnDark: #222;
+
+// --- Textos y Bordes ---
+$colorTextoLight: #dddddd;
+$colorTextoDark: #1f1f1f;
+$colorBorde: #999999;
+$colorBordeLight: #444;
+
+// En Sass puedes usar variables dentro de otras variables directamente
+$borde: 2px solid $colorBorde; 
+
+// --- Fuentes (Tipografía) ---
+// Nota: Corregido el 'sans-serif3' que tenías por 'sans-serif'
+$fuenteTitulo: 'Saira Stencil', sans-serif; 
+$grosorTitulo: 100;
+$estiloTitulo: normal;
+
+$fuenteTexto: 'Kode Mono', monospace;
+$grosorTexto: 400;
+$estiloTexto: normal;
+
+// --- Media Queries: Tamaños (1370px) ---
+$tamanoTituloDesktopXL: 2.6rem;
+$tamanoEnlacesDesktopXL: 1.2rem;
+$tamanoTextoDesktopXL: .8rem;
+
+// --- Tamaños Base ---
+$tamanoTitulo: $tamanoTituloDesktopXL;
+$tamanoEnlaces: $tamanoEnlacesDesktopXL;
+$tamanoTexto: $tamanoTextoDesktopXL;
+
+// --- Media Queries: Tamaños (576px) ---
+$tamanoTituloMovileXS: 2rem;
+$tamanoTextoMovileXS: 0.9rem;
+$tamanoEnlaceMovileXS: 0.9rem;
+
+// --- Media Queries: Tamaños (768px) ---
+$tamanoTitulotoMovil: 2.2rem;
+$tamanoTextoMovil: 1.1rem;

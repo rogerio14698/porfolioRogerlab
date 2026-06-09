@@ -119,8 +119,7 @@
 }
 
 .nav a:hover {
-    color: var(--_textoHover);
-    transition: color 0.2s ease;
+    
 
 }
 

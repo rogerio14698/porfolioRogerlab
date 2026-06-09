@@ -1,3 +1,4 @@
+/*
 @media (max-width: 1370px) {
 
     .titulo {
@@ -52,7 +53,7 @@
         font-size: clamp(10px, 4vw, 22px);
     }
 
-    /* pagina #about me*/
+    /* pagina #about me
     #dynamic-section {
         width: 100%;
         flex: 1;
@@ -98,7 +99,7 @@
         width: 50%;
     }
 
-    /*Seccion de projectos*/
+    /*Seccion de projectos
 
     .seccionProjects {
         margin-left: auto;
@@ -165,7 +166,7 @@
         margin-bottom: auto;
     }
 
-    /*Seccion de contacto*/
+    /*Seccion de contacto
 
     .seccionContact {
         margin-left: auto;
@@ -240,7 +241,7 @@
         font-size: clamp(1.1rem, 2.1vw, 1.7rem);
     }
 
-    /*Footer*/
+    /*Footer
 
     .contenedorFooter {
         gap: 16px;
@@ -265,3 +266,4 @@
         min-width: 150px;
     }
 }
+*/

@@ -15,6 +15,6 @@
 @section('twitter_description', $pageMetaDescription ?? ('Desarrollo web profesional en ' . config('seo.city') . ' y ' . config('seo.region') . '. Especialista en paginas web, landing pages y aplicaciones web a medida para negocios.'))
 
 @section('content')
-
+    {{-- Aqui va el header y dentro el navegador ya modificado --}}
     @include('components.main')
 @endsection
