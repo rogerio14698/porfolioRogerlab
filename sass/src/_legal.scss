@@ -1,4 +1,4 @@
-@use '../global/variables' as v;
+@use "../global/variables" as v;
 
 .legalSection {
     display: flex;
@@ -16,18 +16,32 @@
     scrollbar-width: thin;
     text-align: left;
 
-    h1, h2, h3 {
+    h1,
+    h2,
+    h3 {
         font-family: v.$fuenteTexto;
         font-weight: v.$grosorTitulo;
         text-decoration: underline dotted var(--colorBorde);
         text-wrap: balance;
     }
 
-    h1 { font-size: v.$tamanoTitulo; margin-bottom: 8px; }
-    h2 { font-size: clamp(1.45rem, 2vw, 2rem); margin-top: 12px; }
-    h3 { font-size: clamp(1.05rem, 1.4vw, 1.25rem); margin-top: 4px; }
+    h1 {
+        font-size: v.$tamanoTitulo;
+        margin-bottom: 8px;
+    }
+    h2 {
+        font-size: clamp(1.45rem, 2vw, 2rem);
+        margin-top: 12px;
+    }
+    h3 {
+        font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+        margin-top: 4px;
+    }
 
-    p, li, th, td {
+    p,
+    li,
+    th,
+    td {
         font-family: v.$fuenteTexto;
         font-size: v.$tamanoTexto;
         font-weight: v.$grosorTexto;
@@ -35,13 +49,21 @@
         color: var(--_texto);
     }
 
-    p { text-align: justify; }
-    ul { list-style: disc; padding-left: 20px; }
-    li + li { margin-top: 8px; }
+    p {
+        text-align: justify;
+    }
+    ul {
+        list-style: disc;
+        padding-left: 20px;
+    }
+    li + li {
+        margin-top: 8px;
+    }
     hr {
         width: 100%;
         border: 0;
-        border-top: 1px solid color-mix(in srgb, var(--colorBorde) 55%, transparent);
+        border-top: 1px solid
+            color-mix(in srgb, var(--colorBorde) 55%, transparent);
         margin: 8px 0;
     }
 
@@ -57,12 +79,20 @@
         min-width: 420px;
     }
 
-    th, td {
+    th,
+    td {
         padding: 12px 14px;
         text-align: left;
         vertical-align: top;
-        border-bottom: 1px solid color-mix(in srgb, var(--colorBorde) 35%, transparent);
+        border-bottom: 1px solid
+            color-mix(in srgb, var(--colorBorde) 35%, transparent);
     }
 
-    th { background-color: color-mix(in srgb, var(--_fondoPanel) 70%, transparent); }
+    th {
+        background-color: color-mix(
+            in srgb,
+            var(--_fondoPanel) 70%,
+            transparent
+        );
+    }
 }

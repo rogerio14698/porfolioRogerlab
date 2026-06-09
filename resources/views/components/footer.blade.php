@@ -2,7 +2,7 @@
     <p data-i18n="footer.rights" data-i18n-year="{{ date('Y') }}">&copy; {{ date('Y') }} Roger Lab. Todos los derechos reservados.</p>
 
     <div class="info">
-        <p>rogerlucas14698@gmail.com</p>
+        <p mail="rogerlucas@rogerlab.es">rogerlucas@rogerlab.es</p>
         <a href="https://wa.me/34629948107?text=Hola%20Roger,%20quiero%20contactarte%20sobre%20tu%20portafolio"><p>+34 629 948 107</p></a>
         <div class="social-icons">
             <a href="https://www.linkedin.com/in/rogerio-lucas-viana-51a149258/"><i class="fa-brands fa-linkedin"></i></a>

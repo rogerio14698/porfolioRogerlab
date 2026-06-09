@@ -6,28 +6,39 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    background-color: v.$colorFondoPanelDark;
+    background-color: var(--_fondoPanel);
     transition: background-color 0.5s ease;
     width: 100%;
     height: t.fluido(100px, 200px);
     padding: t.fluido(1rem, 2rem);
     border: 1px solid v.$colorBorde;
     border-bottom: none;
-    font-size: t.fluido(1.5rem, 2.5rem);
+    padding-bottom: 20px;
 
     h1 {
         font-family: v.$fuenteTitulo;
         font-weight: v.$grosorTitulo;
         font-style: v.$estiloTitulo;
-        // ahora el tamaño del título se ajusta automáticamente entre 20px y 50px según el ancho del viewport entre 400px y 1220px
-        //font-size: t.fluido(20px, 50px, 400px, 1220px);
-        font-size: 7vw;
-        //Despues ver esta idea: 
-        //@media (max-width: 480px) {
-        //font-size: 12vw; // Le damos más fuerza en móviles para que no quede enano
         color: var(--_texto);
         transition: color 0.5s ease;
+        // ahora el tamaño del título se ajusta automáticamente entre 20px y 50px según el ancho del viewport entre 400px y 1220px
+        //font-size: t.fluido(20px, 50px, 400px, 1220px);
+        font-size: 8vw; // Tamaño base para pantallas grandes, se ajustará con media queries
+        //Tamaño fijo para moviles, para que no quede enano
+         @media (max-width: 480px) {
+        font-size: 11vw; // Le damos más fuerza en móviles para que no quede enano
+        }
+        @media (max-width: 768px) {
+        font-size: 12vw; // Le damos más fuerza en móviles para que no quede enano
+        }
+        @media (max-width: 1200px) {
+        font-size: 9vw; // Le damos más fuerza en móviles para que no quede enano
+        }
+        @media (max-width: 1400px) {
+        font-size: 8vw; // Le damos más fuerza en móviles para que no quede enano
+        }
     }
+
 
     p {
         align-self: stretch;
@@ -42,6 +53,7 @@
         font-size: t.fluido(2rem, 3rem);
         color: var(--_texto);
         transition: color 0.5s ease;
+        
 
         &::after {
             content: "";

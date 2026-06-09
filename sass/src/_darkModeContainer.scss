@@ -4,7 +4,7 @@
     $aside-width: clamp(30px, 4vw, 50px);
     position: absolute;
     top: 50%;
-    left: calc(-1 * $aside-width + 10px);
+    left: calc(-1 * $aside-width - 3px);
     transform: translateY(-50%);
     padding: 4px;
     width: $aside-width;
@@ -55,6 +55,27 @@
             height: 20px;
             background-color: v.$colorbtnLight;
             border: none;
+        }
+    }
+
+    //Estilos para movil: cambia de posicion y se queda por debajo del header.
+    @media (max-width: 768px) {
+        position: static;
+        left: auto;
+        top: auto;
+        transform: none;
+        width: 100%;
+        height: auto;
+        padding: 0;
+        flex-direction: row;
+        justify-content: space-around;
+        background-color: transparent;
+
+        button {
+            writing-mode: horizontal-tb;
+            width: auto;
+            height: auto;
+            padding: 8px 12px;
         }
     }
 }
