@@ -1,0 +1,29 @@
+@use '../global/variable' as v;
+
+.projects {
+    &__list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+
+    &__card {
+        border: v.$borde;
+        padding: 1.5rem;
+        transition: transform 0.2s;
+
+        &:hover {
+            transform: translateY(-5px);
+        }
+
+        &-title {
+            font-family: v.$fuenteTitulo;
+            margin-bottom: 0.5rem;
+        }
+
+        &-meta {
+            color: v.$colorBorde;
+            font-size: 0.85rem;
+        }
+    }
+}

@@ -1,0 +1,113 @@
+@use '../global/variable' as v;
+
+.seccionPracticas {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 60%;
+    margin-left: auto;
+    margin-top: auto;
+    padding: 24px;
+    position: relative;
+    top: -170px;
+    gap: 12px;
+    overflow-y: auto;
+    text-align: justify;
+
+    h2 {
+        font-size: v.$tamanoTitulo;
+        font-family: v.$fuenteTexto;
+        font-weight: v.$grosorTitulo;
+        text-decoration: underline dotted var(--colorBorde);
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: v.$tamanoTexto;
+        font-family: v.$fuenteTexto;
+        text-transform: uppercase;
+        color: var(--_textoSoft);
+        line-height: 1.8;
+        padding: 6px 8px;
+        &::first-letter { font-size: 130%; }
+    }
+}
+
+.practicasModal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+    &.is-open { display: block; }
+
+    &__backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+    }
+
+    &__panel {
+        position: relative;
+        width: min(1080px, 96vw);
+        max-height: 90vh;
+        margin: 5vh auto;
+        overflow: auto;
+        border: 1px solid var(--colorBorde);
+        background: var(--_fondoPanel);
+        color: var(--_texto);
+        padding: 20px;
+        padding-top: 64px;
+    }
+}
+
+.practicasInfoGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.practicasInfoRow {
+    display: grid;
+    gap: 4px;
+    border: 1px solid color-mix(in srgb, var(--colorBorde) 55%, transparent);
+    padding: 8px;
+    background: color-mix(in srgb, var(--_fondoPanel) 85%, transparent);
+    
+    &__label { font-weight: 600; color: var(--_texto); }
+    &__value { color: var(--_textoSoft); }
+}
+
+.practicasDayCard {
+    border: 1px solid color-mix(in srgb, var(--colorBorde) 55%, transparent);
+    background: color-mix(in srgb, var(--_fondoPanel) 87%, transparent);
+    padding: 10px;
+    margin-bottom: 10px;
+
+    &__title { margin: 0 0 8px; color: var(--_texto); font-weight: 700; }
+
+    &__row span {
+        display: block;
+        text-transform: uppercase;
+        border-left: 2px solid var(--colorBorde);
+        padding-left: 6px;
+        font-weight: 700;
+    }
+}
+
+@media (max-width: 768px) {
+    .seccionPracticas {
+        width: 80%;
+        position: static;
+    }
+    .practicasInfoGrid, .practicasDayCard__meta {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 576px) {
+    .seccionPracticas {
+        width: 100%;
+        padding: 16px;
+        h2 { font-size: 1.3rem; }
+    }
+}

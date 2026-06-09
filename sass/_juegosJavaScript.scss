@@ -1,0 +1,26 @@
+@use '../global/variable' as v;
+
+.games {
+    &__header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    &__card {
+        background-color: rgba(v.$colorModoDarkFondo, 0.05);
+        border: 1px solid v.$colorBorde;
+        padding: 2rem;
+
+        &-title {
+            font-family: v.$fuenteTitulo;
+            color: var(--_texto);
+        }
+
+        &-cta {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid v.$colorBorde;
+        }
+    }
+}

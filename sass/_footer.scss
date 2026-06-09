@@ -1,0 +1,31 @@
+@use '../global/variable' as v;
+
+.contenedorFooter {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: var(--_fondoPanel);
+    margin-top: 8px;
+    padding: 8px 16px;
+    transition: background-color 0.5s ease;
+
+    p {
+        font-family: v.$fuenteTexto;
+        font-weight: v.$grosorTexto;
+        font-style: v.$estiloTexto;
+        font-size: 0.7rem;
+        color: var(--_texto);
+        transition: color 0.5s ease;
+    }
+}
+
+.info, .privacy {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    gap: 8px;
+    font-family: v.$fuenteTexto;
+    font-size: 0.7rem;
+}

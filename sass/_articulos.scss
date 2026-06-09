@@ -1,0 +1,28 @@
+@use '../global/variable' as v;
+
+.articles {
+    padding: 2rem;
+
+    &__grid {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    &__item {
+        border-left: v.$borde;
+        padding-left: 1.5rem;
+
+        &-title {
+            font-family: v.$fuenteTitulo;
+            font-size: v.$tamanoTitulo;
+            color: var(--_texto);
+        }
+
+        &-content {
+            font-family: v.$fuenteTexto;
+            color: var(--_texto);
+            margin-top: 0.5rem;
+        }
+    }
+}

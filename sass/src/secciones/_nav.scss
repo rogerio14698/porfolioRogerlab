@@ -12,10 +12,10 @@
         margin-left: 30px;
     }
     li {
-        adding: 10px 0;
+        padding: 10px 0;
     }
-    :last-child li {
-        padding: 0;
+    li:last-child {
+        padding-bottom: 0;
     }
     a {
         position: relative;
