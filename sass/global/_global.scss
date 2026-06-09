@@ -1,9 +1,14 @@
-@use 'variable' as v;
+@use '../global/variables' as v;
 
 html {
     box-sizing: border-box;
+    --colorBorde: #{v.$colorBorde};
     scrollbar-width: thin;
-    scrollbar-color: color-mix(in srgb, #{v.$colorBorde} 45%, transparent) transparent;
+    scrollbar-color: color-mix(in srgb, var(--colorBorde) #{v.$opacidadScrollbar}, transparent) transparent;
+}
+
+html[data-theme="light"] {
+    --colorBorde: #{v.$colorBordeLight};
 }
 
 *,
@@ -14,17 +19,17 @@ html {
 
 * {
     scrollbar-width: thin;
-    scrollbar-color: color-mix(in srgb, #{v.$colorBorde} 45%, transparent) transparent;
+    scrollbar-color: color-mix(in srgb, var(--colorBorde) #{v.$opacidadScrollbar}, transparent) transparent;
 }
 
 body {
-    //Variables para activas para el tema oscuro por defecto.
     --_fondo: #{v.$colorModoDarkFondo};
-    --_fondoPanel: rgba(34, 34, 34, 0.90); 
+    --_fondoPanel: #{v.$colorFondoPanelDark};
     --_texto: #{v.$colorTextoLight};
     --_textoSoft: color-mix(in srgb, var(--_texto) 88%, #000 12%);
     --_textoHover: color-mix(in srgb, var(--_texto) 72%, #fff 28%);
     --_linea: #{v.$colorLineaDark};
+    --colorBorde: #{v.$colorBorde};
 
     margin: 0;
     padding: 0;
@@ -35,41 +40,42 @@ body {
 }
 
 body[data-theme="light"] {
-  --_fondo:       #{v.$colorModoLightFondo};
-  --_fondoPanel:  rgba(255, 255, 255, 0.88);
-  --_texto:       #{v.$colorTextoDark};
-  --_textoSoft:   color-mix(in srgb, var(--_texto) 90%, #000 10%);
-  --_textoHover:  color-mix(in srgb, var(--_texto) 82%, #000 18%); 
-  --_linea:       #{v.$colorLineaLight};
+    --_fondo: #{v.$colorModoLightFondo};
+    --_fondoPanel: #{v.$colorFondoPanelLight};
+    --_texto: #{v.$colorTextoDark};
+    --_textoSoft: color-mix(in srgb, var(--_texto) 90%, #000 10%);
+    --_textoHover: color-mix(in srgb, var(--_texto) 82%, #000 18%);
+    --_linea: #{v.$colorLineaLight};
+    --colorBorde: #{v.$colorBordeLight};
 }
 
 h1, h2, h3, h4, h5, h6, p, a, ul, ol, li {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 a, ul, ol {
-  text-decoration: none;
-  color: inherit;
-  list-style-type: none;
+    text-decoration: none;
+    color: inherit;
+    list-style-type: none;
 }
 
 ::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
+    width: 4px;
+    height: 4px;
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+    background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: color-mix(in srgb, var(--colorBorde) 45%, transparent);
-  border-radius: 999px;
+    background: color-mix(in srgb, var(--colorBorde) #{v.$opacidadScrollbar}, transparent);
+    border-radius: 999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: color-mix(in srgb, var(--colorBorde) 65%, transparent);
+    background: color-mix(in srgb, var(--colorBorde) #{v.$opacidadScrollbarHover}, transparent);
 }
 
 #mainShaderBg {
@@ -87,7 +93,7 @@ a, ul, ol {
     z-index: 1;
 }
 
-.contenedor{
+.contenedor {
     margin: 0 auto;
-    width: 90%;
+    width: #{v.$anchoContenedor};
 }

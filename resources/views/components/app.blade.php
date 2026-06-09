@@ -6,14 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @php
         $defaultTitle = 'RogerLab | Desarrollador Web Freelance en ' . config('seo.city');
-        $defaultDescription = 'Desarrollo web a medida en ' . config('seo.city') . ' y ' . config('seo.region') . '. Especialista en aplicaciones web, rendimiento y optimizacion de conversion para negocios.';
+        $defaultDescription =
+            'Desarrollo web a medida en ' .
+            config('seo.city') .
+            ' y ' .
+            config('seo.region') .
+            '. Especialista en aplicaciones web, rendimiento y optimizacion de conversion para negocios.';
         $defaultOgImage = asset('img/profileIMG.png');
     @endphp
     <title>@yield('title', $defaultTitle)</title>
     <meta name="description" content="@yield('meta_description', $defaultDescription)">
     <meta name="robots" content="@yield('robots_meta', 'index,follow')">
     <link rel="canonical" href="@yield('canonical', url()->current())">
-    @foreach (($hreflangLinks ?? []) as $lang => $href)
+    @foreach ($hreflangLinks ?? [] as $lang => $href)
         <link rel="alternate" hreflang="{{ $lang }}" href="{{ $href }}">
     @endforeach
     <meta property="og:type" content="@yield('og_type', 'website')">
@@ -48,7 +53,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&family=Poiret+One&family=Saira+Stencil:ital,wght@0,100..900;1,100..900&display=swap">
     <!--Enlace a la carpeta de public/css -->
-    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}?v={{ filemtime(public_path('css/app.css')) }}">
+    <!--Fin del enlace a la carpeta de public/css -->
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('img/favicon/apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('img/favicon/android-chrome-192x192.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('img/favicon/favicon-32x32.png') }}">

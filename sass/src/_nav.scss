@@ -1,25 +1,30 @@
-@use "../global/variable" as v;
+@use "../global/variables" as v;
+@use "../global/tools" as t;
 
 .nav {
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+    flex-direction: row;
+    background-color: var(--_fondoPanel);
+    border: 1px solid var(--colorBorde);
     align-items: flex-start;
     font-family: v.$fuenteTexto;
-    font-size: v.$tamanoEnlaces;
+    @media (max-width: 1200px) {
+        font-size: t.fluido(0.8rem, 1rem);
+    }
+    font-size: 1rem;
 
     ul {
-        margin-left: 30px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-direction: row;
+        margin-left: 10px;
     }
     li {
-        padding: 10px 0;
-    }
-    li:last-child {
-        padding-bottom: 0;
+     padding: 8px 12px;
     }
     a {
-        position: relative;
-        display: inline-block;
+        color: var(--_texto);
         transition: color 0.2s ease;
     }
     a:hover {

@@ -1,24 +1,22 @@
 //Aqui va las secciones que se usan de forma global en toda la web.
-@import './global/normalize';
-@import './global/variable' ;
-@import './global/global';
+@use './global/normalize';
+@use './global/variables';
+@use './global/global';
+@use './global/tools';
 
 
 //Aqui va las secciones de la web para compilar.
-@import './src/header';
-@import './src/nav';
-@import './src/main';
-@import './src/darkModeContainer';
-@import './src/footer';
+@use './src/header';
+@use './src/nav';
+@use './src/main';
+@use './src/darkModeContainer';
+@use './src/footer';
 
 //Aqui van las secciones de cada contenido que va dentro del main.
-@import './src/textoAbout';
-@import './src/practicas';
-@import './src/articulos';
-@import './src/proyectos';
-@import './src/juegosJavaScript';
-@import './src/contactoForm';
-
-
-
+@use './src/textoAbout';
+@use './src/practicas';
+@use './src/articulos';
+@use './src/proyectos';
+@use './src/juegosJavaScript';
+@use './src/contactoForm';
 

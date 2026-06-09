@@ -2,6 +2,10 @@
 $colorModoDarkFondo: #222;
 $colorModoLightFondo: #ece8df;
 
+// --- Fondos de panel ---
+$colorFondoPanelDark: rgba(34, 34, 34, .9);
+$colorFondoPanelLight: hsla(0, 0%, 100%, .88);
+
 // --- Líneas ---
 $colorLineaLight: #999;
 $colorLineaDark: #fff;
@@ -17,6 +21,11 @@ $colorTextoLight: #dddddd;
 $colorTextoDark: #1f1f1f;
 $colorBorde: #999999;
 $colorBordeLight: #444;
+$opacidadScrollbar: 45%;
+$opacidadScrollbarHover: $opacidadScrollbar + 20%;
+
+// --- Tamaños ---
+$anchoContenedor: 90%;
 
 // En Sass puedes usar variables dentro de otras variables directamente
 $borde: 2px solid $colorBorde; 
@@ -48,4 +57,4 @@ $tamanoEnlaceMovileXS: 0.9rem;
 
 // --- Media Queries: Tamaños (768px) ---
 $tamanoTitulotoMovil: 2.2rem;
-$tamanoTextoMovil: 1.1rem;
+$tamanoTextoMovil: 1.1rem; 

@@ -1,4 +1,4 @@
-@use "../../global/variable" as v;
+@use "../global/variables" as v;
 
 .asideLeft {
     $aside-width: clamp(30px, 4vw, 50px);
@@ -7,12 +7,12 @@
     left: calc(-1 * $aside-width + 10px);
     transform: translateY(-50%);
     padding: 4px;
-    width: v.$aside-width;
+    width: $aside-width;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     height: 100%;
-    background-color: v.$fondo;
+    //background-color: v.$fondo;
     transition: background-color 0.5s ease;
     font-family: v.$fuenteTexto;
 
@@ -22,7 +22,7 @@
         width: 100%;
         height: 100%;
         background: none;
-        color: v.$texto;
+        //color: v.$texto;
         cursor: pointer;
         padding: 2px;
         font-size: clamp(10px, 3vw, 15px);

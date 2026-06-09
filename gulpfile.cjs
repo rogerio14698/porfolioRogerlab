@@ -1,7 +1,7 @@
 const { src, dest, watch, series } = require('gulp');
 const sass = require('gulp-sass')(require('sass'));
 const sourcemaps = require('gulp-sourcemaps');
-const autoprefixer = require('gulp-autoprefixer');
+const autoprefixer = require('gulp-autoprefixer').default;
 const cssnano = require('gulp-cssnano');
 
 function compileSass() {
@@ -23,3 +23,5 @@ exports.default = series(compileSass, watchSass);
 
 // npx gulp compile
 // npx gulp
+
+//comando para ejecutar el watch: npx gulp

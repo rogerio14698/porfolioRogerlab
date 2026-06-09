@@ -1,0 +1,23 @@
+
+
+//Tamaños de medias queries para generar los bucles para cada seccion.
+
+/*
+    //Horizontal
+xs: max-width: 360px
+estandar: min-width: 361px y max-width: 480px
+tablet: min-width: 481px y max-width: 768px
+tabletXL: min-width: 769px y max-width: 1024px
+desktopEstandar: min-width: 1025px y max-width: 1440px
+desktopXL: min-width: 1441px
+*/
+
+//Funcion para calcular tipografía fluída automática.
+    //Funcion para determinar el crecimiento de pixeles por cada unidad de viewport.
+@use "sass:math";
+@function fluido($min-size, $max-size, $min-breakpoint: 400px, $max-breakpoint: 2000px){
+    $v: math.div($max-size - $min-size, $max-breakpoint - $min-breakpoint);
+    $w: $v * 100;
+    $y: $min-size - ($v * $min-breakpoint);
+    @return clamp(#{$min-size}, #{$y} + #{$w}vw, #{$max-size});
+}

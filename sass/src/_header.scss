@@ -1,23 +1,30 @@
-@use '../global/variable' as v;
+@use '../global/variables' as v;
+@use '../global/tools' as t;
 
 .titulo {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    background-color: var(--_fondoPanel);
+    background-color: v.$colorFondoPanelDark;
     transition: background-color 0.5s ease;
     width: 100%;
-    height: auto;
-    padding: 20px;
-    border: 1px solid var(--colorBorde);
+    height: t.fluido(100px, 200px);
+    padding: t.fluido(1rem, 2rem);
+    border: 1px solid v.$colorBorde;
     border-bottom: none;
+    font-size: t.fluido(1.5rem, 2.5rem);
 
     h1 {
         font-family: v.$fuenteTitulo;
         font-weight: v.$grosorTitulo;
         font-style: v.$estiloTitulo;
-        font-size: 6rem;
+        // ahora el tamaño del título se ajusta automáticamente entre 20px y 50px según el ancho del viewport entre 400px y 1220px
+        //font-size: t.fluido(20px, 50px, 400px, 1220px);
+        font-size: 7vw;
+        //Despues ver esta idea: 
+        //@media (max-width: 480px) {
+        //font-size: 12vw; // Le damos más fuerza en móviles para que no quede enano
         color: var(--_texto);
         transition: color 0.5s ease;
     }
@@ -28,11 +35,11 @@
         padding-left: 2ch;
         display: flex;
         align-items: center;
-        gap: clamp(10px, 2vw, 24px);
+        gap: t.fluido(0.5rem, 1.2rem);
         font-family: v.$fuenteTexto;
         font-weight: v.$grosorTexto;
         font-style: v.$estiloTexto;
-        font-size: 1.5rem;
+        font-size: t.fluido(2rem, 3rem);
         color: var(--_texto);
         transition: color 0.5s ease;
 
