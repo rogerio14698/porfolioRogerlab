@@ -131,7 +131,10 @@ Route::get('/{any}', function () {
 })->where('any', '.*')->name('not-found');
 
 // AL DEJARLA AQUÍ ABAJO COMO FUNCIÓN GLOBAL PURA, LARAVEL LA ENCUENTRA SIEMPRE
-function renderSection(string $section, string $pageTitle, string $pageMetaDescription, int $status = 200, string $robotsMeta = 'index,follow')
+
+
+if (!function_exists('renderSection')) {
+    function renderSection(string $section, string $pageTitle, string $pageMetaDescription, int $status = 200, string $robotsMeta = 'index,follow')
 {
     $data = compact('section', 'pageTitle', 'pageMetaDescription', 'robotsMeta');
 
@@ -140,4 +143,5 @@ function renderSection(string $section, string $pageTitle, string $pageMetaDescr
     }
 
     return response()->view('index', $data, $status);
+}
 }
