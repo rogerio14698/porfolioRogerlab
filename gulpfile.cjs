@@ -5,17 +5,19 @@ const autoprefixer = require('gulp-autoprefixer').default;
 const cssnano = require('gulp-cssnano');
 
 function compileSass() {
-  return src(['./sass/**/*.scss', './sass/**/*.sass']) // Soporta ambas extensiones
+  // CAMBIADO: Ahora busca dentro de resources/sass/
+  return src(['./resources/sass/**/*.scss', './resources/sass/**/*.sass']) 
     .pipe(sourcemaps.init())
     .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer())
     .pipe(cssnano())
     .pipe(sourcemaps.write('.'))
-    .pipe(dest('./public/css'));
+    .pipe(dest('./public/css')); // Esto sigue dejando el CSS final listo en public
 }
 
 function watchSass() {
-  watch(['./sass/**/*.scss', './sass/**/*.sass'], compileSass);
+  // CAMBIADO: El vigilante también mira dentro de resources/sass/
+  watch(['./resources/sass/**/*.scss', './resources/sass/**/*.sass'], compileSass);
 }
 
 exports.compile = compileSass;
@@ -23,5 +25,4 @@ exports.default = series(compileSass, watchSass);
 
 // npx gulp compile
 // npx gulp
-
-//comando para ejecutar el watch: npx gulp
+// comando para ejecutar el watch: npx gulp

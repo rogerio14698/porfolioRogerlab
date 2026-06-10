@@ -3,9 +3,8 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "build": "vite build",
-        "dev": "vite",
-        "watch": "watch-sass"
+        "build": "npx gulp compile",
+        "dev": "npx gulp"
     },
     "devDependencies": {
         "@tailwindcss/vite": "^4.0.0",
