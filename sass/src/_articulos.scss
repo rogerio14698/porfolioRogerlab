@@ -8,10 +8,13 @@
     overflow:auto;
     width: 75%;
     margin-left: auto;
+    max-height: 100vh;
+    overflow-y: auto;
     h2 {
         font-size: t.fluido(1.5rem, 2rem);
         margin-bottom: 16px;
         text-decoration: underline double var(--colorBorde);
+        font-weight: 500;
     }
     p {
         font-size: t.fluido(0.8rem, 1rem);

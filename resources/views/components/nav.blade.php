@@ -10,8 +10,9 @@
         <li><a href="{{ route('mi-periodo-practicas') }}" data-partial-nav data-i18n="nav.fct">Practicas FCT</a></li>
         <li><a href="{{ route('articles') }}" data-partial-nav data-i18n="nav.articles">Articulos</a></li>
         <li><a href="{{ route('projects') }}" data-partial-nav data-i18n="nav.projects">Proyectos</a></li>
-        <li><a href="{{ route('juegos') }}" data-partial-nav data-i18n="nav.juegos">Juegos JavaScript</a></li>
         <li><a href="{{ route('contact') }}" data-partial-nav data-i18n="nav.contact">Contacto</a></li>
+        {{-- Aqui en un futuro lo pondré si lo necesito, pero como ventana desplegable de proyectos, de momento no --}}
+        {{--         <li><a href="{{ route('juegos') }}" data-partial-nav data-i18n="nav.juegos">Juegos JavaScript</a></li>--}}
     </ul>
     <div class="sectionLanguageBar">
         @include('components.secltLanguage')

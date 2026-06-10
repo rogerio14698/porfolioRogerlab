@@ -18,7 +18,9 @@
                 soluta
                 quaerat vitae voluptatibus minima commodi hic asperiores omnis rerum illo rem nihil harum delectus.</p>
         </div>
-        <button class="btnRepo" onclick="window.open('https://github.com/rogerio14698/ProyectoBiblioteca-2DAW', '_blank', 'noopener,noreferrer')">
-            <span data-i18n="about.repository.button">Repositorio</span> <span>&rarr;</span>
-        </button>
+        <div class="alinearButton">
+            <button class="btnRepo" onclick="window.open('https://github.com/rogerio14698/ProyectoBiblioteca-2DAW', '_blank', 'noopener,noreferrer')">
+                <span data-i18n="about.repository.button">Repositorio</span> <span>&rarr;</span>
+            </button>
+        </div>
     </div>

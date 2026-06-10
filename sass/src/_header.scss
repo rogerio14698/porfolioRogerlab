@@ -58,7 +58,9 @@
         &::after {
             content: "";
             flex: 1;
-            height: 5px;
+            height: 1px;
+            margin-left: 2ch;
+            margin-right: 2ch;
             background-color: var(--_linea);
             transition: background-color 0.5s ease;
             transform-origin: left center;

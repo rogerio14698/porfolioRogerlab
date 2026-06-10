@@ -16,7 +16,9 @@
         <p data-i18n="projects.content.body_2">Ver contenido de las hojas de firma para rellenar este apartado.
         </p>
     </div>
-    <button class="btnRepo" onclick="window.open('https://github.com/rogerio14698/gestorContenido', '_blank', 'noopener,noreferrer')">
-        <span data-i18n="about.repository.button">Repositorio</span> <span>&rarr;</span>
-    </button>
+    <div class="alinearButton">
+        <button class="btnRepo" onclick="window.open('https://github.com/rogerio14698/gestorContenido', '_blank', 'noopener,noreferrer')">
+            <span data-i18n="about.repository.button">Repositorio</span> <span>&rarr;</span>
+        </button>
+    </div>
 </div>

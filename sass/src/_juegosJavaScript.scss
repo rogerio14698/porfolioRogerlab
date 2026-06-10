@@ -1,26 +1,110 @@
 @use '../global/variables' as v;
+@use '../global/tools' as t;
 
-.games {
-    &__header {
-        text-align: center;
-        margin-bottom: 3rem;
+
+
+//Section games 
+.sectionGames {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    padding: 12px;
+    gap: 24px;
+    .cardJuegos{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+        gap: 10px;
+        border: 1px solid var(--colorBorde);
+        box-shadow: 0 0 10px rgba(248, 248, 248, 0.836);
+        .logoJuego{
+            display: flex;
+            flex-direction: column-reverse;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            h2{
+                align-self: end;
+                font-size: t.fluido(1.5rem, 2rem);
+                font-family: v.$fuenteTexto;
+                font-weight: v.$grosorTitulo;
+                color: var(--_texto);
+                text-decoration: underline double var(--colorBorde);
+            }
+            img{
+                border: 3px solid var(--colorBorde);
+                width: 100px;
+                height: auto;
+            }
+        }
+        .descripcionJuego{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            gap: 10px;
+            p{
+                font-size: t.fluido(0.8rem, 1rem);
+                font-family: v.$fuenteTexto;
+                color: var(--_textoSoft);
+                line-height: 1.8;
+                padding: 6px 8px;
+                text-align: justify;
+                &::first-letter {
+                    font-size: 130%;
+                }
+            }
+            a{
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                font-size: v.$tamanoEnlaces;
+                font-family: v.$fuenteTexto;
+                padding: 6px 10px;
+                cursor: pointer;
+                border: 1px solid var(--colorBorde);
+                background-color: transparent;
+                color: var(--_texto);
+                transition:
+                    background-color 0.3s ease,
+                    color 0.3s ease;
+                width: auto;
+                min-width: 44px;
+                margin: 5px;
+            }
+        }
     }
+}
 
-    &__card {
-        background-color: rgba(v.$colorModoDarkFondo, 0.05);
-        border: 1px solid v.$colorBorde;
-        padding: 2rem;
-
-        &-title {
-            font-family: v.$fuenteTitulo;
-            color: var(--_texto);
-        }
-
-        &-cta {
-            display: inline-block;
-            margin-top: 1rem;
-            padding: 0.5rem 1rem;
-            border: 1px solid v.$colorBorde;
-        }
+.gamesScrollHint {
+    display: none;
+}
+@media (max-width: 768px) {
+    .gamesScrollHint {
+        display: block;
+        text-align: center;
+        font-size: .8rem;
+        font-family: v.$fuenteTexto;
+        color: var(--_texto);
+        margin-top: 1rem;
+        padding: 1rem;
+        border: 1px solid var(--colorBorde);
+        background: var(--_fondoPanel);
+        
+    }
+    .gamesScrollHint::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--_fondo);
+        z-index: -1;
     }
 }
