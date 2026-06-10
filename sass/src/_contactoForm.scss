@@ -1,4 +1,5 @@
-@use '../global/variables' as v;
+@use "../global/variables" as v;
+@use "../global/tools" as t;
 
 .seccionContact {
     display: flex;
@@ -6,67 +7,143 @@
     align-items: flex-start;
     text-align: justify;
     margin-left: auto;
-    width: 50%;
+    width: 70%;
     padding: 24px;
-    margin-top: auto;
-    position: relative;
-    top: -150px;
+    @media (max-width: 768px) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
 
-    h2 {
-        font-size: v.$tamanoTitulo;
+    h2,
+    h3 {
+        padding: 4px;
+        font-size: t.fluido(1.5rem, 2rem);
         font-family: v.$fuenteTexto;
         font-weight: v.$grosorTitulo;
-        text-decoration: underline dotted var(--colorBorde);
-        margin-bottom: 24px;
+        text-decoration: underline double var(--colorBorde);
     }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        width: 100%;
+        font-family: v.$fuenteTexto;
     
-    form { display: flex; flex-direction: column; gap: 16px; width: 100%; }
-}
-
-.contactPdfLink {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 34px;
-    padding: 6px 12px;
-    border: 1px solid var(--colorBorde);
-    color: var(--_texto);
-    text-decoration: none;
-    font-family: v.$fuenteTexto;
-    transition: all 0.3s ease;
-    &:hover { background-color: var(--colorBorde); color: var(--_fondoPanel); }
-}
-
-.formLabel {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    font-family: v.$fuenteTitulo;
-    font-weight: bold;
-
-    input, textarea {
-        width: 80%;
-        padding: 8px;
-        border: 1px solid var(--colorBorde);
-        background-color: transparent;
-        color: var(--_texto);
-        &:focus {
-            outline: 1px solid color-mix(in srgb, var(--colorBorde) 75%, transparent);
-            outline-offset: 2px;
+        @media (max-width: 768px) {
+            gap: 8px;
         }
     }
 
-    button {
+    .contactPdfRow {
+        display: flex;
+        flex-direction: row;
         width: 100%;
-        padding: 8px 16px;
-        font-size: v.$tamanoEnlaces;
-        font-family: v.$fuenteTexto;
-        cursor: pointer;
-        border: 1px solid var(--colorBorde);
-        background-color: transparent;
-        color: var(--_texto);
-        transition: all 0.3s ease;
-        &:hover { background-color: var(--colorBorde); color: var(--_fondoPanel); }
+        justify-content: space-between;
+        align-items: center;
+        @media (max-width: 768px) {
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        .contactPdfTitle {
+            @media (max-width: 768px) {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                margin-bottom: 16px;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+
+        .contactPdfLink {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 34px;
+            padding: 6px 12px;
+            border: 3px solid var(--colorBorde);
+            color: var(--_texto);
+            text-decoration: none;
+            font-family: v.$fuenteTexto;
+            font-size: t.fluido(0.875rem, 1rem);
+            transition: all 0.3s ease;
+            &:hover {
+                background-color: var(--colorBorde);
+                color: var(--_fondoPanel);
+            }
+        }
+    }
+
+    .formLabel {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        label {
+            font-size: t.fluido(0.875rem, 1rem);
+            font-family: v.$fuenteTexto;
+        }
+
+        input,
+        textarea {
+            width: 60%;
+            padding: 8px;
+            border: 1px solid var(--colorBorde);
+            background-color: transparent;
+            color: var(--_texto);
+            font-family: v.$fuenteTexto;
+            font-size: t.fluido(0.875rem, 1rem);
+            &:focus {
+                outline: 1px solid
+                    color-mix(in srgb, var(--colorBorde) 75%, transparent);
+                outline-offset: 2px;
+            }
+        }
+        textarea {
+            min-height: 100px;
+            max-height: 150px;
+            max-width: 100%;
+            resize: vertical;
+            overflow: auto;
+            &:focus {
+                outline: 1px solid
+                    color-mix(in srgb, var(--colorBorde) 75%, transparent);
+                outline-offset: 2px;
+            }
+        }
+        button {
+            width: 100%;
+            padding: 8px 16px;
+            font-size: v.$tamanoEnlaces;
+            font-family: v.$fuenteTexto;
+            cursor: pointer;
+            border: 1px solid var(--colorBorde);
+            background-color: transparent;
+            color: var(--_texto);
+            transition: all 0.3s ease;
+            &:hover {
+                background-color: var(--colorBorde);
+                color: var(--_fondoPanel);
+            }
+        }
+        @media (max-width: 768px) {
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            width: 100%;
+            gap: 8px;
+            input,
+            textarea {
+                width: 100%;
+            }
+        }
     }
 }

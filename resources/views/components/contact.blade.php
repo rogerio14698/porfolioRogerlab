@@ -16,11 +16,12 @@
             </div>
         @endif
 
-        <div class="contactHoneypot" aria-hidden="true">
+        {{--         <div class="" aria-hidden="true">
             <label for="company" data-i18n="contact.form.company">Empresa</label>
             <input id="company" name="company" type="text" value="{{ old('company') }}" tabindex="-1"
                 autocomplete="off">
-        </div>
+        </div> 
+        --}}
 
         <x-contact.field id="name" name="name" label="Nombre" labelKey="contact.form.name" placeholder="Roger"
             :value="old('name')" maxlength="120" required />
