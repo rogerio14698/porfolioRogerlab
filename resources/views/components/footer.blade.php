@@ -1,6 +1,7 @@
 <footer class="contenedorFooter">
-    <p data-i18n="footer.rights" data-i18n-year="{{ date('Y') }}">&copy; {{ date('Y') }} Roger Lab. Todos los derechos reservados.</p>
-
+    <div class="copyright">
+        <p data-i18n="footer.rights" data-i18n-year="{{ date('Y') }}">&copy; {{ date('Y') }} Roger Lab. Todos los derechos reservados.</p>
+    </div>
     <div class="info">
         <p mail="rogerlucas@rogerlab.es">rogerlucas@rogerlab.es</p>
         <a href="https://wa.me/34629948107?text=Hola%20Roger,%20quiero%20contactarte%20sobre%20tu%20portafolio"><p>+34 629 948 107</p></a>

@@ -37,7 +37,7 @@
     }
     button.active {
         opacity: 1;
-        border-left: 2px solid v.$colorBordeLight;
+        //border-left: 2px solid v.$colorBordeLight;
 
         span {
             margin: 5px;
@@ -70,6 +70,7 @@
         flex-direction: row;
         justify-content: space-around;
         background-color: transparent;
+        border-bottom: 1px solid var(--colorBorde);
 
         button {
             writing-mode: horizontal-tb;

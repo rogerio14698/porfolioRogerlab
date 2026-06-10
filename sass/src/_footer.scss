@@ -15,15 +15,19 @@
         font-family: v.$fuenteTexto;
         font-weight: v.$grosorTexto;
         font-style: v.$estiloTexto;
-        font-size: 1vw;
         color: var(--_texto);
+        font-size: t.fluido(0.8rem, 1rem);
         transition: color 0.5s ease;
-        border-left: 1px solid var(--colorBorde);
+       //border-left: 1px solid var(--colorBorde);
         padding-left: 16px;
+    }
+    .copyright{
+        align-self: end;
+        font-size: 12px;
     }
     .privacy {
         a {
-            border-left: 1px solid var(--colorBorde);
+           // border-left: 1px solid var(--colorBorde);
             padding-left: 16px;
         }
     }
@@ -43,12 +47,32 @@
             a {
                 color: var(--_texto);
                 font-size: 1.8rem;
-                padding: 4px;
+                //padding: 4px;
                 transition: color 0.3s ease;
                 &:hover {
                     color: var(--_textoHover);
                 }
             }
         }
+    }
+
+    @media (max-width: 768px) {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        gap: 34px;
+        
+        p{
+            padding-left: 0;
+        }
+        .social-icons, .privacy {
+            gap: 8px;
+            a {
+                font-size: 1rem;
+                padding: 0;
+                
+            }
+        }
+        
     }
 }

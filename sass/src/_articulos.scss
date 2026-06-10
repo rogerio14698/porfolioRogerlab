@@ -1,8 +1,79 @@
-@use '../global/variables' as v;
+@use "../global/variables" as v;
+@use "../global/tools" as t;
 
 .articles {
     padding: 2rem;
+    font-family: v.$fuenteTexto;
+    color: var(--_texto);
+    overflow:auto;
+    width: 75%;
+    margin-left: auto;
+    h2 {
+        font-size: t.fluido(1.5rem, 2rem);
+        margin-bottom: 16px;
+        text-decoration: underline double var(--colorBorde);
+    }
+    p {
+        font-size: t.fluido(0.8rem, 1rem);
+        line-height: 1.5;
+        padding: 6px 8px;
+        text-align: justify;
+        &::first-letter {
+            font-size: 130%;
+        }
+    }
+    ul{
+        list-style: none;
+        padding-left: 0;
+    }
+    li{
+        font-size: t.fluido(0.8rem, 1rem);
+        line-height: 1.5;
+        padding: 6px 8px;
+        &::first-letter {
+            font-size: 130%;
+        }
+    }
+    section{
+        margin-bottom: 34px;
+    }
+    blockquote{
+        font-size: t.fluido(0.8rem, 1rem);
+        line-height: 1.5;
+        padding: 6px 8px;
+        border-left: 10px solid var(--colorBorde);
+        margin-left: 0;
+        text-decoration: underline var(--colorBorde);
+        &::first-letter {
+            font-size: 130%;
+        }
+        &::before{
+            content: "*";
+            font-size: 1.5rem;
+            color: var(--colorBorde);
+            margin-right: 8px;
+        }
+    }
 
+    table{
+        width: 100%;
+        border-collapse: collapse;
+        tr{
+            border-bottom: 1px solid var(--colorBorde);
+        }
+        th, td{
+            padding: 8px;
+            text-align: left;
+            font-size: t.fluido(0.8rem, 1rem);
+            line-height: 1.5;
+        }
+    }
+    @media (max-width: 768px) {
+        width: 100%;
+        padding: 16px;
+    }
+
+    
     &__grid {
         display: flex;
         flex-direction: column;
@@ -14,9 +85,6 @@
         padding-left: 1.5rem;
 
         &-title {
-            font-family: v.$fuenteTitulo;
-            font-size: v.$tamanoTitulo;
-            color: var(--_texto);
         }
 
         &-content {
