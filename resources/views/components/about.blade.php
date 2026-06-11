@@ -1,4 +1,7 @@
 <section class="seccionAboutMe">
+    {{--Aqui va la seccion de conociminetos --}}
+    @include('components.conocimientos')
+
     <h2 data-i18n="about.methodology.title">¿Cuál es mi metodología de trabajo?</h2>
     <p data-i18n="about.methodology.body_1">
         No me limito a escribir código; me gusta entender el "porqué" de cada solución.
