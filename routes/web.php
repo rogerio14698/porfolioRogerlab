@@ -129,5 +129,3 @@ Route::get('/{any}', function () {
         'noindex,nofollow'
     );
 })->where('any', '.*')->name('not-found');
-
-// AL DEJARLA AQUÍ ABAJO COMO FUNCIÓN GLOBAL PURA, LARAVEL LA ENCUENTRA SIEMPRE
