@@ -2,6 +2,8 @@
     {{--Aqui va la seccion de conociminetos --}}
     @include('components.conocimientos')
 
+
+    {{-- Esta sección la tengo que dar una vuelta ver como estructuro esto. --}}
     <h2 data-i18n="about.methodology.title">¿Cuál es mi metodología de trabajo?</h2>
     <p data-i18n="about.methodology.body_1">
         No me limito a escribir código; me gusta entender el "porqué" de cada solución.
@@ -27,5 +29,7 @@
         Claro, son proyectos funcionales,
         al principio imponen respecto pero una vez puesto ya los puedes manejar
     </p>
-    @include('components.btnEnlaceRepositorio')
+    
+    @include('components.projects.pdf')
+    
 </section>

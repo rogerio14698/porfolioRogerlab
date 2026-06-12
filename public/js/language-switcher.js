@@ -8,9 +8,9 @@
     var translations = {
         es: {
             'nav.home': 'Inicio',
-            'nav.about': 'Sobre mí',
+            'nav.about': 'Skills',
             'nav.fct': 'Prácticas FCT',
-            'nav.articles': 'Artículos',
+            'nav.articles': 'Blog',
             'nav.projects': 'Proyectos',
             'nav.juegos': 'Juegos JavaScript',
             'nav.contact': 'Contacto',
@@ -34,7 +34,10 @@
             'games.dungeon.card.alt': 'Mazmorra impía',
             'games.dungeon.card.title': 'Mazmorra impía',
             'games.dungeon.card.cta': 'Jugar a Mazmorra impía',
-            'home.intro.body': 'Disfruto el desarrollo web porque me permite transformar ideas en soluciones prácticas, y mi objetivo es entregar un trabajo ágil, eficaz y de alta calidad en cada reto que aparece. Me gusta analizar proyectos, detectar lo que no está funcionando, mejorar sistemas existentes y conseguir que todo sea más claro, más estable y más fácil de mantener desde el primer día.',
+            //Este texto de abajo es la animacion//
+            'home.intro.body.part1': 'Hola, soy Rogério Lucas. Me dedico al desarrollo Full Stack con un enfoque muy claro: picar código limpio,estructurado y que resuelva problemas reales sin complicar las cosas. Me muevo cómodamente en todo el ciclo deuna aplicación, desde diseñar bases de datos y refactorizar lógica en el backend con Laravel, hasta optimizar elrendimiento en el frontend o pelearme con la configuración de contenedores en Docker. No busco simplemente quelas cosas funcionen; me importa que sean estables, escalables y fáciles de mantener en producción.',
+            'home.intro.body.part2': 'Acabo de terminar mi formación superior en DAW y de foguearme en entornos reales gestionando desde despliegues en AWS hasta interacciones complejas con bases de datos. Si buscas a alguien que sepa analizar código heredado, solucionar bugs sin romper nada por el camino y aportar valor al equipo desde el primer día, echa un vistazo a mis proyectos o hablemos.',
+
             'articles.visits.title': '¿Qué necesita una web para convertir visitas en clientes?',
             'articles.visits.intro': 'Tener una web bonita ya no es suficiente. Para generar resultados reales en 2026, tu sitio debe cumplir con estos pilares:',
             'articles.visits.item_1': 'Velocidad extrema: si tarda más de 2 segundos en cargar, el 50 % de los usuarios se irá.',
@@ -125,9 +128,9 @@
         },
         en: {
             'nav.home': 'Home',
-            'nav.about': 'About',
+            'nav.about': 'Skills',
             'nav.fct': 'FCT Internship',
-            'nav.articles': 'Articles',
+            'nav.articles': 'Blog',
             'nav.projects': 'Projects',
             'nav.juegos': 'JavaScript Games',
             'nav.contact': 'Contact',
@@ -151,7 +154,10 @@
             'games.dungeon.card.alt': 'Impious dungeon',
             'games.dungeon.card.title': 'Impious dungeon',
             'games.dungeon.card.cta': 'Play Impious dungeon',
-            'home.intro.body': 'I enjoy web development because it allows me to transform ideas into practical solutions, and my goal is to deliver agile, effective, and high-quality work in every challenge that appears. I like analyzing projects, identifying what is not working, improving existing systems, and making everything clearer, more stable, and easier to maintain from day one.',
+            //Este texto de abajo es la animacion//
+            'home.intro.body.part1': `Hi, I'm Rogério Lucas. I'm a full-stack developer with a very clear focus: writing clean, structured code that solves real-world problems without overcomplicating things. I'm comfortable working across the entire application lifecycle, from designing databases and refactoring backend logic with Laravel, to optimizing frontend performance or tackling container configuration in Docker. I don't just want things to work; I care about them being stable, scalable, and easy to maintain in production.` ,
+            'home.intro.body.part2' : `I just finished my higher education in Web Application Development (DAW) and gained experience in real-world environments managing everything from AWS deployments to complex database interactions. If you're looking for someone who can analyze legacy code, fix bugs without breaking anything, and add value to the team from day one, check out my projects or let's talk.`,
+
             'articles.visits.title': 'What does a website need to turn visits into clients?',
             'articles.visits.intro': 'A nice-looking website is no longer enough. To generate real results in 2026, your site must meet these core pillars:',
             'articles.visits.item_1': 'Extreme speed: if it takes more than 2 seconds to load, 50% of users will leave.',
@@ -242,9 +248,9 @@
         },
         pt: {
             'nav.home': 'Início',
-            'nav.about': 'Sobre mim',
+            'nav.about': 'Skills',
             'nav.fct': 'Estágio FCT',
-            'nav.articles': 'Artigos',
+            'nav.articles': 'Blog',
             'nav.projects': 'Projetos',
             'nav.juegos': 'Jogos JavaScript',
             'nav.contact': 'Contacto',
@@ -266,7 +272,10 @@
             'games.dungeon.card.alt': 'Masmorra ímpia',
             'games.dungeon.card.title': 'Masmorra ímpia',
             'games.dungeon.card.cta': 'Jogar Masmorra ímpia',
-            'home.intro.body': 'Gosto de desenvolvimento web porque me permite transformar ideias em soluções práticas, e o meu objetivo é entregar um trabalho ágil, eficaz e de alta qualidade em cada desafio. Gosto de analisar projetos, detetar o que não está a funcionar, melhorar sistemas existentes e fazer com que tudo fique mais claro, mais estável e mais fácil de manter desde o primeiro dia.',
+            //Este texto de abajo es la animacion//
+            'home.intro.body.part1': 'Olá, meu nome é Rogério Lucas. Sou um desenvolvedor Full Stack com um foco bem definido: escrever código limpo e estruturado que resolva problemas reais sem complicações desnecessárias. Tenho experiência em todas as etapas do ciclo de vida de uma aplicação, desde o design de bancos de dados e a refatoração da lógica de backend com Laravel, até a otimização do desempenho do frontend e a configuração de containers em Docker. Não me preocupo apenas com o funcionamento; quero que as coisas sejam estáveis, escaláveis ​​e fáceis de manter em produção.',
+            'home.intro.body.part2': 'Acabei de concluir minha formação superior em Desenvolvimento de Aplicações Web (DAW) e adquiri experiência em ambientes reais, gerenciando desde implantações na AWS até interações complexas com bancos de dados. Se você procura alguém capaz de analisar código legado, corrigir bugs sem causar problemas e agregar valor à equipe desde o primeiro dia, confira meus projetos ou entre em contato.',
+
             'articles.visits.title': 'O que precisa um site para transformar visitas em clientes?',
             'articles.visits.intro': 'Ter um site bonito já não é suficiente. Para gerar resultados reais em 2026, o teu site precisa destes pilares:',
             'articles.visits.item_1': 'Velocidade extrema: se demorar mais de 2 segundos a carregar, 50% dos utilizadores vão sair.',

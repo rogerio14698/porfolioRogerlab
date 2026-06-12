@@ -6,9 +6,9 @@
 (function () {
   'use strict';
 
-  const START_DELAY_MS = 300;
-  const LETTER_DELAY_MS = 18;
-  const DURATION_S = 0.9;
+  const START_DELAY_MS = 200;
+  const LETTER_DELAY_MS = 8;
+  const DURATION_S = 0.2;
   const EASING = 'cubic-bezier(0.2, 0.65, 0.3, 0.9)';
   const THRESHOLD = 0.25;
 
@@ -70,15 +70,17 @@
 
     section.dataset.typewriterReady = 'true';
 
-    var paragraph = section.querySelector('p');
-    if (!paragraph) return;
+    var paragraph = section.querySelectorAll('p');
+    if (paragraph.length === 0) return;
 
-    prepareParagraph(paragraph);
+    paragraph.forEach(prepareParagraph);
+    //prepareParagraph(paragraph);
 
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
-          typeParagraph(paragraph);
+          //Aqui se anima cada parrafo a la vez.
+          paragraph.forEach(typeParagraph);
           observer.unobserve(section);
         }
       });

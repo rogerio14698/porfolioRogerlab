@@ -3,5 +3,6 @@
 	<div class="contactPdfLinks">
 		<a href="{{ route('pdf-cv.english') }}" target="_blank" rel="noopener noreferrer" class="contactPdfLink">English</a>
 		<a href="{{ route('pdf-cv.spanish') }}" target="_blank" rel="noopener noreferrer" class="contactPdfLink">Spanish</a>
+		@include('components.btnEnlaceRepositorio')
 	</div>
 </div>

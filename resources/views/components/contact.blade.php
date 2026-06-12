@@ -1,6 +1,5 @@
 <section class="seccionContact">
     <h2 data-i18n="contact.title">Contacto</h2>
-    @include('components.projects.pdf')
     <form method="POST" action="{{ route('contact.submit') }}" class="contactForm" novalidate>
         @csrf
 

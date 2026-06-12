@@ -1,16 +1,21 @@
 <section class="textoAbout">
-    <p data-i18n="home.intro.body">
-        I enjoy web development because it allows me to transform ideas into practical solutions,
-        and my goal is to deliver agile, effective, and high-quality work to every challenge that arises.
-        I relish analyzing projects, streamlining what isn't working, improving existing systems, and ensuring
-        things are clearer, more stable, and easier to maintain from day one.
+    <p data-i18n="home.intro.body.part1">
+        Hola, soy Rogério Lucas. Me dedico al desarrollo Full Stack con un enfoque muy claro: picar código limpio,
+        estructurado y que resuelva problemas reales sin complicar las cosas. Me muevo cómodamente en todo el ciclo de
+        una aplicación, desde diseñar bases de datos y refactorizar lógica en el backend con Laravel, hasta optimizar el
+        rendimiento en el frontend o pelearme con la configuración de contenedores en Docker. No busco simplemente que
+        las cosas funcionen; me importa que sean estables, escalables y fáciles de mantener en producción.
     </p>
-    {{--
-    Esto es una idea, que se vaya ramificando y mostrando fechas 
-    que quiera o tipos de logros que quiera.
-<div class="timeline">
-            <div class="timeline__progress"></div>
-        </div>  --}}
+    <br>
+    <br>
+    <p data-i18n="home.intro.body.part2">
+        Acabo de terminar mi formación superior en DAW y de foguearme en entornos reales gestionando desde despliegues en AWS
+        hasta interacciones complejas con bases de datos. Si buscas a alguien que sepa analizar código heredado,
+        solucionar bugs sin romper nada por el camino y aportar valor al equipo desde el primer día, echa un vistazo a
+        mis proyectos o hablemos.
+    </p>
+
+
 
 
 
