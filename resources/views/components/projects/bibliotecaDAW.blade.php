@@ -10,7 +10,8 @@
     </div>
 
     <div class="description">
-        <p data-i18n="projects.library.body_1">It was my final project for the DAW (Desarrollo de Aplicaciones Web)
+        <p data-i18n="projects.library.body_1">
+            It was my final project for the DAW (Desarrollo de Aplicaciones Web)
             module.
             It is a library management system that allows users to manage their book collections,
             borrow and return books, and search for books in the library's catalog. The project was developed using
