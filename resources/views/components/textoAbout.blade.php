@@ -1,6 +1,4 @@
 <section class="hero">
-
-
     {{-- columna izquierda foto o avatar --}}
     <div class="heroMedia">
         <img src="{{ asset('img/cv-foto.jpeg') }}" alt="Foto-de-Rogerio-Lucas" class="heroFoto">
@@ -11,10 +9,12 @@
 
         {{-- CTAs --}}
         <div class="heroeActions">
-            <a href="#" class="btn btn-primary"> Ver Proyectos </a>
+            <a href="{{ route('projects') }}" class="btn btn-primary"> Ver Proyectos </a>
             <a href="{{ route('contact') }}" class="btn btn-secondary"> Hablemos</a>
-            <a href="#" class="btn btn-secondary"> Curriculum Español</a>
-            <a href="#" class="btn btn-secondary"> Curriculum Inglés</a>
+            <a href="{{ route('pdf-cv.english') }}" target="_blank" rel="noopener noreferrer"
+                class="contactPdfLink">Cv-English</a>
+            <a href="{{ route('pdf-cv.spanish') }}" target="_blank" rel="noopener noreferrer"
+                class="contactPdfLink">Cv-Spanish</a>
         </div>
 
         {{-- Stack principal --}}

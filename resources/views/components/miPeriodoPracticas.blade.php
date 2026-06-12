@@ -63,10 +63,11 @@
         aria-labelledby="practicasModalTitle">
         <div class="practicasModal__backdrop" data-practicas-close></div>
         <div class="practicasModal__panel" role="document">
-            <button type="button" class="practicasModal__close" id="practicasModalClose" data-practicas-close aria-label="Cerrar ventana">×</button>
+            <button type="button" class="practicasModal__close" id="practicasModalClose" data-practicas-close
+                aria-label="Cerrar ventana">×</button>
 
             <h3 id="practicasModalTitle">Seguimiento detallado de prácticas</h3>
-            
+
             <div id="practicasModalContent">
 
             </div>
