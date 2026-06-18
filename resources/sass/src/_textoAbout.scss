@@ -3,73 +3,91 @@
 
 .hero {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    padding: 24px;
+    grid-template-columns: minmax(240px, 0.92fr) minmax(300px, 1.08fr);
+    gap: 12px;
+    padding: 12px 14px 14px;
+    min-height: clamp(420px, calc(100vh - 260px), 560px);
 
     @media (max-width: 768px) {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 12px;
+        gap: 10px;
+        min-height: auto;
+        padding: 12px;
     }
     .heroMedia {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        text-align: Justify;
-        border-right: 5px solid var(--colorBorde);
-        padding: 24px;
-        margin-right: 32px;
+        text-align: left;
+        border-right: 1px solid color-mix(in srgb, var(--colorBorde) 55%, transparent);
+        padding: 10px 14px 10px 10px;
+        margin-right: 0;
         @media (max-width: 768px) {
             border-right: none;
             margin-right: 0;
-            margin-bottom: 24px;
+            margin-bottom: 6px;
+            padding: 8px 0;
         }
         .heroName {
-            font-size: 20px;
+            font-size: clamp(0.8rem, 0.72rem + 0.35vw, 0.98rem);
             font-family: v.$fuenteTexto;
             font-weight: v.$grosorTitulo;
-            padding: 4px;
-            margin-bottom: 24px;
-            margin-top: 14px;
+            padding: 2px 0;
+            margin-bottom: 6px;
+            margin-top: 0;
+            letter-spacing: 0.08em;
+            opacity: 0.88;
+
+            &::before {
+                content: ">";
+                margin-right: 0.5rem;
+                opacity: 0.6;
+            }
 
         }
         h1 {
-            font-size: 18px;
+            font-size: clamp(0.98rem, 0.9rem + 0.6vw, 1.28rem);
             font-family: v.$fuenteTexto;
             font-weight: v.$grosorTitulo;
-            text-decoration: underline double var(--colorBorde);
-            padding: 4px;
-            margin-bottom: 24px;
+            text-decoration: none;
+            padding: 6px 0 0 0;
+            margin-bottom: 10px;
+            line-height: 1.35;
         }
         .heroFoto {
             align-self: center;
-            border: 4px solid var(--colorBorde);
-            border-radius: 100px;
-            width: 120px;
+            border: 1px solid var(--colorBorde);
+            border-radius: 8px;
+            width: clamp(84px, 6.4vw, 104px);
             height: auto;
-            box-shadow: 0 0 10px var(--colorBorde);
+            box-shadow: 0 0 0 transparent;
+            filter: grayscale(0.12) contrast(1.02);
+            margin-bottom: 10px;
         }
         .heroFoto:hover {
-            transform: scale(1.1);
-            transition: all 0.3s ease;
+            transform: translateY(-1px);
+            transition: all 0.2s ease;
+            box-shadow: 0 0 0 1px color-mix(in srgb, var(--colorBorde) 40%, transparent);
         }
         .heroeActions {
             display:grid;
             grid-template-columns: repeat(2, 1fr);
             justify-content: space-between;
             align-items: center;
-            gap: 12px;
-            margin-top: 24px;
-            margin-bottom: 24px;
+            gap: 6px;
+            margin-top: 8px;
+            margin-bottom: 8px;
 
             a {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                padding: 16px;
+                min-height: 34px;
+                padding: 7px 9px;
+                font-size: clamp(0.74rem, 0.7rem + 0.25vw, 0.88rem);
                 font-family: v.$fuenteTexto;
                 border: 1px solid var(--colorBorde);
                 background-color: transparent;
@@ -88,33 +106,32 @@
             }
         }
         .heroStack{
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            align-items: stretch;
             width: 100%;
-            gap: 12px;
-            border-bottom: 1px solid var(--colorBorde);
-            gap: 12px;
+            gap: 4px;
+            padding: 7px 0;
             span {
-                flex-direction: row;
-                font-size: 14px;
+                display: inline-flex;
+                align-items: center;
+                font-size: clamp(0.7rem, 0.68rem + 0.12vw, 0.84rem);
                 font-family: v.$fuenteTexto;
                 font-weight: v.$grosorTexto;
                 color: var(--_texto);
-                padding: 4px;
-                margin-bottom: 4px;
-                width: 100%;
+                opacity: 0.8;
+                padding: 2px 0;
+                margin-bottom: 0;
+                width: auto;
             }
 
             @media (max-width: 768px) {
-                display: flex;
-                flex-direction: column;
+                display: grid;
+                grid-template-columns: 1fr;
                 align-items: center;
                 justify-content: center;
                 width: 100%;
-                gap: 12px;
+                gap: 4px;
 
             }
         }
@@ -128,18 +145,33 @@
 .textoAbout {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: Justify;
+    align-items: flex-start;
+    justify-content: flex-start;
+    text-align: left;
     margin-left: auto;
-    padding: 24px;
+    padding: 8px 8px 6px;
     overflow-y: auto;
+    border-left: 1px solid color-mix(in srgb, var(--colorBorde) 22%, transparent);
+   
+
+    @media (max-width: 768px) {
+        border-left: none;
+        padding: 8px 0;
+    }
+
     p {
-        font-size: t.fluido(1rem, 1.5rem);
+        font-size: clamp(0.9rem, 0.86rem + 0.18vw, 1rem);
+        line-height: 1.48;
         font-family: v.$fuenteTexto;
         font-weight: v.$grosorTexto;
         color: var(--_texto);
-        max-width: 600px;
+        max-width: 60ch;
+
+        & + p {
+            margin-top: 0.8rem;
+            padding-top: 0.6rem;
+            border-top: 1px dashed color-mix(in srgb, var(--colorBorde) 40%, transparent);
+        }
     }
 }
 //Fin del texto del inicio
@@ -156,8 +188,8 @@
     .conocimientos {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 24px;
-        margin-bottom: 48px;
+        gap: 14px;
+        margin-bottom: 22px;
 
         @media (max-width: 768px) {
             grid-template-columns: repeat(1, 1fr);
@@ -165,14 +197,16 @@
         }
 
         .conocimientosSeccione {
-            border-left: 5px solid var(--colorBorde);
-            padding: 12px;
-            box-shadow: 0 0 10px var(--colorBorde);
-            gap: 24px;
+            border-left: 1px solid color-mix(in srgb, var(--colorBorde) 60%, transparent);
+            padding: 10px 12px;
+            box-shadow: none;
+            gap: 10px;
+            background-color: color-mix(in srgb, var(--_fondoPanel) 92%, transparent);
 
             h2 {
-                font-size: t.fluido(1.5rem, 2.5rem);
+                font-size: t.fluido(1.15rem, 1.6rem);
                 text-decoration: none;
+                letter-spacing: 0.04em;
             }
 
             ul {
@@ -184,7 +218,7 @@
             }
             li {
                 list-style: none;
-                padding: 4px;
+                padding: 3px 0;
                 margin: 0;
                 font-size: t.fluido(0.875rem, 1.125rem);
                 font-family: v.$fuenteTexto;
@@ -206,17 +240,20 @@
     .contactPdfRow {
         display: flex;
         flex-direction: row;
-        width: 35%;
+        width: 100%;
+        max-width: 520px;
         justify-content: space-between;
         align-items: center;
+        gap: 12px;
 
         h3 {
-            font-size: t.fluido(1.5rem, 2.5rem);
+            font-size: t.fluido(1.15rem, 1.6rem);
             font-family: v.$fuenteTexto;
             font-weight: v.$grosorTitulo;
-            text-decoration: underline double var(--colorBorde);
-            padding: 4px;
-            margin-bottom: 24px;
+            text-decoration: none;
+            padding: 4px 0;
+            margin-bottom: 12px;
+            letter-spacing: 0.04em;
         }
         @media (max-width: 768px) {
             display: flex;
@@ -241,16 +278,16 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            min-height: 34px;
-            padding: 6px 12px;
-            border: 3px solid var(--colorBorde);
+            min-height: 32px;
+            padding: 6px 10px;
+            border: 1px solid color-mix(in srgb, var(--colorBorde) 80%, transparent);
             color: var(--_texto);
             text-decoration: none;
             font-family: v.$fuenteTexto;
-            font-size: t.fluido(0.875rem, 1rem);
+            font-size: t.fluido(0.78rem, 0.95rem);
             transition: all 0.3s ease;
-            margin-bottom: 16px;
-            margin-top: 16px;
+            margin-bottom: 8px;
+            margin-top: 8px;
             &:hover {
                 background-color: var(--colorBorde);
                 color: var(--_fondoPanel);
@@ -259,19 +296,21 @@
     }
 
     h2 {
-        font-size: t.fluido(1.5rem, 2.5rem);
+        font-size: t.fluido(1.2rem, 1.75rem);
         font-family: v.$fuenteTexto;
         font-weight: v.$grosorTitulo;
-        text-decoration: underline double var(--colorBorde);
-        padding: 4px;
-        margin-bottom: 24px;
+        text-decoration: none;
+        padding: 4px 0;
+        margin-bottom: 12px;
+        letter-spacing: 0.04em;
     }
     p {
-        font-size: t.fluido(1rem, 1.25rem);
+        font-size: t.fluido(0.9rem, 1.05rem);
         font-family: v.$fuenteTexto;
         font-weight: v.$grosorTexto;
         text-align: justify;
-        padding: 8px;
+        padding: 4px 0;
+        line-height: 1.5;
 
         &::first-letter {
             font-size: 130%;
@@ -281,11 +320,11 @@
     button {
         display: flex;
         justify-content: space-between;
-        font-size: v.$tamanoEnlaces;
+        font-size: 0.9rem;
         font-family: v.$fuenteTexto;
-        padding: 4px 8px;
+        padding: 6px 8px;
         cursor: pointer;
-        border: 1px solid var(--colorBorde);
+        border: 1px solid color-mix(in srgb, var(--colorBorde) 75%, transparent);
         background-color: transparent;
         color: var(--_texto);
         transition:
@@ -306,10 +345,10 @@
     @media (max-width: 768px) {
         width: 100%;
         h2 {
-            font-size: t.fluido(1.25rem, 2rem);
+            font-size: t.fluido(1.1rem, 1.4rem);
         }
         p {
-            font-size: t.fluido(0.875rem, 1.125rem);
+            font-size: t.fluido(0.85rem, 1rem);
         }
     }
 }

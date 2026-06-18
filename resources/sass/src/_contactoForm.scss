@@ -5,102 +5,195 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    text-align: justify;
     margin-left: auto;
-    width: 75%;
-    padding: 24px;
+    width: min(100%, 980px);
+    padding: 20px 18px 24px;
+
     @media (max-width: 768px) {
-        display: flex;
         align-items: center;
         justify-content: center;
         width: 100%;
+        padding: 12px 12px 18px;
     }
 
     h2,
     h3 {
-        padding: 4px;
-        font-size: t.fluido(1.5rem, 2rem);
+        padding: 0;
+        margin: 0 0 12px;
+        font-size: t.fluido(1.2rem, 1.7rem);
         font-family: v.$fuenteTexto;
         font-weight: v.$grosorTitulo;
-        text-decoration: underline double var(--colorBorde);
+        text-decoration: none;
+        letter-spacing: 0.04em;
     }
 
     form {
         display: flex;
         flex-direction: column;
-        gap: 16px;
+        gap: 12px;
         width: 100%;
         font-family: v.$fuenteTexto;
+        padding: 18px;
+        background: color-mix(in srgb, var(--_fondoPanel) 92%, transparent);
+        box-shadow: none;
     
         @media (max-width: 768px) {
-            gap: 8px;
+            gap: 10px;
+            padding: 14px;
         }
     }
 
+    .contactAlert {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid color-mix(in srgb, var(--colorBorde) 55%, transparent);
+        background: color-mix(in srgb, var(--_fondoPanel) 86%, transparent);
+        color: var(--_texto);
+        font-size: t.fluido(0.82rem, 0.95rem);
+        line-height: 1.5;
 
-    .formLabel {
+        &--error {
+            border-color: color-mix(in srgb, #d46a6a 55%, transparent);
+        }
+
+        &--info {
+            border-color: color-mix(in srgb, var(--colorBorde) 45%, transparent);
+        }
+    }
+
+    .contactFormGrid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .contactFormGrid > .formLabel:last-child {
+        grid-column: 1 / -1;
+    }
+
+    .contactFormMeta {
+        padding: 10px 12px;
+        background: color-mix(in srgb, var(--_fondoPanel) 84%, transparent);
+
+        p {
+            margin: 0;
+            padding: 0;
+            font-size: t.fluido(0.78rem, 0.92rem);
+            line-height: 1.55;
+            color: var(--_textoSoft);
+        }
+    }
+
+    .contactTurnstile {
         display: flex;
-        flex-direction: row;
+        justify-content: flex-start;
         align-items: center;
-        justify-content: space-between;
+        min-height: 60px;
+        padding: 6px 0;
+    }
 
-        label {
-            font-size: t.fluido(0.875rem, 1rem);
-            font-family: v.$fuenteTexto;
-        }
+    .contactSubmitRow {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding-top: 2px;
 
-        input,
-        textarea {
-            width: 60%;
-            padding: 8px;
-            border: 1px solid var(--colorBorde);
-            background-color: transparent;
-            color: var(--_texto);
-            font-family: v.$fuenteTexto;
-            font-size: t.fluido(0.875rem, 1rem);
-            &:focus {
-                outline: 1px solid
-                    color-mix(in srgb, var(--colorBorde) 75%, transparent);
-                outline-offset: 2px;
-            }
-        }
-        textarea {
-            min-height: 100px;
-            max-height: 150px;
-            max-width: 100%;
-            resize: vertical;
-            overflow: auto;
-            &:focus {
-                outline: 1px solid
-                    color-mix(in srgb, var(--colorBorde) 75%, transparent);
-                outline-offset: 2px;
-            }
-        }
         button {
-            width: 100%;
-            padding: 8px 16px;
+            min-width: min(260px, 100%);
+            width: auto;
+            padding: 10px 16px;
             font-size: v.$tamanoEnlaces;
             font-family: v.$fuenteTexto;
             cursor: pointer;
-            border: 1px solid var(--colorBorde);
+            border: 1px solid color-mix(in srgb, var(--colorBorde) 75%, transparent);
             background-color: transparent;
             color: var(--_texto);
-            transition: all 0.3s ease;
+            transition:
+                background-color 0.25s ease,
+                color 0.25s ease,
+                transform 0.15s ease;
+
             &:hover {
                 background-color: var(--colorBorde);
                 color: var(--_fondoPanel);
             }
+
+            &:active {
+                transform: translateY(1px);
+            }
         }
+
         @media (max-width: 768px) {
-            flex-direction: column;
-            align-items: flex-start;
-            justify-content: flex-start;
+            justify-content: stretch;
+
+            button {
+                width: 100%;
+                min-width: 0;
+            }
+        }
+    }
+
+    .formLabel {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 8px;
+        width: 100%;
+
+        label {
+            font-size: t.fluido(0.82rem, 0.95rem);
+            font-family: v.$fuenteTexto;
+            letter-spacing: 0.03em;
+            color: var(--_textoSoft);
+        }
+
+        input,
+        textarea {
             width: 100%;
-            gap: 8px;
+            padding: 10px 12px;
+            border: 1px solid color-mix(in srgb, var(--colorBorde) 65%, transparent);
+            background-color: transparent;
+            color: var(--_texto);
+            font-family: v.$fuenteTexto;
+            font-size: t.fluido(0.85rem, 0.98rem);
+            line-height: 1.5;
+            box-shadow: none;
+
+            &:focus {
+                outline: 1px solid color-mix(in srgb, var(--colorBorde) 75%, transparent);
+                outline-offset: 2px;
+            }
+        }
+        textarea {
+            min-height: 140px;
+            max-height: 220px;
+            max-width: 100%;
+            resize: vertical;
+            overflow: auto;
+        }
+
+        @media (max-width: 768px) {
+            width: 100%;
+
             input,
             textarea {
                 width: 100%;
             }
+        }
+    }
+
+    @media (max-width: 768px) {
+        .contactFormGrid {
+            grid-template-columns: 1fr;
+        }
+
+        .contactFormGrid > .formLabel:last-child {
+            grid-column: auto;
+        }
+
+        .contactFormMeta {
+            border-left: none;
         }
     }
 }

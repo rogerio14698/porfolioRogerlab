@@ -43,8 +43,6 @@
             que
             las cosas funcionen; me importa que sean estables, escalables y fáciles de mantener en producción.
         </p>
-        <br>
-        <br>
         <p data-i18n="home.intro.body.part2">
             Acabo de terminar mi formación superior en DAW y de foguearme en entornos reales gestionando desde
             despliegues en AWS

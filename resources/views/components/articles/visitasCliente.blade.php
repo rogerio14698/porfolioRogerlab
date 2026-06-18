@@ -4,9 +4,9 @@
         Al buscar una oportunidad estable en empresa, estos son los factores que más peso tienen para mí:
     </p>
     <ul>
-        <li data-i18n="articles.visits.item_1"><strong>Buenas prácticas reales:</strong> Revisiones de código, ramas claras y criterios técnicos consistentes.</li>
-        <li data-i18n="articles.visits.item_2"><strong>Contexto de producto:</strong> Entender para qué existe cada funcionalidad ayuda a tomar mejores decisiones.</li>
-        <li data-i18n="articles.visits.item_3"><strong>Aprendizaje acompañado:</strong> Feedback directo, documentación útil y compañeros con los que contrastar soluciones.</li>
-        <li data-i18n="articles.visits.item_4"><strong>Responsabilidad progresiva:</strong> Empezar aportando en tareas concretas y ganar autonomía con resultados.</li>
+        <li data-i18n="articles.visits.item_1">Buenas prácticas reales: revisiones de código, ramas claras y criterios técnicos consistentes.</li>
+        <li data-i18n="articles.visits.item_2">Contexto de producto: entender para qué existe cada funcionalidad ayuda a tomar mejores decisiones.</li>
+        <li data-i18n="articles.visits.item_3">Aprendizaje acompañado: feedback directo, documentación útil y compañeros con los que contrastar soluciones.</li>
+        <li data-i18n="articles.visits.item_4">Responsabilidad progresiva: empezar aportando en tareas concretas y ganar autonomía con resultados.</li>
     </ul>
 </section>

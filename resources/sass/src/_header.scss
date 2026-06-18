@@ -9,8 +9,8 @@
     background-color: var(--_fondoPanel);
     transition: background-color 0.5s ease;
     width: 100%;
-    height: t.fluido(100px, 200px);
-    padding: t.fluido(1rem, 2rem);
+    height: clamp(74px, 7.2vw, 118px);
+    padding: clamp(0.65rem, 0.4rem + 0.8vw, 1rem) clamp(0.9rem, 0.65rem + 0.8vw, 1.45rem);
     border: 1px solid v.$colorBorde;
     border-bottom: none;
     padding-bottom: 20px;
@@ -23,7 +23,8 @@
         transition: color 0.5s ease;
         // ahora el tamaño del título se ajusta automáticamente entre 20px y 50px según el ancho del viewport entre 400px y 1220px
         //font-size: t.fluido(20px, 50px, 400px, 1220px);
-        font-size: 8vw; // Tamaño base para pantallas grandes, se ajustará con media queries
+        font-size: clamp(2rem, 4.4vw, 4.4rem);
+        line-height: 0.95;
         //Tamaño fijo para moviles, para que no quede enano
          @media (max-width: 480px) {
         font-size: 11vw; // Le damos más fuerza en móviles para que no quede enano
@@ -50,9 +51,17 @@
         font-family: v.$fuenteTexto;
         font-weight: v.$grosorTexto;
         font-style: v.$estiloTexto;
-        font-size: t.fluido(2rem, 3rem);
+        font-size: clamp(0.78rem, 0.7rem + 0.45vw, 1.05rem);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
         color: var(--_texto);
         transition: color 0.5s ease;
+
+        &::before {
+            content: "//";
+            opacity: 0.65;
+            margin-right: 0.35rem;
+        }
         
 
         &::after {
