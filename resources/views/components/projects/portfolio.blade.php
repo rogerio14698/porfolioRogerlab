@@ -5,18 +5,16 @@
 
         <div class="titleProject">
             <h2 data-i18n="projects.portfolio.title">Web Portfolio</h2>
-            <p data-i18n="projects.portfolio.meta">Apr.2026 | Design & Development</p>
+            <p data-i18n="projects.portfolio.meta">Abr. 2026 | Diseño y desarrollo</p>
         </div>
 
         <div class="description">
             <p data-i18n="projects.portfolio.body_1">
-                Diseñado y desarrollado un portfolio web personal utilizando Laravel, HTML, CSS y JavaScript para mostrar mis proyectos y habilidades de manera profesional y atractiva. 
-                El portfolio incluye secciones para proyectos destacados, experiencia laboral, habilidades técnicas y un formulario de contacto, 
-                con un diseño responsivo y moderno que se adapta a diferentes dispositivos.
+                Diseñé y desarrollé este portfolio con Laravel, HTML, CSS y JavaScript para presentar mis proyectos, mi forma de trabajar y el tipo de perfil que quiero aportar a una empresa.
             </p>
             <br>
             <p data-i18n="projects.portfolio.body_2">
-                Con referencias de diferentes portfolios y sitios web de diseño, he creado un diseño único y personalizado que refleja mi estilo y personalidad.
+                Más que vender servicios, la intención es enseñar con claridad cómo estructuro una aplicación, cómo escribo el código y qué decisiones tomo al construir una interfaz.
             </p>
         </div>
     </div>

@@ -5,7 +5,7 @@
 
     <div class="titleProject">
         <h2 data-i18n="projects.juegoRol.title">Juego de Rol</h2>
-        <p data-i18n="projects.juegoRol.meta">May.2026 | Development & Design</p>
+        <p data-i18n="projects.juegoRol.meta">May. 2026 | Desarrollo y diseño</p>
     </div>
 
     <div class="description">

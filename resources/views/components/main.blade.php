@@ -3,9 +3,8 @@
     @include('components.aside')
     @include('components.sectionContent', [
         'section' => $section,
-        'pageTitle' => $pageTitle ?? ('RogerLab | Desarrollador Web fullstack en ' . config('seo.city')),
-        'pageMetaDescription' => $pageMetaDescription ?? 
-        ('Desarrollo web profesional en ' . config('seo.city') . ' y ' . config('seo.region') . 
-        '. Especialista en paginas web, landing pages y aplicaciones web a medida para negocios y empresas.'),
+        'pageTitle' => $pageTitle ?? 'RogerLab | Desarrollador Full Stack titulado en DAW',
+        'pageMetaDescription' => $pageMetaDescription ??
+        'Portfolio de Rogério Lucas, desarrollador Full Stack titulado en DAW. Proyectos con Laravel, PHP, JavaScript, bases de datos, Docker y AWS orientados a código mantenible y trabajo en equipo.',
     ])
 </main>

@@ -90,17 +90,22 @@
         .heroStack{
             display: flex;
             flex-direction: row;
-            align-items: flex-start;
-            text-align: justify;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            width: 100%;
+            gap: 12px;
             border-bottom: 1px solid var(--colorBorde);
             gap: 12px;
             span {
+                flex-direction: row;
                 font-size: 14px;
                 font-family: v.$fuenteTexto;
                 font-weight: v.$grosorTexto;
                 color: var(--_texto);
                 padding: 4px;
                 margin-bottom: 4px;
+                width: 100%;
             }
 
             @media (max-width: 768px) {

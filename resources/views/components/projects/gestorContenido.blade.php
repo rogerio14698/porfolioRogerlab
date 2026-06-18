@@ -4,16 +4,16 @@
     </div>
 
     <div class="titleProject">
-        <h2 data-i18n="projects.content.title">Gestor Contenido</h2>
-        <p data-i18n="projects.content.meta">Feb.2026 | Development</p>
+        <h2 data-i18n="projects.content.title">Gestor de Contenido</h2>
+        <p data-i18n="projects.content.meta">Feb. 2026 | Desarrollo</p>
     </div>
 
     <div class="description">
         <p data-i18n="projects.content.body_1">
-            Aqui pongo lo que hice en el proyecto, ya que es un proyecto que he trabajado en mis practicas laborales.
+            Proyecto interno en el que participé durante las prácticas, centrado en la gestión y actualización de contenido dentro de una aplicación usada en entorno empresarial.
         </p>
         <br>
-        <p data-i18n="projects.content.body_2">Ver contenido de las hojas de firma para rellenar este apartado.
+        <p data-i18n="projects.content.body_2">Mi aportación estuvo en revisar flujos existentes, entender restricciones de una base real y dejar el sistema más claro para futuras actualizaciones del equipo.
         </p>
     </div>
     <div class="alinearButton">

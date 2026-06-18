@@ -6,22 +6,17 @@
 
     <div class="titleProject">
         <h2 data-i18n="projects.library.title">Biblioteca DAW</h2>
-        <p data-i18n="projects.library.meta">April.13 | Desing & Development</p>
+        <p data-i18n="projects.library.meta">Abr. 2023 | Diseño y desarrollo</p>
     </div>
 
     <div class="description">
         <p data-i18n="projects.library.body_1">
-            It was my final project for the DAW (Desarrollo de Aplicaciones Web)
-            module.
-            It is a library management system that allows users to manage their book collections,
-            borrow and return books, and search for books in the library's catalog. The project was developed using
-            Laravel,
-            a PHP framework, and MySQL for the database.
+            Fue mi proyecto final de Desarrollo de Aplicaciones Web. Construí un sistema de gestión bibliotecaria con
+            Laravel y MySQL para administrar colecciones, préstamos, devoluciones y consultas de catálogo.
         </p>
         <br>
-        <p data-i18n="projects.library.body_2">In this project, I focused on implementing a user-friendly interface and
-            ensuring the system's
-            functionality met the requirements of the DAW module.
+        <p data-i18n="projects.library.body_2">Me sirvió para consolidar estructura MVC, modelado de datos y una forma
+            de trabajar ordenada de principio a fin sobre un proyecto completo.
         </p>
 
     </div>

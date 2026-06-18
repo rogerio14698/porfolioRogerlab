@@ -1,6 +1,6 @@
 <div id="dynamic-section" data-section="{{ $section }}"
-    data-page-title="{{ $pageTitle ?? ('RogerLab | Desarrollador Web Freelance en ' . config('seo.city')) }}"
-    data-meta-description="{{ $pageMetaDescription ?? ('Desarrollo web profesional en ' . config('seo.city') . ' y ' . config('seo.region') . '. Especialista en paginas web, landing pages y aplicaciones web a medida para negocios.') }}">
+    data-page-title="{{ $pageTitle ?? 'RogerLab | Desarrollador Full Stack titulado en DAW' }}"
+    data-meta-description="{{ $pageMetaDescription ?? 'Portfolio de Rogério Lucas, desarrollador Full Stack titulado en DAW. Proyectos con Laravel, PHP, JavaScript, bases de datos, Docker y AWS orientados a código mantenible y trabajo en equipo.' }}">
     @if ($section === 'home')
         @include('components.textoAbout')
     @elseif ($section === 'about')

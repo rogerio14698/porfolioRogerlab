@@ -1,14 +1,14 @@
 <section>
-    <h2 data-i18n="articles.pricing.title">¿Cuánto cuesta una página web en España en 2026?</h2>
+    <h2 data-i18n="articles.pricing.title">Qué puedo aportar como perfil junior tras terminar DAW</h2>
     <p data-i18n="articles.pricing.intro">
-        El precio de una web profesional en 2026 varía según su complejidad y objetivos. Actualmente, el mercado se mueve en estos rangos medios:
+        Mi valor no pasa por vender humo ni por prometer experiencia que no tengo. Lo que sí puedo aportar hoy es una base sólida en estas áreas:
     </p>
     <ul>
-        <li data-i18n="articles.pricing.item_1"><strong>Landing Page:</strong> Desde 800€ hasta 2.000€. Ideal para campañas específicas.</li>
-        <li data-i18n="articles.pricing.item_2"><strong>Web Corporativa (Pyme):</strong> Entre 1.500€ y 4.500€. Incluye servicios, contacto y blog.</li>
-        <li data-i18n="articles.pricing.item_3"><strong>E-commerce (Tienda Online):</strong> Desde 3.000€ hasta +10.000€ según el catálogo y pasarelas de pago.</li>
+        <li data-i18n="articles.pricing.item_1"><strong>Backend web:</strong> Laravel, PHP, routing, validación, bases de datos relacionales y mantenimiento de lógica existente.</li>
+        <li data-i18n="articles.pricing.item_2"><strong>Frontend funcional:</strong> JavaScript, maquetación cuidada, interacción de interfaz y atención al rendimiento.</li>
+        <li data-i18n="articles.pricing.item_3"><strong>Entorno de trabajo:</strong> Git, Docker, Linux, despliegues y capacidad para moverme en código heredado con criterio.</li>
     </ul>
     <blockquote data-i18n="articles.pricing.note">
-        *Nota: En 2026, factores como la optimización para buscadores de IA (GEO) y la seguridad avanzada (Firewalls activos) son esenciales en cualquier presupuesto profesional.
+        A esto sumo una actitud directa: documentar lo importante, preguntar cuando falta contexto y priorizar soluciones mantenibles.
     </blockquote>
 </section>

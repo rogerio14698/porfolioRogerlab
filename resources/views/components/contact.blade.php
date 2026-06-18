@@ -26,7 +26,7 @@
             :value="old('name')" maxlength="120" required />
 
         <x-contact.field id="subject" name="subject" label="Asunto" labelKey="contact.form.subject"
-            placeholder="Necesito una web para mi negocio" placeholderKey="contact.form.subject_placeholder"
+            placeholder="Quiero hablar contigo sobre una vacante" placeholderKey="contact.form.subject_placeholder"
             :value="old('subject')" maxlength="150" required />
 
         <x-contact.field id="email" name="email" type="email" label="Correo electronico"
@@ -35,7 +35,7 @@
             maxlength="255" required />
 
         <x-contact.textarea id="message" name="message" label="Mensaje" labelKey="contact.form.message"
-            placeholder="Cuentame tu proyecto, el contexto y el plazo que tienes en mente."
+            placeholder="Cuéntame el puesto, el equipo, el stack o el motivo del contacto y te respondo lo antes posible."
             placeholderKey="contact.form.message_placeholder" :value="old('message')" maxlength="5000" required />
 
         <div class="contactFormMeta">

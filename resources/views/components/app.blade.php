@@ -5,13 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @php
-        $defaultTitle = 'RogerLab | Desarrollador Web Freelance en ' . config('seo.city');
+        $defaultTitle = 'RogerLab | Desarrollador Full Stack titulado en DAW';
         $defaultDescription =
-            'Desarrollo web a medida en ' .
-            config('seo.city') .
-            ' y ' .
-            config('seo.region') .
-            '. Especialista en aplicaciones web, rendimiento y optimizacion de conversion para negocios.';
+            'Portfolio de Rogério Lucas, desarrollador Full Stack titulado en DAW. Proyectos con Laravel, PHP, JavaScript, bases de datos, Docker y AWS orientados a código mantenible y trabajo en equipo.';
         $defaultOgImage = asset('img/profileIMG.png');
     @endphp
     <title>@yield('title', $defaultTitle)</title>

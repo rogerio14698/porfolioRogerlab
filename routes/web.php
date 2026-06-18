@@ -9,16 +9,16 @@ Route::redirect('/', '/home');
 Route::get('/home', function () {
     return renderSection(
         'home',
-        'Desarrollador Web Freelance en ' . config('seo.city') . ' | Aplicaciones Web para Negocios',
-        'Desarrollo paginas web, landings y aplicaciones web a medida en ' . config('seo.city') . ' y ' . config('seo.region') . '. Soluciones rapidas, claras y enfocadas en conversion para negocios locales.'
+        'RogerLab | Desarrollador Full Stack titulado en DAW',
+        'Portfolio de Rogério Lucas, desarrollador Full Stack titulado en DAW. Proyectos con Laravel, PHP, JavaScript, bases de datos, Docker y AWS orientados a código mantenible y trabajo en equipo.'
     );
 })->name('home');
 
 Route::get('/about', function () {
     return renderSection(
         'about',
-        'Sobre Mi | Desarrollador Web Freelance en ' . config('seo.city'),
-        'Conoce mi experiencia en desarrollo web, metodologias de trabajo y enfoque tecnico para crear webs y aplicaciones web mantenibles para negocios en ' . config('seo.city') . ' y ' . config('seo.region') . '.'
+        'Sobre mí | Rogério Lucas, desarrollador Full Stack',
+        'Experiencia, metodología de trabajo y objetivos profesionales de Rogério Lucas tras finalizar DAW y realizar prácticas en entorno real.'
     );
 })->name('about');
 
@@ -33,16 +33,16 @@ Route::get('/mi-periodo-practicas', function () {
 Route::get('/articles', function () {
     return renderSection(
         'articles',
-        'Articulos sobre Desarrollo Web, SEO y Conversion | RogerLab',
-        'Lee articulos sobre precios web en ' . config('seo.country') . ', landing pages, conversion, SEO y criterios para contratar un desarrollador web orientado a negocio.'
+        'Artículos y reflexiones técnicas | RogerLab',
+        'Notas sobre aprendizaje técnico, mantenimiento, código heredado y desarrollo web desde una perspectiva profesional y honesta.'
     );
 })->name('articles');
 
 Route::get('/projects', function () {
     return renderSection(
         'projects',
-        'Proyectos Web y Aplicaciones Desarrolladas | RogerLab',
-        'Explora proyectos de desarrollo web y aplicaciones a medida creados con Laravel, JavaScript y tecnologias modernas, orientados a rendimiento, usabilidad y negocio.'
+        'Proyectos | Rogério Lucas',
+        'Selección de proyectos académicos, personales y de prácticas con Laravel, JavaScript, bases de datos y despliegue.'
     );
 })->name('projects');
 
@@ -65,8 +65,8 @@ Route::get('/juegos/ahorcado', function () {
 Route::get('/contact', function () {
     return renderSection(
         'contact',
-        'Contacto | Solicita tu Presupuesto Web en ' . config('seo.city'),
-        'Cuentame tu proyecto y recibe una propuesta para tu pagina web, landing page o aplicacion web a medida en ' . config('seo.city') . ', ' . config('seo.region') . ' o cualquier punto de ' . config('seo.country') . '.'
+        'Contacto profesional | RogerLab',
+        'Escríbeme para hablar sobre vacantes, procesos de selección o colaboración técnica dentro de un equipo de desarrollo.'
     );
 })->name('contact');
 
@@ -123,8 +123,8 @@ Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap.x
 Route::get('/{any}', function () {
     return renderSection(
         'notFound',
-        'Pagina no encontrada | RogerLab',
-        'La pagina que buscas no esta disponible. Puedes volver al inicio para explorar servicios, proyectos y formas de contacto.',
+        'Página no encontrada | RogerLab',
+        'La página que buscas no está disponible. Puedes volver al inicio para revisar mi perfil, proyectos y formas de contacto.',
         404,
         'noindex,nofollow'
     );
