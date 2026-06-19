@@ -43,7 +43,8 @@
     }
     .cardProject {
         min-width: 0;
-        height: 100%;
+        height: auto;
+        min-height: 100%;
         padding: 18px;
         align-self: stretch;
         display: flex;
@@ -54,8 +55,8 @@
         border: 1px solid color-mix(in srgb, var(--colorBorde) 55%, transparent);
         background: color-mix(in srgb, var(--_fondoPanel) 92%, transparent);
         box-shadow: none;
-        border-radius: 16px;
-        overflow: hidden;
+        border-radius: 4px;
+        overflow: visible;
         
         .titleProject,
         .description {
@@ -102,11 +103,14 @@
 
     @media (max-width: 768px) {
         grid-template-columns: 1fr;
+        max-height: none;
+        overflow-y: visible;
         padding: 12px 12px 16px;
         gap: 14px;
         
         .cardProject {
             padding: 16px;
+            min-height: 0;
         }
     }
 }
