@@ -17,16 +17,14 @@
 }
 
 .seccionProjects {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(280px, 1fr));
-    align-items: start;
+    display: block;
+    column-count: 2;
+    column-gap: 18px;
+    column-fill: balance;
     width: 100%;
     margin-left: auto;
     padding: 12px 18px 20px;
-    gap: 18px;
     overflow: visible;
-        max-height: 100vh;
-    overflow-y: auto;
     
     .logo {
         display: flex;
@@ -42,11 +40,13 @@
         }
     }
     .cardProject {
+        break-inside: avoid;
+        page-break-inside: avoid;
+        width: 100%;
+        margin: 0 0 18px;
         min-width: 0;
         height: auto;
-        min-height: 100%;
         padding: 18px;
-        align-self: stretch;
         display: flex;
         align-items: flex-start;
         justify-content: flex-start;
@@ -94,6 +94,38 @@
             gap: 10px;
         }
 
+        .galeria {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 8px;
+        }
+
+        .galeria__item {
+            border: 1px solid color-mix(in srgb, var(--colorBorde) 65%, transparent);
+            border-radius: 2px;
+            background: color-mix(in srgb, var(--_fondoPanel) 90%, transparent);
+            padding: 0;
+            margin: 0;
+            cursor: pointer;
+            overflow: hidden;
+            aspect-ratio: 4 / 3;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+
+            &:hover,
+            &:focus-visible {
+                transform: translateY(-2px);
+                border-color: color-mix(in srgb, var(--_texto) 60%, var(--colorBorde));
+            }
+        }
+
+        .galeria__img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
         .alinearButton {
             width: 100%;
             justify-content: flex-start;
@@ -102,17 +134,77 @@
     }
 
     @media (max-width: 768px) {
-        grid-template-columns: 1fr;
+        column-count: 1;
+        column-gap: 0;
         max-height: none;
         overflow-y: visible;
         padding: 12px 12px 16px;
-        gap: 14px;
         
         .cardProject {
             padding: 16px;
             min-height: 0;
+            margin-bottom: 14px;
+        }
+
+        .galeria {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
         }
     }
+}
+
+.gfLightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 1600;
+    display: grid;
+    place-items: center;
+    padding: 16px;
+    background: color-mix(in srgb, black 85%, transparent);
+
+    &[hidden] {
+        display: none;
+    }
+}
+
+.gfLightbox__backdrop {
+    position: absolute;
+    inset: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.gfLightbox__panel {
+    position: relative;
+    width: min(900px, 100%);
+    background: color-mix(in srgb, var(--_fondoPanel) 96%, transparent);
+    border: 1px solid color-mix(in srgb, var(--colorBorde) 70%, transparent);
+    padding: 10px;
+}
+
+.gfLightbox__img {
+    width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    display: block;
+}
+
+.gfLightbox__controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.gfLightbox__btn {
+    border: 1px solid color-mix(in srgb, var(--colorBorde) 75%, transparent);
+    background: color-mix(in srgb, var(--_fondoPanel) 92%, transparent);
+    color: var(--_texto);
+    font-family: v.$fuenteTexto;
+    font-size: 0.9rem;
+    padding: 6px 10px;
+    cursor: pointer;
 }
 
 .alinearButton {

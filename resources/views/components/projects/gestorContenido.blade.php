@@ -16,9 +16,6 @@
         <p data-i18n="projects.content.body_2">Mi aportación estuvo en revisar flujos existentes, entender restricciones de una base real y dejar el sistema más claro para futuras actualizaciones del equipo.
         </p>
     </div>
-    <div class="alinearButton">
-        <button class="btnRepo" onclick="window.open('https://github.com/rogerio14698/gestorContenido', '_blank', 'noopener,noreferrer')">
-            <span data-i18n="about.repository.button">Repositorio</span> <span>&rarr;</span>
-        </button>
-    </div>
+   <div class="galeria" data-gallery="gestor-contenido" data-base-src="{{ url('img/GestorContenido') }}" data-extension=".png" data-count="10" aria-label="Galeria de capturas del proyecto Gestor de Contenido">
+        </div>
 </div>

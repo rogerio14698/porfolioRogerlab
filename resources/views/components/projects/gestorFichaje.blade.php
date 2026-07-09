@@ -14,11 +14,6 @@
             <br>
             <p data-i18n="projects.time.body_2">Aquí trabajé sobre procesos internos, revisión de lógica de negocio y pequeños ajustes de interfaz para hacer el sistema más comprensible para el usuario final.</p>
         </div>
-        <div class="alinearButton">
-            {{-- 
-            <button class="btnRepo" onclick="window.open('https://github.com/rogerio14698/ProyectoBiblioteca-2DAW', '_blank', 'noopener,noreferrer')">
-                <span data-i18n="about.repository.button">Repositorio</span> <span>&rarr;</span>
-            </button>
-             --}}
+        <div class="galeria" data-gallery="gestor-fichaje" data-base-src="{{ url('img/GestorFichaje') }}" data-extension=".png" data-count="9" aria-label="Galeria de capturas del proyecto Gestor Fichaje">
         </div>
     </div>

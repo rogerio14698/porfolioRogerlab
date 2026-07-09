@@ -59,6 +59,181 @@ document.addEventListener('partial:navigation:loaded', function (event) {
     renderTurnstileWidgets(event.detail && event.detail.container ? event.detail.container : document);
 });
 
+var gestorFichajeLightboxState = {
+    images: [],
+    activeIndex: 0
+};
+
+function createGestorFichajeLightbox() {
+    var existing = document.getElementById('gfLightbox');
+
+    if (existing) {
+        return existing;
+    }
+
+    var lightbox = document.createElement('div');
+    lightbox.id = 'gfLightbox';
+    lightbox.className = 'gfLightbox';
+    lightbox.hidden = true;
+    lightbox.innerHTML = [
+        '<button type="button" class="gfLightbox__backdrop" aria-label="Cerrar galeria" data-gf-close></button>',
+        '<div class="gfLightbox__panel" role="dialog" aria-modal="true" aria-label="Galeria del proyecto">',
+        '  <img class="gfLightbox__img" src="" alt="">',
+        '  <div class="gfLightbox__controls">',
+        '    <button type="button" class="gfLightbox__btn" data-gf-prev>&larr;</button>',
+        '    <button type="button" class="gfLightbox__btn" data-gf-close>Cerrar</button>',
+        '    <button type="button" class="gfLightbox__btn" data-gf-next>&rarr;</button>',
+        '  </div>',
+        '</div>'
+    ].join('');
+
+    function closeLightbox() {
+        lightbox.hidden = true;
+    }
+
+    function renderActive() {
+        var active = gestorFichajeLightboxState.images[gestorFichajeLightboxState.activeIndex];
+
+        if (!active) {
+            return;
+        }
+
+        var imageNode = lightbox.querySelector('.gfLightbox__img');
+        imageNode.src = active.src;
+        imageNode.alt = active.alt;
+    }
+
+    lightbox.addEventListener('click', function (event) {
+        var target = event.target;
+
+        if (target.hasAttribute('data-gf-close')) {
+            closeLightbox();
+            return;
+        }
+
+        if (target.hasAttribute('data-gf-prev')) {
+            gestorFichajeLightboxState.activeIndex =
+                (gestorFichajeLightboxState.activeIndex - 1 + gestorFichajeLightboxState.images.length) % gestorFichajeLightboxState.images.length;
+            renderActive();
+            return;
+        }
+
+        if (target.hasAttribute('data-gf-next')) {
+            gestorFichajeLightboxState.activeIndex =
+                (gestorFichajeLightboxState.activeIndex + 1) % gestorFichajeLightboxState.images.length;
+            renderActive();
+        }
+    });
+
+    document.addEventListener('keydown', function (event) {
+        if (lightbox.hidden) {
+            return;
+        }
+
+        if (event.key === 'Escape') {
+            closeLightbox();
+            return;
+        }
+
+        if (event.key === 'ArrowLeft') {
+            gestorFichajeLightboxState.activeIndex =
+                (gestorFichajeLightboxState.activeIndex - 1 + gestorFichajeLightboxState.images.length) % gestorFichajeLightboxState.images.length;
+            renderActive();
+            return;
+        }
+
+        if (event.key === 'ArrowRight') {
+            gestorFichajeLightboxState.activeIndex =
+                (gestorFichajeLightboxState.activeIndex + 1) % gestorFichajeLightboxState.images.length;
+            renderActive();
+        }
+    });
+
+    lightbox.openGallery = function (images, startIndex) {
+        gestorFichajeLightboxState.images = images;
+        gestorFichajeLightboxState.activeIndex = startIndex;
+        renderActive();
+        lightbox.hidden = false;
+    };
+
+    document.body.appendChild(lightbox);
+    return lightbox;
+}
+
+function initGestorFichajeGallery(root) {
+    var scope = root || document;
+    var containers = scope.querySelectorAll('.galeria[data-gallery][data-base-src][data-count]');
+
+    if (!containers.length) {
+        return;
+    }
+
+    containers.forEach(function (container) {
+        if (container.dataset.galleryReady === 'true') {
+            return;
+        }
+
+        var galleryName = (container.dataset.gallery || 'proyecto').replace(/-/g, ' ');
+        var total = Number(container.dataset.count || '0');
+        var baseSrc = container.dataset.baseSrc || '';
+        var extension = container.dataset.extension || '.png';
+
+        if (!total || !baseSrc) {
+            return;
+        }
+
+        var images = [];
+        var fragment = document.createDocumentFragment();
+
+        for (var index = 1; index <= total; index++) {
+            var src = baseSrc + index + extension;
+            var alt = 'Captura ' + index + ' de ' + galleryName;
+            images.push({ src: src, alt: alt });
+
+            var trigger = document.createElement('button');
+            trigger.type = 'button';
+            trigger.className = 'galeria__item';
+            trigger.setAttribute('aria-label', 'Abrir captura ' + index + ' de ' + galleryName);
+            trigger.dataset.galleryIndex = String(index - 1);
+
+            var image = document.createElement('img');
+            image.className = 'galeria__img';
+            image.src = src;
+            image.alt = alt;
+            image.loading = 'lazy';
+            image.decoding = 'async';
+
+            trigger.appendChild(image);
+            fragment.appendChild(trigger);
+        }
+
+        container.appendChild(fragment);
+
+        container.addEventListener('click', function (event) {
+            var target = event.target;
+            var button = target && target.closest ? target.closest('.galeria__item') : null;
+
+            if (!button) {
+                return;
+            }
+
+            var startIndex = Number(button.dataset.galleryIndex || '0');
+            var lightbox = createGestorFichajeLightbox();
+            lightbox.openGallery(images, startIndex);
+        });
+
+        container.dataset.galleryReady = 'true';
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    initGestorFichajeGallery(document);
+});
+
+document.addEventListener('partial:navigation:loaded', function (event) {
+    initGestorFichajeGallery(event.detail && event.detail.container ? event.detail.container : document);
+});
+
 document.addEventListener('DOMContentLoaded', function () {
     renderNavToggle();
 
