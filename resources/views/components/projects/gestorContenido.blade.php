@@ -16,6 +16,6 @@
         <p data-i18n="projects.content.body_2">Mi aportación estuvo en revisar flujos existentes, entender restricciones de una base real y dejar el sistema más claro para futuras actualizaciones del equipo.
         </p>
     </div>
-   <div class="galeria" data-gallery="gestor-contenido" data-base-src="{{ url('img/GestorContenido') }}" data-extension=".png" data-count="10" aria-label="Galeria de capturas del proyecto Gestor de Contenido">
-        </div>
+    <div class="galeria" data-gallery="gestor-contenido" data-base-src="{{ url('img/GestorContenido') }}" data-extension=".png" data-count="10" aria-label="Galeria de capturas del proyecto Gestor de Contenido">
+    </div>
 </div>

@@ -184,6 +184,7 @@ function initGestorFichajeGallery(root) {
 
         var images = [];
         var fragment = document.createDocumentFragment();
+        var maxVisible = 3;
 
         for (var index = 1; index <= total; index++) {
             var src = baseSrc + index + extension;
@@ -208,6 +209,56 @@ function initGestorFichajeGallery(root) {
         }
 
         container.appendChild(fragment);
+
+        var items = Array.prototype.slice.call(container.querySelectorAll('.galeria__item'));
+        var visibleCount = Math.min(maxVisible, items.length);
+        var currentStart = 0;
+
+        function renderVisibleRange() {
+            items.forEach(function (item, itemIndex) {
+                var distance = (itemIndex - currentStart + items.length) % items.length;
+                var shouldShow = distance < visibleCount;
+
+                item.hidden = !shouldShow;
+                item.setAttribute('aria-hidden', shouldShow ? 'false' : 'true');
+            });
+        }
+
+        function move(step) {
+            currentStart = (currentStart + step + items.length) % items.length;
+            renderVisibleRange();
+        }
+
+        renderVisibleRange();
+
+        if (items.length > visibleCount) {
+            var nav = document.createElement('div');
+            nav.className = 'galeria__nav';
+
+            var prevBtn = document.createElement('button');
+            prevBtn.type = 'button';
+            prevBtn.className = 'galeria__navBtn';
+            prevBtn.textContent = 'Anterior';
+            prevBtn.setAttribute('aria-label', 'Ver 3 capturas anteriores de ' + galleryName);
+
+            var nextBtn = document.createElement('button');
+            nextBtn.type = 'button';
+            nextBtn.className = 'galeria__navBtn';
+            nextBtn.textContent = 'Siguiente';
+            nextBtn.setAttribute('aria-label', 'Ver 3 capturas siguientes de ' + galleryName);
+
+            prevBtn.addEventListener('click', function () {
+                move(-visibleCount);
+            });
+
+            nextBtn.addEventListener('click', function () {
+                move(visibleCount);
+            });
+
+            nav.appendChild(prevBtn);
+            nav.appendChild(nextBtn);
+            container.insertAdjacentElement('afterend', nav);
+        }
 
         container.addEventListener('click', function (event) {
             var target = event.target;

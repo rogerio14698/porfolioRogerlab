@@ -4,7 +4,7 @@
         </div>
 
         <div class="titleProject">
-            <h2 data-i18n="projects.time.title">Gestor Fichaje</h2>
+            <h2 data-i18n="projects.time.title">Gestor Fichaje | AION</h2>
             <p data-i18n="projects.time.meta">Ene. 2026 | Desarrollo</p>
         </div>
 

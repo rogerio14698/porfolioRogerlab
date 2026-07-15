@@ -126,6 +126,43 @@
             display: block;
         }
 
+        .galeria__nav {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .galeria__navBtn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 96px;
+            padding: 6px 10px;
+            border: 1px solid color-mix(in srgb, var(--colorBorde) 75%, transparent);
+            background: color-mix(in srgb, var(--_fondoPanel) 92%, transparent);
+            color: var(--_texto);
+            font-family: v.$fuenteTexto;
+            font-size: 0.9rem;
+            letter-spacing: 0.02em;
+            cursor: pointer;
+            transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+
+            &:hover,
+            &:focus-visible {
+                background: color-mix(in srgb, var(--_fondoPanel) 80%, var(--_texto) 8%);
+                border-color: color-mix(in srgb, var(--_texto) 60%, var(--colorBorde));
+                transform: translateY(-1px);
+            }
+
+            &:focus-visible {
+                outline: 2px solid color-mix(in srgb, var(--_texto) 55%, transparent);
+                outline-offset: 1px;
+            }
+        }
+
         .alinearButton {
             width: 100%;
             justify-content: flex-start;
@@ -176,7 +213,11 @@
 
 .gfLightbox__panel {
     position: relative;
-    width: min(900px, 100%);
+    width: min(920px, 96vw);
+    height: min(78vh, 680px);
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
+    gap: 10px;
     background: color-mix(in srgb, var(--_fondoPanel) 96%, transparent);
     border: 1px solid color-mix(in srgb, var(--colorBorde) 70%, transparent);
     padding: 10px;
@@ -184,9 +225,12 @@
 
 .gfLightbox__img {
     width: 100%;
-    max-height: 80vh;
+    height: 100%;
+    max-height: none;
     object-fit: contain;
+    object-position: center;
     display: block;
+    background: color-mix(in srgb, var(--_fondoPanel) 88%, transparent);
 }
 
 .gfLightbox__controls {
@@ -194,7 +238,14 @@
     justify-content: space-between;
     align-items: center;
     gap: 8px;
-    margin-top: 8px;
+    margin-top: 0;
+}
+
+@media (max-width: 768px) {
+    .gfLightbox__panel {
+        width: min(920px, 100%);
+        height: min(72vh, 520px);
+    }
 }
 
 .gfLightbox__btn {
