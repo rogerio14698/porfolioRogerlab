@@ -10,10 +10,10 @@
 
     <div class="description">
         <p data-i18n="projects.content.body_1">
-            Proyecto interno en el que participé durante las prácticas, centrado en la gestión y actualización de contenido dentro de una aplicación usada en entorno empresarial.
+            Proyecto interno en entorno empresarial orientado a gestión de contenido: trabajé sobre una base Laravel/PHP con MySQL para estabilizar flujos de edición y publicación.
         </p>
         <br>
-        <p data-i18n="projects.content.body_2">Mi aportación estuvo en revisar flujos existentes, entender restricciones de una base real y dejar el sistema más claro para futuras actualizaciones del equipo.
+        <p data-i18n="projects.content.body_2">Analicé lógica heredada, ajusté reglas de negocio y refiné componentes de interfaz en Blade + JavaScript para reducir fricción operativa en futuras iteraciones del equipo.
         </p>
     </div>
     <div class="galeria" data-gallery="gestor-contenido" data-base-src="{{ url('img/GestorContenido') }}" data-extension=".png" data-count="10" aria-label="Galeria de capturas del proyecto Gestor de Contenido">

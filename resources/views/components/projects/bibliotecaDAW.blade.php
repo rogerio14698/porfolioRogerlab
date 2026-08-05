@@ -11,12 +11,12 @@
 
     <div class="description">
         <p data-i18n="projects.library.body_1">
-            Fue mi proyecto final de Desarrollo de Aplicaciones Web. Construí un sistema de gestión bibliotecaria con
-            Laravel y MySQL para administrar colecciones, préstamos, devoluciones y consultas de catálogo.
+            Proyecto final de DAW donde diseñé e implementé una aplicación de gestión bibliotecaria con Laravel, PHP,
+            Eloquent ORM y MySQL para cubrir ciclo completo de catálogo, préstamos y devoluciones.
         </p>
         <br>
-        <p data-i18n="projects.library.body_2">Me sirvió para consolidar estructura MVC, modelado de datos y una forma
-            de trabajar ordenada de principio a fin sobre un proyecto completo.
+        <p data-i18n="projects.library.body_2">Definí el modelo relacional, organicé la arquitectura MVC y apliqué
+            validaciones de negocio para asegurar consistencia de datos y facilitar mantenimiento evolutivo.
         </p>
 
     </div>

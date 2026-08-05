@@ -9,10 +9,10 @@
         </div>
 
         <div class="description">
-            <p data-i18n="projects.time.body_1">Aplicación centrada en control horario y gestión de fichajes, diseñada para registrar entradas, salidas e incidencias dentro del flujo laboral diario.
+            <p data-i18n="projects.time.body_1">Aplicación de control horario enfocada en trazabilidad de jornadas e incidencias; colaboré sobre backend PHP/Laravel y persistencia MySQL para asegurar registros fiables.
             </p>
             <br>
-            <p data-i18n="projects.time.body_2">Aquí trabajé sobre procesos internos, revisión de lógica de negocio y pequeños ajustes de interfaz para hacer el sistema más comprensible para el usuario final.</p>
+            <p data-i18n="projects.time.body_2">Revisé procesos críticos de negocio, depuré reglas de fichaje y mejoré la capa de interfaz con Blade + JavaScript para acelerar la operación diaria del usuario final.</p>
         </div>
         <div class="galeria" data-gallery="gestor-fichaje" data-base-src="{{ url('img/GestorFichaje') }}" data-extension=".png" data-count="9" aria-label="Galeria de capturas del proyecto Gestor Fichaje">
         </div>

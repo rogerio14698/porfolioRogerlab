@@ -10,12 +10,12 @@
 
     <div class="description">
         <p data-i18n="projects.juegoRol.body_1">
-            Juego modular en JavaScript con lógica separada de mapa, personajes, combate y estado. Usa plantillas claras
-            y eventos para mantener el código ordenado.
+            Videojuego modular en Vanilla JavaScript con separación explícita de dominio (mapa, combate, personajes y
+            estado), orientado a escalabilidad funcional.
         </p>
         <br>
-        <p data-i18n="projects.juegoRol.body_2">Interfaz construida con HTML externo y scripts especializados; presenta
-            la UI separada de la lógica para facilitar cambios y mantenimiento.
+        <p data-i18n="projects.juegoRol.body_2">Implementé una capa de presentación desacoplada con plantillas HTML y
+            manejo de eventos para permitir nuevas mecánicas sin degradar legibilidad ni mantenibilidad.
         </p>
     </div>
     <div class="alinearButton">

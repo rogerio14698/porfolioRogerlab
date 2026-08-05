@@ -10,11 +10,11 @@
 
     <div class="description">
         <p data-i18n="projects.apipokemon.body_1">
-            Proyecto centrado en integración de API REST con Laravel: diseñé rutas limpias, validación de búsqueda por nombre o ID y un controlador que consume PokeAPI para construir una ficha completa del Pokemon.
+            Proyecto full-stack de integración REST con Laravel: diseñé endpoints internos, validación de entrada y un servicio de consumo PokeAPI para generar fichas completas por nombre o ID.
         </p>
         <br>
         <p data-i18n="projects.apipokemon.body_2">
-            Apliqué tratamiento de datos anidados para extraer sprites normales y shiny, separación por componentes Blade y lógica de interfaz para filtrar galerías, manteniendo una experiencia rápida, clara y mantenible.
+            Estructuré transformación de datos anidados, renderizado por componentes Blade y filtros de galería en JavaScript para entregar una Pokedex rápida, legible y preparada para escalar funcionalidades.
         </p>
     </div>
     <div class="alinearButton">
