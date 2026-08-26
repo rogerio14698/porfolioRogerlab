@@ -99,6 +99,38 @@
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 8px;
+
+            &.galeria--n8n {
+                display: block;
+
+                .galeria__item {
+                    width: 100%;
+                    aspect-ratio: auto;
+                    border: 1px solid color-mix(in srgb, var(--colorBorde) 65%, transparent);
+                    border-radius: 4px;
+                    background: color-mix(in srgb, var(--_fondoPanel) 90%, transparent);
+                    padding: 4px;
+                    margin: 0;
+                    overflow: hidden;
+                    display: block;
+                    text-align: center;
+                    cursor: pointer;
+
+                    img {
+                        width: 100%;
+                        height: auto;
+                        display: block;
+                        border-radius: 2px;
+                        object-fit: contain;
+                        transition: transform 0.25s ease;
+                    }
+
+                    &:hover img,
+                    &:focus-visible img {
+                        transform: scale(1.015);
+                    }
+                }
+            }
         }
 
         .galeria__item {
@@ -235,7 +267,7 @@
 
 .gfLightbox__controls {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     gap: 8px;
     margin-top: 0;

@@ -152,6 +152,16 @@ function createGestorFichajeLightbox() {
     lightbox.openGallery = function (images, startIndex) {
         gestorFichajeLightboxState.images = images;
         gestorFichajeLightboxState.activeIndex = startIndex;
+
+        var prevBtn = lightbox.querySelector('[data-gf-prev]');
+        var nextBtn = lightbox.querySelector('[data-gf-next]');
+        if (prevBtn) {
+            prevBtn.style.display = images.length > 1 ? '' : 'none';
+        }
+        if (nextBtn) {
+            nextBtn.style.display = images.length > 1 ? '' : 'none';
+        }
+
         renderActive();
         lightbox.hidden = false;
     };
@@ -277,12 +287,42 @@ function initGestorFichajeGallery(root) {
     });
 }
 
+function initSingleImageLightbox(root) {
+    var scope = root || document;
+    var items = scope.querySelectorAll('.galeria--n8n .galeria__item, .galeria--n8n img, [data-single-lightbox]');
+
+    items.forEach(function (item) {
+        if (item.dataset.singleLightboxReady === 'true') {
+            return;
+        }
+
+        var img = item.tagName === 'IMG' ? item : item.querySelector('img');
+        if (!img) {
+            return;
+        }
+
+        item.dataset.singleLightboxReady = 'true';
+
+        item.addEventListener('click', function (event) {
+            event.preventDefault();
+            var lightbox = createGestorFichajeLightbox();
+            lightbox.openGallery([{
+                src: img.src,
+                alt: img.alt || 'Captura de pantalla'
+            }], 0);
+        });
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     initGestorFichajeGallery(document);
+    initSingleImageLightbox(document);
 });
 
 document.addEventListener('partial:navigation:loaded', function (event) {
-    initGestorFichajeGallery(event.detail && event.detail.container ? event.detail.container : document);
+    var root = event.detail && event.detail.container ? event.detail.container : document;
+    initGestorFichajeGallery(root);
+    initSingleImageLightbox(root);
 });
 
 document.addEventListener('DOMContentLoaded', function () {

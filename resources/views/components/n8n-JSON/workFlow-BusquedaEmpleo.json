@@ -1,0 +1,939 @@
+{
+  "name": "LinkedIn job search with apify - Cover Letter Generator v2",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "pdf",
+        "options": {}
+      },
+      "id": "8ce00a91-efcf-4b15-a6d1-cdffd0e9651f",
+      "name": "Extract from File",
+      "type": "n8n-nodes-base.extractFromFile",
+      "position": [
+        240,
+        768
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 4
+            }
+          ]
+        }
+      },
+      "id": "cded2e96-6005-492d-a228-a4983420c70a",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "position": [
+        -800,
+        816
+      ],
+      "notesInFlow": false,
+      "typeVersion": 1.2,
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1Bpe-iGzJHLgrkdR8cSqfNnNiqBm22ssmuYB1eSE6Lu8",
+          "mode": "list",
+          "cachedResultName": "busquedaEmpleo-n8n",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Bpe-iGzJHLgrkdR8cSqfNnNiqBm22ssmuYB1eSE6Lu8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Bpe-iGzJHLgrkdR8cSqfNnNiqBm22ssmuYB1eSE6Lu8/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "nombre_cv",
+              "displayName": "nombre_cv",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "perfil_profesional",
+              "displayName": "perfil_profesional",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "tecnologias_principales",
+              "displayName": "tecnologias_principales",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "idiomas",
+              "displayName": "idiomas",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "experiencia_destacada",
+              "displayName": "experiencia_destacada",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {
+          "cellFormat": "USER_ENTERED"
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        640,
+        768
+      ],
+      "id": "6bccc103-1ae6-483b-bbe9-3cf268e271e7",
+      "name": "Almacenar_CV para busqueda",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "6u5KEeCzLpzaOUxL",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// n8n Code Node - Modo: \"Run Once for Each Item\"\n\nconst itemJson = $input.item.json;\n\n// 0. Normalización general de texto y limpieza Unicode\nconst raw = itemJson.text || \"\";\nconst info = itemJson.info || {};\nconst tituloArchivo = (itemJson.metadata?.[\"dc:title\"] || \"\").normalize(\"NFC\").trim();\n\nconst text = raw\n  .normalize(\"NFC\")\n  .replace(/\\r\\n/g, \"\\n\")\n  .replace(/[\\u200B-\\u200D\\uFEFF]/g, \"\") // Remueve caracteres invisibles\n  .trim();\n\nconst lines = text.split(\"\\n\").map(l => l.trim()).filter(l => l.length > 0);\n\n// ---------- 1. DATOS DE CONTACTO ----------\nconst emailMatch = text.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}/);\nconst email = emailMatch ? emailMatch[0].trim() : \"\";\n\n// Regex depurada para teléfonos (captura opcionalmente (+34) o 34 bien estructurado)\nconst telMatch = text.match(/(?:\\(\\+\\d{1,3}\\)|\\+\\d{1,3}|\\b\\d{1,3}\\)?)\\s*\\d{8,9}/);\nlet telefono = telMatch ? telMatch[0].replace(/[^\\d+]/g, \"\").trim() : \"\";\nif (telefono && !telefono.startsWith(\"+\")) {\n  telefono = `+${telefono}`;\n}\n\nconst ubicacionMatch = text.match(/([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+)*)\\s*[-–]\\s*([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+)*)/);\nconst ubicacion = ubicacionMatch ? ubicacionMatch[0].trim() : \"\";\n\n// ---------- 2. ENLACES ----------\nconst urlRegex = /https?:\\/\\/[^\\s\"'\\n]+/g;\nconst urls = [...new Set(text.match(urlRegex) || [])];\n\nconst linkedin = urls.find(u => u.includes(\"linkedin.com\")) || \"\";\nconst github = urls.find(u => u.includes(\"github.com\")) || \"\";\nconst portfolio = urls.find(u => !u.includes(\"linkedin.com\") && !u.includes(\"github.com\") && !u.includes(\"biblioteca.\")) || \"\";\nconst proyectoLink = urls.find(u => u.includes(\"biblioteca.\")) || \"\";\nconst otrosUrls = urls.filter(u => ![linkedin, github, portfolio, proyectoLink].includes(u)).join(\", \");\n\n// ---------- 3. NOMBRE Y TÍTULO PROFESIONAL ----------\nconst nombre_completo = lines[0] ? lines[0].replace(/[^\\w\\sÁÉÍÓÚáéíóúÑñ-]/gi, \"\").trim() : \"\";\n\nlet titulo_profesional = lines[1] || \"\";\nif (titulo_profesional.includes(\"|\")) {\n  titulo_profesional = titulo_profesional.split(\"|\")[0].trim();\n}\n\n// ---------- 4. IDIOMAS ----------\nconst idiomasArr = [];\nconst idiomaRegex = /([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\\s*\\|\\s*[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+)*)\\s*:\\s*([^\\n]+)/g;\nlet m;\nconst idiomasConocidos = [\"Español\", \"Spanish\", \"Portugués\", \"Portuguese\", \"Inglés\", \"English\", \"Francés\", \"French\"];\nwhile ((m = idiomaRegex.exec(text)) !== null) {\n  const clave = m[1];\n  if (idiomasConocidos.some(idi => clave.includes(idi))) {\n    clave.split(\"|\").forEach(idioma => {\n      idiomasArr.push(`${idioma.trim()}: ${m[2].trim()}`);\n    });\n  }\n}\nconst idiomasStr = idiomasArr.join(\" | \");\n\n// ---------- 5. HABILIDADES TÉCNICAS ----------\nconst skillsDict = {\n  lenguajes_programacion: [\"JavaScript\", \"TypeScript\", \"PHP\", \"Java\", \"Python\", \"C#\", \"C++\", \"Ruby\", \"Go\", \"Swift\", \"Kotlin\"],\n  frameworks_librerias: [\"Laravel\", \"Eloquent ORM\", \"Bootstrap\", \"Vanilla JS\", \"React\", \"Vue\", \"Angular\", \"Django\", \"Node\", \"NodeJS\", \"Express\"],\n  bases_datos: [\"MySQL\", \"MariaDB\", \"SQL Server\", \"Microsoft SQL Server\", \"PostgreSQL\", \"MongoDB\", \"Oracle\", \"SQLite\"],\n  devops_herramientas: [\"Git\", \"GitHub\", \"Docker\", \"Postman\", \"Nginx\", \"Apache\", \"Jenkins\", \"CI/CD\", \"Kubernetes\"],\n  cloud: [\"AWS\", \"EC2\", \"Google Cloud\", \"Azure\", \"Firebase\"],\n  otras_herramientas: [\"HTML5\", \"CSS3\", \"Sass\", \"SQL\", \"PL/SQL\", \"XML\", \"Linux\", \"Windows\"]\n};\n\nconst habilidades_tecnicas = [];\nfor (const categoria in skillsDict) {\n  const detectadas = skillsDict[categoria].filter(skill =>\n    new RegExp(`\\\\b${skill.replace(/[.*+?^${}()|[\\]\\\\]/g, \"\\\\$&\")}\\\\b`, \"i\").test(text)\n  );\n  if (detectadas.length > 0) {\n    habilidades_tecnicas.push(...detectadas);\n  }\n}\nconst habilidadesStr = [...new Set(habilidades_tecnicas)].join(\", \");\n\n// ---------- 6. EXPERIENCIA ----------\nconst experienciaArr = [];\nconst fechaRangoRegex = /([A-Za-zÁÉÍÓÚñ]+\\s\\d{4})\\s*[-–]\\s*([A-Za-zÁÉÍÓÚñ]+\\s\\d{4})/g;\nlet fm;\nwhile ((fm = fechaRangoRegex.exec(text)) !== null) {\n  const idx = fm.index;\n  const antes = text.substring(0, idx).split(\"\\n\").filter(l => l.trim()).pop();\n  const puesto = antes ? antes.split(\"|\")[0].trim() : \"\";\n  const empresa = antes && antes.includes(\"|\") ? antes.split(\"|\")[1]?.trim() : \"\";\n  experienciaArr.push(`${puesto} en ${empresa} (${fm[1]} - ${fm[2]})`);\n}\nconst experienciaStr = experienciaArr.join(\"\\n\");\n\n// ---------- 7. FORMACIÓN ----------\nlet educacionStr = \"\";\nconst formacionIdx = text.search(/Formaci[oó]n|Education/i);\nif (formacionIdx !== -1) {\n  const bloqueFormacion = text.substring(formacionIdx, formacionIdx + 500);\n  const tituloEdu = bloqueFormacion.match(/Grado Superior[^\\n]*|Higher Technical Degree[^\\n]*/i);\n  const fechaEdu = bloqueFormacion.match(/(\\d{4})\\s*-\\s*(\\d{4})/);\n  if (tituloEdu) {\n    educacionStr = `${tituloEdu[0].trim()} (${fechaEdu ? fechaEdu[0] : \"\"})`;\n  }\n}\n\n// ---------- 8. RESUMEN ----------\nconst resumen_perfil = lines.slice(2, 6).join(\" \").length > 50\n  ? lines.slice(2, 6).join(\" \").replace(/\\s+/g, \" \").trim()\n  : \"\";\n\n// ---------- ESTRUCTURA PLANIFICADA PARA GOOGLE SHEETS ----------\nreturn {\n  json: {\n    fuente_archivo: tituloArchivo,\n    titulo_profesional,\n    ubicacion,\n    proyecto: proyectoLink,\n    resumen_perfil,\n    experiencia: experienciaStr,\n    idiomas: idiomasStr,\n    habilidades_tecnicas: habilidadesStr\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        432,
+        768
+      ],
+      "id": "617cd3a1-8d0c-48a7-83ab-1274dfe19bcc",
+      "name": "Limpia el texto del CV"
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        16,
+        768
+      ],
+      "id": "e3c9e34d-1261-4927-a63d-bc0a04cb6c56",
+      "name": "Descarga Los archivos CV",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "zItAo3qmHc9CKhhJ",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Librería de configuraciones de búsqueda para Browserless / LinkedIn\nconst busquedas = [\n  {\n    perfil: \"Full Stack / PHP (Laravel) - España & Remoto\",\n    keywords: '(\"Laravel\" OR \"PHP\" OR \"Full Stack\") AND (\"Junior\" OR \"DAW\" OR \"Entry Level\") AND NOT (\"Senior\" OR \"Lead\")',\n    location: \"Spain\"\n  },\n  {\n    perfil: \"Web / Frontend (JS / Vanilla) - España\",\n    keywords: '(\"JavaScript\" OR \"Web Developer\" OR \"Desarrollador Web\") AND (\"Junior\" OR \"Trainee\" OR \"DAW\" OR \"FCT\")',\n    location: \"Spain\"\n  },\n  {\n    perfil: \"Local / Presencial - Asturias (Gijón / Oviedo)\",\n    keywords: '(\"Desarrollador\" OR \"Programador\" OR \"Sistemas\" OR \"Técnico IT\" OR \"Auxiliar\") AND (\"Junior\" OR \"DAW\")',\n    location: \"Asturias, Spain\"\n  },\n  {\n    perfil: \"Junior Full Stack - EU / Remote (English)\",\n    keywords: '(\"Laravel\" OR \"PHP\" OR \"Full Stack\" OR \"Junior Developer\") AND (\"Remote\" OR \"Entry Level\")',\n    location: \"European Union\"\n  },\n  {\n    perfil: \"IA / Integraciones - Madrid & España\",\n    keywords: '(\"IA\" OR \"AI\" OR \"Inteligencia Artificial\" OR \"Integraciones\" OR \"Integration\") AND (\"PHP\" OR \"Laravel\" OR \"API\" OR \"MCP\" OR \"Agentes\" OR \"Agents\") AND (\"Junior\" OR \"DAW\" OR \"Entry Level\") AND NOT (\"Senior\" OR \"Lead\")',\n    location: \"Spain\"\n  },\n  {\n    perfil: \"Auxiliar administrativo - Gijon & Oviedo\",\n    keywords: '(\"IA\" OR \"AI\" OR \"Administrativo\" OR \"Auxiliar Administrativo\" \"Data entry\")',\n    location: \"Asturias\"\n  }\n];\n// Devolvemos los elementos para que n8n itere sobre cada uno\nreturn busquedas.map(item => ({ json: item }));"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -64,
+        992
+      ],
+      "id": "b723e906-de9b-4031-9325-0c4e862b4f11",
+      "name": "KeyWords"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "177d9451-18ba-436d-b533-37e3944cfbad",
+              "leftValue": "={{ $json.fuente_archivo }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -448,
+        816
+      ],
+      "id": "600ecce4-b0ad-41da-a1b1-01a377d35bd2",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1Bpe-iGzJHLgrkdR8cSqfNnNiqBm22ssmuYB1eSE6Lu8",
+          "mode": "list",
+          "cachedResultName": "busquedaEmpleo-n8n",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Bpe-iGzJHLgrkdR8cSqfNnNiqBm22ssmuYB1eSE6Lu8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Bpe-iGzJHLgrkdR8cSqfNnNiqBm22ssmuYB1eSE6Lu8/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -624,
+        816
+      ],
+      "id": "8e1bc36f-52c2-41a0-b607-46ee972f2339",
+      "name": "Get row(s) in sheet",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "6u5KEeCzLpzaOUxL",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "1hxm3Q6mPw4zvWShc0h9_PlDM0JRQXN7a",
+            "mode": "list",
+            "cachedResultName": "CV-Rogerio-n8n",
+            "cachedResultUrl": "https://drive.google.com/drive/folders/1hxm3Q6mPw4zvWShc0h9_PlDM0JRQXN7a"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -176,
+        768
+      ],
+      "id": "81050d5b-59e8-4bc7-ac7f-9e1a7ad93816",
+      "name": "Search files and folders",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "zItAo3qmHc9CKhhJ",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const keywords = \"Junior PHP\";\nconst location = \"Spain\";\nconst paginas = [25, 50]; // ajusta cuántas páginas quieres\n\n// Rango de tiempo para la búsqueda (parámetro f_TPR de LinkedIn)\n// r86400   = últimas 24 horas\n// r604800  = última semana (7 días)\n// r2592000 = último mes (30 días)\nconst rangoTiempo = \"r86400\"; // <-- cambia aquí para ajustar el periodo\n\nconst portales = paginas.map(start => ({\n  portal: \"LinkedIn\",\n  url: `https://es.linkedin.com/jobs/search/?keywords=${encodeURIComponent(keywords)}&location=${encodeURIComponent(location)}&f_TPR=${rangoTiempo}&start=${start}`\n}));\n\nreturn portales.map(item => ({ json: item }));"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        128,
+        992
+      ],
+      "id": "2f781c73-ae61-4684-82d7-895a0e29c01f",
+      "name": "Libreria de url, consultas"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "documentURL": "https://docs.google.com/document/d/1g73EN8jNplJUpfpXpVOhQKJLt8KBBJkJnIY-ppZHPOE/edit?tab=t.0"
+      },
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        -256,
+        992
+      ],
+      "id": "af531681-8443-4c04-8075-6a6961261291",
+      "name": "Get a document",
+      "alwaysOutputData": false,
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "18Bn9bJLMFZlPWLM",
+          "name": "Google Docs account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://browserless:3000/content?token=epKJG9VBgYjD76KDuIXbj558r8uZtABBAzfCWbfVTEWQITUvRH1M2RWvQkQEzifXcFCMlfLTmBks86DErc",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"url\": \"{{ $json.url }}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        480,
+        992
+      ],
+      "id": "2e91fa15-f911-4bd6-9154-6310a37a361f",
+      "name": "HTTP Request; Busca las ofertas"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Obtención de la plantilla desde el nodo de Google Docs de forma segura\nlet plantillaDocs = '';\ntry {\n  const docNode = $('Get a document').first().json;\n  plantillaDocs = docNode.content || docNode.text || docNode.body || '';\n} catch (e) {\n  plantillaDocs = 'Estimados Sres de {{EMPRESA}}:\\n\\nMe dirijo a ustedes para el puesto de {{PUESTO}}.';\n}\n\n// Función auxiliar para reemplazar placeholders\nfunction generarCoverLetter(plantilla, empresa, puesto) {\n  if (!plantilla) return '';\n  return plantilla\n    .replace(/\\{\\{EMPRESA\\}\\}/g, empresa || 'la empresa')\n    .replace(/\\{\\{PUESTO\\}\\}/g, puesto || 'Desarrollador Web');\n}\n\n// Función para extraer el apartado \"Acerca del empleo\" y devolverlo como lista en una sola celda\nfunction extraerAcercaDelEmpleo(html) {\n  if (!html) return '';\n\n  // Busca el bloque que suele contener la descripción tras el título \"Acerca del empleo\"\n  const bloqueMatch = html.match(/Acerca del empleo[\\s\\S]*?(<ul[\\s\\S]*?<\\/ul>|<div[^>]*show-more-less-html__markup[^>]*>[\\s\\S]*?<\\/div>)/i);\n  if (!bloqueMatch) return '';\n\n  const bloqueHtml = bloqueMatch[1];\n\n  // Extrae los <li> si existen\n  const items = [...bloqueHtml.matchAll(/<li[^>]*>([\\s\\S]*?)<\\/li>/gi)]\n    .map(m => m[1].replace(/<[^>]+>/g, '').trim())\n    .filter(Boolean);\n\n  if (items.length > 0) {\n    // Lista en una sola celda, separada por \" • \"\n    return items.map(i => `• ${i}`).join(' | ');\n  }\n\n  // Si no hay <li>, limpia el HTML y devuelve el texto plano\n  const textoPlano = bloqueHtml.replace(/<[^>]+>/g, ' ').replace(/\\s+/g, ' ').trim();\n  return textoPlano;\n}\n\nconst items = $input.all();\nconst resultados = [];\n\nfor (const item of items) {\n  const data = item.json;\n\n  // 1. Detección exhaustiva de HTML / Body\n  const html = data.data || data.body || data.html || (typeof data === 'string' ? data : '');\n\n  // 2. Detección exhaustiva de URL y Portal\n  const rawUrl = data.url || data.headers?.referer || data.headers?.location || '';\n  let portal = data.portal;\n\n  if (!portal) {\n    if (rawUrl.includes('linkedin.com') || html.includes('linkedin.com')) portal = 'LinkedIn';\n  }\n\n  // --- LINKEDIN ---\n  if (portal === 'LinkedIn') {\n    const jsonLdMatch = html.match(/<script type=\"application\\/ld\\+json\">([\\s\\S]*?)<\\/script>/i);\n    let jsonLdJobs = [];\n\n    if (jsonLdMatch && jsonLdMatch[1]) {\n      try {\n        const parsedData = JSON.parse(jsonLdMatch[1]);\n        if (parsedData.itemListElement && Array.isArray(parsedData.itemListElement)) {\n          jsonLdJobs = parsedData.itemListElement.map(job => ({\n            puesto: job.name,\n            empresa: job.disambiguatingDescription || 'Empresa No Especificada',\n            ubicacion: job.description || 'España',\n            enlace: job.url\n          }));\n        }\n      } catch (e) {}\n    }\n\n    const matches = html.match(/<div class=\"[^\"]*base-card[^\"]*\"[\\s\\S]*?<\\/li>/g) || [];\n    const htmlJobs = [];\n    matches.forEach(card => {\n      const titleMatch = card.match(/<h3 class=\"[^\"]*base-search-card__title[^\"]*\">([\\s\\S]*?)<\\/h3>/);\n      const linkMatch = card.match(/<a class=\"[^\"]*base-card__full-link[^\"]*\" href=\"([^\"?]+)/);\n      const companyMatch = card.match(/<h4 class=\"[^\"]*base-search-card__subtitle[^\"]*\">([\\s\\S]*?)<\\/h4>/);\n\n      if (titleMatch && linkMatch) {\n        htmlJobs.push({\n          puesto: titleMatch[1].replace(/<[^>]+>/g, '').trim(),\n          empresa: companyMatch ? companyMatch[1].replace(/<[^>]+>/g, '').trim() : 'Empresa No Especificada',\n          ubicacion: 'España',\n          enlace: linkMatch[1].trim()\n        });\n      }\n    });\n\n    const finalJobs = jsonLdJobs.length > 0 ? jsonLdJobs : htmlJobs;\n\n    finalJobs.forEach(job => {\n      resultados.push({\n        json: {\n          portal: 'LinkedIn',\n          puesto: job.puesto,\n          empresa: job.empresa,\n          ubicacion: job.ubicacion,\n          enlace: job.enlace,\n          descripcion: extraerAcercaDelEmpleo(html),\n          coverLetter: generarCoverLetter(plantillaDocs, job.empresa, job.puesto)\n        }\n      });\n    });\n  }\n}\n\nreturn resultados.length > 0 ? resultados : [{ json: { mensaje: \"Sin ofertas encontradas en la ejecución\" } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        688,
+        992
+      ],
+      "id": "369fb2a3-7394-47bb-9e42-0ab0478daef9",
+      "name": "Extraer solo lo necesario de las ofertas."
+    },
+    {
+      "parameters": {
+        "jsCode": "// Toma las URLs de la librería y las pasa limpias al HTTP Request\nconst items = $input.all();\n\nreturn items.map(item => {\n  return {\n    json: {\n      portal: item.json.portal,\n      url: item.json.url\n    }\n  };\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        288,
+        992
+      ],
+      "id": "f165b4cc-b191-43fd-b5d5-33346fcbe251",
+      "name": "Ajustar urls"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=http://browserless:3000/content?token=epKJG9VBgYjD76KDuIXbj558r8uZtABBAzfCWbfVTEWQITUvRH1M2RWvQkQEzifXcFCMlfLTmBks86DErc",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"url\": \"{{ $json.enlace }}\"\n}",
+        "options": {
+          "batching": {
+            "batch": {
+              "batchSize": 1,
+              "batchInterval": 2000
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        -240,
+        1216
+      ],
+      "id": "08ca1cd3-b0a5-4efd-ab97-b8ddba75f93c",
+      "name": "HTTP Request; Acerca del empleo"
+    },
+    {
+      "parameters": {
+        "jsCode": "function limpiarTexto(texto) {\n  if (!texto) return '';\n\n  return texto\n    // Decodifica entidades HTML comunes\n    .replace(/&amp;/g, '&')\n    .replace(/&lt;/g, '<')\n    .replace(/&gt;/g, '>')\n    .replace(/&quot;/g, '\"')\n    .replace(/&#39;/g, \"'\")\n    .replace(/&nbsp;/g, ' ')\n    // Convierte <li> y saltos de línea en un separador legible\n    .replace(/<li[^>]*>/gi, '• ')\n    .replace(/<\\/li>/gi, ' | ')\n    .replace(/<br\\s*\\/?>/gi, ' | ')\n    .replace(/<\\/p>/gi, ' | ')\n    // Elimina cualquier otro tag HTML restante\n    .replace(/<[^>]+>/g, ' ')\n    // Colapsa espacios múltiples y separadores duplicados\n    .replace(/\\s+/g, ' ')\n    .replace(/(\\|\\s*)+/g, ' | ')\n    .trim();\n}\n\nfunction extraerJobPosting(html) {\n  if (!html) return null;\n\n  // Busca todos los bloques ld+json (puede haber varios en la página)\n  const bloques = [...html.matchAll(/<script type=\"application\\/ld\\+json\">([\\s\\S]*?)<\\/script>/gi)];\n\n  for (const bloque of bloques) {\n    try {\n      const data = JSON.parse(bloque[1]);\n      if (data['@type'] === 'JobPosting') {\n        return data;\n      }\n    } catch (e) {\n      // Si falla el parseo (JSON cortado o malformado), continúa con el siguiente bloque\n      continue;\n    }\n  }\n  return null;\n}\n\nconst items = $input.all();\nconst resultados = [];\n\nfor (const item of items) {\n  const html = item.json.data || item.json.body || item.json.html || (typeof item.json === 'string' ? item.json : '');\n\n  const jobPosting = extraerJobPosting(html);\n\n  resultados.push({\n    json: {\n      puesto: jobPosting?.title || '',\n      empresa: jobPosting?.hiringOrganization?.name || '',\n      ubicacion: jobPosting?.jobLocation?.address?.addressLocality || '',\n      pais: jobPosting?.jobLocation?.address?.addressCountry || '',\n      descripcion: limpiarTexto(jobPosting?.description || '')\n    }\n  });\n}\n\nreturn resultados.length > 0 ? resultados : [{ json: { mensaje: \"Sin JobPosting encontrado\" } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        32,
+        1216
+      ],
+      "id": "dd4638f0-0ef2-44fd-9b90-add4c469063c",
+      "name": "Limpiar Acerca del empleo",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "content": "# Consultas a Linkeding HTTP\n- Consulta tantas ofertas como quieras en Linkedn y luego por cada enlace extrae sobre el empleo para luego analizar y si hace maaatch con tu CV genera una puntuacion con JavaScript",
+        "width": 640,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -960,
+        992
+      ],
+      "typeVersion": 1,
+      "id": "92e965fc-b315-4cdc-a6b8-59fdac4aaa8c",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Obtenemos los ítems que salen de \"Limpiar Acerca del empleo\" (vienen en $input)\nconst itemsAcercaDelEmpleo = $input.all();\n\n// 2. Obtenemos los ítems originales con (puesto, empresa, enlace, coverLetter, etc.)\nconst ofertasOriginales = $('Extraer solo lo necesario de las ofertas.').all();\n\nconst resultado = [];\n\n// Recorremos los 94 ítems por su índice exacto [i]\nfor (let i = 0; i < itemsAcercaDelEmpleo.length; i++) {\n  const datosAcerca = itemsAcercaDelEmpleo[i].json;\n  const datosOferta = ofertasOriginales[i] ? ofertasOriginales[i].json : {};\n\n  // Si la extracción individual del JobPosting encontró datos mejores, los usa; si no, usa los de la búsqueda\n  const puestoFinal = datosAcerca.puesto || datosOferta.puesto || '';\n  const empresaFinal = datosAcerca.empresa || datosOferta.empresa || '';\n  const ubicacionFinal = datosAcerca.ubicacion || datosOferta.ubicacion || '';\n  const descripcionFinal = datosAcerca.descripcion || datosOferta.descripcion || '';\n\n  resultado.push({\n    json: {\n      portal: datosOferta.portal || 'LinkedIn',\n      puesto: puestoFinal,\n      empresa: empresaFinal,\n      ubicacion: ubicacionFinal,\n      enlace: datosOferta.enlace || '',\n      descripcion: descripcionFinal,\n      // Recuperamos la carta de presentación generada en la primera fase\n      coverLetter: datosOferta.coverLetter || ''\n    }\n  });\n}\n\nreturn resultado;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        272,
+        1216
+      ],
+      "id": "dbaff98d-0382-4abe-a964-c0e27578c726",
+      "name": "Ajustar columnas para guardar lo necesario",
+      "executeOnce": false
+    },
+    {
+      "parameters": {
+        "content": "#Extraccion de datos CV\n- Extrae datos del CV y los guarda de forma ordenada en la hoja de calculos.",
+        "width": 928,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -192,
+        592
+      ],
+      "typeVersion": 1,
+      "id": "e5175347-290d-4d7c-b6be-18693e4d2da2",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "# Martch Ranking \n- Guarda todos los datos de las ofertas con una puntuacion para que puedas priorizar el orden \nde aplicacion a las ofertas de empleo",
+        "width": 1296,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -416,
+        1392
+      ],
+      "typeVersion": 1,
+      "id": "f042c4e2-3078-4dc3-a045-684f418958b4",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1Bpe-iGzJHLgrkdR8cSqfNnNiqBm22ssmuYB1eSE6Lu8",
+          "mode": "list",
+          "cachedResultName": "busquedaEmpleo-n8n",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Bpe-iGzJHLgrkdR8cSqfNnNiqBm22ssmuYB1eSE6Lu8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 958643773,
+          "mode": "list",
+          "cachedResultName": "Hoja 2",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Bpe-iGzJHLgrkdR8cSqfNnNiqBm22ssmuYB1eSE6Lu8/edit#gid=958643773"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "puesto": "={{ $json.puesto }}",
+            "empresa": "={{ $json.empresa }}",
+            "ubicacion": "={{ $json.ubicacion }}",
+            "enlace": "={{ $json.enlace }}",
+            "coverLetter": "={{ $json.coverLetter }}",
+            "descripcion": "={{ $json.descripcion }}"
+          },
+          "matchingColumns": [
+            "enlace"
+          ],
+          "schema": [
+            {
+              "id": "ubicacion",
+              "displayName": "ubicacion",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "puesto",
+              "displayName": "puesto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "empresa",
+              "displayName": "empresa",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "enlace",
+              "displayName": "enlace",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "coverLetter",
+              "displayName": "coverLetter",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "descripcion",
+              "displayName": "descripcion",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        624,
+        1216
+      ],
+      "id": "28fde1ec-2665-4a1f-b3be-d9b7e6380b92",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "6u5KEeCzLpzaOUxL",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\n\n// Configuración del perfil\nconst miPerfil = {\n  stackPrincipal: ['php', 'laravel', 'javascript', 'js', 'mysql', 'docker', 'html', 'css', 'sass', 'scss', 'git', 'github'],\n  tecnologiasSecundarias: ['python', 'typescript', 'java', 'sql', 'postgres', 'mariadb', 'nginx', 'apache', 'aws', 'ec2', 'postman', 'node'],\n  rolesBusqueda: ['desarrollador', 'developer', 'full stack', 'fullstack', 'backend', 'web', 'junior', 'daw'],\n  palabrasPenalizadas: ['senior', 'sr', 'lead', 'architect', 'arquitecto', 'c#', '.net']\n};\n\n// Regex para detectar menciones de 3 o más años de experiencia\n// Captura patrones como: \"4 años\", \"3+ años\", \"3 a 5 años de experiencia\", \"mínimo 4 años\", etc.\nconst regexExcesoExperiencia = /(?:[3-9]|\\d{2,})\\s*(?:\\+|\\s*a\\s*\\d+)?\\s*(?:años|año)\\s*(?:de)?\\s*(?:experiencia)?/i;\n\nconst ofertasEvaluadas = [];\n\nfor (const item of items) {\n  const data = item.json;\n  const textoPuesto = (data.puesto || '').toLowerCase();\n  const textoDescripcion = (data.descripcion || '').toLowerCase();\n  const textoCompleto = `${textoPuesto} ${textoDescripcion}`;\n\n  // 1. FILTRO DE DESCARTE DIRECTO: Si exige 3 o más años de experiencia, se descarta inmediatamente\n  if (regexExcesoExperiencia.test(textoCompleto)) {\n    continue; // Salta a la siguiente oferta sin incluir esta\n  }\n\n  let score = 0;\n\n  // 2. Coincidencia en el título del puesto (+15 por rol relevante)\n  miPerfil.rolesBusqueda.forEach(rol => {\n    if (textoPuesto.includes(rol)) score += 15;\n  });\n\n  // 3. Coincidencia del Stack Principal (+10 puntos por tecnología)\n  miPerfil.stackPrincipal.forEach(tech => {\n    if (textoCompleto.includes(tech)) score += 10;\n  });\n\n  // 4. Coincidencia de Tecnologías Secundarias (+5 puntos)\n  miPerfil.tecnologiasSecundarias.forEach(tech => {\n    if (textoCompleto.includes(tech)) score += 5;\n  });\n\n  // 5. Penalización por títulos/roles Senior (-20 puntos)\n  miPerfil.palabrasPenalizadas.forEach(word => {\n    if (textoCompleto.includes(word)) score -= 20;\n  });\n\n  ofertasEvaluadas.push({\n    json: {\n      ...data,\n      matchScore: Math.max(0, score)\n    }\n  });\n}\n\n// Ordenar de MAYOR a MENOR coincidencia\nofertasEvaluadas.sort((a, b) => b.json.matchScore - a.json.matchScore);\n\n// Retornar exactamente las mejores 50 ofertas válidas\nreturn ofertasEvaluadas.slice(0, 50);"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -304,
+        1552
+      ],
+      "id": "1510b1a9-1dcd-4e97-8303-46156c1e98aa",
+      "name": "Filtro de ofertas"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1Bpe-iGzJHLgrkdR8cSqfNnNiqBm22ssmuYB1eSE6Lu8",
+          "mode": "list",
+          "cachedResultName": "busquedaEmpleo-n8n",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Bpe-iGzJHLgrkdR8cSqfNnNiqBm22ssmuYB1eSE6Lu8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1064992123,
+          "mode": "list",
+          "cachedResultName": "Resultado Filtrado",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Bpe-iGzJHLgrkdR8cSqfNnNiqBm22ssmuYB1eSE6Lu8/edit#gid=1064992123"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "enlace": "={{ $json.enlace }}",
+            "carta presentacion": "={{ $json.coverLetter }}",
+            "empresa": "={{ $json.empresa }}",
+            "puesto": "={{ $json.puesto }}",
+            "ubicacion": "={{ $json.ubicacion }}",
+            "descripcion": "={{ $json.descripcion }}",
+            "Match Score": "={{ $json.matchScore }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "enlace",
+              "displayName": "enlace",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "puesto",
+              "displayName": "puesto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "empresa",
+              "displayName": "empresa",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "ubicacion",
+              "displayName": "ubicacion",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "carta presentacion",
+              "displayName": "carta presentacion",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "descripcion",
+              "displayName": "descripcion",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Match Score",
+              "displayName": "Match Score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        656,
+        1552
+      ],
+      "id": "79296063-6e66-4a53-9f43-3c9384bd578a",
+      "name": "Append row in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "6u5KEeCzLpzaOUxL",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Limpia el texto del CV",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Almacenar_CV para busqueda": {
+      "main": [
+        [
+          {
+            "node": "KeyWords",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limpia el texto del CV": {
+      "main": [
+        [
+          {
+            "node": "Almacenar_CV para busqueda",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Descarga Los archivos CV": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "KeyWords": {
+      "main": [
+        [
+          {
+            "node": "Libreria de url, consultas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Search files and folders",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get a document",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search files and folders": {
+      "main": [
+        [
+          {
+            "node": "Descarga Los archivos CV",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Libreria de url, consultas": {
+      "main": [
+        [
+          {
+            "node": "Ajustar urls",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get a document": {
+      "main": [
+        [
+          {
+            "node": "KeyWords",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request; Busca las ofertas": {
+      "main": [
+        [
+          {
+            "node": "Extraer solo lo necesario de las ofertas.",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extraer solo lo necesario de las ofertas.": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request; Acerca del empleo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ajustar urls": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request; Busca las ofertas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request; Acerca del empleo": {
+      "main": [
+        [
+          {
+            "node": "Limpiar Acerca del empleo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limpiar Acerca del empleo": {
+      "main": [
+        [
+          {
+            "node": "Ajustar columnas para guardar lo necesario",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ajustar columnas para guardar lo necesario": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Filtro de ofertas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filtro de ofertas": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "feff6ed8-f7d7-453a-aa02-9440c3746c3b",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "8634ad3e743d102348b68b3b52af0046eb6ea1fe555f259c1177727d33513bc6"
+  },
+  "nodeGroups": [],
+  "id": "twOVXUIzcy8NOjOd",
+  "tags": []
+}

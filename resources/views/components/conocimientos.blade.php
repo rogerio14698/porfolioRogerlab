@@ -37,6 +37,8 @@
             <li>Git & GitHub</li>
             <li>Docker</li>
             <li>Postman</li>
+            <li>n8n (Automatización)</li>
+            <li>Browserless</li>
         </ul>
     </div>
 
@@ -45,6 +47,7 @@
         <ul>
             <li>AWS (EC2 Instances)</li>
             <li>Google Cloud</li>
+            <li>APIs REST (Google Drive / Sheets / Docs)</li>
             <li>Netlify</li>
         </ul>
     </div>

@@ -22,9 +22,11 @@
             <span> PHP / Laravel </span>
             <span> JavaScript / Typescript </span>
             <span> MySQL / PostgreSQL </span>
-            <span> Git</span>
-            <span> AWS / EC2</span>
-            <span> Docker / Docker Compose</span>
+            <span> Git </span>
+            <span> AWS / EC2 </span>
+            <span> Docker / Docker Compose </span>
+            <span> n8n / Automatización </span>
+            <span> APIs REST / Browserless </span>
         </div>
 
     </div>
