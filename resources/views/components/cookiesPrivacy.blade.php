@@ -1,9 +1,9 @@
 <section class="legalSection legalSection--cookies" aria-labelledby="cookies-title">
 
     <h1 id="cookies-title" data-i18n="cookies.title">Cookie Policy</h1>
-    <p class="legalSection__meta" data-i18n="cookies.meta">Last updated: April 17, 2026</p>
+    <p data-i18n="cookies.meta">Last updated: April 17, 2026</p>
 
-    <p class="legalSection__intro" data-i18n="cookies.intro">
+    <p data-i18n="cookies.intro">
         This Cookie Policy explains how this portfolio website uses cookies and similar technologies, why they are used, and what options you have to control them.
     </p>
 

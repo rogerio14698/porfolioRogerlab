@@ -10,8 +10,8 @@
 
         {{-- CTAs --}}
         <div class="heroeActions">
-            <a href="{{ route('projects') }}" class="btn btn-primary" data-i18n="hero.cta.projects">Ver proyectos</a>
-            <a href="{{ route('contact') }}" class="btn btn-secondary" data-i18n="hero.cta.contact">Contactar</a>
+            <a href="{{ route('projects') }}" data-i18n="hero.cta.projects">Ver proyectos</a>
+            <a href="{{ route('contact') }}" data-i18n="hero.cta.contact">Contactar</a>
             <a href="{{ route('pdf-cv.english') }}" target="_blank" rel="noopener noreferrer"
                 class="contactPdfLink" data-i18n="hero.cta.cv_en">CV English</a>
             <a href="{{ route('pdf-cv.spanish') }}" target="_blank" rel="noopener noreferrer"

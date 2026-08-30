@@ -1,7 +1,7 @@
 <section class="legalSection legalSection--privacy" aria-labelledby="privacy-title">
 
     <h1 id="privacy-title" data-i18n="privacy.title">Privacy Policy</h1>
-    <p class="legalSection__intro" data-i18n="privacy.intro">
+    <p data-i18n="privacy.intro">
         This Privacy Policy explains what information may be collected when you use this portfolio website, how that information is used, and how it is protected.
     </p>
 
@@ -42,7 +42,7 @@
         If you have shared personal information and want to request clarification, correction, or deletion, you may do so through the contact channels published on the site.
     </p>
 
-    <p class="legalSection__meta" data-i18n="privacy.meta">
+    <p data-i18n="privacy.meta">
         <strong>Last Updated:</strong> April 2026
     </p>
 </section>

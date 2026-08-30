@@ -1,6 +1,6 @@
 <section class="legalSection legalSection--terms" aria-labelledby="terms-title">
     <h1 id="terms-title" data-i18n="terms.title">Terms of Service</h1>
-    <p class="legalSection__intro" data-i18n="terms.intro">
+    <p data-i18n="terms.intro">
         By accessing this portfolio, you agree to use its content responsibly and in accordance with the conditions described below.
     </p>
 
@@ -35,7 +35,7 @@
 
     <hr>
 
-    <p class="legalSection__meta" data-i18n="terms.meta">
+    <p data-i18n="terms.meta">
         <strong>Last Updated:</strong> April 2026
     </p>
 </section>

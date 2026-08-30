@@ -6,5 +6,5 @@
         The page you are looking for might have been removed, had its name changed,
         or is temporarily unavailable.
     </p>
-    <a href="{{ route('home') }}" class="btn" data-partial-nav>Back to Home</a>
+    <a href="{{ route('home') }}" data-partial-nav>Back to Home</a>
 </div>

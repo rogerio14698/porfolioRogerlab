@@ -9,7 +9,7 @@
         heredado.
     </p>
 
-    <div class="practicasCompetencias">
+    <div>
         <h2>Competencias clave demostradas</h2>
         <p>
             <strong>Optimización técnica orientada a negocio:</strong> resolución de incidencias en CSS, rutas y
