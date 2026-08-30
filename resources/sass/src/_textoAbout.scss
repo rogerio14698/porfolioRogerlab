@@ -82,27 +82,7 @@
             margin-bottom: 8px;
 
             a {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                min-height: 34px;
                 padding: 7px 9px;
-                font-size: clamp(0.74rem, 0.7rem + 0.25vw, 0.88rem);
-                font-family: v.$fuenteTexto;
-                border: 1px solid var(--colorBorde);
-                background-color: transparent;
-                color: var(--_texto);
-                transition:
-                    background-color 0.3s ease,
-                    color 0.3s ease;
-                cursor: pointer;
-                &:hover {
-                    background-color: var(--colorBorde);
-                    color: var(--_fondoPanel);
-                }
-                &:active {
-                    transform: translate(0, 2px);
-                }
             }
         }
         .heroStack{

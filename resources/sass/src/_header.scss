@@ -9,7 +9,6 @@
     background-color: var(--_fondoPanel);
     transition: background-color 0.5s ease;
     width: 100%;
-    height: clamp(74px, 7.2vw, 118px);
     padding: clamp(0.65rem, 0.4rem + 0.8vw, 1rem) clamp(0.9rem, 0.65rem + 0.8vw, 1.45rem);
     border: 1px solid v.$colorBorde;
     border-bottom: none;

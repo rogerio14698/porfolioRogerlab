@@ -49,31 +49,7 @@
     }
 
     .practicasModalTrigger {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
         width: auto;
-        min-height: 36px;
-        padding: 6px 12px;
-        border: 1px solid color-mix(in srgb, var(--colorBorde) 78%, transparent);
-        background-color: transparent;
-        color: var(--_texto);
-        cursor: pointer;
-        font-family: v.$fuenteTexto;
-        font-size: v.$tamanoEnlaces;
-        transition:
-            background-color 0.25s ease,
-            color 0.25s ease,
-            transform 0.15s ease;
-
-        &:hover {
-            background-color: var(--colorBorde);
-            color: var(--_fondoPanel);
-        }
-
-        &:active {
-            transform: translateY(1px);
-        }
     }
 
     button{
@@ -95,21 +71,8 @@
     // comienzo del modal
     // Botón de cerrar el modal.
     .practicasModal__close {
-        position: absolute;
-        top: 16px;
-        right: 16px;
         width: auto;
-        min-width: 36px;
-        height: 36px;
-        padding: 0 10px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 999px;
         text-align: center;
-        border: 1px solid var(--colorBorde);
-        background: rgba(255, 255, 255, 0.08);
-        backdrop-filter: blur(4px);
     }
 
     .practicasModal {

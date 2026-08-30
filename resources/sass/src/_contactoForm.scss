@@ -99,28 +99,7 @@
         padding-top: 2px;
 
         button {
-            min-width: min(260px, 100%);
             width: auto;
-            padding: 10px 16px;
-            font-size: v.$tamanoEnlaces;
-            font-family: v.$fuenteTexto;
-            cursor: pointer;
-            border: 1px solid color-mix(in srgb, var(--colorBorde) 75%, transparent);
-            background-color: transparent;
-            color: var(--_texto);
-            transition:
-                background-color 0.25s ease,
-                color 0.25s ease,
-                transform 0.15s ease;
-
-            &:hover {
-                background-color: var(--colorBorde);
-                color: var(--_fondoPanel);
-            }
-
-            &:active {
-                transform: translateY(1px);
-            }
         }
 
         @media (max-width: 768px) {
