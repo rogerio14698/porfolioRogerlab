@@ -1,5 +1,4 @@
 <section class="seccionAboutMe">
-    <h1>Sobre Rogerio Lucas Viana, desarrollador web Full Stack Junior</h1>
     {{--Aqui va la seccion de conociminetos --}}
     @include('components.conocimientos')
 

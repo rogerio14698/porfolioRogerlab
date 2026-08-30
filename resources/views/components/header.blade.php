@@ -1,5 +1,5 @@
 
 <header class="contenedor titulo">
-        <p class="titulo__nombre">Rogerio Lucas Viana</p>
+        <h1>Rogerio Lucas Viana</h1>
         <p>Full Stack Developer Junior</p>
 </header>

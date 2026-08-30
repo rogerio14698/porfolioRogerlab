@@ -57,6 +57,14 @@
             margin-bottom: 10px;
             line-height: 1.35;
         }
+        .heroHeadline {
+            font-size: clamp(0.82rem, 0.78rem + 0.3vw, 0.95rem);
+            font-family: v.$fuenteTexto;
+            font-weight: v.$grosorTitulo;
+            color: var(--_texto);
+            line-height: 1.35;
+            margin-bottom: 10px;
+        }
         .heroFoto {
             align-self: center;
             border: 1px solid var(--colorBorde);
