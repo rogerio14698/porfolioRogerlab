@@ -6,17 +6,16 @@
     </div>
 
     <div class="footerContact">
-        <a class="footerContact__link" href="mailto:rogerlucas@rogerlab.es">rogerlucas@rogerlab.es</a>
-        <a class="footerContact__link"
-            href="https://wa.me/34629948107?text=Hola%20Roger,%20quiero%20contactarte%20sobre%20tu%20portafolio">
-            +34 629 948 107
+        <a class="footerContact__link" href="mailto:{{ config('seo.profile.email') }}">{{ config('seo.profile.email') }}</a>
+        <a class="footerContact__link" href="https://wa.me/34629948107?text=Hola%20Rogerio,%20quiero%20contactarte%20sobre%20tu%20portfolio">
+            {{ config('seo.profile.telephone') }}
         </a>
 
         <div class="social-icons" aria-label="Redes sociales">
-            <a href="https://www.linkedin.com/in/rogerio-lucas-viana-51a149258/" aria-label="LinkedIn">
+            <a href="{{ config('seo.profile.linkedin') }}" aria-label="LinkedIn">
                 <i class="fa-brands fa-linkedin"></i>
             </a>
-            <a href="https://github.com/rogerio14698" aria-label="GitHub">
+            <a href="{{ config('seo.profile.github') }}" aria-label="GitHub">
                 <i class="fa-brands fa-github"></i>
             </a>
         </div>

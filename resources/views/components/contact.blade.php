@@ -1,5 +1,5 @@
 <section class="seccionContact">
-    <h2 data-i18n="contact.title">Contacto</h2>
+    <h1 data-i18n="contact.title">Contacto profesional con Rogerio Lucas Viana</h1>
     <form method="POST" action="{{ route('contact.submit') }}" class="contactForm" novalidate>
         @csrf
 

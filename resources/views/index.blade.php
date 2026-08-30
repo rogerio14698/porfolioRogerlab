@@ -1,18 +1,24 @@
 @extends('components.app')
 
-@section('title', $pageTitle ?? 'RogerLab | Desarrollador Full Stack titulado en DAW')
+@php
+    $profile = config('seo.profile');
+    $defaultTitle = "{$profile['name']} | {$profile['job_title']} en Gijón";
+    $defaultDescription = $profile['description'];
+@endphp
 
-@section('meta_description', $pageMetaDescription ?? 'Portfolio de Rogério Lucas, desarrollador Full Stack titulado en DAW. Proyectos con Laravel, PHP, JavaScript, bases de datos, Docker y AWS orientados a código mantenible y trabajo en equipo.')
+@section('title', $pageTitle ?? $defaultTitle)
+
+@section('meta_description', $pageMetaDescription ?? $defaultDescription)
 
 @section('robots_meta', $robotsMeta ?? 'index,follow')
 
-@section('og_title', $pageTitle ?? 'RogerLab | Desarrollador Full Stack titulado en DAW')
+@section('og_title', $pageTitle ?? $defaultTitle)
 
-@section('og_description', $pageMetaDescription ?? 'Portfolio de Rogério Lucas, desarrollador Full Stack titulado en DAW. Proyectos con Laravel, PHP, JavaScript, bases de datos, Docker y AWS orientados a código mantenible y trabajo en equipo.')
+@section('og_description', $pageMetaDescription ?? $defaultDescription)
 
-@section('twitter_title', $pageTitle ?? 'RogerLab | Desarrollador Full Stack titulado en DAW')
+@section('twitter_title', $pageTitle ?? $defaultTitle)
 
-@section('twitter_description', $pageMetaDescription ?? 'Portfolio de Rogério Lucas, desarrollador Full Stack titulado en DAW. Proyectos con Laravel, PHP, JavaScript, bases de datos, Docker y AWS orientados a código mantenible y trabajo en equipo.')
+@section('twitter_description', $pageMetaDescription ?? $defaultDescription)
 
 @section('content')
     {{-- Aqui va el header y dentro el navegador ya modificado --}}

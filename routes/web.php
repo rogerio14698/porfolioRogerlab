@@ -9,24 +9,24 @@ Route::redirect('/', '/home');
 Route::get('/home', function () {
     return renderSection(
         'home',
-        'RogerLab | Desarrollador Full Stack titulado en DAW',
-        'Portfolio de Rogério Lucas, desarrollador Full Stack titulado en DAW. Proyectos con Laravel, PHP, JavaScript, bases de datos, Docker y AWS orientados a código mantenible y trabajo en equipo.'
+        'Rogerio Lucas Viana | Desarrollador Web Full Stack Junior en Gijón',
+        'Portfolio de Rogerio Lucas Viana, desarrollador web Full Stack Junior en Gijón, Asturias. Proyectos y experiencia con Laravel, PHP, JavaScript, Docker, SQL y AWS.'
     );
 })->name('home');
 
 Route::get('/about', function () {
     return renderSection(
         'about',
-        'Sobre mí | Rogério Lucas, desarrollador Full Stack',
-        'Experiencia, metodología de trabajo y objetivos profesionales de Rogério Lucas tras finalizar DAW y realizar prácticas en entorno real.'
+        'Sobre Rogerio Lucas Viana | Desarrollador Web Full Stack Junior',
+        'Conoce la experiencia, competencias y metodología de Rogerio Lucas Viana, desarrollador web Full Stack Junior titulado en DAW y especializado en Laravel, PHP y JavaScript.'
     );
 })->name('about');
 
 Route::get('/mi-periodo-practicas', function () {
     return renderSection(
         'miPeriodoPracticas',
-        'Mi Periodo de Practicas (FCT) | RogerLab',
-        'Conoce mi experiencia profesional durante las practicas FCT en Mon Event SL: despliegues, mantenimiento de aplicaciones web y gestion de codigo legacy.'
+        'Prácticas FCT en MON EVENT SL | Rogerio Lucas Viana',
+        'Experiencia de Rogerio Lucas Viana en prácticas FCT: Docker, mantenimiento de aplicaciones PHP, refactorización de código heredado, AJAX y despliegues.'
     );
 })->name('mi-periodo-practicas');
 
@@ -41,8 +41,8 @@ Route::get('/articles', function () {
 Route::get('/projects', function () {
     return renderSection(
         'projects',
-        'Proyectos | Rogério Lucas',
-        'Selección de proyectos académicos, personales y de prácticas con Laravel, JavaScript, bases de datos y despliegue.'
+        'Proyectos Full Stack | Laravel, PHP y JavaScript | Rogerio Lucas Viana',
+        'Proyectos Full Stack de Rogerio Lucas Viana con Laravel, PHP, JavaScript, MySQL, Docker, AWS y automatización con n8n.'
     );
 })->name('projects');
 
@@ -65,8 +65,8 @@ Route::get('/juegos/ahorcado', function () {
 Route::get('/contact', function () {
     return renderSection(
         'contact',
-        'Contacto profesional | RogerLab',
-        'Escríbeme para hablar sobre vacantes, procesos de selección o colaboración técnica dentro de un equipo de desarrollo.'
+        'Contacto profesional | Rogerio Lucas Viana, desarrollador Full Stack Junior',
+        'Contacta con Rogerio Lucas Viana para vacantes junior, procesos de selección o colaboración en equipos de desarrollo web con Laravel, PHP y JavaScript.'
     );
 })->name('contact');
 

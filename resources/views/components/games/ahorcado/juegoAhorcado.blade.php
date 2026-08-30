@@ -1,4 +1,5 @@
 <section class="contenedorJuego">
+    <h1>Juego del ahorcado desarrollado con JavaScript</h1>
     <a href="{{ route('juegos') }}" data-partial-nav data-i18n="games.back">Volver a juegos</a>
     <div id="tablero"></div>
     <p id="vidas"></p>

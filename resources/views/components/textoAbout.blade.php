@@ -1,9 +1,10 @@
 <section class="hero">
     {{-- columna izquierda foto o avatar --}}
     <div class="heroMedia">
-        <img src="{{ asset('img/cv-foto.jpeg') }}" alt="Foto-de-Rogerio-Lucas" class="heroFoto">
+        <img src="{{ asset('img/cv-foto.jpeg') }}" alt="Rogerio Lucas Viana, desarrollador web Full Stack Junior especializado en Laravel y JavaScript" class="heroFoto">
         <span class="heroName" data-i18n="hero.role">Desarrollador Full Stack | Titulado en DAW</span>
-        <h1 data-i18n="hero.title">Busco incorporarme a un equipo donde construir software web mantenible</h1>
+        <h1>Rogerio Lucas Viana - Desarrollador Web Full Stack Junior</h1>
+        <p data-i18n="hero.title">Busco incorporarme a un equipo donde construir software web mantenible</p>
 
         {{-- Columna derecha contenido --}}
 

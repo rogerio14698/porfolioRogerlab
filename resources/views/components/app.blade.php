@@ -5,19 +5,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @php
-        $defaultTitle = 'RogerLab | Desarrollador Full Stack titulado en DAW';
-        $defaultDescription =
-            'Portfolio de Rogério Lucas, desarrollador Full Stack titulado en DAW. Proyectos con Laravel, PHP, JavaScript, bases de datos, Docker y AWS orientados a código mantenible y trabajo en equipo.';
-        $defaultOgImage = asset('img/profileIMG.png');
+        $profile = config('seo.profile');
+        $defaultTitle = "{$profile['name']} | {$profile['job_title']} en Gijón";
+        $defaultDescription = $profile['description'];
+        $defaultOgImage = asset($profile['image']);
+        $schema = [
+            '@context' => 'https://schema.org',
+            '@graph' => [
+                [
+                    '@type' => 'Person',
+                    '@id' => "{$profile['portfolio']}#person",
+                    'name' => $profile['name'],
+                    'jobTitle' => $profile['job_title'],
+                    'description' => $profile['description'],
+                    'url' => $profile['portfolio'],
+                    'image' => $defaultOgImage,
+                    'email' => $profile['email'],
+                    'telephone' => $profile['telephone'],
+                    'address' => [
+                        '@type' => 'PostalAddress',
+                        'addressLocality' => config('seo.city'),
+                        'addressRegion' => config('seo.region'),
+                        'addressCountry' => config('seo.country'),
+                    ],
+                    'sameAs' => [$profile['linkedin'], $profile['github']],
+                    'knowsAbout' => $profile['skills'],
+                ],
+                [
+                    '@type' => 'WebSite',
+                    '@id' => "{$profile['portfolio']}#website",
+                    'name' => 'RogerLab',
+                    'url' => $profile['portfolio'],
+                    'description' => $profile['description'],
+                    'author' => ['@id' => "{$profile['portfolio']}#person"],
+                ],
+            ],
+        ];
     @endphp
     <title>@yield('title', $defaultTitle)</title>
     <meta name="description" content="@yield('meta_description', $defaultDescription)">
+    <meta name="author" content="{{ $profile['name'] }}">
     <meta name="robots" content="@yield('robots_meta', 'index,follow')">
     <link rel="canonical" href="@yield('canonical', url()->current())">
     @foreach ($hreflangLinks ?? [] as $lang => $href)
         <link rel="alternate" hreflang="{{ $lang }}" href="{{ $href }}">
     @endforeach
     <meta property="og:type" content="@yield('og_type', 'website')">
+    <meta property="og:site_name" content="RogerLab">
+    <meta property="og:locale" content="es_ES">
     <meta property="og:url" content="@yield('og_url', url()->current())">
     <meta property="og:title" content="@yield('og_title', $defaultTitle)">
     <meta property="og:description" content="@yield('og_description', $defaultDescription)">
@@ -32,13 +67,7 @@
         @yield('schema_json_ld')
     @else
         <script type="application/ld+json">
-            {
-                "@@context": "https://schema.org",
-                "@@type": "Organization",
-                "name": "{{ config('app.name') }}",
-                "url": "{{ url('/') }}",
-                "logo": "{{ asset('img/logoPortfolio.png') }}"
-            }
+            {!! json_encode($schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
         </script>
     @endif
 

@@ -1,5 +1,5 @@
 <section class="seccionPracticas">
-    <h2>Practicas FCT en Mon Event SL | Resumen profesional</h2>
+    <h1>Prácticas FCT como desarrollador de aplicaciones web en MON EVENT SL</h1>
 
     <p>
         Entre febrero y abril de 2026, participé en proyectos web en entorno real aportando mejoras en rendimiento,

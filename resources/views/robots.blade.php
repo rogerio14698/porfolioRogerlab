@@ -4,6 +4,7 @@ Disallow: /api
 Disallow: /test
 Disallow: /debug
 Disallow: /temp
+Disallow: /contact/verify/
 Disallow: /*.json$
 Allow: /
 
