@@ -6,6 +6,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
+    height: 10rem;
     background-color: var(--_fondoPanel);
     transition: background-color 0.5s ease;
     width: 100%;
@@ -27,12 +28,6 @@
         //Tamaño fijo para moviles, para que no quede enano
          @media (max-width: 480px) {
         font-size: 11vw; // Le damos más fuerza en móviles para que no quede enano
-        }
-        @media (max-width: 768px) {
-        font-size: 12vw; // Le damos más fuerza en móviles para que no quede enano
-        }
-        @media (max-width: 1200px) {
-        font-size: 9vw; // Le damos más fuerza en móviles para que no quede enano
         }
         @media (max-width: 1400px) {
         font-size: 8vw; // Le damos más fuerza en móviles para que no quede enano
