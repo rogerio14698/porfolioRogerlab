@@ -44,6 +44,9 @@
     @endphp
     <title>@yield('title', $defaultTitle)</title>
     <meta name="description" content="@yield('meta_description', $defaultDescription)">
+    @hasSection('meta_keywords')
+        <meta name="keywords" content="@yield('meta_keywords')">
+    @endif
     <meta name="author" content="{{ $profile['name'] }}">
     <meta name="robots" content="@yield('robots_meta', 'index,follow')">
     <link rel="canonical" href="@yield('canonical', url()->current())">
