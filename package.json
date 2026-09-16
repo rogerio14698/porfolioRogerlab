@@ -3,8 +3,8 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "build": "npx gulp compile",
-        "dev": "npx gulp"
+        "build": "vite build && npx gulp compile",
+        "dev": "concurrently \"vite\" \"npx gulp\""
     },
     "devDependencies": {
         "@tailwindcss/vite": "^4.0.0",

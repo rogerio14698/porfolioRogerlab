@@ -1,130 +1,153 @@
 @use "../global/variables" as v;
 @use "../global/tools" as t;
 
-.articles {
+.blog {
     width: min(100%, 1024px);
     margin: 0 auto;
-    padding: 18px 16px 24px;
-    font-family: v.$fuenteTexto;
-    color: var(--_texto);
-    overflow: visible;
+    padding: 28px 16px 40px;
     display: grid;
-    gap: 16px;
-    max-height: 100vh;
-    overflow-y: auto;
+    gap: 22px;
+    color: var(--_texto);
+    font-family: v.$fuenteTexto;
+
+    h1,
+    h2,
+    p {
+        margin: 0;
+    }
+
+    h1 {
+        font-size: t.fluido(1.8rem, 2.8rem);
+        font-weight: v.$grosorTitulo;
+        line-height: 1.15;
+    }
 
     h2 {
         font-size: t.fluido(1.15rem, 1.6rem);
-        margin-bottom: 10px;
-        text-decoration: none;
         font-weight: 500;
         letter-spacing: 0.03em;
     }
+
     p {
         font-size: t.fluido(0.86rem, 0.98rem);
         line-height: 1.65;
-        padding: 0;
-        text-align: justify;
+    }
 
-        &::first-letter {
-            font-size: 130%;
+    .blog-header {
+        display: grid;
+        gap: 9px;
+    }
+
+    .blog-label {
+        color: var(--_textoSoft);
+        font-size: 0.74rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+    }
+
+    .blog-intro {
+        max-width: 680px;
+        color: var(--_textoSoft);
+    }
+
+    .blog-card {
+        display: grid;
+        grid-template-columns: 1fr;
+        min-width: 0;
+        background: color-mix(in srgb, var(--_fondoPanel) 92%, transparent);
+        box-shadow: 0 8px 20px color-mix(in srgb, var(--_fondo) 28%, transparent);
+        transition: box-shadow 0.25s ease, transform 0.25s ease;
+
+        &:hover {
+            box-shadow: 0 14px 28px color-mix(in srgb, var(--_fondo) 42%, transparent);
+            
         }
     }
-    ul{
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-    li{
-        font-size: t.fluido(0.86rem, 0.98rem);
-        line-height: 1.6;
-        padding: 8px 0;
 
-        &::first-letter {
-            font-size: 130%;
-        }
+    .blog-card-with-image {
+        grid-template-columns: minmax(170px, 30%) minmax(0, 1fr);
     }
-    section{
-        display: flex;
-        flex-direction: column;
+
+    .blog-card-content {
+        display: grid;
+        align-content: center;
         gap: 12px;
-        padding: 18px 18px 16px;
-        box-shadow: none;
-        margin: 0;
+        min-width: 0;
+        padding: 20px;
     }
-    blockquote{
-        font-size: t.fluido(0.86rem, 0.98rem);
-        line-height: 1.6;
-        padding: 12px 14px;
-    
-        margin: 0;
-        text-decoration: none;
-        background: color-mix(in srgb, var(--_fondoPanel) 85%, transparent);
 
-        &::first-letter {
-            font-size: 130%;
-        }
-        &::before{
-            content: ">";
-            font-size: 1.1rem;
-            color: var(--colorBorde);
-            margin-right: 6px;
+    .blog-image {
+        min-height: 180px;
+        height: 100%;
+        overflow: hidden;
+        background: color-mix(in srgb, var(--_fondo) 30%, var(--_fondoPanel));
+
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            min-height: 180px;
+            object-fit: cover;
+            transition: transform 0.35s ease;
         }
     }
 
-    table{
-        width: 100%;
-        border-collapse: collapse;
-        display: block;
-        overflow-x: auto;
-        border: 1px solid color-mix(in srgb, var(--colorBorde) 45%, transparent);
+    .blog-card:hover .blog-image img {
+        transform: scale(1.04);
+    }
 
-        tr{
-            border-bottom: 1px solid color-mix(in srgb, var(--colorBorde) 35%, transparent);
-        }
-        th, td{
-            padding: 10px 12px;
-            text-align: left;
-            font-size: t.fluido(0.82rem, 0.95rem);
-            line-height: 1.45;
-        }
+    .blog-link {
+        width: fit-content;
+        color: var(--_textoSoft);
+        font-size: 0.78rem;
+        letter-spacing: 0.04em;
+        transition: color 0.2s ease;
 
-        th {
+        &:hover {
             color: var(--_texto);
-            background: color-mix(in srgb, var(--_fondoPanel) 86%, transparent);
         }
     }
+
+    .blog-detail {
+        display: grid;
+        gap: 22px;
+        padding: 24px;
+        background: color-mix(in srgb, var(--_fondoPanel) 92%, transparent);
+    }
+
+    .blog-image-detail {
+        max-height: 420px;
+
+        img {
+            max-height: 420px;
+        }
+    }
+
+    .blog-content {
+        color: var(--_textoSoft);
+        font-size: t.fluido(0.9rem, 1.05rem);
+        line-height: 1.8;
+    }
+
+    .blog-back {
+        border-top: 1px solid color-mix(in srgb, var(--colorBorde) 35%, transparent);
+        padding-top: 14px;
+    }
+
     @media (max-width: 768px) {
         width: 100%;
-        padding: 12px;
+        padding: 12px 12px 28px;
 
-        section {
-            padding: 14px 14px 12px;
-            border-radius: 14px;
-        }
-    }
-
-    
-    &__grid {
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-    }
-
-    &__item {
-        border-left: 1px solid color-mix(in srgb, var(--colorBorde) 55%, transparent);
-        padding-left: 1rem;
-        padding-top: 4px;
-        padding-bottom: 4px;
-
-        &-title {
-            margin-bottom: 8px;
+        .blog-card-with-image {
+            grid-template-columns: 1fr;
         }
 
-        &-content {
-            font-family: v.$fuenteTexto;
-            color: var(--_texto);
-            margin-top: 0.25rem;
+        .blog-image {
+            max-height: 230px;
+        }
+
+        .blog-detail {
+            padding: 18px;
         }
     }
 }

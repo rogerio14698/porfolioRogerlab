@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,13 +31,8 @@ Route::get('/mi-periodo-practicas', function () {
     );
 })->name('mi-periodo-practicas');
 
-Route::get('/articles', function () {
-    return renderSection(
-        'articles',
-        'Artículos y reflexiones técnicas | RogerLab',
-        'Notas sobre aprendizaje técnico, mantenimiento, código heredado y desarrollo web desde una perspectiva profesional y honesta.'
-    );
-})->name('articles');
+Route::get('/blog', [BlogController::class, 'index'])->name('blog');
+Route::get('/blog/{blog:link}', [BlogController::class, 'show'])->name('blog.show');
 
 Route::get('/projects', function () {
     return renderSection(
@@ -46,21 +42,7 @@ Route::get('/projects', function () {
     );
 })->name('projects');
 
-Route::get('/juegos', function () {
-    return renderSection(
-        'juegos',
-        'Juegos JavaScript | RogerLab',
-        'Diviértete con juegos interactivos desarrollados en JavaScript, juegos como el ahorcado, y juegos de rol desarollado en el grado de Desarrollo de Aplicaciones Web'
-    );
-})->name('juegos');
 
-Route::get('/juegos/ahorcado', function () {
-    return renderSection(
-        'ahorcado',
-        'Juego del Ahorcado | RogerLab',
-        'Juega al ahorcado en una experiencia interactiva desarrollada con JavaScript dentro de RogerLab.'
-    );
-})->name('juegos.ahorcado');
 
 Route::get('/contact', function () {
     return renderSection(

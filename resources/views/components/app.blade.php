@@ -44,6 +44,9 @@
     @endphp
     <title>@yield('title', $defaultTitle)</title>
     <meta name="description" content="@yield('meta_description', $defaultDescription)">
+    @hasSection('meta_keywords')
+        <meta name="keywords" content="@yield('meta_keywords')">
+    @endif
     <meta name="author" content="{{ $profile['name'] }}">
     <meta name="robots" content="@yield('robots_meta', 'index,follow')">
     <link rel="canonical" href="@yield('canonical', url()->current())">
@@ -97,13 +100,7 @@
         @yield('content')
         @include('components.footer')
     </div>
-    <script src="{{ asset('js/theme.js') }}?v={{ filemtime(public_path('js/theme.js')) }}" defer></script>
-    <script src="{{ asset('js/animaciones.js') }}?v={{ filemtime(public_path('js/animaciones.js')) }}" defer></script>
-    <script src="{{ asset('js/partial-navigation.js') }}?v={{ filemtime(public_path('js/partial-navigation.js')) }}" defer></script>
-    <script src="{{ asset('js/language-switcher.js') }}?v={{ filemtime(public_path('js/language-switcher.js')) }}" defer></script>
-    <script src="{{ asset('js/practicas-modal.js') }}?v={{ filemtime(public_path('js/practicas-modal.js')) }}" defer></script>
-    <script src="{{ asset('js/ahorcado.js') }}?v={{ filemtime(public_path('js/ahorcado.js')) }}" defer></script>
-    <script src="{{ asset('js/main.js') }}?v={{ filemtime(public_path('js/main.js')) }}" defer></script>
+    @vite('resources/js/app.ts')
 </body>
 
 </html>
