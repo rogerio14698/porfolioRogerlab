@@ -7,9 +7,11 @@
             </div>
             <div class="blog-image blog-image-detail">
                 @if ($article->image)
-                    <img src="{{ asset($article->image) }}" alt="{{ $article->title }}">
+                    <img src="{{ asset($article->image) }}" alt="{{ $article->title }}"
+                        data-fallback-src="{{ asset('img/LogoPorfolio.jpg') }}">
                 @else
-                    <img src="{{ asset('img/LogoPorfolio.jpg') }}" alt="Foto estándar">
+                    <img src="{{ asset('img/LogoPorfolio.jpg') }}" alt="Foto estándar"
+                        data-fallback-src="{{ asset('img/LogoPorfolio.jpg') }}">
                 @endif
             </div>
             <div class="blog-content">{!! nl2br(e($article->content)) !!}</div>
@@ -33,9 +35,11 @@
             <article class="blog-card blog-card-with-image">
                 <div class="blog-image">
                     @if ($article->image)
-                        <img src="{{ asset($article->image) }}" alt="{{ $article->title }}" loading="lazy">
+                        <img src="{{ asset($article->image) }}" alt="{{ $article->title }}" loading="lazy"
+                            data-fallback-src="{{ asset('img/LogoPorfolio.jpg') }}">
                     @else
-                        <img src="{{ asset('img/LogoPorfolio.jpg') }}" alt="Foto estándar" loading="lazy">
+                        <img src="{{ asset('img/LogoPorfolio.jpg') }}" alt="Foto estándar" loading="lazy"
+                            data-fallback-src="{{ asset('img/LogoPorfolio.jpg') }}">
                     @endif
                 </div>
                 <div class="blog-card-content">
