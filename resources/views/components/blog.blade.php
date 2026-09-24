@@ -24,7 +24,7 @@
 
             <div class="login">
                 <p>Inicio Sesión</p>
-                <form action="{{ route('login') }}" method="POST">
+                <form action="#" method="POST">
                     @csrf
                     <input type="text" name="user" placeholder="Usuario" required>
                     <input type="password" name="password" placeholder="Contraseña" required>
