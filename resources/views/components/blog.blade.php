@@ -24,8 +24,9 @@
 
             <div class="login">
                 <p>Inicio Sesión</p>
-                <form action="#" method="POST">
-                    @csrf
+                {{--Lo quitamos de forma temporal el action del formulario --}}
+                <form action="" method="POST">
+                    {{-- @csrf Lo quitamos de forma temporal --}}
                     <input type="text" name="user" placeholder="Usuario" required>
                     <input type="password" name="password" placeholder="Contraseña" required>
 
