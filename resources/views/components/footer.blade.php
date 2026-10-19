@@ -1,7 +1,7 @@
 <footer class="contenedorFooter">
     <div class="footerBrand">
         <p class="footerLabel" data-i18n="footer.rights" data-i18n-year="{{ date('Y') }}">
-            &copy; {{ date('Y') }} Roger Lab. Todos los derechos reservados.
+            &copy; {{ date('Y') }} RogerLab. Todos los derechos reservados.
         </p>
     </div>
 
@@ -13,17 +13,17 @@
 
         <div class="social-icons" aria-label="Redes sociales">
             <a href="{{ config('seo.profile.linkedin') }}" aria-label="LinkedIn">
-                <i class="fa-brands fa-linkedin"></i>
+                <i class="fa-brands fa-linkedin" aria-hidden="true"></i> LinkedIn
             </a>
             <a href="{{ config('seo.profile.github') }}" aria-label="GitHub">
-                <i class="fa-brands fa-github"></i>
+                <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub
             </a>
         </div>
     </div>
 
     <nav class="footerPrivacy" aria-label="Enlaces legales">
-        <a href="{{ route('privacy-policy') }}" data-partial-nav data-i18n="footer.privacy">Politica de privacidad</a>
-        <a href="{{ route('terms-of-service') }}" data-partial-nav data-i18n="footer.terms">Terminos del servicio</a>
-        <a href="{{ route('cookies-privacy') }}" data-partial-nav data-i18n="footer.cookies">Politica de cookies</a>
+        <a href="{{ route('privacy-policy') }}" data-partial-nav data-i18n="footer.privacy">Política de privacidad</a>
+        <a href="{{ route('terms-of-service') }}" data-partial-nav data-i18n="footer.terms">Términos del servicio</a>
+        <a href="{{ route('cookies-privacy') }}" data-partial-nav data-i18n="footer.cookies">Política de cookies</a>
     </nav>
 </footer>

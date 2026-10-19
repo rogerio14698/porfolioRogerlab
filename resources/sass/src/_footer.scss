@@ -19,14 +19,17 @@
     }
 
     a:hover { text-decoration: underline; }
-    .social-icons { display: flex; gap: var(--space-2); }
+    .social-icons { display: flex; flex-wrap: wrap; gap: var(--space-2); }
     .social-icons a {
-        display: grid;
-        place-items: center;
-        width: 44px;
-        height: 44px;
-        font-size: 1.375rem;
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-2);
+        min-height: 44px;
+        padding-inline: var(--space-3);
+        font-size: var(--text-body);
         background: var(--surface-page);
+
+        i { font-size: 1.375rem; }
     }
 
     .footerPrivacy {

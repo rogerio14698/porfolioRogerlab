@@ -10,7 +10,10 @@ class BlogLocale
 {
     public function handle(Request $request, Closure $next): Response
     {
-        $locale = $request->query('lang', $request->session()->get('blog.locale', 'es'));
+        $defaultLocale = $request->routeIs('blog', 'blog.show', 'blog.legacy')
+            ? 'es'
+            : $request->session()->get('blog.locale', 'es');
+        $locale = $request->query('lang', $defaultLocale);
         if (! in_array($locale, config('blog.locales'), true)) {
             $locale = 'es';
         }

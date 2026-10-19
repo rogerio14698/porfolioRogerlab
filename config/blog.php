@@ -6,4 +6,5 @@ return [
     'max_images' => 10,
     'max_image_kb' => 5120,
     'fallback_image' => 'img/LogoPorfolio.jpg',
+    'social_image' => 'img/blog-social.png',
 ];

@@ -20,9 +20,9 @@
             <h1>{{ __('blog.heading') }}</h1>
             <p>{{ __('blog.intro') }}</p>
             @if (auth()->check() && strcasecmp(auth()->user()->email, config('blog.owner_email')) === 0)
-                <a class="blog-link" href="{{ route('admin.blog.index', ['lang' => app()->getLocale()]) }}">{{ __('blog.dashboard') }}</a>
+                <a class="blog-link" rel="nofollow" href="{{ route('admin.blog.index', ['lang' => app()->getLocale()]) }}">{{ __('blog.dashboard') }}</a>
             @else
-                <a class="blog-link" href="{{ route('login', ['lang' => app()->getLocale()]) }}">{{ __('blog.login') }}</a>
+                <a class="blog-link" rel="nofollow" href="{{ route('login', ['lang' => app()->getLocale()]) }}">{{ __('blog.login') }}</a>
             @endif
         </header>
         @forelse ($articles as $article)

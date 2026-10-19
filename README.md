@@ -55,6 +55,11 @@ tras limpiar el archivo, este comando permite recuperar el acceso.
 - El editor usa texto simple escapado, con saltos de línea; no admite HTML.
 - La dirección usa letras minúsculas, números y guiones. No la cambies después de
   publicar salvo que aceptes perder las URL anteriores; no se crean redirecciones.
+  La excepción es la corrección histórica de `porfolio` a `portfolio`: la migración
+  conserva el contenido y `/blog/porfolio` devuelve un 301 a `/blog/portfolio`,
+  manteniendo los parámetros (incluido `lang`). El slug antiguo queda reservado.
+  Si ya existen ambos slugs, la migración se detiene para resolver el conflicto
+  sin sobrescribir publicaciones. La corrección de datos no se revierte con un rollback.
 - Puedes adjuntar hasta 10 imágenes JPEG/PNG/WebP de 5 MB y 6000 × 6000 px cada una.
   Cada foto necesita texto alternativo en los tres idiomas. Se conservan en orden
   de subida, sin recorte destructivo. Se muestra un carrusel manual accesible para
@@ -80,7 +85,27 @@ Los títulos SEO (70 caracteres), descripciones (160) y palabras clave (255) son
 opcionales por idioma. Sin ellos se usa el título o un extracto del texto.
 Las publicaciones generan canonical, hreflang, Open Graph, Twitter y JSON-LD
 `BlogPosting`; solo las publicadas aparecen en `/sitemap.xml`.
+El índice del blog y los posts usan canonical propio con `?lang=es`, `?lang=en`
+o `?lang=pt`, y alternativos `hreflang` para las traducciones disponibles más
+`x-default` apuntando al español. Sin `lang`, el blog público siempre se sirve
+en español, independientemente de la sesión o del idioma guardado en el navegador.
+Las páginas paginadas conservan `page` en canonical y alternativos, excepto `page=1`.
+El sitemap incluye las tres versiones del índice. No se migran las URL a prefijos
+por idioma; la traducción del resto del portfolio desde el servidor queda pendiente.
+
+La portada social del índice es [blog-social.png](./public/img/blog-social.png)
+(1200 × 630 px). Los posts usan su primera imagen, la imagen histórica si existe,
+o el logo si no tienen imagen; el JSON-LD utiliza las imágenes del propio post.
+La home ya incluye `Person` y `WebSite`. Tras desplegar, comprueba una URL pública
+de post en el [Rich Results Test](https://search.google.com/test/rich-results)
+y revisa el grafo de la home en el [Schema Markup Validator](https://validator.schema.org/).
+La validación local comprueba el JSON emitido, pero no sustituye estas herramientas.
+
 El panel y las vistas previas llevan `noindex` y caché privada desactivada.
+Los enlaces públicos a login/panel llevan `nofollow`. Tanto el archivo estático
+[robots.txt](./public/robots.txt) como la respuesta Laravel excluyen `/login`,
+`/logout`, `/admin` y las verificaciones de contacto. `robots.txt` no sustituye
+la autenticación ni elimina por sí mismo URL ya indexadas.
 Los campos globales `SEO_*` están documentados con valores de ejemplo en
 [.env.example](./.env.example); `APP_URL` debe apuntar a la URL real del despliegue.
 Las páginas del portfolio conservan sus textos SEO específicos existentes.

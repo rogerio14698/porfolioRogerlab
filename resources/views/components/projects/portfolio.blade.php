@@ -1,6 +1,6 @@
 <article class="cardProject project-card">
     <div class="logo project-card__media">
-        <img src="{{ asset('img/LogoPorfolio.jpg') }}" alt="Logo del portfolio Roger Lab"
+        <img src="{{ asset('img/LogoPorfolio.jpg') }}" alt="Logo del portfolio RogerLab"
             data-i18n-alt="projects.portfolio.alt">
     </div>
 

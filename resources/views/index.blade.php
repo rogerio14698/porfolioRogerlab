@@ -6,35 +6,35 @@
     $defaultDescription = $profile['description'];
 @endphp
 
-@section('title', e($pageTitle ?? $defaultTitle))
+@section('title', $pageTitle ?? $defaultTitle)
 
-@section('meta_description', e($pageMetaDescription ?? $defaultDescription))
+@section('meta_description', $pageMetaDescription ?? $defaultDescription)
 
 @if (!empty($metaKeywords))
-    @section('meta_keywords', e($metaKeywords))
+    @section('meta_keywords', $metaKeywords)
 @endif
 
 @section('robots_meta', $robotsMeta ?? 'index,follow')
 
-@section('og_title', e($pageTitle ?? $defaultTitle))
+@section('og_title', $pageTitle ?? $defaultTitle)
 
-@section('og_description', e($pageMetaDescription ?? $defaultDescription))
+@section('og_description', $pageMetaDescription ?? $defaultDescription)
 
-@section('twitter_title', e($pageTitle ?? $defaultTitle))
+@section('twitter_title', $pageTitle ?? $defaultTitle)
 
-@section('twitter_description', e($pageMetaDescription ?? $defaultDescription))
+@section('twitter_description', $pageMetaDescription ?? $defaultDescription)
 
 @if (!empty($canonicalUrl))
-    @section('canonical', e($canonicalUrl))
-    @section('og_url', e($canonicalUrl))
-    @section('twitter_url', e($canonicalUrl))
+    @section('canonical', $canonicalUrl)
+    @section('og_url', $canonicalUrl)
+    @section('twitter_url', $canonicalUrl)
 @endif
 
 @section('og_type', $ogType ?? 'website')
 
 @if (!empty($ogImage))
-    @section('og_image', e($ogImage))
-    @section('twitter_image', e($ogImage))
+    @section('og_image', $ogImage)
+    @section('twitter_image', $ogImage)
 @endif
 
 @if (!empty($schemaJsonLd))

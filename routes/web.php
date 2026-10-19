@@ -39,6 +39,7 @@ Route::get('/mi-periodo-practicas', function () {
 Route::middleware(BlogLocale::class)->group(function () {
     Route::get('/blog', [BlogController::class, 'index'])->name('blog');
     Route::get('/blog/media/{image}', [BlogController::class, 'image'])->name('blog.image');
+    Route::get('/blog/porfolio', [BlogController::class, 'redirectLegacy'])->name('blog.legacy');
     Route::get('/blog/{blog:link}', [BlogController::class, 'show'])->name('blog.show');
 
     Route::middleware(PrivateBlogResponse::class)->group(function () {
@@ -79,15 +80,15 @@ Route::get('/contact/verify/{contactMessage}/{token}', [ContactController::class
 Route::get('/privacy-policy', function () {
     return renderSection(
         'privacyPolicy',
-        'Politica de Privacidad | RogerLab',
-        'Consulta como se recopilan, utilizan y protegen los datos personales enviados a traves del portfolio y del formulario de contacto de RogerLab.'
+        'Política de Privacidad | RogerLab',
+        'Consulta cómo se recopilan, utilizan y protegen los datos personales enviados a través del portfolio y del formulario de contacto de RogerLab.'
     );
 })->name('privacy-policy');
 
 Route::get('/terms-of-service', function () {
     return renderSection(
         'termsOfService',
-        'Terminos del Servicio | RogerLab',
+        'Términos del Servicio | RogerLab',
         'Revisa las condiciones de uso del contenido, limitaciones y alcance del portfolio profesional de RogerLab.'
     );
 })->name('terms-of-service');
@@ -95,8 +96,8 @@ Route::get('/terms-of-service', function () {
 Route::get('/cookies-privacy', function () {
     return renderSection(
         'cookiesPrivacy',
-        'Politica de Cookies | RogerLab',
-        'Informacion sobre el uso de cookies, tecnologias de seguimiento y opciones de control disponibles en la web de RogerLab.'
+        'Política de Cookies | RogerLab',
+        'Información sobre el uso de cookies, tecnologías de seguimiento y opciones de control disponibles en la web de RogerLab.'
     );
 })->name('cookies-privacy');
 

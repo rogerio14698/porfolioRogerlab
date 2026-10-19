@@ -216,6 +216,153 @@ class BlogPublishingTest extends TestCase
             ->assertSee('\\u003C/script\\u003E', false);
     }
 
+    public function test_blog_index_has_a_real_social_image_and_reciprocal_language_urls(): void
+    {
+        $image = getimagesize(public_path(config('blog.social_image')));
+        $this->assertSame([1200, 630], [$image[0], $image[1]]);
+        $this->assertSame('image/png', $image['mime']);
+
+        foreach (config('blog.locales') as $locale) {
+            $url = route('blog', ['lang' => $locale]);
+            $response = $this->get($url)->assertOk()
+                ->assertSee('<html lang="'.$locale.'">', false)
+                ->assertSee('<link rel="canonical" href="'.$url.'">', false)
+                ->assertSee('<meta property="og:url" content="'.$url.'">', false)
+                ->assertSee('<meta property="og:image" content="'.asset(config('blog.social_image')).'">', false)
+                ->assertSee('<meta name="twitter:image" content="'.asset(config('blog.social_image')).'">', false)
+                ->assertSee('<meta property="og:image:width" content="1200">', false)
+                ->assertSee('<meta property="og:image:height" content="630">', false);
+
+            foreach (config('blog.locales') as $alternate) {
+                $response->assertSee('<link rel="alternate" hreflang="'.$alternate.'" href="'.route('blog', ['lang' => $alternate]).'">', false);
+            }
+            $response->assertSee('<link rel="alternate" hreflang="x-default" href="'.route('blog', ['lang' => 'es']).'">', false);
+        }
+    }
+
+    public function test_blog_pagination_has_clean_canonical_and_alternate_urls(): void
+    {
+        $response = $this->get('/blog?lang=en&page=2&utm_source=test')->assertOk();
+        foreach (['es', 'en', 'pt', 'x-default'] as $alternate) {
+            $locale = $alternate === 'x-default' ? 'es' : $alternate;
+            $url = route('blog', ['lang' => $locale, 'page' => 2]);
+            $response->assertSee('<link rel="alternate" hreflang="'.$alternate.'" href="'.e($url).'">', false);
+        }
+        $url = e(route('blog', ['lang' => 'en', 'page' => 2]));
+        $response->assertSee('<link rel="canonical" href="'.$url.'">', false)
+            ->assertSee('<meta property="og:url" content="'.$url.'">', false)
+            ->assertSee('<meta name="twitter:url" content="'.$url.'">', false);
+        $this->get('/blog?lang=en&page=1')->assertOk()
+            ->assertSee('<link rel="canonical" href="'.route('blog', ['lang' => 'en']).'">', false);
+    }
+
+    public function test_public_blog_language_does_not_depend_on_a_previous_session(): void
+    {
+        $post = $this->postRecord(true);
+        foreach (['/blog', '/blog/'.$post->link] as $path) {
+            $this->withSession(['blog.locale' => 'en'])->get($path)->assertOk()
+                ->assertSee('<html lang="es">', false);
+            $this->get($path.'?lang=pt')->assertOk()->assertSee('<html lang="pt">', false);
+            $this->get($path.'?lang=invalid')->assertOk()->assertSee('<html lang="es">', false);
+        }
+    }
+
+    public function test_post_social_metadata_and_json_ld_use_its_own_image_and_localized_fields(): void
+    {
+        $post = $this->postRecord(true);
+        $image = $post->images()->create(['path' => 'images/cover.png', 'alt' => ['es' => 'Portada'], 'position' => 0]);
+        $cover = route('blog.image', $image);
+        foreach (config('blog.locales') as $locale) {
+            $canonical = route('blog.show', ['blog' => $post->link, 'lang' => $locale]);
+            $response = $this->get($canonical)->assertOk()
+                ->assertSee('<link rel="canonical" href="'.e($canonical).'">', false)
+                ->assertSee('<meta property="og:image" content="'.$cover.'">', false)
+                ->assertSee('<meta name="twitter:image" content="'.$cover.'">', false)
+                ->assertSee('<link rel="alternate" hreflang="x-default" href="'.e(route('blog.show', ['blog' => $post->link, 'lang' => 'es'])).'">', false);
+            foreach (config('blog.locales') as $alternate) {
+                $response->assertSee('<link rel="alternate" hreflang="'.$alternate.'" href="'.e(route('blog.show', ['blog' => $post->link, 'lang' => $alternate])).'">', false);
+            }
+            preg_match('/<script type="application\/ld\+json">(.*?)<\/script>/s', $response->getContent(), $matches);
+            $schema = json_decode($matches[1], true, 512, JSON_THROW_ON_ERROR);
+            $this->assertSame('BlogPosting', $schema['@type']);
+            $this->assertSame('Title '.$locale, $schema['headline']);
+            $this->assertSame('Description '.$locale, $schema['description']);
+            $this->assertSame($locale, $schema['inLanguage']);
+            $this->assertSame($canonical, $schema['url']);
+            $this->assertSame([$cover], $schema['image']);
+            $this->assertSame(config('seo.profile.name'), $schema['author']['name']);
+            $this->assertSame($post->published_at->toIso8601String(), $schema['datePublished']);
+            $this->assertSame($post->updated_at->toIso8601String(), $schema['dateModified']);
+        }
+    }
+
+    public function test_slug_migration_preserves_content_and_old_url_redirects_permanently(): void
+    {
+        $post = $this->postRecord(true);
+        $post->update(['link' => 'porfolio']);
+        $migration = require database_path('migrations/2026_10_19_160000_correct_portfolio_blog_slug.php');
+        $migration->up();
+        $this->assertSame('portfolio', $post->fresh()->link);
+        $this->assertSame($post->content, $post->fresh()->content);
+        $this->assertSame($post->translations, $post->fresh()->translations);
+        $this->get('/blog/porfolio?lang=en&utm_source=old')
+            ->assertStatus(301)
+            ->assertRedirect(route('blog.show', ['blog' => 'portfolio', 'lang' => 'en', 'utm_source' => 'old']));
+        $this->get('/blog/portfolio?lang=en')->assertOk()->assertSee('Content en');
+        $this->get('/sitemap.xml')->assertOk()->assertSee('/blog/portfolio', false)->assertDontSee('/blog/porfolio', false);
+        $migration->up();
+        $migration->down();
+        $this->assertSame('portfolio', $post->fresh()->link);
+    }
+
+    public function test_slug_migration_reports_collisions_without_overwriting_either_post(): void
+    {
+        $old = $this->postRecord(true);
+        $old->update(['link' => 'porfolio']);
+        $new = $this->postRecord(true);
+        $new->update(['link' => 'portfolio']);
+        $migration = require database_path('migrations/2026_10_19_160000_correct_portfolio_blog_slug.php');
+
+        try {
+            $migration->up();
+            $this->fail('Expected a slug collision to be reported.');
+        } catch (\RuntimeException $exception) {
+            $this->assertStringContainsString('both slugs already exist', $exception->getMessage());
+        }
+        $this->assertSame('porfolio', $old->fresh()->link);
+        $this->assertSame('portfolio', $new->fresh()->link);
+    }
+
+    public function test_legacy_redirect_does_not_expose_drafts_and_the_old_slug_is_reserved(): void
+    {
+        $post = $this->postRecord();
+        $post->update(['link' => 'portfolio']);
+        $this->get('/blog/porfolio')->assertNotFound();
+        $post->update(['is_published' => true, 'published_at' => now()->addDay()]);
+        $this->get('/blog/porfolio')->assertNotFound();
+        $data = $this->payload();
+        $data['link'] = 'porfolio';
+        $this->actingAs(User::findOrFail($post->author_id))->post('/admin/blog', $data)
+            ->assertSessionHasErrors('link');
+    }
+
+    public function test_old_url_keeps_serving_the_post_until_the_slug_migration_runs(): void
+    {
+        $post = $this->postRecord(true);
+        $post->update(['link' => 'porfolio']);
+        $this->get('/blog/porfolio?lang=en')->assertOk()->assertSee('Content en');
+    }
+
+    public function test_sitemap_lists_every_blog_index_language_and_author_links_are_nofollow(): void
+    {
+        $response = $this->get('/sitemap.xml')->assertOk();
+        foreach (config('blog.locales') as $locale) {
+            $response->assertSee('<loc>'.route('blog', ['lang' => $locale]).'</loc>', false);
+            $this->get('/blog?lang='.$locale)->assertOk()
+                ->assertSee('rel="nofollow" href="'.route('login', ['lang' => $locale]).'"', false);
+        }
+    }
+
     public function test_owner_can_save_a_draft_without_images_and_empty_upload_row(): void
     {
         $data = $this->payload();

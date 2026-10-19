@@ -176,7 +176,7 @@
             'projects.time.meta': 'Ene. 2026 | Desarrollo',
             'projects.time.body_1': 'Aplicación de control horario enfocada en trazabilidad de jornadas e incidencias; colaboré sobre backend PHP/Laravel y persistencia MySQL para asegurar registros fiables.',
             'projects.time.body_2': 'Revisé procesos críticos de negocio, depuré reglas de fichaje y mejoré la capa de interfaz con Blade + JavaScript para acelerar la operación diaria del usuario final.',
-            'projects.portfolio.alt': 'Logo del portfolio Roger Lab',
+            'projects.portfolio.alt': 'Logo del portfolio RogerLab',
             'projects.portfolio.title': 'Portfolio Web',
             'projects.portfolio.meta': 'Abr. 2026 | Diseño y desarrollo',
             'projects.portfolio.body_1': 'Desarrollé este portfolio como producto full-stack con Laravel, Blade, Vanilla JavaScript, CSS y arquitectura de componentes para presentar proyectos con foco técnico y de negocio.',
@@ -216,7 +216,7 @@
             'contact.form.message_placeholder': 'Cuéntame el puesto, el equipo, el stack o el motivo del contacto y te respondo lo antes posible.',
             'contact.form.notice': 'Antes de que el mensaje llegue al administrador, debes confirmar tu dirección de correo mediante un enlace de verificación.',
             'contact.form.submit': 'Enviar mensaje',
-            'footer.rights': '© {year} Roger Lab. Todos los derechos reservados.',
+            'footer.rights': '© {year} RogerLab. Todos los derechos reservados.',
             'footer.privacy': 'Política de privacidad',
             'footer.terms': 'Términos del servicio',
             'footer.cookies': 'Política de cookies'
@@ -390,7 +390,7 @@
             'projects.time.meta': 'Jan. 2026 | Development',
             'projects.time.body_1': 'Time-tracking application focused on attendance traceability and incident logging; I contributed on PHP/Laravel backend flows and MySQL persistence to keep records reliable.',
             'projects.time.body_2': 'I reviewed critical business processes, debugged attendance rules, and improved the Blade + JavaScript interface layer to speed up day-to-day user operations.',
-            'projects.portfolio.alt': 'Roger Lab portfolio logo',
+            'projects.portfolio.alt': 'RogerLab portfolio logo',
             'projects.portfolio.title': 'Web Portfolio',
             'projects.portfolio.meta': 'Apr. 2026 | Design and development',
             'projects.portfolio.body_1': 'I built this portfolio as a full-stack product using Laravel, Blade, Vanilla JavaScript, and CSS component architecture to present projects with technical and business context.',
@@ -430,7 +430,7 @@
             'contact.form.message_placeholder': 'Tell me about the role, the team, the stack, or the reason for getting in touch and I will reply as soon as possible.',
             'contact.form.notice': 'Before the message reaches the administrator, you must confirm your email address through a verification link.',
             'contact.form.submit': 'Send message',
-            'footer.rights': '© {year} Roger Lab. All rights reserved.',
+            'footer.rights': '© {year} RogerLab. All rights reserved.',
             'footer.privacy': 'Privacy Policy',
             'footer.terms': 'Terms of Service',
             'footer.cookies': 'Cookie Policy'
@@ -603,7 +603,7 @@
             'projects.time.meta': 'Jan. 2026 | Desenvolvimento',
             'projects.time.body_1': 'Aplicação de controlo horário focada em rastreabilidade de assiduidade e incidências; contribuí em fluxos backend PHP/Laravel e persistência MySQL para garantir registos fiáveis.',
             'projects.time.body_2': 'Revisei processos críticos de negócio, depurei regras de fichagem e melhorei a camada de interface com Blade + JavaScript para acelerar a operação diária do utilizador final.',
-            'projects.portfolio.alt': 'Logo do portfolio Roger Lab',
+            'projects.portfolio.alt': 'Logo do portfolio RogerLab',
             'projects.portfolio.title': 'Portfolio Web',
             'projects.portfolio.meta': 'Abr. 2026 | Design e desenvolvimento',
             'projects.portfolio.body_1': 'Desenvolvi este portfólio como produto full-stack com Laravel, Blade, Vanilla JavaScript e arquitetura por componentes para apresentar projetos com contexto técnico e de negócio.',
@@ -643,10 +643,10 @@
             'contact.form.message_placeholder': 'Conta-me sobre a vaga, a equipa, a stack ou o motivo do contacto e responderei assim que possível.',
             'contact.form.notice': 'Antes de a mensagem chegar ao administrador, tens de confirmar o teu email atraves de uma ligacao de verificacao.',
             'contact.form.submit': 'Enviar mensagem',
-            'footer.rights': '© {year} Roger Lab. Todos os direitos reservados.',
-            'footer.privacy': 'Politica de privacidade',
-            'footer.terms': 'Termos do servico',
-            'footer.cookies': 'Politica de cookies'
+            'footer.rights': '© {year} RogerLab. Todos os direitos reservados.',
+            'footer.privacy': 'Política de privacidade',
+            'footer.terms': 'Termos do serviço',
+            'footer.cookies': 'Política de cookies'
         }
     };
 
@@ -970,14 +970,7 @@
     function initLanguageSwitcher() {
         var container = document.querySelector(SECTION_SELECTOR);
         if (container && container.dataset.serverLanguage) {
-            var requested = new URL(window.location.href).searchParams.get('lang');
-            var language = requested ? normalizeLanguage(requested) : getStoredLanguage();
-            if (language !== container.dataset.serverLanguage) {
-                var url = new URL(window.location.href);
-                url.searchParams.set('lang', language);
-                window.location.replace(url.href);
-                return;
-            }
+            var language = normalizeLanguage(container.dataset.serverLanguage);
             setStoredLanguage(language);
             applyLanguage(language);
             return;

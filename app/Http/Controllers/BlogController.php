@@ -12,13 +12,31 @@ class BlogController extends Controller
 {
     public function index()
     {
+        $articles = Blog::published()->with('images')->orderByDesc('published_at')->paginate(8)->withQueryString();
+        $page = $articles->currentPage() > 1 ? $articles->currentPage() : null;
+        $hreflangLinks = collect(config('blog.locales'))->mapWithKeys(fn ($locale) => [
+            $locale => route('blog', array_filter(['lang' => $locale, 'page' => $page])),
+        ])->all();
+        $hreflangLinks['x-default'] = $hreflangLinks['es'];
+
         return renderSection('blog', __('blog.page_title'), __('blog.intro'), 200, null, [
-            'articles' => Blog::published()->with('images')->orderByDesc('published_at')->paginate(8)->withQueryString(),
-            'canonicalUrl' => route('blog', array_filter(['lang' => app()->getLocale(), 'page' => request('page')])),
-            'hreflangLinks' => collect(config('blog.locales'))->mapWithKeys(fn ($locale) => [
-                $locale => route('blog', array_filter(['lang' => $locale, 'page' => request('page')])),
-            ])->all(),
+            'articles' => $articles,
+            'ogImage' => asset(config('blog.social_image')),
+            'ogImageWidth' => 1200,
+            'ogImageHeight' => 630,
+            'canonicalUrl' => $hreflangLinks[app()->getLocale()],
+            'hreflangLinks' => $hreflangLinks,
         ]);
+    }
+
+    public function redirectLegacy(Request $request)
+    {
+        if (! Blog::published()->where('link', 'portfolio')->exists()) {
+            // Slug migration not applied yet: keep serving the post at its old URL.
+            return $this->show(Blog::where('link', 'porfolio')->firstOrFail());
+        }
+
+        return redirect()->route('blog.show', array_merge($request->query(), ['blog' => 'portfolio']), 301);
     }
 
     public function show(Blog $blog)
@@ -47,6 +65,7 @@ class BlogController extends Controller
             }
             $hreflangLinks[$locale] = route('blog.show', ['blog' => $blog->link, 'lang' => $locale]);
         }
+        $hreflangLinks['x-default'] = $hreflangLinks['es'];
 
         return renderSection('blog', $title, $description, 200, $preview ? 'noindex,nofollow' : null, [
             'article' => $blog,
@@ -64,7 +83,7 @@ class BlogController extends Controller
                 'url' => $canonical,
                 'image' => $images ?: [$blog->coverUrl()],
                 'inLanguage' => app()->getLocale(),
-                'author' => ['@type' => 'Person', 'name' => config('seo.profile.name')],
+                'author' => ['@type' => 'Person', 'name' => config('seo.profile.name'), 'url' => config('seo.profile.portfolio')],
                 'datePublished' => $blog->published_at?->toIso8601String(),
                 'dateModified' => $blog->updated_at?->toIso8601String(),
             ],

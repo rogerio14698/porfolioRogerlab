@@ -97,4 +97,35 @@ class PortfolioPresentationTest extends TestCase
         }
         $response->assertSee('data-i18n-aria-label="practicas.modal.close"', false);
     }
+
+    public function test_home_has_valid_person_and_website_schema_and_consistent_public_labels(): void
+    {
+        $this->withoutVite();
+        $response = $this->get('/home')->assertOk()
+            ->assertSee('RogerLab. Todos los derechos reservados.')
+            ->assertSee('Prácticas FCT')
+            ->assertSee('Política de privacidad')
+            ->assertSee('Términos del servicio')
+            ->assertSee('Política de cookies')
+            ->assertSee('aria-hidden="true"></i> LinkedIn', false)
+            ->assertSee('aria-hidden="true"></i> GitHub', false)
+            ->assertDontSee('Roger Lab');
+        preg_match('/<script type="application\/ld\+json">(.*?)<\/script>/s', $response->getContent(), $matches);
+        $schema = json_decode($matches[1], true, 512, JSON_THROW_ON_ERROR);
+        $this->assertSame('https://schema.org', $schema['@context']);
+        $this->assertSame('Person', $schema['@graph'][0]['@type']);
+        $this->assertSame(config('seo.profile.name'), $schema['@graph'][0]['name']);
+        $this->assertSame('WebSite', $schema['@graph'][1]['@type']);
+        $this->assertSame('RogerLab', $schema['@graph'][1]['name']);
+    }
+
+    public function test_both_robots_responses_exclude_private_pages(): void
+    {
+        $dynamic = $this->get('/robots.txt')->assertOk()->getContent();
+        $static = file_get_contents(public_path('robots.txt'));
+        foreach (['/login', '/logout', '/admin', '/contact/verify/'] as $path) {
+            $this->assertStringContainsString('Disallow: '.$path, $dynamic);
+            $this->assertStringContainsString('Disallow: '.$path, $static);
+        }
+    }
 }

@@ -25,11 +25,6 @@ class SitemapController extends Controller
                 'changefreq' => 'monthly',
             ],
             [
-                'loc' => route('blog'),
-                'priority' => '0.9',
-                'changefreq' => 'weekly',
-            ],
-            [
                 'loc' => route('projects'),
                 'priority' => '0.8',
                 'changefreq' => 'monthly',
@@ -55,6 +50,14 @@ class SitemapController extends Controller
                 'changefreq' => 'yearly',
             ],
         ];
+
+        foreach (config('blog.locales') as $locale) {
+            $urls[] = [
+                'loc' => route('blog', ['lang' => $locale]),
+                'priority' => '0.9',
+                'changefreq' => 'weekly',
+            ];
+        }
 
         foreach (Blog::published()->select(['link', 'translations'])->cursor() as $blog) {
             foreach (config('blog.locales') as $locale) {

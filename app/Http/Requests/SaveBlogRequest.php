@@ -31,7 +31,7 @@ class SaveBlogRequest extends FormRequest
     {
         $publishing = $this->input('status') === 'published';
         $rules = [
-            'link' => ['required', 'string', 'max:160', 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/', Rule::unique('blogs', 'link')->ignore($this->route('blog'))],
+            'link' => ['required', 'string', 'max:160', 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/', Rule::notIn(['porfolio']), Rule::unique('blogs', 'link')->ignore($this->route('blog'))],
             'status' => ['required', Rule::in(['draft', 'published'])],
             'translations' => ['required', 'array:es,en,pt'],
             'uploads' => ['nullable', 'array', 'max:'.config('blog.max_images')],
