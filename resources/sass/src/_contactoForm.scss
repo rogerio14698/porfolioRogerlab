@@ -1,179 +1,61 @@
-@use "../global/variables" as v;
-@use "../global/tools" as t;
-
 .seccionContact {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-left: auto;
-    width: min(100%, 980px);
-    padding: 20px 18px 24px;
+    display: grid;
+    gap: var(--space-8);
+    align-items: start;
 
-    @media (max-width: 768px) {
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        padding: 12px 12px 18px;
-    }
+    h1 { font-size: var(--text-display); }
+    form { display: grid; gap: var(--space-6); min-width: 0; }
 
-    h1,
-    h2,
-    h3 {
-        padding: 0;
-        margin: 0 0 12px;
-        font-size: t.fluido(1.2rem, 1.7rem);
-        font-family: v.$fuenteTexto;
-        font-weight: v.$grosorTitulo;
-        text-decoration: none;
-        letter-spacing: 0.04em;
-    }
-
-    form {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        width: 100%;
-        font-family: v.$fuenteTexto;
-        padding: 18px;
-        background: color-mix(in srgb, var(--_fondoPanel) 92%, transparent);
-        box-shadow: none;
-    
-        @media (max-width: 768px) {
-            gap: 10px;
-            padding: 14px;
-        }
-    }
-
-    .contactAlert {
-        width: 100%;
-        padding: 10px 12px;
-        border: 1px solid color-mix(in srgb, var(--colorBorde) 55%, transparent);
-        background: color-mix(in srgb, var(--_fondoPanel) 86%, transparent);
-        color: var(--_texto);
-        font-size: t.fluido(0.82rem, 0.95rem);
-        line-height: 1.5;
-
-        &--error {
-            border-color: color-mix(in srgb, #d46a6a 55%, transparent);
-        }
-
-        &--info {
-            border-color: color-mix(in srgb, var(--colorBorde) 45%, transparent);
-        }
-    }
-
-    .contactFormGrid {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 12px;
-    }
-
-    .contactFormGrid > .formLabel:last-child {
-        grid-column: 1 / -1;
-    }
-
-    .contactFormMeta {
-        padding: 10px 12px;
-        background: color-mix(in srgb, var(--_fondoPanel) 84%, transparent);
-
-        p {
-            margin: 0;
-            padding: 0;
-            font-size: t.fluido(0.78rem, 0.92rem);
-            line-height: 1.55;
-            color: var(--_textoSoft);
-        }
-    }
-
-    .contactTurnstile {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        min-height: 60px;
-        padding: 6px 0;
-    }
-
-    .contactSubmitRow {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        padding-top: 2px;
-
-        button {
-            width: auto;
-        }
-
-        @media (max-width: 768px) {
-            justify-content: stretch;
-
-            button {
-                width: 100%;
-                min-width: 0;
-            }
-        }
-    }
+    .contactFormGrid { display: grid; gap: var(--space-6); }
 
     .formLabel {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-start;
-        gap: 8px;
-        width: 100%;
+        display: grid;
+        gap: var(--space-2);
+        align-content: start;
+        min-width: 0;
 
-        label {
-            font-size: t.fluido(0.82rem, 0.95rem);
-            font-family: v.$fuenteTexto;
-            letter-spacing: 0.03em;
-            color: var(--_textoSoft);
-        }
-
-        input,
-        textarea {
+        label { font-size: var(--text-small); font-weight: 600; }
+        input, textarea {
             width: 100%;
-            padding: 10px 12px;
-            border: 1px solid color-mix(in srgb, var(--colorBorde) 65%, transparent);
-            background-color: transparent;
-            color: var(--_texto);
-            font-family: v.$fuenteTexto;
-            font-size: t.fluido(0.85rem, 0.98rem);
+            min-width: 0;
+            min-height: 52px;
+            padding: var(--space-4);
+            border: 1px solid var(--field-border);
+            border-radius: var(--radius-control);
+            background: var(--input-bg);
+            color: var(--text-primary);
             line-height: 1.5;
-            box-shadow: none;
 
-            &:focus {
-                outline: 1px solid color-mix(in srgb, var(--colorBorde) 75%, transparent);
-                outline-offset: 2px;
-            }
-        }
-        textarea {
-            min-height: 140px;
-            max-height: 220px;
-            max-width: 100%;
-            resize: vertical;
-            overflow: auto;
+            &::placeholder { color: var(--text-secondary); opacity: 1; }
+            &:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 4px; }
+            &[aria-invalid="true"] { border-width: 2px; }
         }
 
-        @media (max-width: 768px) {
-            width: 100%;
-
-            input,
-            textarea {
-                width: 100%;
-            }
-        }
+        textarea { min-height: 220px; resize: vertical; }
     }
 
-    @media (max-width: 768px) {
-        .contactFormGrid {
-            grid-template-columns: 1fr;
-        }
+    .contactFormMeta, .contactAlert {
+        padding: var(--space-6);
+        background: var(--surface-raised);
+        p { font-size: var(--text-small); max-width: 65ch; }
+    }
 
-        .contactFormGrid > .formLabel:last-child {
-            grid-column: auto;
-        }
+    .contactAlert--error { font-weight: 600; }
+    .contactTurnstile { min-height: 65px; max-width: 100%; }
+    .contactSubmitRow { display: flex; }
+    .contactSubmitRow button { min-width: min(240px, 100%); }
+}
 
-        .contactFormMeta {
-            border-left: none;
-        }
+@media (min-width: 48rem) {
+    .seccionContact {
+        grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+        gap: var(--space-12);
+    }
+}
+
+@media (min-width: 64rem) {
+    .seccionContact {
+        .contactFormGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .formLabel:nth-child(n + 3) { grid-column: 1 / -1; }
     }
 }

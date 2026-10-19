@@ -2,8 +2,8 @@
     @if (isset($article))
         <article class="blog-detail">
             <div class="blog-header">
-                <p class="blog-label">RogerLab / Blog</p>
                 <h1>{{ $article->title }}</h1>
+                <p class="blog-label">RogerLab / Blog</p>
             </div>
             <div class="blog-image blog-image-detail">
                 @if ($article->image)
@@ -19,16 +19,16 @@
         </article>
     @else
         <header class="blog-header">
-            <p class="blog-label">RogerLab / Ideas</p>
             <h1>Blog Profesional | En mantenimiento</h1>
+            <p class="blog-label">RogerLab / Ideas</p>
 
             <div class="login">
                 <p>Inicio Sesión</p>
                 {{--Lo quitamos de forma temporal el action del formulario --}}
                 <form action="" method="POST" onsubmit="return false;">
                     {{-- @csrf Lo quitamos de forma temporal --}}
-                    <input type="text" name="user" placeholder="Usuario" required>
-                    <input type="password" name="password" placeholder="Contraseña" required>
+                    <input type="text" name="user" placeholder="Usuario" aria-label="Usuario" autocomplete="username" required>
+                    <input type="password" name="password" placeholder="Contraseña" aria-label="Contraseña" autocomplete="current-password" required>
 
                     {{-- Btn de recordar usuario --}}
                     <label>
