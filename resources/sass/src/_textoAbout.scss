@@ -36,6 +36,7 @@
     }
 
     .heroeActions {
+        background: var(--surface-raised);
         display: flex;
         flex-wrap: wrap;
         gap: var(--space-2);
