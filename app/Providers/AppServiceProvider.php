@@ -34,6 +34,10 @@ class AppServiceProvider extends ServiceProvider
             return Limit::perHour(3)->by($request->ip());
         });
 
+        RateLimiter::for('blog-login', function (Request $request): Limit {
+            return Limit::perMinute(5)->by($request->ip());
+        });
+
         Event::listen(
             ContactMessageSubmitted::class,
             SendContactVerificationNotification::class,
