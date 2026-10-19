@@ -36,15 +36,15 @@
     }
 
     .heroeActions {
-        background: var(--surface-raised);
         display: flex;
         flex-wrap: wrap;
-        gap: var(--space-2);
+        gap: var(--space-3);
         margin-top: var(--space-8);
 
         .contactPdfLink {
-            background: transparent;
-            padding-inline: var(--space-3);
+            background: var(--action-bg);
+            color: var(--action-text);
+            padding-inline: var(--space-6);
         }
     }
 

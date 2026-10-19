@@ -382,6 +382,13 @@ que se quieran conservar**: eliminaría sus traducciones y las relaciones de im�
 
 ## Commits y reversión
 
+Refinamiento posterior del inicio: los dos enlaces al CV utilizan la misma
+pareja de tokens `--action-bg` / `--action-text`, con fondo opaco individual
+y separación entre controles. Esto evita que el estilo heredado de
+`a:first-child` deje el primer PDF con texto invertido sobre un fondo
+transparente al comentar los CTA anteriores. Se conservan destinos, textos,
+foco visible y adaptación a ambos temas.
+
 | Commit | Unidad |
 | --- | --- |
 | `8991474` | Tokens, navegación y marco compartido |
