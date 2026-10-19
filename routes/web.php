@@ -1,8 +1,13 @@
 <?php
 
-use App\Http\Controllers\ContactController;
+use App\Http\Controllers\AdminBlogController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\BlogLoginController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\SitemapController;
+use App\Http\Middleware\BlogLocale;
+use App\Http\Middleware\BlogOwner;
+use App\Http\Middleware\PrivateBlogResponse;
 use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', '/home');
@@ -31,8 +36,21 @@ Route::get('/mi-periodo-practicas', function () {
     );
 })->name('mi-periodo-practicas');
 
-Route::get('/blog', [BlogController::class, 'index'])->name('blog');
-Route::get('/blog/{blog:link}', [BlogController::class, 'show'])->name('blog.show');
+Route::middleware(BlogLocale::class)->group(function () {
+    Route::get('/blog', [BlogController::class, 'index'])->name('blog');
+    Route::get('/blog/media/{image}', [BlogController::class, 'image'])->name('blog.image');
+    Route::get('/blog/{blog:link}', [BlogController::class, 'show'])->name('blog.show');
+
+    Route::middleware(PrivateBlogResponse::class)->group(function () {
+        Route::get('/login', [BlogLoginController::class, 'create'])->name('login');
+        Route::post('/login', [BlogLoginController::class, 'store'])->middleware('throttle:blog-login')->name('login.store');
+        Route::middleware([BlogOwner::class, 'auth.session'])->group(function () {
+            Route::post('/logout', [BlogLoginController::class, 'destroy'])->name('logout');
+            Route::get('/admin/blog/{blog}/preview', [BlogController::class, 'preview'])->name('admin.blog.preview');
+            Route::resource('/admin/blog', AdminBlogController::class)->except('show')->names('admin.blog');
+        });
+    });
+});
 
 Route::get('/projects', function () {
     return renderSection(
@@ -41,8 +59,6 @@ Route::get('/projects', function () {
         'Proyectos Full Stack de Rogerio Lucas Viana con Laravel, PHP, JavaScript, MySQL, Docker, AWS y automatización con n8n.'
     );
 })->name('projects');
-
-
 
 Route::get('/contact', function () {
     return renderSection(
@@ -87,12 +103,14 @@ Route::get('/cookies-privacy', function () {
 Route::get('/pdf-cv/english', function () {
     $path = resource_path('views/components/pdf-cv/RogerioLucas-cv-English.pdf');
     abort_unless(file_exists($path), 404);
+
     return response()->file($path, ['Content-Type' => 'application/pdf']);
 })->name('pdf-cv.english');
 
 Route::get('/pdf-cv/spanish', function () {
     $path = resource_path('views/components/pdf-cv/RogerioLucas-Spanish-cv.pdf');
     abort_unless(file_exists($path), 404);
+
     return response()->file($path, ['Content-Type' => 'application/pdf']);
 })->name('pdf-cv.spanish');
 

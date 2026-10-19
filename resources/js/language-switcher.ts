@@ -866,6 +866,9 @@
 
     function applyPageMetadata(language) {
         var container = document.querySelector(SECTION_SELECTOR);
+        if (container && container.dataset.serverLanguage) {
+            return;
+        }
         var section = container ? container.dataset.section : null;
         var localizedMetadata = section && pageMetadata[language] ? pageMetadata[language][section] : null;
         var fallbackMetadata = section && pageMetadata[DEFAULT_LANGUAGE] ? pageMetadata[DEFAULT_LANGUAGE][section] : null;
@@ -949,11 +952,36 @@
 
         var language = normalizeLanguage(button.dataset.languageOption);
 
+        var container = document.querySelector(SECTION_SELECTOR);
+        if (container && container.dataset.serverLanguage) {
+            if (language === container.dataset.serverLanguage) {
+                return;
+            }
+            setStoredLanguage(language);
+            var url = new URL(window.location.href);
+            url.searchParams.set('lang', language);
+            window.location.assign(url.href);
+            return;
+        }
         setStoredLanguage(language);
         applyLanguage(language);
     }
 
     function initLanguageSwitcher() {
+        var container = document.querySelector(SECTION_SELECTOR);
+        if (container && container.dataset.serverLanguage) {
+            var requested = new URL(window.location.href).searchParams.get('lang');
+            var language = requested ? normalizeLanguage(requested) : getStoredLanguage();
+            if (language !== container.dataset.serverLanguage) {
+                var url = new URL(window.location.href);
+                url.searchParams.set('lang', language);
+                window.location.replace(url.href);
+                return;
+            }
+            setStoredLanguage(language);
+            applyLanguage(language);
+            return;
+        }
         applyLanguage(getStoredLanguage());
     }
 

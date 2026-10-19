@@ -4,7 +4,7 @@ const entranceSelector = [
     '.conocimientosSeccione', '.aboutNarrative > div',
     '.project-card__media', '.project-card__body > *', '.project-card > .galeria', '.seccionContact > *',
     '.seccionPracticas > h1', '.seccionPracticas > p',
-    '.blog-header', '.blog-card', '.legalSection > *'
+    '.blog-header > *', '.blog-card .blog-gallery', '.blog-card-content > *', '.legalSection > *'
 ].join(', ');
 
 const entranceObserver = 'IntersectionObserver' in window

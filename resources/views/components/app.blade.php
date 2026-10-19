@@ -55,7 +55,7 @@
     @endforeach
     <meta property="og:type" content="@yield('og_type', 'website')">
     <meta property="og:site_name" content="RogerLab">
-    <meta property="og:locale" content="es_ES">
+    <meta property="og:locale" content="{{ ['es' => 'es_ES', 'en' => 'en_GB', 'pt' => 'pt_PT'][app()->getLocale()] ?? 'es_ES' }}">
     <meta property="og:url" content="@yield('og_url', url()->current())">
     <meta property="og:title" content="@yield('og_title', $defaultTitle)">
     <meta property="og:description" content="@yield('og_description', $defaultDescription)">
@@ -70,7 +70,7 @@
         @yield('schema_json_ld')
     @else
         <script type="application/ld+json">
-            {!! json_encode($schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
+            {!! json_encode($schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) !!}
         </script>
     @endif
 

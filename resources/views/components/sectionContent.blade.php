@@ -1,4 +1,5 @@
 <div id="dynamic-section" data-section="{{ $section }}"
+    @if (in_array($section, ['blog', 'blogLogin', 'blogAdmin', 'blogEditor'])) data-server-language="{{ app()->getLocale() }}" @endif
     data-page-title="{{ $pageTitle ?? 'RogerLab | Desarrollador Full Stack titulado en DAW' }}"
     data-meta-description="{{ $pageMetaDescription ?? 'Portfolio de Rogério Lucas, desarrollador Full Stack titulado en DAW. Proyectos con Laravel, PHP, JavaScript, bases de datos, Docker y AWS orientados a código mantenible y trabajo en equipo.' }}">
     @if ($section === 'home')
@@ -9,6 +10,12 @@
         @include('components.miPeriodoPracticas')
     @elseif ($section === 'blog')
         @include('components.blog')
+    @elseif ($section === 'blogLogin')
+        @include('blog.login')
+    @elseif ($section === 'blogAdmin')
+        @include('blog.admin')
+    @elseif ($section === 'blogEditor')
+        @include('blog.editor')
     @elseif ($section === 'projects')
         @include('components.projects')
     @elseif ($section === 'contact')

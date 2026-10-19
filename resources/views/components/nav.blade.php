@@ -5,12 +5,12 @@
         <span></span>
     </button>
     <ul id="nav-list">
-        <li><a href="{{ route('home') }}" data-partial-nav data-i18n="nav.home">Inicio</a></li>
-        <li><a href="{{ route('about') }}" data-partial-nav data-i18n="nav.about">Skills</a></li>
-        <li><a href="{{ route('mi-periodo-practicas') }}" data-partial-nav data-i18n="nav.fct">Practicas FCT</a></li>
-        <li><a href="{{ route('projects') }}" data-partial-nav data-i18n="nav.projects">Proyectos</a></li>
-        <li><a href="{{ route('contact') }}" data-partial-nav data-i18n="nav.contact">Contacto</a></li>
-        <li><a href="{{ route('blog') }}" data-partial-nav data-i18n="nav.blog">Blog</a></li>
+        <li><a href="{{ route('home') }}" @unless(request()->routeIs('blog*', 'admin.blog.*', 'login*')) data-partial-nav @endunless data-i18n="nav.home">Inicio</a></li>
+        <li><a href="{{ route('about') }}" @unless(request()->routeIs('blog*', 'admin.blog.*', 'login*')) data-partial-nav @endunless data-i18n="nav.about">Skills</a></li>
+        <li><a href="{{ route('mi-periodo-practicas') }}" @unless(request()->routeIs('blog*', 'admin.blog.*', 'login*')) data-partial-nav @endunless data-i18n="nav.fct">Practicas FCT</a></li>
+        <li><a href="{{ route('projects') }}" @unless(request()->routeIs('blog*', 'admin.blog.*', 'login*')) data-partial-nav @endunless data-i18n="nav.projects">Proyectos</a></li>
+        <li><a href="{{ route('contact') }}" @unless(request()->routeIs('blog*', 'admin.blog.*', 'login*')) data-partial-nav @endunless data-i18n="nav.contact">Contacto</a></li>
+        <li><a href="{{ route('blog') }}" data-i18n="nav.blog">Blog</a></li>
         {{-- Aqui en un futuro lo pondré si lo necesito, pero como ventana desplegable de proyectos, de momento no --}}
         {{--         <li><a href="{{ route('juegos') }}" data-partial-nav data-i18n="nav.juegos">Juegos JavaScript</a></li>--}}
     </ul>

@@ -1,78 +1,43 @@
 <section class="blog">
     @if (isset($article))
         <article class="blog-detail">
-            <div class="blog-header">
-                <h1>{{ $article->title }}</h1>
-                <p class="blog-label">RogerLab / Blog</p>
-            </div>
-            <div class="blog-image blog-image-detail">
-                @if ($article->image)
-                    <img src="{{ asset($article->image) }}" alt="{{ $article->title }}"
-                        data-fallback-src="{{ asset('img/LogoPorfolio.jpg') }}">
-                @else
-                    <img src="{{ asset('img/LogoPorfolio.jpg') }}" alt="Foto estándar"
-                        data-fallback-src="{{ asset('img/LogoPorfolio.jpg') }}">
+            @if ($preview ?? false)
+                <p class="blog-notice">{{ __('blog.preview_note') }}</p>
+                <a class="blog-link" href="{{ route('admin.blog.edit', ['blog' => $article, 'lang' => app()->getLocale()]) }}">{{ __('blog.edit') }}</a>
+            @endif
+            <header class="blog-header">
+                <h1>{{ $article->localized('title') }}</h1>
+                @if ($article->published_at)
+                    <time datetime="{{ $article->published_at->toDateString() }}">{{ $article->published_at->format('d/m/Y') }}</time>
                 @endif
-            </div>
-            <div class="blog-content">{!! nl2br(e($article->content)) !!}</div>
-            <a class="blog-link blog-back" href="{{ route('blog') }}">Volver al blog</a>
+            </header>
+            @include('blog.gallery', ['post' => $article])
+            <div class="blog-content">{{ $article->localized('content') }}</div>
+            <a class="blog-link" href="{{ route('blog', ['lang' => app()->getLocale()]) }}">{{ __('blog.back') }}</a>
         </article>
     @else
         <header class="blog-header">
-            <h1>Blog Profesional | En mantenimiento</h1>
-            <p class="blog-label">RogerLab / Ideas</p>
-
-            <div class="login">
-                <p>Inicio Sesión</p>
-                {{--Lo quitamos de forma temporal el action del formulario --}}
-                <form action="" method="POST" onsubmit="return false;">
-                    {{-- @csrf Lo quitamos de forma temporal --}}
-                    <input type="text" name="user" placeholder="Usuario" aria-label="Usuario" autocomplete="username" required>
-                    <input type="password" name="password" placeholder="Contraseña" aria-label="Contraseña" autocomplete="current-password" required>
-
-                    {{-- Btn de recordar usuario --}}
-                    <label>
-                        <input type="checkbox" name="remember">
-                        Recuérdame
-                    </label>
-                    <button type="submit">Iniciar Sesión</button>
-                </form>
-            </div>
+            <h1>{{ __('blog.heading') }}</h1>
+            <p>{{ __('blog.intro') }}</p>
+            @if (auth()->check() && strcasecmp(auth()->user()->email, config('blog.owner_email')) === 0)
+                <a class="blog-link" href="{{ route('admin.blog.index', ['lang' => app()->getLocale()]) }}">{{ __('blog.dashboard') }}</a>
+            @else
+                <a class="blog-link" href="{{ route('login', ['lang' => app()->getLocale()]) }}">{{ __('blog.login') }}</a>
+            @endif
         </header>
-        {{-- 
-        En ves de cargar todo con: @include('components.articles.menosCodigoMasSoluciones')
-    @include('components.articles.visitasCliente')
-    @include('components.articles.precioPaginaWeb')
-    @include('components.articles.landingPageVSFullWeb')
-    @include('components.articles.contratarUnDesarrolladorWeb')
-    Ahora lo va a leer directamente de la base de datos y construilo dinámicamente
-     --}}
-
-        @foreach ($articles as $article)
+        @forelse ($articles as $article)
             <article class="blog-card blog-card-with-image">
-                <div class="blog-image">
-                    @if ($article->image)
-                        <img src="{{ asset($article->image) }}" alt="{{ $article->title }}" loading="lazy"
-                            data-fallback-src="{{ asset('img/LogoPorfolio.jpg') }}">
-                    @else
-                        <img src="{{ asset('img/LogoPorfolio.jpg') }}" alt="Foto estándar" loading="lazy"
-                            data-fallback-src="{{ asset('img/LogoPorfolio.jpg') }}">
-                    @endif
-                </div>
+                @include('blog.gallery', ['post' => $article])
                 <div class="blog-card-content">
-                    <h2>
-                        @if ($article->link)
-                            <a href="{{ route('blog.show', $article) }}">{{ $article->title }}</a>
-                        @else
-                            {{ $article->title }}
-                        @endif
-                    </h2>
-                    <p>{{ Str::limit(strip_tags($article->content), 180) }}</p>
-                    @if ($article->link)
-                        <a class="blog-link" href="{{ route('blog.show', $article) }}">Leer artículo <span aria-hidden="true">-&gt;</span></a>
-                    @endif
+                    <h2><a href="{{ route('blog.show', ['blog' => $article->link, 'lang' => app()->getLocale()]) }}">{{ $article->localized('title') }}</a></h2>
+                    <time datetime="{{ $article->published_at->toDateString() }}">{{ $article->published_at->format('d/m/Y') }}</time>
+                    <p>{{ Str::limit($article->localized('content'), 180) }}</p>
+                    <a class="blog-link" href="{{ route('blog.show', ['blog' => $article->link, 'lang' => app()->getLocale()]) }}">{{ __('blog.read') }}</a>
                 </div>
             </article>
-        @endforeach
+        @empty
+            <p class="blog-notice">{{ __('blog.empty') }}</p>
+        @endforelse
+        @include('blog.pagination', ['paginator' => $articles])
     @endif
 </section>
