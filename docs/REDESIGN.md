@@ -126,7 +126,8 @@ una certificación de accesibilidad de todo el sitio.
   sin alterar endpoint, CSRF, validación ni integración Turnstile.
 - **FCT:** mejor lectura del documento y diálogo de seguimiento.
 - **Blog/login:** presentación coherente, nombres accesibles y autocomplete.
-  El login que ya estaba deshabilitado continúa deshabilitado.
+  En la primera entrega el login permaneció deshabilitado; el panel funcional
+  de la actualización de blog descrita más abajo sustituye ese estado.
 - **Legales y footer:** medida de lectura, ritmo vertical, enlaces visibles
   y una única superficie de desplazamiento del documento.
 - **Comportamiento compartido:** entradas con IntersectionObserver que no
@@ -295,6 +296,90 @@ Top three problems (most visible first), each with the screenshot it shows in an
    (`followup-projects-390.jpg`): solo se fija la navegación compacta, no
    todo el header; menú plegado por defecto.
 
+## Actualización: blog público y panel exclusivo del autor
+
+Se conserva la dirección monocromática, las fuentes y la animación original.
+El listado usa filas con imágenes sin recorte destructivo y el editor emplea
+campos amplios, grupos por idioma y títulos compactos propios de una herramienta
+de trabajo. No se incorporan dependencias, fuentes ni imágenes externas nuevas.
+
+- `/login`: solo el correo configurado en `BLOG_OWNER_EMAIL`, sin registro.
+  Primer acceso con contraseña temporal local; se guarda el hash y se elimina
+  su asignación de `.env`. Recuperación local con `blog:reset-password`.
+- `/admin/blog`: borradores, altas, edición, previsualización, publicación,
+  retirada y eliminación confirmada. Texto simple en ES/EN/PT; SEO por idioma.
+- `/blog`: únicamente publicaciones visibles, paginación, detalle y SEO
+  generado en servidor. El idioma usa `?lang=`; entrar y salir del blog carga
+  la página completa para no conservar metadatos de otra sección.
+- Imágenes privadas fuera de `public`, con autorización también en la ruta
+  de medios. Sin fotos se usa el logo existente. Carrusel manual, flechas
+  de teclado, contador anunciado y todas las imágenes visibles sin JavaScript.
+- Protección CSRF, límite de acceso, validación de archivos, hash de contraseña,
+  noindex/no-store en panel y previsualizaciones. Revisión transaccional del
+  máximo de imágenes para evitar superar el límite con guardados simultáneos.
+- `.env.example` documenta claves del blog, SEO, SQLite y cookies. `.env` local
+  tiene el correo y el campo inicial vacío; no se ha elegido una contraseña ni
+  creado una cuenta real. Las instrucciones operativas están en el [README](../README.md).
+
+### Verificación del blog
+
+- Build Vite/Sass, formato PHP y compilación de todas las vistas correctos.
+- 26 pruebas focalizadas de autenticación, publicación, traducciones, SEO seguro,
+  privacidad, imágenes, borrado y regresión del portfolio/contacto. No se declara que
+  haya pasado una suite completa.
+- 32 comprobaciones Chrome del flujo real de login, borrador, publicación con
+  dos archivos, carrusel con ratón/teclado, traducciones, SEO tras ejecutar JS,
+  eliminación y logout; anchos 1440/768/390/320 y ambos temas, sin excepciones.
+- Se repitieron las 23 comprobaciones anteriores de navegación/FCT/partículas
+  y las 54 combinaciones de rutas, tamaños y temas: correctas.
+- Fixtures, credenciales de prueba y archivos de navegador en una base SQLite
+  y un almacenamiento temporales aislados; no se publicaron datos de ejemplo
+  en la base local del usuario. Migración local aplicada de forma aditiva.
+- `code-review` detectó la carrera del límite de imágenes; se corrigió con
+  bloqueo del registro y comprobación dentro de la transacción, cubierta por test.
+
+El inspector a 1440/768/390 informa 0 FAIL / 1 WARN tanto en acceso como en blog.
+En el blog hay excepciones explícitas: `few-pictures` y `no-footage`, porque las
+fotos son opcionales y no se inventa contenido; `eyebrow`, porque clasifica el
+contador funcional «Imagen 1 de 3» como adorno sobre el siguiente título.
+Las fechas se colocaron debajo del título para reforzar la jerarquía.
+El único aviso restante es el marfil de la paleta que se debe conservar.
+Se revisaron las capturas completas de los tres tamaños. No se ha realizado
+una auditoría formal WCAG ni pruebas con lector de pantalla o móvil físico.
+
+ROUND 2
+
+Seen in one second: notas de desarrollo con la identidad de RogerLab y un
+acceso diferenciado para su autor.
+
+Idea (one sentence): el dossier de proyectos se amplía con un cuaderno de
+publicaciones del propio desarrollador, con sus imágenes y tres idiomas.
+
+Live thing: carrusel manual de imágenes reales y publicación privada de borradores.
+
+Layout words by section: blog=listado editorial / detalle=lectura / acceso=formulario /
+panel=listado de trabajo / editor=grupos por idioma.
+
+Scores: design 7 · usability 8.5 · creativity 6 · content 7 → overall 7.3
+
+Caps applied: fotos opcionales y contenido de prueba solo para validación;
+se prima la herramienta funcional sobre una composición experimental.
+
+Top three problems (most visible first), each with the screenshot it shows in and the fix:
+
+1. El título del acceso parecía un hero de marketing (`blog-login-inspect/desktop-fold.jpg`):
+   se redujo a 24–32px para una tarea de autenticación.
+2. Las fechas competían con los títulos (`blog-public-inspect/tablet-page-01.jpg`):
+   se trasladaron bajo el título; no se suprime información editorial.
+3. El editor completo es largo en móvil (`blog-editor-390.jpg`): se agrupa por idioma,
+   se pliega el SEO opcional y se avisa antes de abandonar cambios sin guardar.
+   Se mantiene el recorrido explícito en vez de esconder campos requeridos en pestañas.
+
+Para revertir esta ampliación, guardar primero una copia de la base y de
+`storage/app/blog`, y revertir sus commits conjuntamente. Revertir Git no revierte
+la base de datos. **No ejecutar un rollback de la nueva migración sobre publicaciones
+que se quieran conservar**: eliminaría sus traducciones y las relaciones de imágenes.
+
 ## Commits y reversión
 
 | Commit | Unidad |
@@ -308,6 +393,9 @@ Top three problems (most visible first), each with the screenshot it shows in an
 | `db0dace` | Documentación de la primera entrega |
 | `e47cf7a` | Narrativa de prácticas y cierre de modal traducidos |
 | `5119404` | Fondo original, control de animación y navegación sticky |
+| `15c9a2f` | Modelo de publicación, medios privados y credenciales del autor |
+| `3e9579e` | Panel, blog público multilingüe, galerías y SEO |
+| `37a6ada` | Pruebas de acceso, publicaciones, imágenes y SEO |
 
 La documentación se mantiene en commits propios. Para localizar toda
 la serie: `git log --oneline b56e8de..nuevoDiseño-ui-ux`.
