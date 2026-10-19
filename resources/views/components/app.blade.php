@@ -92,6 +92,7 @@
 </head>
 
 <body data-theme="dark">
+    <canvas id="mainShaderBg" aria-hidden="true"></canvas>
     <div class="mainContent contenedor">
         @include('components.header')
         @include('components.nav')

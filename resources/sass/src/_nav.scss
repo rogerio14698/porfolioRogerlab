@@ -1,4 +1,8 @@
 .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--surface-page);
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -55,7 +59,11 @@
     &[data-enhanced] {
         .nav-toggle { display: flex; }
         ul { display: none; }
-        &.is-open ul { display: flex; }
+        &.is-open ul {
+            display: flex;
+            max-height: calc(100dvh - 80px);
+            overflow-y: auto;
+        }
     }
 
     &.is-open .nav-toggle {

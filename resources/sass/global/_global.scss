@@ -3,6 +3,7 @@
 html {
     box-sizing: border-box;
     scrollbar-gutter: stable;
+    scroll-padding-top: 6rem;
 }
 
 *, *::before, *::after {
@@ -64,7 +65,25 @@ input, textarea { caret-color: var(--text-primary); }
     scrollbar-color: var(--field-border) transparent;
 }
 
+#mainShaderBg {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.18;
+    mix-blend-mode: screen;
+}
+
+body[data-theme="light"] #mainShaderBg {
+    opacity: 0.12;
+    mix-blend-mode: multiply;
+}
+
 .mainContent {
+    position: relative;
+    z-index: 1;
     width: min(100%, 1680px);
     margin-inline: auto;
     padding-inline: var(--page-gutter);

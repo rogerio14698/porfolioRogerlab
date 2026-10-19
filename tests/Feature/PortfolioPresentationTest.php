@@ -24,7 +24,8 @@ class PortfolioPresentationTest extends TestCase
                 ->assertSee('data-language-option="pt"', false)
                 ->assertSee('aria-controls="nav-list"', false)
                 ->assertSee('class="themeBtn', false)
-                ->assertDontSee('<canvas', false);
+                ->assertSee('<canvas id="mainShaderBg" aria-hidden="true">', false)
+                ->assertSee('id="backgroundMotionToggle"', false);
 
             $this->assertSame(
                 1,
@@ -78,5 +79,22 @@ class PortfolioPresentationTest extends TestCase
             ->assertSee('data-section="about"', false)
             ->assertSee('data-i18n="nav.about"', false)
             ->assertSee('<html', false);
+    }
+
+    public function test_internship_narrative_has_translation_hooks(): void
+    {
+        $this->withoutVite();
+        $response = $this->get('/mi-periodo-practicas');
+
+        $response->assertOk();
+        foreach ([
+            'intro.start', 'skills.title', 'skills.technical.label', 'skills.technical.body',
+            'skills.operations.label', 'skills.operations.body', 'skills.development.label',
+            'skills.development.body', 'skills.team.label', 'skills.team.body',
+            'contribution.title', 'contribution.body1', 'contribution.body2',
+        ] as $key) {
+            $response->assertSee('data-i18n="practicas.'.$key.'"', false);
+        }
+        $response->assertSee('data-i18n-aria-label="practicas.modal.close"', false);
     }
 }

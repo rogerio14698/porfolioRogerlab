@@ -354,7 +354,7 @@ document.addEventListener('DOMContentLoaded', function () {
     renderNavToggle();
 
     const canvas = document.getElementById('mainShaderBg');
-    if (!canvas) return;
+    if (!(canvas instanceof HTMLCanvasElement)) return;
 
     function renderNavToggle() {
         var nav = document.querySelector('.nav');
@@ -388,7 +388,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     const gl = canvas.getContext('webgl');
-    if (!gl) return;
+    if (!gl) {
+        console.warn('Background animation unavailable: WebGL is not supported.');
+        return;
+    }
 
     /* ── Helpers ── */
     function createShader(type, source) {
@@ -670,18 +673,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         gl.viewport(0, 0, canvas.width, canvas.height);
     }
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-
-    /* ── Render loop (~30 fps) ── */
-    var lastFrame = 0;
-    var FRAME_INTERVAL = 1000 / 45; // 10 fps cap for testing, set to 16.67 for 60 fps
-
-    function render(time) {
-        requestAnimationFrame(render);
-        if (time - lastFrame < FRAME_INTERVAL) return;
-        lastFrame = time;
-
+    function drawFrame(time) {
         var t = time * 0.0003;
         var w = canvas.width, h = canvas.height;
 
@@ -695,7 +687,7 @@ document.addEventListener('DOMContentLoaded', function () {
         gl.drawArrays(gl.TRIANGLES, 0, 6);
         gl.disableVertexAttribArray(bgPosLoc);
 
-        /* Pass 2 — 64 particles (additive blend) */
+        /* Pass 2 — Particles (additive blend) */
         gl.enable(gl.BLEND);
         gl.blendFunc(gl.ONE, gl.ONE);
         gl.useProgram(pProg);
@@ -710,5 +702,74 @@ document.addEventListener('DOMContentLoaded', function () {
         gl.disableVertexAttribArray(pPartLoc);
     }
 
-    requestAnimationFrame(render);
+    const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const motionToggle = document.getElementById('backgroundMotionToggle');
+    const MOTION_STORAGE_KEY = 'rogerlab-background-paused';
+    let paused = window.localStorage.getItem(MOTION_STORAGE_KEY) === 'true';
+    let reducedMotion = motionPreference.matches;
+    let frameId: number | null = null;
+    let lastFrame: number | null = null;
+    let elapsed = 0;
+    let contextLost = false;
+    const frameInterval = 1000 / 30;
+
+    function canAnimate() {
+        return !paused && !reducedMotion && !document.hidden && !contextLost;
+    }
+
+    function render(time: number) {
+        frameId = null;
+        if (!canAnimate()) return;
+
+        if (lastFrame === null || time - lastFrame >= frameInterval) {
+            elapsed += lastFrame === null ? 0 : Math.min(time - lastFrame, 100);
+            lastFrame = time;
+            drawFrame(elapsed);
+        }
+        frameId = requestAnimationFrame(render);
+    }
+
+    function syncMotion() {
+        if (frameId !== null) {
+            cancelAnimationFrame(frameId);
+            frameId = null;
+        }
+        lastFrame = null;
+        if (motionToggle instanceof HTMLButtonElement) {
+            motionToggle.disabled = reducedMotion || contextLost;
+            motionToggle.setAttribute('aria-pressed', String(!paused && !reducedMotion && !contextLost));
+        }
+        if (canAnimate()) {
+            frameId = requestAnimationFrame(render);
+        }
+    }
+
+    if (motionToggle instanceof HTMLButtonElement) {
+        motionToggle.hidden = false;
+        motionToggle.addEventListener('click', function () {
+            paused = !paused;
+            window.localStorage.setItem(MOTION_STORAGE_KEY, String(paused));
+            syncMotion();
+        });
+    }
+
+    window.addEventListener('resize', function () {
+        resizeCanvas();
+        if (!contextLost) drawFrame(elapsed);
+    });
+    document.addEventListener('visibilitychange', syncMotion);
+    motionPreference.addEventListener('change', function (event) {
+        reducedMotion = event.matches;
+        syncMotion();
+    });
+    canvas.addEventListener('webglcontextlost', function () {
+        contextLost = true;
+        canvas.hidden = true;
+        syncMotion();
+        console.warn('Background animation stopped: WebGL context was lost. Reload to restore it.');
+    });
+
+    resizeCanvas();
+    drawFrame(elapsed);
+    syncMotion();
 });
