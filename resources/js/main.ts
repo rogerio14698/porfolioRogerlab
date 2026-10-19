@@ -736,8 +736,16 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         lastFrame = null;
         if (motionToggle instanceof HTMLButtonElement) {
+            const playing = !paused && !reducedMotion && !contextLost;
+            const labelState = contextLost ? 'unavailable' : reducedMotion ? 'reduced' : playing ? 'pause' : 'play';
             motionToggle.disabled = reducedMotion || contextLost;
-            motionToggle.setAttribute('aria-pressed', String(!paused && !reducedMotion && !contextLost));
+            motionToggle.setAttribute('aria-pressed', String(playing));
+            motionToggle.querySelectorAll<HTMLElement>('[data-motion-label]').forEach(function (label) {
+                label.hidden = label.dataset.motionLabel !== labelState;
+                if (!label.hidden) {
+                    motionToggle.setAttribute('aria-labelledby', label.id);
+                }
+            });
         }
         if (canAnimate()) {
             frameId = requestAnimationFrame(render);

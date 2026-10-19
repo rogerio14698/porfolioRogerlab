@@ -1,23 +1,67 @@
 .asideLeft {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-1);
+    align-items: center;
+    gap: var(--space-2);
     margin: 0;
 
-    span { display: none; }
+    button {
+        gap: var(--space-2);
+        min-width: 44px;
+        min-height: 44px;
+        padding: var(--space-2);
+        flex-shrink: 0;
+
+        &:hover { text-decoration: none; background: var(--surface-raised); }
+        &.active:hover { background: var(--action-bg); }
+        &:active:not(:disabled) { transform: translateY(1px); }
+    }
+
+    .preferenceIcon {
+        display: block;
+        width: 22px;
+        height: 22px;
+        flex-shrink: 0;
+    }
+
+    .preferenceLabel:not([hidden]) {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+    }
+
+    [hidden] { display: none; }
 
     #backgroundMotionToggle {
-        min-height: 44px;
-        padding: var(--space-2) var(--space-3);
-        border: 0;
-        background: var(--surface-raised);
+        background: transparent;
         color: var(--text-primary);
-        font-size: var(--text-small);
 
-        &[hidden] { display: none; }
+        &:hover:not(:disabled) { background: var(--surface-raised); }
+        .motionIcon--pause { display: none; }
+
         &[aria-pressed="true"] {
-            background: var(--action-bg);
-            color: var(--action-text);
+            .motionIcon--play { display: none; }
+            .motionIcon--pause { display: block; }
+        }
+    }
+}
+
+@media (min-width: 48rem) {
+    .asideLeft {
+        button { padding-inline: var(--space-3); }
+
+        .preferenceLabel:not([hidden]) {
+            position: static;
+            width: auto;
+            height: auto;
+            margin: 0;
+            overflow: visible;
+            clip-path: none;
         }
     }
 }

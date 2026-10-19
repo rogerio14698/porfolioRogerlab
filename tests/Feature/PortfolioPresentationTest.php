@@ -25,7 +25,15 @@ class PortfolioPresentationTest extends TestCase
                 ->assertSee('aria-controls="nav-list"', false)
                 ->assertSee('class="themeBtn', false)
                 ->assertSee('<canvas id="mainShaderBg" aria-hidden="true">', false)
-                ->assertSee('id="backgroundMotionToggle"', false);
+                ->assertSee('id="backgroundMotionToggle"', false)
+                ->assertSee('aria-labelledby="darkThemeLabel"', false)
+                ->assertSee('aria-labelledby="lightThemeLabel"', false)
+                ->assertSee('data-i18n="theme.dark"', false)
+                ->assertSee('data-i18n="theme.light"', false)
+                ->assertSee('data-motion-label="play"', false)
+                ->assertSee('data-motion-label="pause"', false)
+                ->assertSee('data-motion-label="reduced"', false)
+                ->assertSee('data-motion-label="unavailable"', false);
 
             $this->assertSame(
                 1,

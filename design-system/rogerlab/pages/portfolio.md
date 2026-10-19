@@ -22,6 +22,14 @@ Inherits [MASTER.md](../MASTER.md). Applies to all portfolio routes.
 - Desktop portrait is alongside identity; mobile portrait follows actions.
 - No nested page scroll regions, fixed-height text panels or clipped copy.
 - Do not enforce two-line headings by truncating or changing original copy.
+- Below 48rem, preferences use moon/sun and play/pause line icons with 44px
+  touch targets. Labels stay available to assistive technology; from 48rem
+  onward, they are also visible. All labels follow the selected ES/EN/PT locale.
+- Playback shows pause while running and play while paused, preserving the
+  saved preference. Reduced motion and WebGL context loss have explicit labels.
+- Sticky navigation uses an opaque page-colored band extending across the
+  frame gutters, including the expanded mobile menu, without blur or particles
+  showing through its surface.
 
 ## Deliberate boundaries
 

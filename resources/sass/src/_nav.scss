@@ -8,6 +8,8 @@
     align-items: center;
     justify-content: space-between;
     gap: var(--space-4);
+    margin-inline: calc(-1 * var(--page-gutter));
+    padding-inline: var(--page-gutter);
     padding-block: var(--space-3);
 
     ul {
