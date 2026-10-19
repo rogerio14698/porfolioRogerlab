@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
+
 class SitemapController extends Controller
 {
     public function index()
@@ -23,23 +25,13 @@ class SitemapController extends Controller
                 'changefreq' => 'monthly',
             ],
             [
-                'loc' => route('articles'),
+                'loc' => route('blog'),
                 'priority' => '0.9',
                 'changefreq' => 'weekly',
             ],
             [
                 'loc' => route('projects'),
                 'priority' => '0.8',
-                'changefreq' => 'monthly',
-            ],
-            [
-                'loc' => route('juegos'),
-                'priority' => '0.6',
-                'changefreq' => 'monthly',
-            ],
-            [
-                'loc' => route('juegos.ahorcado'),
-                'priority' => '0.6',
                 'changefreq' => 'monthly',
             ],
             [
@@ -63,6 +55,19 @@ class SitemapController extends Controller
                 'changefreq' => 'yearly',
             ],
         ];
+
+        foreach (Blog::published()->select(['link', 'translations'])->cursor() as $blog) {
+            foreach (config('blog.locales') as $locale) {
+                if ($locale !== 'es' && empty($blog->translations[$locale]['title'])) {
+                    continue;
+                }
+                $urls[] = [
+                    'loc' => route('blog.show', ['blog' => $blog->link, 'lang' => $locale]),
+                    'priority' => '0.7',
+                    'changefreq' => 'monthly',
+                ];
+            }
+        }
 
         return response()
             ->view('sitemap', ['urls' => $urls])

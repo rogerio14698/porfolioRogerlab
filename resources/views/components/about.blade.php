@@ -1,8 +1,11 @@
 <section class="seccionAboutMe">
+    <h1 class="pageTitle" data-i18n="nav.about">Skills</h1>
     {{--Aqui va la seccion de conociminetos --}}
     @include('components.conocimientos')
 
     {{-- Esta sección la tengo que dar una vuelta ver como estructuro esto. --}}
+    <div class="aboutNarrative">
+    <div>
     <h2 data-i18n="about.methodology.title">¿Cuál es mi metodología de trabajo?</h2>
     <p data-i18n="about.methodology.body_1">
         No me limito a escribir código. Primero intento entender el problema, después propongo
@@ -12,7 +15,8 @@
         Trabajo con control de versiones, procuro documentar las decisiones importantes y doy valor
         a un código que se pueda leer, revisar y extender sin fricción innecesaria.
     </p>
-    <br>
+    </div>
+    <div>
     <h2 data-i18n="about.specialization.title">¿En qué me estoy especializando ahora?</h2>
     <p data-i18n="about.specialization.body_1">
         Ahora mismo estoy profundizando en Laravel, en la calidad del backend PHP y en la parte
@@ -24,6 +28,8 @@
         arquitectura y testing y participar en equipos donde pueda aprender de desarrolladores con más recorrido.
     </p>
 
+    </div>
+    </div>
 {{--     <h2 data-i18n="about.repository.title">¿Puedo usar tus códigos del repositorio?</h2>
     <p data-i18n="about.repository.body_1">
         Claro, son proyectos funcionales,

@@ -12,14 +12,15 @@ if (! function_exists('renderSection')) {
         ?string $pageTitle = null,
         ?string $pageMetaDescription = null,
         int $status = 200,
-        ?string $robotsMeta = null
+        ?string $robotsMeta = null,
+        array $data = []
     ): Response {
-        $view = view('index', compact(
+        $view = view('index', array_merge($data, compact(
             'section',
             'pageTitle',
             'pageMetaDescription',
             'robotsMeta'
-        ));
+        )));
 
         return response($view, $status);
     }

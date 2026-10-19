@@ -2,50 +2,50 @@
     <h1 data-i18n="practicas.title">Prácticas FCT como desarrollador de aplicaciones web en MON EVENT SL</h1>
 
     <p>
-        Entre febrero y abril de 2026, participé en proyectos web en entorno real aportando mejoras en rendimiento,
+        <span data-i18n="practicas.intro.start">Entre febrero y abril de 2026, participé en proyectos web en entorno real aportando mejoras en rendimiento,
         estabilidad y mantenimiento. Desde una perspectiva <strong>SEO</strong>, mis intervenciones se centraron en
         optimización de front-end, corrección de rutas y consistencia visual en producción. Desde una perspectiva
         <strong>RRHH</strong>, destaqué por adaptación rápida, autonomía técnica y capacidad para trabajar con código
-        heredado.
+        heredado.</span>
     </p>
 
     <div>
-        <h2>Competencias clave demostradas</h2>
+        <h2 data-i18n="practicas.skills.title">Competencias clave demostradas</h2>
         <p>
-            <strong>Optimización técnica orientada a negocio:</strong> resolución de incidencias en CSS, rutas y
+            <strong data-i18n="practicas.skills.technical.label">Optimización técnica orientada a negocio:</strong> <span data-i18n="practicas.skills.technical.body">resolución de incidencias en CSS, rutas y
             despliegue,
             con impacto directo en calidad percibida, experiencia de usuario y mantenimiento de la web en local y
-            servidor.
+            servidor.</span>
         </p>
         <p>
-            <strong>Entornos, sistemas y operaciones:</strong> configuración y reconstrucción de contenedores
+            <strong data-i18n="practicas.skills.operations.label">Entornos, sistemas y operaciones:</strong> <span data-i18n="practicas.skills.operations.body">configuración y reconstrucción de contenedores
             <strong>Docker</strong>, trabajo sobre <strong>Linux</strong> y soporte de despliegue con
             <strong>PuTTY</strong>
-            y <strong>FileZilla</strong>.
+            y <strong>FileZilla</strong>.</span>
         </p>
         <p>
-            <strong>Desarrollo y refactorización:</strong> mejora de módulos con <strong>AJAX</strong>, ajustes de
+            <strong data-i18n="practicas.skills.development.label">Desarrollo y refactorización:</strong> <span data-i18n="practicas.skills.development.body">mejora de módulos con <strong>AJAX</strong>, ajustes de
             permisos,
-            resolución de errores en comentarios/fichaje y modernización de código legado sin documentación completa.
+            resolución de errores en comentarios/fichaje y modernización de código legado sin documentación completa.</span>
         </p>
         <p>
-            <strong>Trabajo colaborativo y madurez profesional:</strong> gestión de ramas y conflictos en
+            <strong data-i18n="practicas.skills.team.label">Trabajo colaborativo y madurez profesional:</strong> <span data-i18n="practicas.skills.team.body">gestión de ramas y conflictos en
             <strong>GitHub</strong>, coordinación de cambios en producción y elaboración de documentación técnica final
             para
-            facilitar continuidad y transferencia de conocimiento.
+            facilitar continuidad y transferencia de conocimiento.</span>
         </p>
     </div>
 
     <hr>
-    <h2>Aporte al equipo y valoración profesional</h2>
-    <p>
+    <h2 data-i18n="practicas.contribution.title">Aporte al equipo y valoración profesional</h2>
+    <p data-i18n="practicas.contribution.body1">
         Mi desempeño fue consistente durante todo el periodo: identifiqué bloqueos técnicos, propuse soluciones viables
         y
         ejecuté mejoras en ciclos cortos. La trazabilidad del trabajo semanal refleja responsabilidad, aprendizaje
         continuo
         y orientación clara a resultados.
     </p>
-    <p>
+    <p data-i18n="practicas.contribution.body2">
         Como cierre de prácticas, dejé una base técnica más estable y documentada. Esta experiencia consolida mi perfil
         como
         desarrollador junior con potencial de crecimiento en equipos de producto, mantenimiento evolutivo y entornos de
@@ -64,7 +64,7 @@
         <div class="practicasModal__backdrop" data-practicas-close></div>
         <div class="practicasModal__panel" role="document">
             <button type="button" class="practicasModal__close" id="practicasModalClose" data-practicas-close
-                aria-label="Cerrar ventana">×</button>
+                aria-label="Cerrar ventana" data-i18n-aria-label="practicas.modal.close">×</button>
 
             <h3 id="practicasModalTitle">Seguimiento detallado de prácticas</h3>
 

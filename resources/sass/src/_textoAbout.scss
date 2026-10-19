@@ -1,342 +1,116 @@
-@use "../global/variables" as v;
-@use "../global/tools" as t;
-
 .hero {
     display: grid;
-    grid-template-columns: minmax(240px, 0.92fr) minmax(300px, 1.08fr);
-    gap: 12px;
-    padding: 12px 14px 14px;
-    min-height: clamp(420px, calc(100vh - 260px), 560px);
+    gap: var(--section-space);
 
-    @media (max-width: 768px) {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        min-height: auto;
-        padding: 12px;
-    }
     .heroMedia {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        text-align: left;
-        border-right: 1px solid color-mix(in srgb, var(--colorBorde) 55%, transparent);
-        padding: 10px 14px 10px 10px;
-        margin-right: 0;
-        @media (max-width: 768px) {
-            border-right: none;
-            margin-right: 0;
-            margin-bottom: 6px;
-            padding: 8px 0;
-        }
-        .heroName {
-            font-size: clamp(0.8rem, 0.72rem + 0.35vw, 0.98rem);
-            font-family: v.$fuenteTexto;
-            font-weight: v.$grosorTitulo;
-            padding: 2px 0;
-            margin-bottom: 6px;
-            margin-top: 0;
-            letter-spacing: 0.08em;
-            opacity: 0.88;
-
-            &::before {
-                content: ">";
-                margin-right: 0.5rem;
-                opacity: 0.6;
-            }
-
-        }
-        h1 {
-            font-size: clamp(0.98rem, 0.9rem + 0.6vw, 1.28rem);
-            font-family: v.$fuenteTexto;
-            font-weight: v.$grosorTitulo;
-            text-decoration: none;
-            padding: 6px 0 0 0;
-            margin-bottom: 10px;
-            line-height: 1.35;
-        }
-        .heroHeadline {
-            font-size: clamp(0.82rem, 0.78rem + 0.3vw, 0.95rem);
-            font-family: v.$fuenteTexto;
-            font-weight: v.$grosorTitulo;
-            color: var(--_texto);
-            line-height: 1.35;
-            margin-bottom: 10px;
-        }
-        .heroFoto {
-            align-self: center;
-            border: 1px solid var(--colorBorde);
-            border-radius: 8px;
-            width: clamp(84px, 6.4vw, 104px);
-            height: auto;
-            box-shadow: 0 0 0 transparent;
-            filter: grayscale(0.12) contrast(1.02);
-            margin-bottom: 10px;
-        }
-        .heroFoto:hover {
-            transform: translateY(-1px);
-            transition: all 0.2s ease;
-            box-shadow: 0 0 0 1px color-mix(in srgb, var(--colorBorde) 40%, transparent);
-        }
-        .heroeActions {
-            display:grid;
-            grid-template-columns: repeat(2, 1fr);
-            justify-content: space-between;
-            align-items: center;
-            gap: 6px;
-            margin-top: 8px;
-            margin-bottom: 8px;
-
-            a {
-                padding: 7px 9px;
-            }
-        }
-        .heroStack{
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            align-items: stretch;
-            width: 100%;
-            gap: 4px;
-            padding: 7px 0;
-            span {
-                display: inline-flex;
-                align-items: center;
-                font-size: clamp(0.7rem, 0.68rem + 0.12vw, 0.84rem);
-                font-family: v.$fuenteTexto;
-                font-weight: v.$grosorTexto;
-                color: var(--_texto);
-                opacity: 0.8;
-                padding: 2px 0;
-                margin-bottom: 0;
-                width: auto;
-            }
-
-            @media (max-width: 768px) {
-                display: grid;
-                grid-template-columns: 1fr;
-                align-items: center;
-                justify-content: center;
-                width: 100%;
-                gap: 4px;
-
-            }
-        }
-        
-
-        
-    }
-}
-
-//Este es el texto con animacion del incio.
-.textoAbout {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    text-align: left;
-    margin-left: auto;
-    padding: 8px 8px 6px;
-    overflow-y: auto;
-    border-left: 1px solid color-mix(in srgb, var(--colorBorde) 22%, transparent);
-   
-
-    @media (max-width: 768px) {
-        border-left: none;
-        padding: 8px 0;
-    }
-
-    p {
-        font-size: clamp(0.9rem, 0.86rem + 0.18vw, 1rem);
-        line-height: 1.48;
-        font-family: v.$fuenteTexto;
-        font-weight: v.$grosorTexto;
-        color: var(--_texto);
-        max-width: 60ch;
-
-        & + p {
-            margin-top: 0.8rem;
-            padding-top: 0.6rem;
-            border-top: 1px dashed color-mix(in srgb, var(--colorBorde) 40%, transparent);
-        }
-    }
-}
-//Fin del texto del inicio
-
-.seccionAboutMe {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: justify;
-    margin-left: auto;
-    overflow-y: auto;
-    padding: 24px;
-    //Seccion de conocimientos.
-    .conocimientos {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 14px;
-        margin-bottom: 22px;
-
-        @media (max-width: 768px) {
-            grid-template-columns: repeat(1, 1fr);
-            margin-left: 0;
-        }
-
-        .conocimientosSeccione {
-            border-left: 1px solid color-mix(in srgb, var(--colorBorde) 60%, transparent);
-            padding: 10px 12px;
-            box-shadow: none;
-            gap: 10px;
-            background-color: color-mix(in srgb, var(--_fondoPanel) 92%, transparent);
-
-            h2 {
-                font-size: t.fluido(1.15rem, 1.6rem);
-                text-decoration: none;
-                letter-spacing: 0.04em;
-            }
-
-            ul {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 0;
-                margin: 0;
-            }
-            li {
-                list-style: none;
-                padding: 3px 0;
-                margin: 0;
-                font-size: t.fluido(0.875rem, 1.125rem);
-                font-family: v.$fuenteTexto;
-                font-weight: v.$grosorTexto;
-            }
-            li:hover {
-                background-color: var(--colorBorde);
-                color: var(--_fondoPanel);
-                cursor: pointer;
-            }
-            li:active {
-                transform: translate(0, 2px);
-            }
-        }
+        gap: var(--space-8);
+        align-items: center;
     }
 
-    //Finde la seccion de conocmientos.
+    .heroCopy {
+        min-width: 0;
+        h1 { font-size: var(--text-display); max-width: 22ch; }
+    }
 
-    .contactPdfRow {
-        display: flex;
-        flex-direction: row;
+    .heroName {
+        margin-top: var(--space-6);
+        font-size: var(--text-small);
+    }
+
+    .heroHeadline {
+        margin-top: var(--space-4);
+        max-width: 42ch;
+        font-size: var(--text-lead);
+        line-height: 1.5;
+    }
+
+    .heroFoto {
         width: 100%;
-        max-width: 520px;
-        justify-content: space-between;
-        align-items: center;
-        gap: 12px;
+        max-height: 560px;
+        aspect-ratio: 4 / 5;
+        object-fit: cover;
+        object-position: center 35%;
+        border-radius: var(--radius-media);
+        background: var(--surface-raised);
+    }
 
-        h3 {
-            font-size: t.fluido(1.15rem, 1.6rem);
-            font-family: v.$fuenteTexto;
-            font-weight: v.$grosorTitulo;
-            text-decoration: none;
-            padding: 4px 0;
-            margin-bottom: 12px;
-            letter-spacing: 0.04em;
-        }
-        @media (max-width: 768px) {
-            display: flex;
-            width: 100%;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 16px;
-        }
-        .contactPdfTitle {
-            @media (max-width: 768px) {
-                width: 100%;
-                display: flex;
-                justify-content: center;
-                margin-bottom: 16px;
-                justify-content: center;
-                align-items: center;
-            }
-        }
+    .heroeActions {
+        background: var(--surface-raised);
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-2);
+        margin-top: var(--space-8);
 
         .contactPdfLink {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 32px;
-            padding: 6px 10px;
-            border: 1px solid color-mix(in srgb, var(--colorBorde) 80%, transparent);
-            color: var(--_texto);
-            text-decoration: none;
-            font-family: v.$fuenteTexto;
-            font-size: t.fluido(0.78rem, 0.95rem);
-            transition: all 0.3s ease;
-            margin-bottom: 8px;
-            margin-top: 8px;
-            &:hover {
-                background-color: var(--colorBorde);
-                color: var(--_fondoPanel);
-            }
+            background: transparent;
+            padding-inline: var(--space-3);
         }
     }
 
-    h2 {
-        font-size: t.fluido(1.2rem, 1.75rem);
-        font-family: v.$fuenteTexto;
-        font-weight: v.$grosorTitulo;
-        text-decoration: none;
-        padding: 4px 0;
-        margin-bottom: 12px;
-        letter-spacing: 0.04em;
-    }
-    p {
-        font-size: t.fluido(0.9rem, 1.05rem);
-        font-family: v.$fuenteTexto;
-        font-weight: v.$grosorTexto;
-        text-align: justify;
-        padding: 4px 0;
-        line-height: 1.5;
-
-        &::first-letter {
-            font-size: 130%;
-        }
-    }
-    //Boton de enlace al github
-    button {
+    .heroStack {
         display: flex;
-        justify-content: space-between;
-        font-size: 0.9rem;
-        font-family: v.$fuenteTexto;
-        padding: 6px 8px;
-        cursor: pointer;
-        border: 1px solid color-mix(in srgb, var(--colorBorde) 75%, transparent);
-        background-color: transparent;
-        color: var(--_texto);
-        transition:
-            background-color 0.3s ease,
-            color 0.3s ease;
-        width: 100%;
+        flex-wrap: wrap;
+        gap: var(--space-2) var(--space-6);
+        margin-top: var(--space-8);
+        max-width: 65ch;
+        font-size: var(--text-small);
+        color: var(--text-secondary);
+    }
+}
 
-        &:hover {
-            background-color: var(--colorBorde);
-            color: var(--_fondoPanel);
-        }
-        &:active {
-            transform: translate(0, 2px);
-        }
+.textoAbout {
+    display: grid;
+    gap: var(--space-6);
+    padding: var(--space-8);
+    background: var(--surface-raised);
+
+    p { max-width: 65ch; }
+}
+
+.seccionAboutMe {
+    display: grid;
+    gap: var(--space-12);
+
+    > h1 { font-size: var(--text-display); }
+
+    .conocimientos {
+        display: grid;
+        gap: var(--space-8);
     }
 
-    //La mediaquerie.
-    @media (max-width: 768px) {
-        width: 100%;
-        h2 {
-            font-size: t.fluido(1.1rem, 1.4rem);
-        }
-        p {
-            font-size: t.fluido(0.85rem, 1rem);
-        }
+    .conocimientosSeccione {
+        display: grid;
+        align-content: start;
+        gap: var(--space-6);
+        padding: var(--space-6);
+        background: var(--surface-raised);
+
+        h2 { font-size: var(--text-heading); }
+        ul { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-6); }
+        li { font-size: var(--text-body); }
     }
+}
+
+.aboutNarrative {
+    display: grid;
+    gap: var(--space-12);
+
+    h2 { font-size: var(--text-heading); margin-bottom: var(--space-6); }
+    p { max-width: 65ch; }
+    p + p { margin-top: var(--space-4); }
+}
+
+@media (min-width: 48rem) {
+    .hero {
+        .heroMedia { grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.8fr); gap: var(--space-12); }
+        .heroFoto { height: 100%; min-height: 420px; }
+    }
+    .textoAbout { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-12); padding: var(--space-12); }
+    .seccionAboutMe .conocimientos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .aboutNarrative { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (min-width: 80rem) {
+    .seccionAboutMe .conocimientos { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }

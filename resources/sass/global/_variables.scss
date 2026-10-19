@@ -32,18 +32,18 @@ $borde: 2px solid $colorBorde;
 
 // --- Fuentes (Tipografía) ---
 // Nota: Corregido el 'sans-serif3' que tenías por 'sans-serif'
-$fuenteTitulo: 'Saira Stencil', sans-serif; 
-$grosorTitulo: 100;
+$fuenteTitulo: 'Big Shoulders', sans-serif;
+$grosorTitulo: 600;
 $estiloTitulo: normal;
 
-$fuenteTexto: 'Kode Mono', monospace;
+$fuenteTexto: 'Public Sans', sans-serif;
 $grosorTexto: 400;
 $estiloTexto: normal;
 
 // --- Media Queries: Tamaños (1370px) ---
 $tamanoTituloDesktopXL: 2.6rem;
 $tamanoEnlacesDesktopXL: 1.2rem;
-$tamanoTextoDesktopXL: .8rem;
+$tamanoTextoDesktopXL: 1rem;
 
 // --- Tamaños Base ---
 $tamanoTitulo: $tamanoTituloDesktopXL;

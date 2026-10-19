@@ -18,7 +18,9 @@
         document.body.dataset.theme = theme;
 
         document.querySelectorAll('.themeBtn').forEach(function (btn) {
-            btn.classList.toggle('active', btn.getAttribute('data-theme') === theme);
+            const isActive = btn.getAttribute('data-theme') === theme;
+            btn.classList.toggle('active', isActive);
+            btn.setAttribute('aria-pressed', String(isActive));
         });
 
         window.localStorage.setItem(STORAGE_KEY, theme);

@@ -4,6 +4,7 @@
             data-i18n-alt="projects.n8n-linkedin.alt">
     </div>
 
+    <div class="project-card__body">
     <div class="titleProject">
         <h2 data-i18n="projects.n8n-linkedin.title">N8n LinkedIn Workflow Búsqueda Empleo</h2>
         <div class="project-card__meta">
@@ -37,17 +38,18 @@
             personalización en el proceso de aplicación.
         </p>
     </div>
-    <div class="galeria galeria--n8n">
-        <button type="button" class="galeria__item" aria-label="Ampliar captura del proyecto n8n LinkedIn">
-            <img src="{{ asset('img/workflow-linkedin.png') }}"
-                alt="Captura del proyecto N8n LinkedIn Workflow Búsqueda Empleo"
-                data-i18n-alt="projects.n8n-linkedin.preview_alt">
-        </button>
-    </div>
     <div class="alinearButton project-card__actions">
         <a class="btnRepo" href="https://github.com/rogerio14698/n8n-LinkedingJob" target="_blank"
             rel="noopener noreferrer" data-i18n="about.repository.button">Repositorio</a>
         <a class="btnWeb" href="{{ asset('n8n-JSON/workFlow-BusquedaEmpleo.json') }}"
             download="workFlow-BusquedaEmpleo.json" data-i18n="projects.n8n-linkedin.download">Descargar flujo</a>
+    </div>
+    </div>
+    <div class="galeria galeria--n8n">
+        <button type="button" class="galeria__item" aria-label="Ampliar captura del proyecto n8n LinkedIn">
+            <img src="{{ asset('img/workflow-linkedin.png') }}"
+                alt="Captura del proyecto N8n LinkedIn Workflow Búsqueda Empleo"
+                data-i18n-alt="projects.n8n-linkedin.preview_alt" loading="lazy" decoding="async">
+        </button>
     </div>
 </article>

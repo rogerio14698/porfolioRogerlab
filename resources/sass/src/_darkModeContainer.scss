@@ -1,79 +1,23 @@
-@use "../global/variables" as v;
-
 .asideLeft {
-    $aside-width: clamp(30px, 4vw, 50px);
-    $aside-height: 300px;
-    position: absolute;
-    top: 50%;
-    left: calc(-1 * $aside-width - 3px);
-    transform: translateY(-50%);
-    padding: 4px;
-    width: $aside-width;
-    height: $aside-height;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 6px;
-    overflow: hidden;
-    //background-color: v.$fondo;
-    transition: background-color 0.5s ease;
-    font-family: v.$fuenteTexto;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+    margin: 0;
 
-    button {
-        writing-mode: vertical-rl;
-        width: 100%;
-        padding: 2px;
-        font-size: clamp(10px, 3vw, 15px);
-        opacity: 0.45;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        flex: 1 1 0;
-        min-height: 0;
-    }
-    button.active {
-        opacity: 1;
-        //border-left: 2px solid v.$colorBordeLight;
+    span { display: none; }
 
-        span {
-            margin: 5px;
-        }
-        .figurabtnDark {
-            display: block;
-            width: 20px;
-            height: 20px;
-            background-color: v.$colorbtnDark;
-            border: none;
-        }
-        .figurabtnLight {
-            display: block;
-            width: 20px;
-            height: 20px;
-            background-color: v.$colorbtnLight;
-            border: none;
-        }
-    }
+    #backgroundMotionToggle {
+        min-height: 44px;
+        padding: var(--space-2) var(--space-3);
+        border: 0;
+        background: var(--surface-raised);
+        color: var(--text-primary);
+        font-size: var(--text-small);
 
-    //Estilos para movil: cambia de posicion y se queda por debajo del header.
-    @media (max-width: 768px) {
-        position: static;
-        left: auto;
-        top: auto;
-        transform: none;
-        width: 100%;
-        height: auto;
-        padding: 0;
-        flex-direction: row;
-        justify-content: space-around;
-        background-color: transparent;
-        border-bottom: 1px solid var(--colorBorde);
-
-        button {
-            writing-mode: horizontal-tb;
-            width: auto;
-            height: auto;
-            padding: 8px 12px;
+        &[hidden] { display: none; }
+        &[aria-pressed="true"] {
+            background: var(--action-bg);
+            color: var(--action-text);
         }
     }
 }

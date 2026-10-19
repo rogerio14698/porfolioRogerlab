@@ -4,6 +4,7 @@
             data-i18n-alt="projects.time.alt">
     </div>
 
+    <div class="project-card__body">
     <div class="titleProject">
         <h2 data-i18n="projects.time.title">Gestor Fichaje | AION</h2>
         <div class="project-card__meta">
@@ -26,10 +27,11 @@
         <p data-i18n="projects.time.body_2">Revisé procesos críticos de negocio, depuré reglas de fichaje y mejoré la
             capa de interfaz con Blade + JavaScript para acelerar la operación diaria del usuario final.</p>
     </div>
-    <div class="galeria" data-gallery="gestor-fichaje" data-base-src="{{ url('img/GestorFichaje') }}"
-        data-extension=".png" data-count="9" aria-label="Galeria de capturas del proyecto Gestor Fichaje">
-    </div>
     <div class="project-card__actions">
         <span class="project-card__internal">Proyecto interno</span>
+    </div>
+    </div>
+    <div class="galeria" data-gallery="gestor-fichaje" data-base-src="{{ url('img/GestorFichaje') }}"
+        data-extension=".png" data-count="9" aria-label="Galeria de capturas del proyecto Gestor Fichaje">
     </div>
 </article>

@@ -75,20 +75,24 @@ function createGestorFichajeLightbox() {
     lightbox.id = 'gfLightbox';
     lightbox.className = 'gfLightbox';
     lightbox.hidden = true;
+    var returnFocus: HTMLElement | null = null;
+    var previousOverflow = '';
     lightbox.innerHTML = [
-        '<button type="button" class="gfLightbox__backdrop" aria-label="Cerrar galeria" data-gf-close></button>',
-        '<div class="gfLightbox__panel" role="dialog" aria-modal="true" aria-label="Galeria del proyecto">',
+        '<button type="button" class="gfLightbox__backdrop" aria-label="Cerrar galeria" tabindex="-1" data-gf-close></button>',
+        '<div class="gfLightbox__panel" role="dialog" aria-modal="true" aria-label="Galeria del proyecto" tabindex="-1">',
         '  <img class="gfLightbox__img" src="" alt="">',
         '  <div class="gfLightbox__controls">',
-        '    <button type="button" class="gfLightbox__btn" data-gf-prev>&larr;</button>',
+        '    <button type="button" class="gfLightbox__btn" aria-label="Anterior" data-gf-prev>&larr;</button>',
         '    <button type="button" class="gfLightbox__btn" data-gf-close>Cerrar</button>',
-        '    <button type="button" class="gfLightbox__btn" data-gf-next>&rarr;</button>',
+        '    <button type="button" class="gfLightbox__btn" aria-label="Siguiente" data-gf-next>&rarr;</button>',
         '  </div>',
         '</div>'
     ].join('');
 
     function closeLightbox() {
         lightbox.hidden = true;
+        document.body.style.overflow = previousOverflow;
+        returnFocus?.focus();
     }
 
     function renderActive() {
@@ -131,8 +135,23 @@ function createGestorFichajeLightbox() {
         }
 
         if (event.key === 'Escape') {
+            event.preventDefault();
             closeLightbox();
             return;
+        }
+
+        if (event.key === 'Tab') {
+            var controls = Array.from(lightbox.querySelectorAll<HTMLButtonElement>('.gfLightbox__controls button'))
+                .filter(function (button) { return button.offsetParent !== null; });
+            var first = controls[0];
+            var last = controls[controls.length - 1];
+            if (event.shiftKey && document.activeElement === first) {
+                event.preventDefault();
+                last?.focus();
+            } else if (!event.shiftKey && document.activeElement === last) {
+                event.preventDefault();
+                first?.focus();
+            }
         }
 
         if (event.key === 'ArrowLeft') {
@@ -150,6 +169,10 @@ function createGestorFichajeLightbox() {
     });
 
     lightbox.openGallery = function (images, startIndex) {
+        if (lightbox.hidden) {
+            returnFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+            previousOverflow = document.body.style.overflow;
+        }
         gestorFichajeLightboxState.images = images;
         gestorFichajeLightboxState.activeIndex = startIndex;
 
@@ -164,6 +187,8 @@ function createGestorFichajeLightbox() {
 
         renderActive();
         lightbox.hidden = false;
+        document.body.style.overflow = 'hidden';
+        lightbox.querySelector<HTMLButtonElement>('.gfLightbox__controls [data-gf-close]')?.focus();
     };
 
     document.body.appendChild(lightbox);
@@ -329,7 +354,7 @@ document.addEventListener('DOMContentLoaded', function () {
     renderNavToggle();
 
     const canvas = document.getElementById('mainShaderBg');
-    if (!canvas) return;
+    if (!(canvas instanceof HTMLCanvasElement)) return;
 
     function renderNavToggle() {
         var nav = document.querySelector('.nav');
@@ -339,9 +364,19 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
+        nav.setAttribute('data-enhanced', 'true');
+
         toggle.addEventListener('click', function () {
             var isOpen = nav.classList.toggle('is-open');
             toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+
+        nav.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape' && nav.classList.contains('is-open')) {
+                nav.classList.remove('is-open');
+                toggle.setAttribute('aria-expanded', 'false');
+                toggle.focus();
+            }
         });
 
         nav.querySelectorAll('a[data-partial-nav]').forEach(function (link) {
@@ -353,7 +388,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     const gl = canvas.getContext('webgl');
-    if (!gl) return;
+    if (!gl) {
+        console.warn('Background animation unavailable: WebGL is not supported.');
+        return;
+    }
 
     /* ── Helpers ── */
     function createShader(type, source) {
@@ -635,18 +673,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         gl.viewport(0, 0, canvas.width, canvas.height);
     }
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-
-    /* ── Render loop (~30 fps) ── */
-    var lastFrame = 0;
-    var FRAME_INTERVAL = 1000 / 45; // 10 fps cap for testing, set to 16.67 for 60 fps
-
-    function render(time) {
-        requestAnimationFrame(render);
-        if (time - lastFrame < FRAME_INTERVAL) return;
-        lastFrame = time;
-
+    function drawFrame(time) {
         var t = time * 0.0003;
         var w = canvas.width, h = canvas.height;
 
@@ -660,7 +687,7 @@ document.addEventListener('DOMContentLoaded', function () {
         gl.drawArrays(gl.TRIANGLES, 0, 6);
         gl.disableVertexAttribArray(bgPosLoc);
 
-        /* Pass 2 — 64 particles (additive blend) */
+        /* Pass 2 — Particles (additive blend) */
         gl.enable(gl.BLEND);
         gl.blendFunc(gl.ONE, gl.ONE);
         gl.useProgram(pProg);
@@ -675,5 +702,74 @@ document.addEventListener('DOMContentLoaded', function () {
         gl.disableVertexAttribArray(pPartLoc);
     }
 
-    requestAnimationFrame(render);
+    const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const motionToggle = document.getElementById('backgroundMotionToggle');
+    const MOTION_STORAGE_KEY = 'rogerlab-background-paused';
+    let paused = window.localStorage.getItem(MOTION_STORAGE_KEY) === 'true';
+    let reducedMotion = motionPreference.matches;
+    let frameId: number | null = null;
+    let lastFrame: number | null = null;
+    let elapsed = 0;
+    let contextLost = false;
+    const frameInterval = 1000 / 30;
+
+    function canAnimate() {
+        return !paused && !reducedMotion && !document.hidden && !contextLost;
+    }
+
+    function render(time: number) {
+        frameId = null;
+        if (!canAnimate()) return;
+
+        if (lastFrame === null || time - lastFrame >= frameInterval) {
+            elapsed += lastFrame === null ? 0 : Math.min(time - lastFrame, 100);
+            lastFrame = time;
+            drawFrame(elapsed);
+        }
+        frameId = requestAnimationFrame(render);
+    }
+
+    function syncMotion() {
+        if (frameId !== null) {
+            cancelAnimationFrame(frameId);
+            frameId = null;
+        }
+        lastFrame = null;
+        if (motionToggle instanceof HTMLButtonElement) {
+            motionToggle.disabled = reducedMotion || contextLost;
+            motionToggle.setAttribute('aria-pressed', String(!paused && !reducedMotion && !contextLost));
+        }
+        if (canAnimate()) {
+            frameId = requestAnimationFrame(render);
+        }
+    }
+
+    if (motionToggle instanceof HTMLButtonElement) {
+        motionToggle.hidden = false;
+        motionToggle.addEventListener('click', function () {
+            paused = !paused;
+            window.localStorage.setItem(MOTION_STORAGE_KEY, String(paused));
+            syncMotion();
+        });
+    }
+
+    window.addEventListener('resize', function () {
+        resizeCanvas();
+        if (!contextLost) drawFrame(elapsed);
+    });
+    document.addEventListener('visibilitychange', syncMotion);
+    motionPreference.addEventListener('change', function (event) {
+        reducedMotion = event.matches;
+        syncMotion();
+    });
+    canvas.addEventListener('webglcontextlost', function () {
+        contextLost = true;
+        canvas.hidden = true;
+        syncMotion();
+        console.warn('Background animation stopped: WebGL context was lost. Reload to restore it.');
+    });
+
+    resizeCanvas();
+    drawFrame(elapsed);
+    syncMotion();
 });

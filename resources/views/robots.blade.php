@@ -1,5 +1,7 @@
 User-agent: *
 Disallow: /admin
+Disallow: /login
+Disallow: /logout
 Disallow: /api
 Disallow: /test
 Disallow: /debug

@@ -1,115 +1,26 @@
-@use "../global/variables" as v;
-
 .legalSection {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
+    display: grid;
+    gap: var(--space-6);
     width: min(100%, 920px);
-    margin: 0 auto;
-    padding: 20px 18px 24px;
-    position: relative;
-    max-height: 100vh;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    text-align: justify;
-    box-shadow: none;
+    margin-inline: auto;
 
-    h1,
-    h2,
-    h3 {
-        font-family: v.$fuenteTexto;
-        font-weight: v.$grosorTitulo;
-        text-decoration: none;
-        text-wrap: balance;
-        letter-spacing: 0.03em;
-    }
+    h1 { font-size: var(--text-display); margin-bottom: var(--space-6); }
+    h2 { font-size: var(--text-heading); margin-top: var(--space-6); }
+    h3 { font-size: var(--text-lead); margin-top: var(--space-4); }
+    p { max-width: 70ch; }
+    ul { list-style: disc; padding-left: var(--space-6); }
+    li + li { margin-top: var(--space-3); }
+    hr { border: 0; margin-block: var(--space-4); }
+    a { text-decoration: underline; overflow-wrap: anywhere; }
 
-    h1 {
-        font-size: clamp(1.4rem, 2.3vw, 2.2rem);
-        margin-bottom: 4px;
-    }
-    h2 {
-        font-size: clamp(1.1rem, 1.5vw, 1.4rem);
-        margin-top: 10px;
-    }
-    h3 {
-        font-size: clamp(1rem, 1.25vw, 1.15rem);
-        margin-top: 4px;
-    }
-
-    p,
-    li,
-    th,
-    td {
-        font-family: v.$fuenteTexto;
-        font-size: v.$tamanoTexto;
-        font-weight: v.$grosorTexto;
-        line-height: 1.7;
-        color: var(--_texto);
-    }
-
-    p {
-        text-align: justify;
-        max-width: 72ch;
-    }
-    ul {
-        list-style: disc;
-        padding-left: 20px;
-        margin: 0;
-    }
-    li + li {
-        margin-top: 8px;
-    }
-    hr {
-        width: 100%;
-        border: 0;
-        border-top: 1px solid
-            color-mix(in srgb, var(--colorBorde) 55%, transparent);
-        margin: 8px 0;
-    }
-
-    &__tableWrap {
-        width: 100%;
-        overflow-x: auto;
-        border: 1px solid color-mix(in srgb, var(--colorBorde) 45%, transparent);
-        background: color-mix(in srgb, var(--_fondoPanel) 88%, transparent);
-        border-radius: 12px;
-    }
-
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        min-width: 420px;
-    }
-
-    th,
-    td {
-        padding: 12px 14px;
+    &__tableWrap { width: 100%; overflow-x: auto; background: var(--surface-raised); }
+    table { width: 100%; border-collapse: collapse; }
+    th, td {
+        padding: var(--space-4);
         text-align: left;
         vertical-align: top;
-        border-bottom: 1px solid
-            color-mix(in srgb, var(--colorBorde) 35%, transparent);
+        border-bottom: 1px solid var(--field-border);
+        overflow-wrap: anywhere;
     }
-
-    th {
-        background-color: color-mix(
-            in srgb,
-            var(--_fondoPanel) 70%,
-            transparent
-        );
-    }
-
-    &--privacy,
-    &--terms,
-    &--cookies {
-        max-height: 100vh;
-    }
-
-    @media (max-width: 768px) {
-        width: 100%;
-        max-height: 100vh;
-        padding: 16px 14px 18px;
-        border-radius: 14px;
-    }
+    th { font-weight: 600; }
 }

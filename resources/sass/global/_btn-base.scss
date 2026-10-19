@@ -1,133 +1,75 @@
-
-
-@use './variables' as v;
-@use './tools' as t;
-
-// Base visual compartida por las acciones interactivas del portfolio.
 .heroeActions a,
 .project-card__actions a,
 .galeria__navBtn,
 .gfLightbox__btn,
 .practicasModalTrigger,
-.contactSubmitRow button {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	min-height: 34px;
-	padding: 6px 10px;
-	border: 1px solid color-mix(in srgb, var(--colorBorde) 75%, transparent);
-	background-color: transparent;
-	color: var(--_texto);
-	cursor: pointer;
-	font-family: v.$fuenteTexto;
-	font-size: t.fluido(0.78rem, 0.95rem);
-	line-height: 1.2;
-	text-decoration: none;
-	transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+.contactSubmitRow button,
+.login button,
+.container > a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    min-height: 48px;
+    min-width: 0;
+    max-width: 100%;
+    padding: var(--space-3) var(--space-6);
+    border: 0;
+    border-radius: var(--radius-control);
+    background: var(--surface-raised);
+    color: var(--text-primary);
+    font: 600 var(--text-small) / 1.4 var(--font-body);
+    text-decoration: none;
+    transition: transform var(--duration-fast) var(--ease-out);
 
-	&:hover {
-		background-color: var(--colorBorde);
-		color: var(--_fondoPanel);
-	}
+    &:hover { text-decoration: underline; }
+    &:active { transform: translateY(2px); }
+}
 
-	&:active {
-		transform: translateY(1px);
-	}
-
-	&:focus-visible {
-		outline: 2px solid var(--_texto);
-		outline-offset: 2px;
-	}
+.heroeActions a:first-child,
+.project-card__actions a:first-child,
+.contactSubmitRow button,
+.login button {
+    background: var(--button-bg);
+    color: var(--button-text);
 }
 
 .galeria__nav {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	gap: 8px;
-	width: 100%;
-	margin-top: 8px;
+    display: flex;
+    gap: var(--space-2);
+    width: 100%;
+    margin-top: var(--space-3);
 }
 
-.galeria__navBtn {
-	flex: 1;
-	min-width: 0;
+.galeria__navBtn { flex: 1; min-width: 0; }
+.gfLightbox__btn { min-width: 48px; }
+
+.btnIdioma, .asideLeft button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    padding: var(--space-2) var(--space-3);
+    border: 0;
+    background: transparent;
+    color: var(--text-primary);
+    font-size: var(--text-small);
+    line-height: 1.4;
+    border-radius: var(--radius-control);
+
+    &:hover { text-decoration: underline; }
+    &.is-active, &.active {
+        background: var(--action-bg);
+        color: var(--action-text);
+    }
 }
 
-.gfLightbox__btn {
-	min-width: 40px;
+@media (prefers-reduced-motion: reduce) {
+    .heroeActions a, .project-card__actions a, .galeria__navBtn,
+    .gfLightbox__btn, .practicasModalTrigger, .contactSubmitRow button,
+    .login button, .container > a {
+        transition: none;
+        &:active { transform: none; }
+    }
 }
-
-.practicasModalTrigger {
-	min-height: 36px;
-	padding: 6px 12px;
-}
-
-.contactSubmitRow button {
-	min-width: min(260px, 100%);
-	padding: 10px 16px;
-	font-size: v.$tamanoEnlaces;
-}
-
-.practicasModal__close {
-	position: absolute;
-	top: 16px;
-	right: 16px;
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	min-width: 36px;
-	height: 36px;
-	padding: 0 10px;
-	border: 1px solid var(--colorBorde);
-	border-radius: 999px;
-	background: color-mix(in srgb, var(--_fondoPanel) 90%, transparent);
-	color: var(--_texto);
-	cursor: pointer;
-
-	&:focus-visible {
-		outline: 2px solid var(--_texto);
-		outline-offset: 2px;
-	}
-}
-
-.asideLeft button {
-	border: 0;
-	background: transparent;
-	color: var(--_texto);
-	cursor: pointer;
-	font-family: v.$fuenteTexto;
-	transition: color 0.5s ease, opacity 0.3s ease;
-
-	&:focus-visible {
-		outline: 2px solid var(--_texto);
-		outline-offset: -2px;
-	}
-}
-
-.btnIdioma {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	min-width: t.fluido(30px, 40px);
-	padding: 4px 8px;
-	border: 3px solid var(--colorBorde);
-	background-color: transparent;
-	color: var(--_texto);
-	cursor: pointer;
-	font-family: v.$fuenteTexto;
-	font-size: 0.9rem;
-	transition: background-color 0.3s ease, color 0.3s ease;
-
-	&.is-active,
-	&:hover {
-		background-color: var(--colorBorde);
-		color: var(--_fondoPanel);
-	}
-
-	&:focus-visible {
-		outline: 2px solid var(--_texto);
-		outline-offset: 2px;
-	}
-}
-

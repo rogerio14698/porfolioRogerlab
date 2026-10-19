@@ -32,6 +32,21 @@
             'practicas.title': 'Prácticas FCT como desarrollador de aplicaciones web en MON EVENT SL',
             'practicas.modal.title': 'Seguimiento detallado de prácticas:',
             'practicas.modal.open': 'Ver seguimiento',
+            'practicas.modal.close': 'Cerrar ventana',
+            'practicas.intro.start': 'Entre febrero y abril de 2026, participé en proyectos web en entorno real aportando mejoras en rendimiento, estabilidad y mantenimiento. Desde una perspectiva SEO, mis intervenciones se centraron en optimización de front-end, corrección de rutas y consistencia visual en producción. Desde una perspectiva RRHH, destaqué por adaptación rápida, autonomía técnica y capacidad para trabajar con código heredado.',
+            'practicas.skills.title': 'Competencias clave demostradas',
+            'practicas.skills.technical.label': 'Optimización técnica orientada a negocio:',
+            'practicas.skills.technical.body': 'resolución de incidencias en CSS, rutas y despliegue, con impacto directo en calidad percibida, experiencia de usuario y mantenimiento de la web en local y servidor.',
+            'practicas.skills.operations.label': 'Entornos, sistemas y operaciones:',
+            'practicas.skills.operations.body': 'configuración y reconstrucción de contenedores Docker, trabajo sobre Linux y soporte de despliegue con PuTTY y FileZilla.',
+            'practicas.skills.development.label': 'Desarrollo y refactorización:',
+            'practicas.skills.development.body': 'mejora de módulos con AJAX, ajustes de permisos, resolución de errores en comentarios/fichaje y modernización de código legado sin documentación completa.',
+            'practicas.skills.team.label': 'Trabajo colaborativo y madurez profesional:',
+            'practicas.skills.team.body': 'gestión de ramas y conflictos en GitHub, coordinación de cambios en producción y elaboración de documentación técnica final para facilitar continuidad y transferencia de conocimiento.',
+            'practicas.contribution.title': 'Aporte al equipo y valoración profesional',
+            'practicas.contribution.body1': 'Mi desempeño fue consistente durante todo el periodo: identifiqué bloqueos técnicos, propuse soluciones viables y ejecuté mejoras en ciclos cortos. La trazabilidad del trabajo semanal refleja responsabilidad, aprendizaje continuo y orientación clara a resultados.',
+            'practicas.contribution.body2': 'Como cierre de prácticas, dejé una base técnica más estable y documentada. Esta experiencia consolida mi perfil como desarrollador junior con potencial de crecimiento en equipos de producto, mantenimiento evolutivo y entornos de mejora continua.',
+            'motion.label': 'Animación de fondo',
             'games.back': 'Volver a juegos',
             'games.hangman.card.alt': 'Juego del ahorcado',
             'games.hangman.card.title': 'Juego del ahorcado',
@@ -231,6 +246,21 @@
             'practicas.title': 'FCT Internship as a Web Application Developer at MON EVENT SL',
             'practicas.modal.title': 'Detailed internship tracking:',
             'practicas.modal.open': 'View tracking',
+            'practicas.modal.close': 'Close window',
+            'practicas.intro.start': 'Between February and April 2026, I contributed to real-world web projects, improving performance, stability and maintenance. From an SEO perspective, my work focused on front-end optimisation, route fixes and visual consistency in production. From an HR perspective, I stood out for adapting quickly, working independently and handling legacy code.',
+            'practicas.skills.title': 'Key skills demonstrated',
+            'practicas.skills.technical.label': 'Business-focused technical optimisation:',
+            'practicas.skills.technical.body': 'resolving CSS, routing and deployment issues, with a direct impact on perceived quality, user experience and website maintenance both locally and on the server.',
+            'practicas.skills.operations.label': 'Environments, systems and operations:',
+            'practicas.skills.operations.body': 'configuring and rebuilding Docker containers, working on Linux and supporting deployments with PuTTY and FileZilla.',
+            'practicas.skills.development.label': 'Development and refactoring:',
+            'practicas.skills.development.body': 'improving AJAX modules, adjusting permissions, fixing comments/time-tracking errors and modernising legacy code without complete documentation.',
+            'practicas.skills.team.label': 'Collaboration and professional maturity:',
+            'practicas.skills.team.body': 'managing branches and conflicts on GitHub, coordinating production changes and preparing final technical documentation to support continuity and knowledge transfer.',
+            'practicas.contribution.title': 'Team contribution and professional assessment',
+            'practicas.contribution.body1': 'My performance was consistent throughout the internship: I identified technical blockers, proposed practical solutions and delivered improvements in short cycles. The weekly work record reflects responsibility, continuous learning and a clear focus on results.',
+            'practicas.contribution.body2': 'By the end of the internship, I had left a more stable and documented technical foundation. This experience strengthens my profile as a junior developer with room to grow in product teams, ongoing software maintenance and continuous improvement environments.',
+            'motion.label': 'Background animation',
             'games.back': 'Back to games',
             'games.hangman.card.alt': 'Hangman game',
             'games.hangman.card.title': 'Hangman game',
@@ -430,6 +460,21 @@
             'practicas.title': 'Estágio FCT como Desenvolvedor de Aplicações Web na MON EVENT SL',
             'practicas.modal.title': 'Acompanhamento detalhado do estágio:',
             'practicas.modal.open': 'Ver acompanhamento',
+            'practicas.modal.close': 'Fechar janela',
+            'practicas.intro.start': 'Entre fevereiro e abril de 2026, participei em projetos web em contexto real, contribuindo para melhorias de desempenho, estabilidade e manutenção. Na perspetiva de SEO, as minhas intervenções centraram-se na otimização do front-end, correção de rotas e consistência visual em produção. Na perspetiva de recursos humanos, destaquei-me pela adaptação rápida, autonomia técnica e capacidade de trabalhar com código legado.',
+            'practicas.skills.title': 'Competências-chave demonstradas',
+            'practicas.skills.technical.label': 'Otimização técnica orientada ao negócio:',
+            'practicas.skills.technical.body': 'resolução de problemas de CSS, rotas e deploy, com impacto direto na qualidade percebida, experiência do utilizador e manutenção do site em local e no servidor.',
+            'practicas.skills.operations.label': 'Ambientes, sistemas e operações:',
+            'practicas.skills.operations.body': 'configuração e reconstrução de contentores Docker, trabalho em Linux e apoio ao deploy com PuTTY e FileZilla.',
+            'practicas.skills.development.label': 'Desenvolvimento e refatorização:',
+            'practicas.skills.development.body': 'melhoria de módulos com AJAX, ajustes de permissões, resolução de erros nos comentários/registo de horas e modernização de código legado sem documentação completa.',
+            'practicas.skills.team.label': 'Colaboração e maturidade profissional:',
+            'practicas.skills.team.body': 'gestão de branches e conflitos no GitHub, coordenação de alterações em produção e elaboração de documentação técnica final para facilitar a continuidade e a transferência de conhecimento.',
+            'practicas.contribution.title': 'Contributo para a equipa e avaliação profissional',
+            'practicas.contribution.body1': 'O meu desempenho foi consistente durante todo o estágio: identifiquei bloqueios técnicos, propus soluções viáveis e executei melhorias em ciclos curtos. O registo do trabalho semanal reflete responsabilidade, aprendizagem contínua e uma orientação clara para resultados.',
+            'practicas.contribution.body2': 'No final do estágio, deixei uma base técnica mais estável e documentada. Esta experiência consolida o meu perfil como programador júnior com potencial de crescimento em equipas de produto, manutenção evolutiva e contextos de melhoria contínua.',
+            'motion.label': 'Animação de fundo',
             'games.back': 'Voltar aos jogos',
             'games.hangman.card.title': 'Jogo da forca',
             'games.hangman.card.body_1': 'Este jogo da forca põe à prova o teu vocabulário e rapidez mental: tens de adivinhar a palavra escondida letra a letra antes de completar o desenho. Inclui uma interface clara, feedback imediato em cada tentativa e uma experiência pensada para jogar de forma fluida em qualquer dispositivo.',
@@ -821,6 +866,9 @@
 
     function applyPageMetadata(language) {
         var container = document.querySelector(SECTION_SELECTOR);
+        if (container && container.dataset.serverLanguage) {
+            return;
+        }
         var section = container ? container.dataset.section : null;
         var localizedMetadata = section && pageMetadata[language] ? pageMetadata[language][section] : null;
         var fallbackMetadata = section && pageMetadata[DEFAULT_LANGUAGE] ? pageMetadata[DEFAULT_LANGUAGE][section] : null;
@@ -877,6 +925,13 @@
             translateAlt(element, activeLanguage);
         });
 
+        document.querySelectorAll('[data-i18n-aria-label]').forEach(function (element) {
+            var translation = translations[activeLanguage][element.dataset.i18nAriaLabel];
+            if (translation) {
+                element.setAttribute('aria-label', translation);
+            }
+        });
+
         applyPageMetadata(activeLanguage);
 
         syncLanguageButtons(activeLanguage);
@@ -897,11 +952,36 @@
 
         var language = normalizeLanguage(button.dataset.languageOption);
 
+        var container = document.querySelector(SECTION_SELECTOR);
+        if (container && container.dataset.serverLanguage) {
+            if (language === container.dataset.serverLanguage) {
+                return;
+            }
+            setStoredLanguage(language);
+            var url = new URL(window.location.href);
+            url.searchParams.set('lang', language);
+            window.location.assign(url.href);
+            return;
+        }
         setStoredLanguage(language);
         applyLanguage(language);
     }
 
     function initLanguageSwitcher() {
+        var container = document.querySelector(SECTION_SELECTOR);
+        if (container && container.dataset.serverLanguage) {
+            var requested = new URL(window.location.href).searchParams.get('lang');
+            var language = requested ? normalizeLanguage(requested) : getStoredLanguage();
+            if (language !== container.dataset.serverLanguage) {
+                var url = new URL(window.location.href);
+                url.searchParams.set('lang', language);
+                window.location.replace(url.href);
+                return;
+            }
+            setStoredLanguage(language);
+            applyLanguage(language);
+            return;
+        }
         applyLanguage(getStoredLanguage());
     }
 

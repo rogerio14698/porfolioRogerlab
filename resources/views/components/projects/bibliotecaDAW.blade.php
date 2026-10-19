@@ -4,6 +4,7 @@
             data-i18n-alt="projects.library.alt">
     </div>
 
+    <div class="project-card__body">
     <div class="titleProject">
         <h2 data-i18n="projects.library.title">Biblioteca DAW</h2>
         <div class="project-card__meta">
@@ -37,5 +38,6 @@
             rel="noopener noreferrer" data-i18n="about.repository.button">Repositorio</a>
         <a class="btnWeb" href="https://biblioteca.rogerlab.es/biblioteca" target="_blank" rel="noopener noreferrer"
             data-i18n="about.website.button">Web</a>
+    </div>
     </div>
 </article>

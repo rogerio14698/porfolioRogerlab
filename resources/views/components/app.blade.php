@@ -44,6 +44,9 @@
     @endphp
     <title>@yield('title', $defaultTitle)</title>
     <meta name="description" content="@yield('meta_description', $defaultDescription)">
+    @hasSection('meta_keywords')
+        <meta name="keywords" content="@yield('meta_keywords')">
+    @endif
     <meta name="author" content="{{ $profile['name'] }}">
     <meta name="robots" content="@yield('robots_meta', 'index,follow')">
     <link rel="canonical" href="@yield('canonical', url()->current())">
@@ -52,7 +55,7 @@
     @endforeach
     <meta property="og:type" content="@yield('og_type', 'website')">
     <meta property="og:site_name" content="RogerLab">
-    <meta property="og:locale" content="es_ES">
+    <meta property="og:locale" content="{{ ['es' => 'es_ES', 'en' => 'en_GB', 'pt' => 'pt_PT'][app()->getLocale()] ?? 'es_ES' }}">
     <meta property="og:url" content="@yield('og_url', url()->current())">
     <meta property="og:title" content="@yield('og_title', $defaultTitle)">
     <meta property="og:description" content="@yield('og_description', $defaultDescription)">
@@ -67,16 +70,16 @@
         @yield('schema_json_ld')
     @else
         <script type="application/ld+json">
-            {!! json_encode($schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
+            {!! json_encode($schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) !!}
         </script>
     @endif
 
     <!--Carga de font awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <!-- Google Fonts: preconnect + todas las familias en una sola petición -->
+    <!-- Google Fonts: familias del sistema visual -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&family=Poiret+One&family=Saira+Stencil:ital,wght@0,100..900;1,100..900&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders:wght@600&family=Public+Sans:wght@400;600&display=swap">
     <!--Enlace a la carpeta de public/css -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}?v={{ filemtime(public_path('css/app.css')) }}">
     <!--Fin del enlace a la carpeta de public/css -->
@@ -90,20 +93,13 @@
 
 <body data-theme="dark">
     <canvas id="mainShaderBg" aria-hidden="true"></canvas>
-
     <div class="mainContent contenedor">
         @include('components.header')
         @include('components.nav')
         @yield('content')
         @include('components.footer')
     </div>
-    <script src="{{ asset('js/theme.js') }}?v={{ filemtime(public_path('js/theme.js')) }}" defer></script>
-    <script src="{{ asset('js/animaciones.js') }}?v={{ filemtime(public_path('js/animaciones.js')) }}" defer></script>
-    <script src="{{ asset('js/partial-navigation.js') }}?v={{ filemtime(public_path('js/partial-navigation.js')) }}" defer></script>
-    <script src="{{ asset('js/language-switcher.js') }}?v={{ filemtime(public_path('js/language-switcher.js')) }}" defer></script>
-    <script src="{{ asset('js/practicas-modal.js') }}?v={{ filemtime(public_path('js/practicas-modal.js')) }}" defer></script>
-    <script src="{{ asset('js/ahorcado.js') }}?v={{ filemtime(public_path('js/ahorcado.js')) }}" defer></script>
-    <script src="{{ asset('js/main.js') }}?v={{ filemtime(public_path('js/main.js')) }}" defer></script>
+    @vite('resources/js/app.ts')
 </body>
 
 </html>

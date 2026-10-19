@@ -1,0 +1,67 @@
+@use './variables' as v;
+
+:root {
+    --palette-charcoal: #{v.$colorModoDarkFondo};
+    --palette-ivory: #{v.$colorModoLightFondo};
+    --palette-paper: #fff;
+    --palette-ink: #{v.$colorTextoDark};
+    --palette-silver: #{v.$colorTextoLight};
+    --palette-graphite: #{v.$colorbtnDark};
+    --palette-slate: #{v.$colorBordeLight};
+    --palette-gray: #{v.$colorBorde};
+    --font-display: #{v.$fuenteTitulo};
+    --font-body: #{v.$fuenteTexto};
+    --text-small: 0.875rem;
+    --text-body: 1rem;
+    --text-lead: clamp(1.125rem, 1rem + 0.4vw, 1.375rem);
+    --text-heading: clamp(1.75rem, 1.3rem + 2vw, 3rem);
+    --text-display: clamp(2.25rem, 1.3rem + 3.5vw, 4.75rem);
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-12: 3rem;
+    --space-16: 4rem;
+    --space-24: 6rem;
+    --page-gutter: clamp(1.25rem, 3.5vw, 4rem);
+    --section-space: clamp(3rem, 6vw, 6rem);
+    --radius-control: 0;
+    --radius-media: 0;
+    --shadow-rest: none;
+    --shadow-dialog: 0 24px 80px rgb(0 0 0 / 28%);
+    --duration-fast: 160ms;
+    --duration-enter: 600ms;
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body {
+    --surface-page: var(--palette-charcoal);
+    --surface-raised: var(--palette-graphite);
+    --surface-media: var(--palette-ivory);
+    --text-primary: var(--palette-silver);
+    --text-secondary: var(--palette-silver);
+    --action-bg: var(--palette-ivory);
+    --action-text: var(--palette-ink);
+    --focus-ring: var(--palette-ivory);
+    --field-border: var(--palette-gray);
+    --button-bg: var(--action-bg);
+    --button-text: var(--action-text);
+    --card-bg: var(--surface-raised);
+    --input-bg: var(--surface-page);
+    color-scheme: dark;
+}
+
+body[data-theme="light"] {
+    --surface-page: var(--palette-ivory);
+    --surface-raised: var(--palette-paper);
+    --surface-media: var(--palette-paper);
+    --text-primary: var(--palette-ink);
+    --text-secondary: var(--palette-slate);
+    --action-bg: var(--palette-charcoal);
+    --action-text: var(--palette-ivory);
+    --focus-ring: var(--palette-charcoal);
+    --field-border: var(--palette-slate);
+    color-scheme: light;
+}
