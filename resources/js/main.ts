@@ -75,20 +75,24 @@ function createGestorFichajeLightbox() {
     lightbox.id = 'gfLightbox';
     lightbox.className = 'gfLightbox';
     lightbox.hidden = true;
+    var returnFocus: HTMLElement | null = null;
+    var previousOverflow = '';
     lightbox.innerHTML = [
-        '<button type="button" class="gfLightbox__backdrop" aria-label="Cerrar galeria" data-gf-close></button>',
-        '<div class="gfLightbox__panel" role="dialog" aria-modal="true" aria-label="Galeria del proyecto">',
+        '<button type="button" class="gfLightbox__backdrop" aria-label="Cerrar galeria" tabindex="-1" data-gf-close></button>',
+        '<div class="gfLightbox__panel" role="dialog" aria-modal="true" aria-label="Galeria del proyecto" tabindex="-1">',
         '  <img class="gfLightbox__img" src="" alt="">',
         '  <div class="gfLightbox__controls">',
-        '    <button type="button" class="gfLightbox__btn" data-gf-prev>&larr;</button>',
+        '    <button type="button" class="gfLightbox__btn" aria-label="Anterior" data-gf-prev>&larr;</button>',
         '    <button type="button" class="gfLightbox__btn" data-gf-close>Cerrar</button>',
-        '    <button type="button" class="gfLightbox__btn" data-gf-next>&rarr;</button>',
+        '    <button type="button" class="gfLightbox__btn" aria-label="Siguiente" data-gf-next>&rarr;</button>',
         '  </div>',
         '</div>'
     ].join('');
 
     function closeLightbox() {
         lightbox.hidden = true;
+        document.body.style.overflow = previousOverflow;
+        returnFocus?.focus();
     }
 
     function renderActive() {
@@ -131,8 +135,23 @@ function createGestorFichajeLightbox() {
         }
 
         if (event.key === 'Escape') {
+            event.preventDefault();
             closeLightbox();
             return;
+        }
+
+        if (event.key === 'Tab') {
+            var controls = Array.from(lightbox.querySelectorAll<HTMLButtonElement>('.gfLightbox__controls button'))
+                .filter(function (button) { return button.offsetParent !== null; });
+            var first = controls[0];
+            var last = controls[controls.length - 1];
+            if (event.shiftKey && document.activeElement === first) {
+                event.preventDefault();
+                last?.focus();
+            } else if (!event.shiftKey && document.activeElement === last) {
+                event.preventDefault();
+                first?.focus();
+            }
         }
 
         if (event.key === 'ArrowLeft') {
@@ -150,6 +169,10 @@ function createGestorFichajeLightbox() {
     });
 
     lightbox.openGallery = function (images, startIndex) {
+        if (lightbox.hidden) {
+            returnFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+            previousOverflow = document.body.style.overflow;
+        }
         gestorFichajeLightboxState.images = images;
         gestorFichajeLightboxState.activeIndex = startIndex;
 
@@ -164,6 +187,8 @@ function createGestorFichajeLightbox() {
 
         renderActive();
         lightbox.hidden = false;
+        document.body.style.overflow = 'hidden';
+        lightbox.querySelector<HTMLButtonElement>('.gfLightbox__controls [data-gf-close]')?.focus();
     };
 
     document.body.appendChild(lightbox);

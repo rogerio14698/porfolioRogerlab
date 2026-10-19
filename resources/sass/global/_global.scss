@@ -21,6 +21,7 @@ body {
     background: var(--surface-page);
     color: var(--text-primary);
     font: 400 var(--text-body) / 1.65 var(--font-body);
+    overflow-wrap: anywhere;
     -webkit-font-smoothing: antialiased;
 }
 

@@ -3,6 +3,7 @@
         <img src="{{ asset('img/referencia4.jpeg') }}" alt="Juego de Rol" data-i18n-alt="projects.juegoRol.alt">
     </div>
 
+    <div class="project-card__body">
     <div class="titleProject">
         <h2 data-i18n="projects.juegoRol.title">Juego de Rol</h2>
         <div class="project-card__meta">
@@ -33,4 +34,5 @@
             data-i18n="about.website.button">Web</a>
     </div>
 
+    </div>
 </article>

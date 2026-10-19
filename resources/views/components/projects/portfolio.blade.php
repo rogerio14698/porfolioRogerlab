@@ -4,6 +4,7 @@
             data-i18n-alt="projects.portfolio.alt">
     </div>
 
+    <div class="project-card__body">
     <div class="titleProject">
         <h2 data-i18n="projects.portfolio.title">Web Portfolio</h2>
         <div class="project-card__meta">
@@ -28,5 +29,6 @@
             Implementé navegación parcial, i18n ES/EN/PT y formularios con validación para demostrar decisiones de
             arquitectura orientadas a rendimiento, mantenibilidad y experiencia de usuario.
         </p>
+    </div>
     </div>
 </article>

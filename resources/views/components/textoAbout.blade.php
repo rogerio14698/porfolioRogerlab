@@ -30,7 +30,7 @@
         </div>
 
         </div>
-        <img src="{{ asset('img/cv-foto.jpeg') }}" alt="Rogerio Lucas Viana, desarrollador web Full Stack Junior especializado en Laravel y JavaScript" class="heroFoto" width="720" height="1280" fetchpriority="high">
+        <img src="{{ asset('img/cv-foto.jpeg') }}" alt="Rogerio Lucas Viana, desarrollador web Full Stack Junior especializado en Laravel y JavaScript" class="heroFoto" width="1170" height="2080" fetchpriority="high">
     </div>
 
     <div class="textoAbout">

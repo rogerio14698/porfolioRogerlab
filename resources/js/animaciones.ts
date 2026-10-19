@@ -2,7 +2,7 @@ const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
 const entranceSelector = [
     '.heroCopy > *', '.heroFoto', '.textoAbout > p', '.pageTitle',
     '.conocimientosSeccione', '.aboutNarrative > div',
-    '.project-card > *', '.seccionContact > *',
+    '.project-card__media', '.project-card__body > *', '.project-card > .galeria', '.seccionContact > *',
     '.seccionPracticas > h1', '.seccionPracticas > p',
     '.blog-header', '.blog-card', '.legalSection > *'
 ].join(', ');

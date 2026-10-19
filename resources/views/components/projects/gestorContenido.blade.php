@@ -4,6 +4,7 @@
             data-i18n-alt="projects.content.alt">
     </div>
 
+    <div class="project-card__body">
     <div class="titleProject">
         <h2 data-i18n="projects.content.title">Gestor de Contenido</h2>
         <div class="project-card__meta">
@@ -27,10 +28,11 @@
             interfaz en Blade + JavaScript para reducir fricción operativa en futuras iteraciones del equipo.
         </p>
     </div>
-    <div class="galeria" data-gallery="gestor-contenido" data-base-src="{{ url('img/GestorContenido') }}"
-        data-extension=".png" data-count="10" aria-label="Galeria de capturas del proyecto Gestor de Contenido">
-    </div>
     <div class="project-card__actions">
         <span class="project-card__internal">Proyecto interno</span>
+    </div>
+    </div>
+    <div class="galeria" data-gallery="gestor-contenido" data-base-src="{{ url('img/GestorContenido') }}"
+        data-extension=".png" data-count="10" aria-label="Galeria de capturas del proyecto Gestor de Contenido">
     </div>
 </article>

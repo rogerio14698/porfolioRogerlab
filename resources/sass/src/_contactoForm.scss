@@ -14,7 +14,7 @@
         align-content: start;
         min-width: 0;
 
-        label { font-size: var(--text-small); font-weight: 600; }
+        label { font-size: var(--text-body); font-weight: 600; }
         input, textarea {
             width: 100%;
             min-width: 0;
@@ -37,7 +37,7 @@
     .contactFormMeta, .contactAlert {
         padding: var(--space-6);
         background: var(--surface-raised);
-        p { font-size: var(--text-small); max-width: 65ch; }
+        p { font-size: var(--text-body); max-width: 65ch; }
     }
 
     .contactAlert--error { font-weight: 600; }
