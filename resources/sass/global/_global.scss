@@ -71,6 +71,17 @@ input, textarea { caret-color: var(--text-primary); }
 
 .contenedor { width: 100%; }
 
+@media (prefers-reduced-motion: no-preference) {
+    .is-revealed {
+        animation: dossier-enter var(--duration-enter) var(--ease-out) both;
+    }
+}
+
+@keyframes dossier-enter {
+    from { opacity: 0.65; transform: translateY(16px); }
+    to { opacity: 1; transform: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
 }
