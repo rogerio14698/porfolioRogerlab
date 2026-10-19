@@ -1,226 +1,95 @@
-@use "../global/variables" as v;
-@use "../global/tools" as t;
-
-.projectsScrollHint {
-    display: block;
-    width: 100%;
-    margin: 0 0 14px;
-    padding: 10px 12px;
-    border: 1px solid color-mix(in srgb, var(--colorBorde) 55%, transparent);
-    background: color-mix(in srgb, var(--_fondoPanel) 88%, transparent);
-    color: var(--_textoSoft);
-    font-family: v.$fuenteTexto;
-    font-size: 0.82rem;
-    line-height: 1.45;
-    text-align: left;
-
-}
-
 .seccionProjects {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 18px;
-    width: 100%;
-    margin-left: auto;
-    padding: 12px 18px 20px;
-    overflow: visible;
+    gap: var(--space-12);
+
+    > h1 { font-size: var(--text-display); }
 
     .project-card {
+        display: grid;
+        align-content: start;
+        gap: var(--space-6);
         min-width: 0;
-        min-height: 100%;
-        margin: 0;
-        padding: 16px;
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 12px;
-        border: 1px solid color-mix(in srgb, var(--colorBorde) 55%, transparent);
-        border-radius: 6px;
-        background: color-mix(in srgb, var(--_fondoPanel) 92%, transparent);
-        box-shadow: 0 8px 20px color-mix(in srgb, var(--_fondo) 26%, transparent);
-        overflow: hidden;
-        transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
-
-        &:hover {
-            transform: translateY(-3px);
-            border-color: color-mix(in srgb, var(--_texto) 65%, var(--colorBorde));
-            box-shadow: 0 14px 28px color-mix(in srgb, var(--_fondo) 42%, transparent);
-        }
+        padding: var(--space-6);
+        background: var(--card-bg);
 
         &__media {
-            height: 176px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            display: grid;
+            place-items: center;
+            min-width: 0;
+            aspect-ratio: 16 / 10;
+            background: var(--surface-media);
             overflow: hidden;
-            border: 1px solid color-mix(in srgb, var(--colorBorde) 60%, transparent);
-            background: color-mix(in srgb, var(--_fondoPanel) 80%, transparent);
 
             img {
                 width: 100%;
                 height: 100%;
-                padding: 16px;
-                background: transparent;
+                max-height: 320px;
                 object-fit: contain;
-                transition: transform 0.3s ease;
+                padding: var(--space-8);
             }
-        }
-
-        &:hover .project-card__media img {
-            transform: scale(1.04);
         }
 
         .titleProject {
             display: grid;
-            gap: 8px;
-
-            h2 {
-                font-size: t.fluido(1.15rem, 1.55rem);
-                font-family: v.$fuenteTexto;
-                font-weight: v.$grosorTitulo;
-                color: var(--_texto);
-                letter-spacing: 0.03em;
-            }
+            align-content: start;
+            gap: var(--space-3);
+            h2 { font-size: var(--text-heading); }
         }
 
-        &__meta,
-        &__stack,
-        &__actions {
+        &__meta, &__stack, &__actions {
             display: flex;
             flex-wrap: wrap;
+            gap: var(--space-2) var(--space-4);
             align-items: center;
-            gap: 6px;
         }
 
-        &__badge,
-        &__stack li,
-        &__internal {
-            display: inline-flex;
-            align-items: center;
-            min-height: 24px;
-            padding: 3px 7px;
-            border: 1px solid color-mix(in srgb, var(--colorBorde) 60%, transparent);
-            border-radius: 999px;
-            background: color-mix(in srgb, var(--_fondoPanel) 78%, transparent);
-            color: var(--_textoSoft);
-            font-family: v.$fuenteTexto;
-            font-size: t.fluido(0.72rem, 0.82rem);
-            line-height: 1.2;
+        &__meta, &__stack, &__internal {
+            font-size: var(--text-small);
+            line-height: 1.5;
+            color: var(--text-secondary);
         }
 
-        &__internal {
-            color: var(--_texto);
-            border-style: dashed;
-        }
-
-        .description {
-            display: grid;
-            gap: 0;
-            flex: 1;
-
-            p {
-                display: block;
-                color: var(--_textoSoft);
-                font-family: v.$fuenteTexto;
-                //font-size: t.fluido(0.86rem, 0.98rem);
-                line-height: 1.7;
-                text-align: left;
-                text-wrap: pretty;
-            }
-
-            p + p {
-                margin-top: 10px;
-                padding-top: 10px;
-                border-top: 1px dashed color-mix(in srgb, var(--colorBorde) 35%, transparent);
-            }
-        }
+        &__stack { font-weight: 600; }
+        .description p { max-width: 65ch; }
+        .description p + p { margin-top: var(--space-4); }
+        &__actions { align-self: end; }
+        &__actions a:not(:first-child) { background: var(--surface-page); }
 
         .galeria {
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 6px;
-            width: 100%;
-            padding-top: 2px;
+            gap: var(--space-2);
+            align-content: start;
+            min-width: 0;
 
-            .galeria__item {
-                aspect-ratio: 4 / 3;
-                padding: 0;
-                overflow: hidden;
-                border: 1px solid color-mix(in srgb, var(--colorBorde) 60%, transparent);
-                border-radius: 3px;
-                background: color-mix(in srgb, var(--_fondoPanel) 80%, transparent);
-                cursor: pointer;
-                transition: border-color 0.2s ease, transform 0.2s ease;
-
-                &:hover {
-                    transform: translateY(-2px);
-                    border-color: var(--_texto);
-                }
-
-                &:focus-visible {
-                    outline: 2px solid var(--_texto);
-                    outline-offset: 2px;
-                    border-color: var(--_texto);
-                }
-            }
-
-            .galeria__img {
+            &__item {
                 display: block;
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                transition: transform 0.25s ease;
+                min-width: 0;
+                min-height: 44px;
+                aspect-ratio: 4 / 3;
+                border: 0;
+                padding: 0;
+                background: var(--surface-media);
+                overflow: hidden;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    transition: transform var(--duration-enter) var(--ease-out);
+                }
+                &:hover img, &:focus-visible img { transform: scale(1.04); }
             }
 
-            .galeria__item:hover .galeria__img,
-            .galeria__item:focus-visible .galeria__img {
-                transform: scale(1.05);
-            }
-        }
-
-        .galeria--n8n .galeria__item {
-            padding: 0;
-            border: 0;
-            background: transparent;
-
-            img {
-                max-height: 180px;
-                object-fit: cover;
-            }
-        }
-
-        &__actions {
-            margin-top: auto;
-        }
-    }
-
-    .cardProject:not(.project-card) {
-        display: flex;
-        justify-content: center;
-
-        img {
-            border: 1px solid color-mix(in srgb, var(--colorBorde) 70%, transparent);
-            width: 72px;
-            height: auto;
-            border-radius: 16px;
-            padding: 4px;
-            background: color-mix(in srgb, var(--_fondoPanel) 90%, transparent);
-        }
-    }
-    @media (max-width: 768px) {
-        grid-template-columns: 1fr;
-        padding: 12px 12px 16px;
-        
-        .project-card {
-            padding: 16px;
-
-            &__media {
-                height: 160px;
+            &--n8n {
+                grid-template-columns: 1fr;
+                .galeria__item {
+                    aspect-ratio: 16 / 10;
+                    img { object-fit: contain; }
+                }
             }
 
-            .galeria {
-                gap: 5px;
-            }
+            &__nav { grid-column: 1 / -1; }
         }
     }
 }
@@ -231,83 +100,51 @@
     z-index: 1600;
     display: grid;
     place-items: center;
-    padding: 16px;
-    background: color-mix(in srgb, black 85%, transparent);
-
-    &[hidden] {
-        display: none;
-    }
+    padding: var(--space-4);
+    background: rgb(0 0 0 / 85%);
+    &[hidden] { display: none; }
 }
 
-.gfLightbox__backdrop {
-    position: absolute;
-    inset: 0;
-    border: 0;
-    background: transparent;
-    cursor: pointer;
-}
+.gfLightbox__backdrop { position: absolute; inset: 0; border: 0; background: transparent; }
 
 .gfLightbox__panel {
     position: relative;
-    width: min(920px, 96vw);
-    height: min(78vh, 680px);
     display: grid;
     grid-template-rows: minmax(0, 1fr) auto;
-    gap: 10px;
-    background: color-mix(in srgb, var(--_fondoPanel) 96%, transparent);
-    border: 1px solid color-mix(in srgb, var(--colorBorde) 70%, transparent);
-    padding: 10px;
+    gap: var(--space-4);
+    width: min(1120px, 100%);
+    height: min(85dvh, 800px);
+    padding: var(--space-4);
+    background: var(--surface-raised);
+    box-shadow: var(--shadow-dialog);
 }
 
-.gfLightbox__img {
-    width: 100%;
-    height: 100%;
-    max-height: none;
-    object-fit: contain;
-    object-position: center;
-    display: block;
-    background: color-mix(in srgb, var(--_fondoPanel) 88%, transparent);
-}
+.gfLightbox__img { width: 100%; height: 100%; object-fit: contain; }
+.gfLightbox__controls { display: flex; justify-content: center; gap: var(--space-2); }
+.alinearButton { display: flex; flex-wrap: wrap; gap: var(--space-3); }
 
-.gfLightbox__controls {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    margin-top: 0;
-}
+@media (min-width: 64rem) {
+    .seccionProjects {
+        gap: var(--space-16);
 
-@media (max-width: 768px) {
-    .gfLightbox__panel {
-        width: min(920px, 100%);
-        height: min(72vh, 520px);
+        .project-card {
+            grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+            column-gap: var(--space-12);
+            padding: var(--space-12);
+            .project-card__media { grid-column: 1; grid-row: 1 / 3; }
+            .titleProject { grid-column: 2; grid-row: 1; }
+            .project-card__stack { grid-column: 2; grid-row: 2; }
+            .description { grid-column: 2; grid-row: 3; }
+            .galeria { grid-column: 1; grid-row: 3 / 5; align-self: start; }
+            .project-card__actions { grid-column: 2; grid-row: 4; }
+
+            &:not(:has(.galeria)) .project-card__media { grid-row: 1 / 5; align-self: center; }
+        }
     }
 }
 
-.alinearButton {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-
-    > button.btnRepo,
-    > button.btnWeb {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        font-size: v.$tamanoEnlaces;
-        font-family: v.$fuenteTexto;
-        padding: 6px 10px;
-        cursor: pointer;
-        border: 1px solid color-mix(in srgb, var(--colorBorde) 75%, transparent);
-        background-color: transparent;
-        color: var(--_texto);
-        transition:
-            background-color 0.3s ease,
-            color 0.3s ease;
-        width: auto;
-        min-width: 92px;
-        margin: 0;
-    }
+@media (prefers-reduced-motion: reduce) {
+    .seccionProjects .project-card .galeria__item img { transition: none; }
+    .seccionProjects .project-card .galeria__item:hover img,
+    .seccionProjects .project-card .galeria__item:focus-visible img { transform: none; }
 }
