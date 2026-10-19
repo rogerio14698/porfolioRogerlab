@@ -1,5 +1,8 @@
 
 <header class="contenedor titulo">
-        <h1>Rogerio Lucas Viana</h1>
-        <p>Full Stack Developer Junior</p>
+        <div>
+            <p class="brandName">Rogerio Lucas Viana</p>
+            <p class="brandRole">Full Stack Developer Junior</p>
+        </div>
+        @include('components.aside')
 </header>

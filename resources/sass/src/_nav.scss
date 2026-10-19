@@ -1,139 +1,78 @@
-@use "../global/variables" as v;
-@use "../global/tools" as t;
-
 .nav {
     display: flex;
-    flex-direction: row;
-    background-color: var(--_fondoPanel);
-    border: 1px solid var(--colorBorde);
-    align-items: flex-start;
-    font-family: v.$fuenteTexto;
-    @media (max-width: 1200px) {
-        font-size: t.fluido(0.8rem, 1rem);
-    }
-    font-size: 1rem;
-    trasition: background-color 0.5s ease;
-
-    .nav-toggle {
-        display: none;
-        align-items: center;
-        flex-direction: column;
-        justify-content: center;
-        border: none;
-        background: transparent;
-        padding: 0.75rem;
-        margin-right: 1rem;
-        cursor: pointer;
-
-        span {
-            display: block;
-            width: 26px;
-            height: 3px;
-            margin: 4px 0;
-            background-color: var(--_texto);
-            transition: transform 0.3s ease, opacity 0.3s ease, width 0.3s ease;
-        }
-    }
-    //AQui se gestiona la animacion del menu una vez desplegado.
-    &.is-open .nav-toggle span:nth-child(1) {
-        transform: translateY(4px) translate(5px, 5px) rotate(45deg);
-        width: 40px;
-    }
-
-    &.is-open .nav-toggle span:nth-child(2) {
-        opacity: 0;
-    }
-
-    &.is-open .nav-toggle span:nth-child(3) {
-        transform: translateY(-4px) translate(5px, -5px) rotate(-45deg);
-        width: 40px;
-    }
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding-block: var(--space-3);
 
     ul {
         display: flex;
-        justify-content: space-around;
+        flex-wrap: wrap;
         align-items: center;
-        flex-direction: row;
-        margin-left: 10px;
-    }
-    li {
-     padding: 8px 12px;
-    }
-    a {
-        color: var(--_texto);
-        transition: color 0.2s ease;
-    }
-    a:hover {
-        color: var(--_textoHover);
-        transition: color 0.2s ease;
-    }
-    a::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: 0;
+        gap: var(--space-1);
         width: 100%;
-        height: 1px;
-        background-color: #999;
-        transform: scaleX(0);
-        transform-origin: left center;
-        transition: transform 0.8s ease;
-    }
-    a:hover::after,
-    a:focus-visible::after {
-        transform: scaleX(0.9);
+        order: 3;
     }
 
-    .sectionLanguageBar {
-    display: flex;
-    justify-content: center;
-    margin-left: auto;
-    padding:t.fluido(4px, 8px);
-    //Aqui tengo que poner una mq para que en version movil aparezca debajo.
-    //border-bottom: 1px solid var(--colorBorde);
-
-    .selectIdioma {
+    a {
         display: flex;
-        gap: 5px;
+        align-items: center;
+        min-height: 44px;
+        padding: var(--space-2) var(--space-3);
+        font-size: var(--text-small);
+        font-weight: 600;
+
+        &:hover { text-decoration: underline; }
+        &[aria-current="page"] {
+            background: var(--surface-raised);
+        }
     }
-}
-}
 
-//media query para un menu de version movil del nav
+    .selectIdioma { display: flex; gap: var(--space-1); }
 
-.nav {
-    @media (max-width: 768px) {
+    .nav-toggle {
+        display: none;
         flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        width: 44px;
+        height: 44px;
+        padding: var(--space-2);
+        border: 0;
+        background: var(--surface-raised);
+        color: var(--text-primary);
 
-        ul {
-            flex-direction: column;
-            align-items: flex-start;
-            width: 100%;
-            gap: 10px;
-            margin-left: 0;
-            padding: 10px;
+        span {
+            width: 22px;
+            height: 2px;
+            background: currentColor;
+            transition: transform var(--duration-fast) var(--ease-out);
         }
-        .sectionLanguageBar {
-            margin-left: 0;
-            width: 100%;
-            justify-content: flex-start;
-            padding: 10px;
-        }
-
-        .nav-toggle {
-            display: flex;
-        }
-
-        ul {
-            display: none;
-            width: 100%;
-        }
-
-        &.is-open ul {
-            display: flex;
-        }
-
     }
+
+    &[data-enhanced] {
+        .nav-toggle { display: flex; }
+        ul { display: none; }
+        &.is-open ul { display: flex; }
+    }
+
+    &.is-open .nav-toggle {
+        span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        span:nth-child(2) { opacity: 0; }
+        span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    }
+}
+
+@media (min-width: 64rem) {
+    .nav {
+        flex-wrap: nowrap;
+        ul, &[data-enhanced] ul { display: flex; order: 0; width: auto; }
+        &[data-enhanced] .nav-toggle { display: none; }
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .nav .nav-toggle span { transition: none; }
 }

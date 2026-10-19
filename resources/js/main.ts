@@ -339,9 +339,19 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
+        nav.setAttribute('data-enhanced', 'true');
+
         toggle.addEventListener('click', function () {
             var isOpen = nav.classList.toggle('is-open');
             toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+
+        nav.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape' && nav.classList.contains('is-open')) {
+                nav.classList.remove('is-open');
+                toggle.setAttribute('aria-expanded', 'false');
+                toggle.focus();
+            }
         });
 
         nav.querySelectorAll('a[data-partial-nav]').forEach(function (link) {

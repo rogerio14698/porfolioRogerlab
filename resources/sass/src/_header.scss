@@ -1,82 +1,19 @@
-@use '../global/variables' as v;
-@use '../global/tools' as t;
-
 .titulo {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    height: 10rem;
-    background-color: var(--_fondoPanel);
-    transition: background-color 0.5s ease;
-    width: 100%;
-    padding: clamp(0.65rem, 0.4rem + 0.8vw, 1rem) clamp(0.9rem, 0.65rem + 0.8vw, 1.45rem);
-    border: 1px solid v.$colorBorde;
-    border-bottom: none;
-    padding-bottom: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-4);
+    padding-block: var(--space-6);
 
-    h1 {
-        font-family: v.$fuenteTitulo;
-        font-weight: v.$grosorTitulo;
-        font-style: v.$estiloTitulo;
-        color: var(--_texto);
-        transition: color 0.5s ease;
-        // ahora el tamaño del título se ajusta automáticamente entre 20px y 50px según el ancho del viewport entre 400px y 1220px
-        //font-size: t.fluido(20px, 50px, 400px, 1220px);
-        font-size: clamp(2rem, 4.4vw, 4.4rem);
-        //Tamaño fijo para moviles, para que no quede enano
-         @media (max-width: 480px) {
-        font-size: 11vw; // Le damos más fuerza en móviles para que no quede enano
-        }
-        @media (max-width: 1400px) {
-        font-size: 9vw; // Le damos más fuerza en móviles para que no quede enano
-        }
+    .brandName {
+        font: 600 clamp(1.5rem, 1.25rem + 1vw, 2rem) / 1.1 var(--font-display);
+        letter-spacing: -0.02em;
     }
 
-
-    p {
-        align-self: stretch;
-        margin-left: 0;
-        padding-left: 2ch;
-        display: flex;
-        align-items: center;
-        gap: t.fluido(0.5rem, 1.2rem);
-        font-family: v.$fuenteTexto;
-        font-weight: v.$grosorTexto;
-        font-style: v.$estiloTexto;
-        font-size: clamp(0.78rem, 0.7rem + 0.45vw, 1.05rem);
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: var(--_texto);
-        transition: color 0.5s ease;
-
-        &::before {
-            content: "//";
-            opacity: 0.65;
-            margin-right: 0.35rem;
-        }
-        
-
-        &::after {
-            content: "";
-            flex: 1;
-            height: 1px;
-            margin-left: 2ch;
-            margin-right: 2ch;
-            background-color: var(--_linea);
-            transition: background-color 0.5s ease;
-            transform-origin: left center;
-            animation: subtitleLineReveal 5000ms ease-out forwards,
-                       subtitleLineFlow 3.2s ease-in-out 2000ms infinite;
-        }
+    .brandRole {
+        margin-top: var(--space-1);
+        font-size: var(--text-small);
+        color: var(--text-secondary);
     }
-}
-
-@keyframes subtitleLineReveal {
-    from { transform: scaleX(0); opacity: 0; }
-    to { transform: scaleX(1); opacity: 1; }
-}
-@keyframes subtitleLineFlow {
-    0%, 100% { opacity: 0.5; }
-    50% { opacity: 1; }
 }
