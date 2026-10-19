@@ -135,8 +135,8 @@ una certificación de accesibilidad de todo el sitio.
   partirse cuando no caben, incluido al ampliar la tipografía al 200 %.
 
 Las fuentes se sirven por Google Fonts como antes, sustituyendo las
-familias anteriores, sin añadir paquetes. El código heredado del shader
-permanece, pero al retirar el canvas no se inicia su animación WebGL.
+familias anteriores, sin añadir paquetes. El fondo de partículas original se recuperó después por petición expresa,
+con los límites y controles descritos en la actualización siguiente.
 
 ## Verificación realizada
 
@@ -222,6 +222,79 @@ Top three problems (most visible first), each with the screenshot it shows in an
 Las capturas y resultados detallados son evidencia local de la sesión,
 no archivos añadidos al repositorio.
 
+## Actualización solicitada: traducciones, navegación y fondo
+
+Tras la primera entrega se solicitaron estos ajustes, manteniendo la misma rama:
+
+- **FCT ES/EN/PT:** la narración principal carecía de claves de traducción.
+  Se conectaron introducción, competencias, aportación y evaluación al
+  selector existente, conservando el texto español. El modal ya disponía de
+  sus tres conjuntos de datos; se localizó también el nombre accesible de
+  su botón de cierre.
+- **Navegación sticky:** permanece en la parte superior al recorrer proyectos
+  largos y el resto de rutas. Fondo opaco del tema, sin blur, con menú móvil
+  limitado a la altura disponible y desplazamiento propio solo si lo necesita.
+  El documento reserva margen de scroll para el foco.
+- **Fondo recuperado:** se vuelve a montar el canvas del shader original,
+  sin sustituir las partículas por un efecto nuevo. Opacidad 0.18 en oscuro
+  y 0.12 en claro, con composición screen/multiply respectivamente; los
+  paneles y la navegación conservan superficies opacas para leer con claridad.
+- **Control y coste:** máximo 30fps y DPR 1. Botón «Animación de fondo»
+  traducido, con `aria-pressed` y preferencia guardada. En movimiento reducido
+  se conserva una imagen estática y no se permite activar el bucle.
+  No hay frames continuos en pestañas ocultas. La pérdida de WebGL se
+  registra en consola y deja el fondo de color como alternativa.
+
+Verificación de esta actualización:
+
+- Build correcto y **7 pruebas PHP** aprobadas.
+- **23 comprobaciones Chrome** aprobadas para traducción principal/modal,
+  navegación parcial, sticky a 1440/768/390/320px, apertura móvil, dibujo
+  WebGL, pausa persistente, cambio dinámico de reduced motion, suspensión
+  por visibilidad y ausencia de excepciones JavaScript.
+- Repetidas las **54 combinaciones de ruta, tema y tamaño** con el fondo
+  restaurado y reduced motion activo: sin overflow, imágenes cargadas rotas
+  ni animaciones DOM, con el control de reproducción deshabilitado.
+- Verificadas las 18 claves de traducción de la superficie y su control
+  de fondo en cada diccionario ES/EN/PT.
+- Inspector de proyectos: 0 FAIL / 2 WARN con las excepciones de contenido
+  anteriores. FCT: 0 FAIL / 3 WARN; se conserva su título largo original y
+  su naturaleza documental sin fotos/vídeo ajenos.
+
+La eliminación inicial del canvas y la prueba original que exigía su
+ausencia quedan sustituidas por este comportamiento, aprobado expresamente
+por el usuario. No se ha importado contenido de MySQL ni modificado `.env`.
+
+Crítica visual de la actualización:
+
+ROUND 1
+
+Seen in one second: el fondo original vuelve a identificar el portfolio sin
+restar jerarquía a títulos, retrato y casos de estudio.
+
+Idea (one sentence): el mismo dossier profesional con la textura de
+partículas propia del portfolio, no una dirección de arte nueva.
+
+Live thing: partículas originales pausables y galerías existentes.
+
+Layout words by section: navegación=barra sticky / proyectos=casos de estudio /
+FCT=documento traducido / fondo=textura ambiental.
+
+Scores: design 6.5 · usability 8.5 · creativity 6.5 · content 8 → overall 7.4
+
+Caps applied: títulos originales largos conservados.
+
+Top three problems (most visible first), each with the screenshot it shows in and the fix:
+
+1. FCT sigue teniendo cuatro líneas de título en móvil
+   (`followup-inspect-fct/mobile-fold.jpg`): no truncar ni reescribir el contenido.
+2. El fondo pasa detrás de texto documental
+   (`followup-inspect-fct/desktop-fold.jpg`): intensidad limitada, controles de
+   pausa y movimiento reducido; no aumentar el brillo del shader.
+3. La barra ocupa altura mientras se lee en móvil
+   (`followup-projects-390.jpg`): solo se fija la navegación compacta, no
+   todo el header; menú plegado por defecto.
+
 ## Commits y reversión
 
 | Commit | Unidad |
@@ -232,8 +305,11 @@ no archivos añadidos al repositorio.
 | `4964567` | Contacto, footer y páginas secundarias |
 | `f51ffff` | Galerías, foco y accesibilidad responsive |
 | `dce38b2` | Pruebas de los contratos de presentación |
+| `db0dace` | Documentación de la primera entrega |
+| `e47cf7a` | Narrativa de prácticas y cierre de modal traducidos |
+| `5119404` | Fondo original, control de animación y navegación sticky |
 
-Este documento se añade en un commit propio posterior. Para localizar toda
+La documentación se mantiene en commits propios. Para localizar toda
 la serie: `git log --oneline b56e8de..nuevoDiseño-ui-ux`.
 
 Para deshacer una sección, usar `git revert <commit>` en una rama de trabajo

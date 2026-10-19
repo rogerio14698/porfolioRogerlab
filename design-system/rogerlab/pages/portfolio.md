@@ -4,7 +4,7 @@ Inherits [MASTER.md](../MASTER.md). Applies to all portfolio routes.
 
 ## Composition
 
-- Frame: compact wordmark/header, normal navigation and horizontal preferences.
+- Frame: compact wordmark/header, sticky navigation and horizontal preferences.
 - Home: editorial identity with large portrait; actions above the stack;
   complete introduction below, in two readable columns on desktop.
 - Projects: full-width case-study rows, media beside the complete description;
@@ -30,3 +30,6 @@ new one-page site. Each route keeps its content and destinations.
 Do not add four unrelated images to the home page solely to satisfy a visual
 inspector; project screenshots remain on the projects route.
 Existing galleries supply the live interaction. No new gimmick or scroll scene.
+The user's original particle background is restored by explicit request,
+subordinate to text and project media. It is decorative, ignores pointer
+events, and has pause/reduced-motion/hidden-tab fallbacks.

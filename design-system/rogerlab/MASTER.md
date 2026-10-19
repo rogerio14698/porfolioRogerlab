@@ -61,6 +61,12 @@ Text and placeholders must meet 4.5:1; large type 3:1.
 - Plain HTML is fully readable without animation or JavaScript.
 - Preserve form validation, Turnstile, routing, downloads and translation keys.
 - Navigation supports keyboard, current page, mobile expansion and Escape.
+- Navigation stays sticky at the top while reading long pages, on all routes.
+- The original WebGL particle background is retained at low intensity:
+  opacity 0.18/screen in dark mode and 0.12/multiply in light mode.
+  Cap rendering at 30fps and device pixel ratio at 1. Stop the loop in hidden
+  tabs, under reduced motion or when paused. Reduced motion keeps a still.
+  A localized pressed-state button controls playback and remembers the choice.
 
 ## Assets
 
