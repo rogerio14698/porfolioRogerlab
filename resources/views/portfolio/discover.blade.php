@@ -29,6 +29,16 @@
                 </article>
             @endforeach
         </div>
+        <div class="discovery__navigation" data-discovery-navigation hidden>
+            <div class="discovery__indicators" role="group" aria-label="{{ __('portfolio.carousel') }}">
+                @foreach ($discoveries as $item)
+                    <button class="discovery__indicator" type="button" data-discovery-index="{{ $loop->index }}"
+                        aria-controls="discovery-track" aria-current="{{ $loop->first ? 'true' : 'false' }}"
+                        aria-label="{{ __('portfolio.slide', ['current' => $loop->iteration, 'total' => $discoveries->count()]) }}: {{ $item->localized('title') }}">
+                        <span aria-hidden="true"></span>
+                    </button>
+                @endforeach
+            </div>
         <button class="discovery__playback" type="button" data-discovery-playback hidden
             aria-controls="discovery-track" aria-label="{{ __('portfolio.pause') }}"
             data-pause-label="{{ __('portfolio.pause') }}" data-play-label="{{ __('portfolio.play') }}"
@@ -36,5 +46,6 @@
             <svg class="discovery__pause-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg>
             <svg class="discovery__play-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round" aria-hidden="true"><path d="m8 5 11 7-11 7Z"/></svg>
         </button>
+        </div>
     </section>
 @endif

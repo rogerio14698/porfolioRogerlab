@@ -255,12 +255,15 @@ class PortfolioContentTest extends TestCase
         $this->get('/home')->assertOk()->assertSee('Project es')->assertSee('tabindex="0"', false);
     }
 
-    public function test_discovery_has_only_an_icon_playback_control_and_localized_accessible_names(): void
+    public function test_discovery_has_indicators_and_icon_playback_with_localized_accessible_names(): void
     {
         foreach (['es' => 'Pausar carrusel', 'en' => 'Pause carousel', 'pt' => 'Pausar carrossel'] as $locale => $label) {
             $this->get("/home?lang=$locale")->assertOk()
                 ->assertSee('aria-label="'.$label.'"', false)
                 ->assertSee('data-discovery-playback hidden', false)
+                ->assertSee('data-discovery-navigation hidden', false)
+                ->assertSee('data-discovery-index="0"', false)
+                ->assertSee('aria-current="true"', false)
                 ->assertSee('class="heroHeadline"', false)
                 ->assertDontSee('discovery-title')
                 ->assertDontSee('discovery__header')

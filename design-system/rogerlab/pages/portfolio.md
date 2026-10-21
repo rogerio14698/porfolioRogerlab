@@ -46,7 +46,11 @@ inspector; project screenshots remain on the projects route.
 Existing galleries and the discovery carousel supply the live interaction.
 The carousel advances after eight seconds of reading time, with no visible
 heading, intro, scrollbar, link row, counter or previous/next buttons, as requested.
-Only a 44px icon-only playback control remains, with localized accessible labels.
+Navigation uses small outlined dots with an elongated filled capsule for the
+active slide, matching the user's reference. Each has a 44px target and localized
+accessible name; selecting one jumps to that item and pauses until explicit resume.
+The icon-only playback control remains alongside them. Indicators follow autoplay,
+native scrolling and keyboard navigation, wrapping on narrow screens if needed.
 Hover, touch, hidden tabs and offscreen content suspend playback. Keyboard focus
 stops it until explicit resume. Reduced motion disables autoplay completely.
 Automatic changes are not announced as live updates. Single-item content has no

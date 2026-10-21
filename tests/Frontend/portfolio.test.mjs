@@ -32,15 +32,18 @@ function setup({ count = 3, reduced = false } = {}) {
     const track = new Element();
     track.scrollLeft = 0;
     const playback = new Element();
+    const navigation = new Element();
+    const indicators = Array.from({ length: count }, () => new Element());
     playback.dataset = { pauseLabel: 'Pause', playLabel: 'Play', reducedLabel: 'Reduced motion' };
     playback.blur = () => { document.activeElement = null; };
     const slides = Array.from({ length: count }, (_, index) => ({
         offsetLeft: index * 100,
         getBoundingClientRect: () => ({ left: index * 100 - track.scrollLeft }),
     }));
-    carousel.contains = (element) => [track, playback, ...slides].includes(element);
-    carousel.querySelector = (selector) => selector === '.discovery__track' ? track : playback;
-    carousel.querySelectorAll = () => slides;
+    carousel.contains = (element) => [track, playback, ...slides, ...indicators].includes(element);
+    carousel.querySelector = (selector) => selector === '.discovery__track' ? track :
+        selector === '[data-discovery-navigation]' ? navigation : playback;
+    carousel.querySelectorAll = (selector) => selector === '[data-discovery-index]' ? indicators : slides;
     document.querySelector = () => carousel;
     track.scrollTo = (options) => {
         moves.push({ ...options, at: now });
@@ -74,7 +77,7 @@ function setup({ count = 3, reduced = false } = {}) {
         }
         now = end;
     };
-    return { document, carousel, track, playback, motion, moves, observers, event, advance };
+    return { document, carousel, track, playback, navigation, indicators, motion, moves, observers, event, advance };
 }
 
 test('advances at exactly eight seconds, wraps, and keeps automatic changes silent', () => {
@@ -100,6 +103,33 @@ test('explicit pause persists and resume gives a complete reading interval', () 
     assert.equal(app.moves.length, 0);
     app.advance(1);
     assert.equal(app.moves.length, 1);
+});
+
+test('indicators jump forward and backward, track the active slide and pause autoplay', () => {
+    const app = setup();
+    assert.equal(app.indicators[0].getAttribute('aria-current'), 'true');
+    app.indicators[2].dispatchEvent(app.event('click'));
+    assert.equal(app.moves.at(-1).left, 200);
+    assert.equal(app.indicators[2].getAttribute('aria-current'), 'true');
+    assert.equal(app.indicators[0].getAttribute('aria-current'), 'false');
+    app.indicators[0].dispatchEvent(app.event('click'));
+    assert.equal(app.moves.at(-1).left, 0);
+    app.advance(16000);
+    assert.equal(app.moves.length, 2);
+    app.playback.dispatchEvent(app.event('click'));
+    app.advance(8000);
+    assert.equal(app.indicators[1].getAttribute('aria-current'), 'true');
+});
+
+test('indicators work with reduced motion and synchronize with native scrolling', () => {
+    const app = setup({ reduced: true });
+    app.indicators[2].dispatchEvent(app.event('click'));
+    assert.equal(app.moves.at(-1).behavior, 'instant');
+    app.track.scrollLeft = 100;
+    app.track.dispatchEvent(app.event('scroll'));
+    app.advance(16);
+    assert.equal(app.indicators[1].getAttribute('aria-current'), 'true');
+    assert.equal(app.indicators[2].getAttribute('aria-current'), 'false');
 });
 
 test('hover, touch, hidden tabs and offscreen content suspend playback', () => {
@@ -168,7 +198,10 @@ test('zero or one item never rotates or exposes a playback control', () => {
         const app = setup({ count });
         app.advance(32000);
         assert.equal(app.moves.length, 0);
-        if (count === 1) assert.equal(app.playback.hidden, true);
+        if (count === 1) {
+            assert.equal(app.playback.hidden, true);
+            assert.equal(app.navigation.hidden, true);
+        }
     }
 });
 

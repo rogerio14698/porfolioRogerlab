@@ -158,8 +158,10 @@ después de migrar, los cambios se hacen en el panel, no en esa instantánea.
   proyectos publicados destacados (según orden) y cuatro artículos publicados
   recientes; si falta un tipo se muestra el otro, sin contenido inventado.
   El carrusel avanza cada ocho segundos, sin título adicional, barra de desplazamiento
-  ni fila de enlaces, flechas o contador. Solo muestra un icono de pausa/reproducción
-  con nombre accesible traducido. Se detiene al pasar el ratón, tocar, ocultar la
+  ni fila de enlaces, flechas o contador. Muestra puntos pulsables para elegir
+  contenido y una cápsula para el activo, junto al icono de pausa/reproducción.
+  Cada indicador tiene un nombre accesible traducido y un área táctil de 44px.
+  La selección manual pausa el avance hasta reanudar con el icono. Se detiene al pasar el ratón, tocar, ocultar la
   pestaña o salir de pantalla; al volver ofrece ocho segundos completos de lectura.
   El foco de teclado pausa hasta reanudar explícitamente. Con movimiento reducido
   no hay reproducción automática. Conserva flechas de teclado sobre la pista y

@@ -9,6 +9,8 @@ function initDiscovery(): void {
     const track = carousel.querySelector<HTMLElement>('.discovery__track');
     const slides = Array.from(carousel.querySelectorAll<HTMLElement>('.discovery__slide'));
     const playback = carousel.querySelector<HTMLButtonElement>('[data-discovery-playback]');
+    const navigation = carousel.querySelector<HTMLElement>('[data-discovery-navigation]');
+    const indicators = Array.from(carousel.querySelectorAll<HTMLButtonElement>('[data-discovery-index]'));
     if (!track || !playback || !slides.length) return;
 
     const controller = new AbortController();
@@ -23,6 +25,7 @@ function initDiscovery(): void {
     let visible = false;
     carousel.dataset.ready = 'true';
     playback.hidden = slides.length < 2;
+    if (navigation) navigation.hidden = slides.length < 2;
 
     const stop = (): void => {
         clearTimeout(timer);
@@ -50,12 +53,15 @@ function initDiscovery(): void {
             }, 8000);
         }
     };
-    const move = (step: number): void => {
-        requested = ((requested ?? active) + step + slides.length) % slides.length;
+    const goTo = (index: number): void => {
+        requested = index;
         track.scrollTo({
             left: slides[requested].offsetLeft - slides[0].offsetLeft,
             behavior: discoveryMotion.matches ? 'instant' : 'smooth',
         });
+    };
+    const move = (step: number): void => {
+        goTo(((requested ?? active) + step + slides.length) % slides.length);
     };
     const update = (): void => {
         const left = track.getBoundingClientRect().left;
@@ -63,8 +69,17 @@ function initDiscovery(): void {
             Math.abs(slide.getBoundingClientRect().left - left) <
             Math.abs(slides[nearest].getBoundingClientRect().left - left) ? index : nearest, 0);
         carousel.dataset.activeSlide = String(active);
+        indicators.forEach((indicator, index) => indicator.setAttribute('aria-current', String(index === active)));
         frame = 0;
     };
+
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => {
+            paused = true;
+            goTo(index);
+            schedule();
+        }, { signal });
+    });
 
     playback.addEventListener('click', () => {
         paused = !paused;
