@@ -1,5 +1,5 @@
 <div id="dynamic-section" data-section="{{ $section }}"
-    @if (in_array($section, ['blog', 'blogLogin', 'blogAdmin', 'blogEditor'])) data-server-language="{{ app()->getLocale() }}" @endif
+    @if (in_array($section, ['home', 'projects', 'project', 'projectsAdmin', 'projectEditor', 'skillsAdmin', 'skillEditor', 'blog', 'blogLogin', 'blogAdmin', 'blogEditor'])) data-server-language="{{ app()->getLocale() }}" @endif
     data-page-title="{{ $pageTitle ?? 'RogerLab | Desarrollador Full Stack titulado en DAW' }}"
     data-meta-description="{{ $pageMetaDescription ?? 'Portfolio de Rogério Lucas, desarrollador Full Stack titulado en DAW. Proyectos con Laravel, PHP, JavaScript, bases de datos, Docker y AWS orientados a código mantenible y trabajo en equipo.' }}">
     @if ($section === 'home')
@@ -18,6 +18,16 @@
         @include('blog.editor')
     @elseif ($section === 'projects')
         @include('components.projects')
+    @elseif ($section === 'project')
+        @include('portfolio.project')
+    @elseif ($section === 'projectsAdmin')
+        @include('portfolio.admin-projects')
+    @elseif ($section === 'projectEditor')
+        @include('portfolio.project-editor')
+    @elseif ($section === 'skillsAdmin')
+        @include('portfolio.admin-skills')
+    @elseif ($section === 'skillEditor')
+        @include('portfolio.skill-editor')
     @elseif ($section === 'contact')
         @include('components.contact')
         {{--Esto ya no es el navegador, son las diferentes secciones de uso de la web --}}

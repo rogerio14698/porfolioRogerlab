@@ -91,7 +91,8 @@ o `?lang=pt`, y alternativos `hreflang` para las traducciones disponibles más
 en español, independientemente de la sesión o del idioma guardado en el navegador.
 Las páginas paginadas conservan `page` en canonical y alternativos, excepto `page=1`.
 El sitemap incluye las tres versiones del índice. No se migran las URL a prefijos
-por idioma; la traducción del resto del portfolio desde el servidor queda pendiente.
+por idioma. Inicio, proyectos y blog ya resuelven su contenido dinámico desde el
+servidor; las demás secciones mantienen su sistema de traducción en el navegador.
 
 La portada social del índice es [blog-social.png](./public/img/blog-social.png)
 (1200 × 630 px). Los posts usan su primera imagen, la imagen histórica si existe,
@@ -120,6 +121,64 @@ Pruebas enfocadas:
 ```sh
 php artisan test tests/Feature/BlogPublishingTest.php tests/Feature/PortfolioPresentationTest.php
 ```
+
+## Habilidades, proyectos y carrusel de inicio
+
+El mismo acceso de propietario permite gestionar `/admin/skills` y
+`/admin/projects`, con enlaces desde la barra del panel del blog. No se necesita
+otra cuenta. Ejecuta `php artisan migrate` antes de servir esta versión:
+la migración añade las tablas y conserva las nueve habilidades y los siete
+proyectos actuales, sus traducciones, enlaces, descarga del flujo y capturas.
+La instantánea inicial está en [portfolio.json](./database/data/portfolio.json);
+después de migrar, los cambios se hacen en el panel, no en esa instantánea.
+
+- **Habilidades:** nombre ES/EN/PT, orden y borrador/publicación. Solo las publicadas
+  aparecen en `heroStack` y en `Person.knowsAbout` de la home.
+- **Proyectos:** título, resumen, descripción, tipo, periodo, SEO y descripción
+  general de imágenes por idioma; tecnologías (una por línea), repositorio,
+  web, orden, estado y selección para la portada. Para publicar se exigen título,
+  resumen, descripción y texto alternativo en los tres idiomas.
+- Se pueden subir hasta 20 JPEG/PNG/WebP de 5 MB y 6000 × 6000 px cada uno.
+  Se guardan en `storage/app/blog/projects`, con protección de borradores.
+  Elige cualquier imagen conservada o la primera nueva como portada; puedes
+  añadir textos alternativos específicos por imagen e idioma. Si se dejan
+  vacíos, se usa la descripción general del proyecto.
+  Las imágenes históricas de `public/img` se conservan como recursos públicos;
+  retirar un proyecto no revoca esos recursos previamente públicos.
+  Eliminar un proyecto solo borra sus archivos subidos, no los recursos históricos.
+- El PHP del servidor debe permitir la cantidad y tamaño de archivos deseados:
+  para 20 imágenes de 5 MB juntas, configura `max_file_uploads >= 20`,
+  `upload_max_filesize >= 5M` y `post_max_size > 100M`, o sube en varias ediciones.
+- La dirección `/projects/{slug}` tiene canonical e hreflang, Open Graph, Twitter
+  y JSON-LD `CreativeWork`. El índice usa `CollectionPage`/`ItemList`, con canonical
+  paginado. Solo proyectos publicados y no futuros aparecen en el sitemap.
+  No se prometen posiciones ni resultados enriquecidos. Evita cambiar un slug
+  publicado: no se generan redirecciones automáticas.
+- En inicio, identidad, foto y CV permanecen fijos. Debajo se alternan hasta cuatro
+  proyectos publicados destacados (según orden) y cuatro artículos publicados
+  recientes; si falta un tipo se muestra el otro, sin contenido inventado.
+  El carrusel avanza cada ocho segundos, sin título adicional, barra de desplazamiento
+  ni fila de enlaces, flechas o contador. Solo muestra un icono de pausa/reproducción
+  con nombre accesible traducido. Se detiene al pasar el ratón, tocar, ocultar la
+  pestaña o salir de pantalla; al volver ofrece ocho segundos completos de lectura.
+  El foco de teclado pausa hasta reanudar explícitamente. Con movimiento reducido
+  no hay reproducción automática. Conserva flechas de teclado sobre la pista y
+  gestos nativos; sin JavaScript sigue siendo desplazable.
+  Con cero contenidos no se dibuja; con uno no muestra controles.
+- Los iconos de tema y fondo no muestran texto en ninguna resolución, pero
+  conservan su nombre accesible traducido y sus estados.
+- La navegación parcial actualiza también canonical, alternativos, robots, metadatos
+  sociales y JSON-LD, evitando arrastrar el SEO de la página anterior.
+
+Validación del contenido dinámico y regresiones relacionadas:
+
+```sh
+php vendor/bin/phpunit tests/Feature/PortfolioContentTest.php tests/Feature/PortfolioPresentationTest.php tests/Feature/BlogPublishingTest.php
+npm run build
+node --test tests/Frontend/portfolio.test.mjs
+```
+
+Las pruebas del carrusel usan el ejecutor integrado de Node 24, sin dependencias adicionales.
 
 ## About Laravel
 

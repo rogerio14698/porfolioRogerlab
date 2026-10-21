@@ -10,7 +10,7 @@
 
     .heroCopy {
         min-width: 0;
-        h1 { font-size: var(--text-display); max-width: 22ch; }
+        h1 { font-size: clamp(3.25rem, 1.7rem + 5vw, 6rem); max-width: 16ch; line-height: 1; }
     }
 
     .heroName {
@@ -19,15 +19,15 @@
     }
 
     .heroHeadline {
-        margin-top: var(--space-4);
-        max-width: 42ch;
+        margin-top: var(--space-6);
+        max-width: 28ch;
         font-size: var(--text-lead);
         line-height: 1.5;
     }
 
     .heroFoto {
         width: 100%;
-        max-height: 560px;
+        max-height: 520px;
         aspect-ratio: 4 / 5;
         object-fit: cover;
         object-position: center 35%;
@@ -51,10 +51,10 @@
     .heroStack {
         display: flex;
         flex-wrap: wrap;
-        gap: var(--space-2) var(--space-6);
+        gap: var(--space-3) var(--space-6);
         margin-top: var(--space-8);
         max-width: 65ch;
-        font-size: var(--text-small);
+        font-size: var(--text-body);
         color: var(--text-secondary);
     }
 }
@@ -62,8 +62,7 @@
 .textoAbout {
     display: grid;
     gap: var(--space-6);
-    padding: var(--space-8);
-    background: var(--surface-raised);
+    padding-block: var(--space-8);
 
     p { max-width: 65ch; }
 }
@@ -83,8 +82,7 @@
         display: grid;
         align-content: start;
         gap: var(--space-6);
-        padding: var(--space-6);
-        background: var(--surface-raised);
+        padding-block: var(--space-6);
 
         h2 { font-size: var(--text-heading); }
         ul { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-6); }
@@ -103,10 +101,10 @@
 
 @media (min-width: 48rem) {
     .hero {
-        .heroMedia { grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.8fr); gap: var(--space-12); }
-        .heroFoto { height: 100%; min-height: 420px; }
+        .heroMedia { grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); gap: var(--space-12); }
+        .heroFoto { height: auto; min-height: 0; }
     }
-    .textoAbout { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-12); padding: var(--space-12); }
+    .textoAbout { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-12); }
     .seccionAboutMe .conocimientos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .aboutNarrative { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }

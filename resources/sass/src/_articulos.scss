@@ -49,7 +49,7 @@
     .blog-button--secondary { background: var(--surface-raised); color: var(--text-primary); }
     .blog-form, .blog-field { display: grid; gap: var(--space-3); min-width: 0; }
     .blog-form { gap: var(--space-6); }
-    .blog-form :is(input:not([type="checkbox"]), textarea, select) {
+    .blog-form :is(input:not([type="checkbox"], [type="radio"], [type="hidden"]), textarea, select) {
         width: 100%; min-width: 0; min-height: 48px; padding: var(--space-3);
         border: 1px solid var(--field-border); border-radius: var(--radius-control);
         background: var(--input-bg); color: var(--text-primary); font: inherit;
@@ -81,6 +81,14 @@
 @media (min-width: 64rem) {
     .blog .blog-card-with-image { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); }
 }
+
+.blog:not(.blog-admin, .blog-access) {
+    .blog-card { background: transparent; gap: var(--space-8); align-items: center; }
+    .blog-card-content { padding: var(--space-6) 0; }
+    .blog-header { max-width: 60rem; }
+    .blog-detail { width: min(100%, 64rem); gap: var(--space-12); }
+}
+
 @media (prefers-reduced-motion: reduce) {
     .blog .blog-button { transition: none; &:hover { transform: none; } }
 }

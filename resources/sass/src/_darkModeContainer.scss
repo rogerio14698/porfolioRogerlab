@@ -55,13 +55,5 @@
     .asideLeft {
         button { padding-inline: var(--space-3); }
 
-        .preferenceLabel:not([hidden]) {
-            position: static;
-            width: auto;
-            height: auto;
-            margin: 0;
-            overflow: visible;
-            clip-path: none;
-        }
     }
 }

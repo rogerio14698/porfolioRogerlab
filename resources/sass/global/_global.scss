@@ -84,7 +84,8 @@ body[data-theme="light"] #mainShaderBg {
 .mainContent {
     position: relative;
     z-index: 1;
-    width: min(100%, 1680px);
+    max-width: 1480px;
+    width: 100%;
     margin-inline: auto;
     padding-inline: var(--page-gutter);
 }

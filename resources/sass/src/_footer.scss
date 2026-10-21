@@ -1,9 +1,8 @@
 .contenedorFooter {
     display: grid;
     gap: var(--space-8);
-    padding: var(--space-8);
+    padding: var(--space-8) 0;
     margin-bottom: var(--space-8);
-    background: var(--surface-raised);
 
     .footerBrand { order: 3; }
     .footerLabel { font-size: var(--text-small); color: var(--text-secondary); }
@@ -15,7 +14,7 @@
         min-height: 44px;
         max-width: 100%;
         overflow-wrap: anywhere;
-        font-size: var(--text-lead);
+        font-size: clamp(1.125rem, 0.9rem + 1.1vw, 1.75rem);
     }
 
     a:hover { text-decoration: underline; }
@@ -27,7 +26,7 @@
         min-height: 44px;
         padding-inline: var(--space-3);
         font-size: var(--text-body);
-        background: var(--surface-page);
+        background: var(--surface-raised);
 
         i { font-size: 1.375rem; }
     }
@@ -43,7 +42,7 @@
 @media (min-width: 48rem) {
     .contenedorFooter {
         grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
-        padding: var(--space-12);
+        padding-block: var(--space-12);
         .footerBrand { grid-column: 1 / -1; }
     }
 }

@@ -1,9 +1,12 @@
 <?php
 
 use App\Http\Controllers\AdminBlogController;
+use App\Http\Controllers\AdminProjectController;
+use App\Http\Controllers\AdminSkillController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BlogLoginController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Middleware\BlogLocale;
 use App\Http\Middleware\BlogOwner;
@@ -12,13 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', '/home');
 
-Route::get('/home', function () {
-    return renderSection(
-        'home',
-        'Rogerio Lucas Viana | Desarrollador Web Full Stack Junior en Gijón',
-        'Portfolio de Rogerio Lucas Viana, desarrollador web Full Stack Junior en Gijón, Asturias. Proyectos y experiencia con Laravel, PHP, JavaScript, Docker, SQL y AWS.'
-    );
-})->name('home');
+Route::get('/home', [PortfolioController::class, 'home'])->middleware(BlogLocale::class)->name('home');
 
 Route::get('/about', function () {
     return renderSection(
@@ -49,17 +46,18 @@ Route::middleware(BlogLocale::class)->group(function () {
             Route::post('/logout', [BlogLoginController::class, 'destroy'])->name('logout');
             Route::get('/admin/blog/{blog}/preview', [BlogController::class, 'preview'])->name('admin.blog.preview');
             Route::resource('/admin/blog', AdminBlogController::class)->except('show')->names('admin.blog');
+            Route::get('/admin/projects/{project}/preview', [PortfolioController::class, 'preview'])->name('admin.projects.preview');
+            Route::resource('/admin/projects', AdminProjectController::class)->except('show')->names('admin.projects');
+            Route::resource('/admin/skills', AdminSkillController::class)->except('show')->names('admin.skills');
         });
     });
 });
 
-Route::get('/projects', function () {
-    return renderSection(
-        'projects',
-        'Proyectos Full Stack | Laravel, PHP y JavaScript | Rogerio Lucas Viana',
-        'Proyectos Full Stack de Rogerio Lucas Viana con Laravel, PHP, JavaScript, MySQL, Docker, AWS y automatización con n8n.'
-    );
-})->name('projects');
+Route::middleware(BlogLocale::class)->group(function () {
+    Route::get('/projects', [PortfolioController::class, 'index'])->name('projects');
+    Route::get('/projects/media/{project}/{index}', [PortfolioController::class, 'image'])->whereNumber('index')->name('projects.image');
+    Route::get('/projects/{project:slug}', [PortfolioController::class, 'show'])->name('projects.show');
+});
 
 Route::get('/contact', function () {
     return renderSection(

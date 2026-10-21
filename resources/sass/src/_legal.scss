@@ -1,11 +1,11 @@
 .legalSection {
     display: grid;
     gap: var(--space-6);
-    width: min(100%, 920px);
+    width: min(100%, 1024px);
     margin-inline: auto;
 
     h1 { font-size: var(--text-display); margin-bottom: var(--space-6); }
-    h2 { font-size: var(--text-heading); margin-top: var(--space-6); }
+    h2 { font-size: var(--text-heading); margin-top: var(--space-8); max-width: 30ch; }
     h3 { font-size: var(--text-lead); margin-top: var(--space-4); }
     p { max-width: 70ch; }
     ul { list-style: disc; padding-left: var(--space-6); }

@@ -29,7 +29,7 @@
                         'addressCountry' => config('seo.country'),
                     ],
                     'sameAs' => [$profile['linkedin'], $profile['github']],
-                    'knowsAbout' => $profile['skills'],
+                    'knowsAbout' => isset($skills) ? $skills->map(fn ($skill) => $skill->label())->all() : $profile['skills'],
                 ],
                 [
                     '@type' => 'WebSite',

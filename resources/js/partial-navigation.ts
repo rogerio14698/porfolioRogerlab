@@ -61,59 +61,18 @@
         }));
     }
 
-    function updateHeadMetadata(container) {
-        if (!container) {
-            return;
-        }
-
-        var pageTitle = container.dataset.pageTitle;
-        var metaDescription = container.dataset.metaDescription;
-        var currentUrl = window.location.href;
-        var canonicalLink = document.querySelector('link[rel="canonical"]');
-
-        if (pageTitle) {
-            document.title = pageTitle;
-        }
-
-        if (metaDescription) {
-            [
-                'meta[name="description"]',
-                'meta[property="og:description"]',
-                'meta[name="twitter:description"]'
-            ].forEach(function (selector) {
-                var metaTag = document.querySelector(selector);
-
-                if (metaTag) {
-                    metaTag.setAttribute('content', metaDescription);
-                }
-            });
-        }
-
-        [
-            'meta[property="og:title"]',
-            'meta[name="twitter:title"]'
-        ].forEach(function (selector) {
-            var metaTag = document.querySelector(selector);
-
-            if (metaTag && pageTitle) {
-                metaTag.setAttribute('content', pageTitle);
-            }
+    function updateHeadMetadata(nextDocument) {
+        var selector = [
+            'meta[name="description"]', 'meta[name="keywords"]', 'meta[name="robots"]',
+            'meta[property^="og:"]', 'meta[name^="twitter:"]',
+            'link[rel="canonical"]', 'link[rel="alternate"][hreflang]',
+            'script[type="application/ld+json"]'
+        ].join(',');
+        document.title = nextDocument.title;
+        document.querySelectorAll(selector).forEach(function (node) { node.remove(); });
+        nextDocument.querySelectorAll(selector).forEach(function (node) {
+            document.head.appendChild(node.cloneNode(true));
         });
-
-        [
-            'meta[property="og:url"]',
-            'meta[name="twitter:url"]'
-        ].forEach(function (selector) {
-            var metaTag = document.querySelector(selector);
-
-            if (metaTag) {
-                metaTag.setAttribute('content', currentUrl);
-            }
-        });
-
-        if (canonicalLink) {
-            canonicalLink.setAttribute('href', currentUrl);
-        }
     }
 
     async function fetchSection(url) {
@@ -132,11 +91,11 @@
         return response.text();
     }
 
-    function parseContainer(markup) {
+    function parseDocument(markup) {
         var parser = new DOMParser();
         var documentFragment = parser.parseFromString(markup, 'text/html');
 
-        return getContainer(documentFragment);
+        return documentFragment;
     }
 
     async function navigate(url, options) {
@@ -152,7 +111,8 @@
 
         try {
             var markup = await fetchSection(url);
-            var nextContainer = parseContainer(markup);
+            var nextDocument = parseDocument(markup);
+            var nextContainer = getContainer(nextDocument);
 
             if (!nextContainer) {
                 window.location.href = url;
@@ -160,7 +120,7 @@
             }
 
             currentContainer.replaceWith(nextContainer);
-            updateHeadMetadata(nextContainer);
+            updateHeadMetadata(nextDocument);
 
             if (settings.pushState !== false) {
                 window.history.pushState({ url: url }, '', url);

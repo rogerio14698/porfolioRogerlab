@@ -931,6 +931,12 @@
 
         document.documentElement.lang = activeLanguage;
 
+        document.querySelectorAll('a[data-i18n="nav.home"], a[data-i18n="nav.projects"], a[data-i18n="nav.blog"]').forEach(function (link) {
+            var url = new URL(link.href, window.location.origin);
+            url.searchParams.set('lang', activeLanguage);
+            link.href = url.href;
+        });
+
         document.querySelectorAll('[data-i18n]').forEach(function (element) {
             translateElement(element, activeLanguage);
         });

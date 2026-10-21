@@ -1,36 +1,19 @@
 <section class="hero">
     <div class="heroMedia">
         <div class="heroCopy">
-            <h1 data-i18n="hero.identity">Rogerio Lucas Viana - Desarrollador Web Full Stack Junior</h1>
-            {{--
-            <p class="heroName" data-i18n="hero.role">Desarrollador Full Stack | Titulado en DAW</p>
-            <p class="heroHeadline" data-i18n="hero.title">Busco incorporarme a un equipo donde construir software web mantenible</p>
-            --}}
-            {{-- Columna derecha contenido --}}
-
-            {{-- CTAs --}}
+            <h1>{{ __('portfolio.identity_name') }}</h1>
+            <p class="heroHeadline">{{ __('portfolio.identity_role') }}</p>
             <div class="heroeActions">
-                {{--
-                <a href="{{ route('projects') }}" data-i18n="hero.cta.projects">Ver proyectos</a>
-                <a href="{{ route('contact') }}" data-i18n="hero.cta.contact">Contactar</a>
-                --}}
                 <a href="{{ route('pdf-cv.english') }}" target="_blank" rel="noopener noreferrer" class="contactPdfLink"
                     data-i18n="hero.cta.cv_en">CV English</a>
                 <a href="{{ route('pdf-cv.spanish') }}" target="_blank" rel="noopener noreferrer" class="contactPdfLink"
                     data-i18n="hero.cta.cv_es">CV Español</a>
             </div>
 
-            {{-- Stack principal --}}
             <div class="heroStack">
-                <span> PHP / Laravel </span>
-                <span> JavaScript / Typescript </span>
-                <span> MySQL / PostgreSQL </span>
-                <span> Git </span>
-                <span> AWS / EC2 </span>
-                <span> Docker / Docker Compose </span>
-                <span> n8n / Automatización </span>
-                <span> IA / Prompts </span>
-                <span> APIs REST / Browserless </span>
+                @foreach ($skills as $skill)
+                    <span>{{ $skill->label() }}</span>
+                @endforeach
             </div>
 
         </div>
@@ -38,6 +21,8 @@
             alt="Rogerio Lucas Viana, desarrollador web Full Stack Junior especializado en Laravel y JavaScript"
             class="heroFoto" width="1170" height="2080" fetchpriority="high">
     </div>
+
+    @include('portfolio.discover')
 
     <div class="textoAbout">
         <p data-i18n="home.intro.body.part1">

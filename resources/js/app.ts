@@ -6,3 +6,4 @@ import './language-switcher';
 import './practicas-modal';
 import './eventosBlog';
 import './main';
+import './portfolio';

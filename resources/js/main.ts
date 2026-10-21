@@ -312,6 +312,19 @@ function initGestorFichajeGallery(root) {
     });
 }
 
+document.addEventListener('click', function (event) {
+    if (!(event.target instanceof Element) || event.defaultPrevented || event.button !== 0 ||
+        event.metaKey || event.ctrlKey || event.altKey || event.shiftKey) return;
+    var link = event.target.closest<HTMLAnchorElement>('[data-project-image]');
+    var gallery = link?.closest('[data-project-gallery]');
+    if (!link || !gallery) return;
+    var links = Array.from(gallery.querySelectorAll<HTMLAnchorElement>('[data-project-image]'));
+    event.preventDefault();
+    createGestorFichajeLightbox().openGallery(links.map(function (item) {
+        return { src: item.href, alt: item.querySelector('img')?.alt || '' };
+    }), links.indexOf(link));
+});
+
 function initSingleImageLightbox(root) {
     var scope = root || document;
     var items = scope.querySelectorAll('.galeria--n8n .galeria__item, .galeria--n8n img, [data-single-lightbox]');

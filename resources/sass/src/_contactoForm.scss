@@ -4,7 +4,7 @@
     align-items: start;
 
     h1 { font-size: var(--text-display); }
-    form { display: grid; gap: var(--space-6); min-width: 0; }
+    form { display: grid; gap: var(--space-8); min-width: 0; }
 
     .contactFormGrid { display: grid; gap: var(--space-6); }
 
@@ -25,6 +25,7 @@
             background: var(--input-bg);
             color: var(--text-primary);
             line-height: 1.5;
+            transition: background var(--duration-fast), border-color var(--duration-fast);
 
             &::placeholder { color: var(--text-secondary); opacity: 1; }
             &:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 4px; }
@@ -48,7 +49,7 @@
 
 @media (min-width: 48rem) {
     .seccionContact {
-        grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+        grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
         gap: var(--space-12);
     }
 }
