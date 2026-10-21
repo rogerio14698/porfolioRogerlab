@@ -13,10 +13,10 @@
 
         <div class="social-icons" aria-label="Redes sociales">
             <a href="{{ config('seo.profile.linkedin') }}" aria-label="LinkedIn">
-                <i class="fa-brands fa-linkedin" aria-hidden="true"></i> LinkedIn
+                <img class="socialIcon" src="{{ asset('img/icons/linkedin.svg') }}" alt="" aria-hidden="true" width="22" height="22" loading="lazy"> LinkedIn
             </a>
             <a href="{{ config('seo.profile.github') }}" aria-label="GitHub">
-                <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub
+                <img class="socialIcon" src="{{ asset('img/icons/github.svg') }}" alt="" aria-hidden="true" width="22" height="22" loading="lazy"> GitHub
             </a>
         </div>
     </div>

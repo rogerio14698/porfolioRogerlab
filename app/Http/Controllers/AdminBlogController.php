@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveBlogRequest;
 use App\Models\Blog;
+use App\Services\UploadImageOptimizer;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -90,7 +91,7 @@ class AdminBlogController extends Controller
                 }
                 $position = (int) $blog->images()->max('position') + 1;
                 foreach ($request->file('uploads', []) as $index => $upload) {
-                    $path = $upload['file']->store('images', 'blog');
+                    $path = app(UploadImageOptimizer::class)->store($upload['file'], 'images', "uploads.$index.file");
                     $newPaths[] = $path;
                     $blog->images()->create([
                         'path' => $path,

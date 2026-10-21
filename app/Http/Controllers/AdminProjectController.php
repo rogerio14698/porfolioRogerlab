@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveProjectRequest;
 use App\Models\Project;
+use App\Services\UploadImageOptimizer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -73,11 +74,11 @@ class AdminProjectController extends Controller
                 if (count($media) + count($request->file('uploads', [])) > 20) {
                     throw ValidationException::withMessages(['uploads' => __('portfolio.image_limit')]);
                 }
-                foreach ($request->file('uploads', []) as $upload) {
+                foreach ($request->file('uploads', []) as $index => $upload) {
                     if ($selectedCover === 'new' && empty($newPaths)) {
                         $coverIndex = count($media);
                     }
-                    $path = $upload->store('projects', 'blog');
+                    $path = app(UploadImageOptimizer::class)->store($upload, 'projects', "uploads.$index");
                     $newPaths[] = $path;
                     $media[] = ['path' => $path, 'disk' => 'blog', 'alt' => []];
                 }

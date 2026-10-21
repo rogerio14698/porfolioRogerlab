@@ -52,7 +52,7 @@ class BlogPublishingTest extends TestCase
     private function image(string $name = 'photo.png'): UploadedFile
     {
         return UploadedFile::fake()->createWithContent($name, base64_decode(
-            'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+a6XcAAAAASUVORK5CYII='
+            'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAADElEQVQImWNgYGAAAAAEAAGjChXjAAAAAElFTkSuQmCC'
         ));
     }
 

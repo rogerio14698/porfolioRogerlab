@@ -19,7 +19,7 @@ function renderTurnstileWidgets(root) {
         return;
     }
 
-    var widgets = root.querySelectorAll('[data-turnstile-widget]');
+    var widgets = root.querySelectorAll('[data-turnstile-widget][data-sitekey]:not([data-sitekey=""])');
 
     if (!widgets.length) {
         return;
@@ -366,9 +366,6 @@ document.addEventListener('partial:navigation:loaded', function (event) {
 document.addEventListener('DOMContentLoaded', function () {
     renderNavToggle();
 
-    const canvas = document.getElementById('mainShaderBg');
-    if (!(canvas instanceof HTMLCanvasElement)) return;
-
     function renderNavToggle() {
         var nav = document.querySelector('.nav');
         var toggle = document.querySelector('.nav-toggle');
@@ -400,34 +397,69 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    const gl = canvas.getContext('webgl');
+});
+
+async function initBackground() {
+    const canvas = document.getElementById('mainShaderBg');
+    if (!(canvas instanceof HTMLCanvasElement)) return;
+
+    const gl = canvas.getContext('webgl', {
+        alpha: false,
+        antialias: false,
+        depth: false,
+        stencil: false,
+        powerPreference: 'low-power'
+    });
     if (!gl) {
         console.warn('Background animation unavailable: WebGL is not supported.');
         return;
     }
+    const parallelCompile = gl.getExtension('KHR_parallel_shader_compile');
 
     /* ── Helpers ── */
     function createShader(type, source) {
         var s = gl.createShader(type);
-        gl.shaderSource(s, source);
-        gl.compileShader(s);
-        if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
-            console.error(gl.getShaderInfoLog(s));
-            gl.deleteShader(s);
+        if (!s) {
+            console.error('Background shader allocation failed.');
             return null;
         }
+        gl.shaderSource(s, source);
+        gl.compileShader(s);
         return s;
     }
 
-    function createProgram(vs, fs) {
+    async function createProgram(vs, fs) {
         var p = gl.createProgram();
+        if (!p) {
+            console.error('Background program allocation failed.');
+            gl.deleteShader(vs);
+            gl.deleteShader(fs);
+            return null;
+        }
         gl.attachShader(p, vs);
         gl.attachShader(p, fs);
         gl.linkProgram(p);
+        // Checking LINK_STATUS before parallel compilation completes stalls the main thread.
+        if (parallelCompile) {
+            while (!gl.getProgramParameter(p, parallelCompile.COMPLETION_STATUS_KHR)) {
+                await new Promise<void>(resolve => window.setTimeout(resolve, 16));
+                if (gl.isContextLost()) {
+                    console.warn('Background animation unavailable: WebGL context lost during compilation.');
+                    return null;
+                }
+            }
+        }
         if (!gl.getProgramParameter(p, gl.LINK_STATUS)) {
-            console.error(gl.getProgramInfoLog(p));
+            console.error('Background shader failed:', gl.getProgramInfoLog(p), gl.getShaderInfoLog(vs), gl.getShaderInfoLog(fs));
+            gl.deleteProgram(p);
+            gl.deleteShader(vs);
+            gl.deleteShader(fs);
             return null;
         }
+        gl.detachShader(p, vs);
+        gl.detachShader(p, fs);
+        gl.deleteShader(vs);
+        gl.deleteShader(fs);
         return p;
     }
 
@@ -455,7 +487,7 @@ document.addEventListener('DOMContentLoaded', function () {
     ].join('\n'));
 
     if (!bgVS || !bgFS) return;
-    var bgProg = createProgram(bgVS, bgFS);
+    var bgProg = await createProgram(bgVS, bgFS);
     if (!bgProg) return;
 
     var bgPosLoc = gl.getAttribLocation(bgProg, 'a_position');
@@ -614,7 +646,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var pVS = createShader(gl.VERTEX_SHADER, particleVertSrc);
     var pFS = createShader(gl.FRAGMENT_SHADER, particleFragSrc);
     if (!pVS || !pFS) return;
-    var pProg = createProgram(pVS, pFS);
+    var pProg = await createProgram(pVS, pFS);
     if (!pProg) return;
 
     var pPartLoc  = gl.getAttribLocation(pProg, 'a_particle');
@@ -793,4 +825,18 @@ document.addEventListener('DOMContentLoaded', function () {
     resizeCanvas();
     drawFrame(elapsed);
     syncMotion();
-});
+}
+
+function scheduleBackground() {
+    if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(initBackground, { timeout: 2000 });
+    } else {
+        window.setTimeout(initBackground, 0);
+    }
+}
+
+if (document.readyState === 'complete') {
+    scheduleBackground();
+} else {
+    window.addEventListener('load', scheduleBackground, { once: true });
+}

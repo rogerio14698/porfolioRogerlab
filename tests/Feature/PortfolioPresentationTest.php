@@ -33,7 +33,11 @@ class PortfolioPresentationTest extends TestCase
                 ->assertSee('data-motion-label="play"', false)
                 ->assertSee('data-motion-label="pause"', false)
                 ->assertSee('data-motion-label="reduced"', false)
-                ->assertSee('data-motion-label="unavailable"', false);
+                ->assertSee('data-motion-label="unavailable"', false)
+                ->assertSee('fonts/big-shoulders-latin-600-v4.woff2', false)
+                ->assertSee('fonts/public-sans-latin-v21.woff2', false)
+                ->assertDontSee('fonts.googleapis.com', false)
+                ->assertDontSee('cdnjs.cloudflare.com', false);
 
             $this->assertSame(
                 1,
@@ -115,8 +119,8 @@ class PortfolioPresentationTest extends TestCase
             ->assertSee('Política de privacidad')
             ->assertSee('Términos del servicio')
             ->assertSee('Política de cookies')
-            ->assertSee('aria-hidden="true"></i> LinkedIn', false)
-            ->assertSee('aria-hidden="true"></i> GitHub', false)
+            ->assertSee('img/icons/linkedin.svg', false)
+            ->assertSee('img/icons/github.svg', false)
             ->assertDontSee('Roger Lab');
         preg_match('/<script type="application\/ld\+json">(.*?)<\/script>/s', $response->getContent(), $matches);
         $schema = json_decode($matches[1], true, 512, JSON_THROW_ON_ERROR);

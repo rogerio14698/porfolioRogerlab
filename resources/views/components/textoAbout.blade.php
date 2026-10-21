@@ -18,6 +18,8 @@
 
         </div>
         <img src="{{ asset('img/cv-foto.jpeg') }}"
+            srcset="{{ asset('img/cv-foto-480-v1.webp') }} 480w, {{ asset('img/cv-foto-960-v1.webp') }} 960w"
+            sizes="(min-width: 1480px) 534px, (min-width: 768px) 38vw, 93vw"
             alt="Rogerio Lucas Viana, desarrollador web Full Stack Junior especializado en Laravel y JavaScript"
             class="heroFoto" width="1170" height="2080" fetchpriority="high">
     </div>

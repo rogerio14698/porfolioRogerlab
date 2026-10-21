@@ -1,4 +1,3 @@
-import './bootstrap';
 import './theme';
 import './animaciones';
 import './partial-navigation';

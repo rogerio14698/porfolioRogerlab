@@ -7,6 +7,67 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## Rendimiento y despliegue
+
+- Todas las vistas comparten las fuentes Big Shoulders y Public Sans alojadas
+  localmente (WOFF2, con sus licencias en `public/fonts`); no dependen de Google
+  Fonts ni de la hoja completa de Font Awesome. Los dos iconos sociales son SVG
+  locales con la atribución de Font Awesome incluida.
+- El fondo conserva su efecto y sus controles, pero se inicializa después de
+  cargar la página, en un turno libre del navegador. Aprovecha compilación paralela
+  de shaders cuando WebGL la admite, sin bloquear esperando su estado.
+  Conserva la densidad original de partículas, resolución y límite de 30 fps.
+  Respeta pausa guardada, movimiento reducido, pestañas ocultas y pérdida de WebGL.
+- El retrato usa variantes WebP de 480 y 960 px sin eliminar el JPEG original.
+- Los CV siguen siendo PDF vectoriales, con el mismo texto y enlaces. Se han
+  recomprimido sin pérdida: inglés **1863338 → 1481053 bytes** y español
+  **2166322 → 1743594 bytes**. No se regeneran en cada visita. Sus URL y nombres
+  de ruta no cambian; admiten `HEAD`, rangos `206` y validación `304` mediante
+  `ETag`/`Last-Modified`, sin iniciar sesión ni emitir cookies.
+  Son documentos públicos con caché de una hora: al sustituirlos, una copia
+  ya almacenada puede seguir disponible hasta que venza ese plazo.
+- `public/.htaccess` activa gzip para HTML/CSS/JS/JSON/SVG **si Apache dispone
+  de `mod_deflate`** y caché solo para archivos estáticos **si dispone de
+  `mod_expires`**. Las fuentes versionadas se conservan un año; CSS/JS/imágenes,
+  una semana. El CSS usa versión en la URL y Vite genera nombres con hash.
+  Para sustituir una imagen o fuente con caché, usa otro nombre de archivo.
+  Las imágenes privadas del blog/proyectos siguen con `no-store, private`;
+  no se activa caché pública para HTML, formularios ni el panel.
+
+Despliega únicamente después de un `git pull --ff-only` correcto. Si Git detecta
+cambios locales, revísalos y resuélvelos o respáldalos antes; no continúes con una
+compilación de la revisión antigua:
+
+```sh
+git status --short
+git pull --ff-only
+npm run build
+php artisan optimize:clear
+php artisan config:cache
+php artisan view:cache
+```
+
+Mantén `APP_ENV=production`, `APP_DEBUG=false` y OPcache habilitado en el PHP
+que sirve la web. No instales ni actives módulos reiniciando un servidor compartido
+sin revisar antes su configuración. Si usas Nginx, `.htaccess` no se aplica:
+configura allí gzip y la caché **solo de archivos estáticos**, sin incluir las
+rutas Laravel de medios privados. Comprueba en producción `Content-Encoding: gzip`
+para una petición GET de CSS/JS con `Accept-Encoding: gzip`, y `Cache-Control`
+para fuentes e imágenes. La configuración local de XAMPP puede no tener esos
+módulos activos aunque los cambios de la aplicación ya estén funcionando.
+
+Vuelve a ejecutar Lighthouse en móvil y escritorio después del despliegue,
+con la misma configuración y sin extensiones. El informe inicial registró
+FCP 0,7 s, LCP 0,8 s y TBT 16890 ms; una medición local no garantiza la misma
+puntuación ni reproduce por sí sola el coste de GPU del dispositivo original.
+
+Pruebas de entrega y controles:
+
+```sh
+php vendor/bin/phpunit tests/Feature/PdfPerformanceTest.php tests/Feature/PortfolioPresentationTest.php
+node --test tests/Frontend/background.test.mjs tests/Frontend/portfolio.test.mjs
+```
+
 ## Blog privado de RogerLab
 
 El blog es público en `/blog`. Solo el propietario puede acceder a `/login`
@@ -68,8 +129,18 @@ tras limpiar el archivo, este comando permite recuperar el acceso.
   **no hace falta `storage:link`**. Las imágenes de borradores solo las puede leer
   el propietario. Las respuestas no se almacenan en caché para respetar su retirada.
   No es posible revocar copias que alguien haya descargado cuando eran públicas.
-- Se guardan los archivos originales: elimina metadatos personales/EXIF antes de
-  subir fotos. Incluye `storage/app/blog` y la base de datos en tus copias de seguridad.
+- Las nuevas imágenes del blog y proyectos se convierten automáticamente a WebP,
+  sin recorte, con el lado mayor limitado a 1600 px (sin ampliar imágenes pequeñas).
+  Se aplica calidad 78, reduciéndola hasta 60 si supera 300 KB; ese peso es un
+  objetivo, no un límite garantizado. Se conserva transparencia y se eliminan
+  metadatos. Con PHP EXIF activo también se corrige la orientación JPEG.
+  Los originales subidos no se conservan: guarda tu copia de alta calidad.
+  Las imágenes ya existentes no cambian; vuelve a subirlas para optimizarlas.
+  Requiere **PHP GD con soporte WebP** en el PHP que sirve la web; sin él se
+  muestra un error y no se guarda la publicación. En Debian/Ubuntu normalmente
+  se instala con `apt install php-gd` (o el paquete de tu versión PHP), activándolo
+  después en Apache/PHP-FPM. En XAMPP activa `extension=gd` en su `php.ini`.
+  Incluye `storage/app/blog` y la base de datos en tus copias de seguridad.
 - Ajusta `upload_max_filesize` (al menos `5M`), `post_max_size` (recomendado `64M`)
   y `max_file_uploads` (al menos 10) en el PHP que sirve la web, y los límites del
   servidor/proxy. La configuración local detectada tiene `post_max_size=40M`:

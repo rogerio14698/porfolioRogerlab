@@ -28,8 +28,10 @@
         font-size: var(--text-body);
         background: var(--surface-raised);
 
-        i { font-size: 1.375rem; }
+        .socialIcon { width: 1.375rem; height: 1.375rem; filter: invert(1); }
     }
+
+    body[data-theme="light"] .contenedorFooter .socialIcon { filter: none; }
 
     .footerPrivacy {
         display: flex;

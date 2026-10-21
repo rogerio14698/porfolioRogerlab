@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminSkillController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BlogLoginController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\PdfCvController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Middleware\BlogLocale;
@@ -99,19 +100,12 @@ Route::get('/cookies-privacy', function () {
     );
 })->name('cookies-privacy');
 
-Route::get('/pdf-cv/english', function () {
-    $path = resource_path('views/components/pdf-cv/RogerioLucas-cv-English.pdf');
-    abort_unless(file_exists($path), 404);
-
-    return response()->file($path, ['Content-Type' => 'application/pdf']);
-})->name('pdf-cv.english');
-
-Route::get('/pdf-cv/spanish', function () {
-    $path = resource_path('views/components/pdf-cv/RogerioLucas-Spanish-cv.pdf');
-    abort_unless(file_exists($path), 404);
-
-    return response()->file($path, ['Content-Type' => 'application/pdf']);
-})->name('pdf-cv.spanish');
+Route::withoutMiddleware('web')->group(function () {
+    Route::get('/pdf-cv/english', PdfCvController::class)
+        ->defaults('language', 'english')->name('pdf-cv.english');
+    Route::get('/pdf-cv/spanish', PdfCvController::class)
+        ->defaults('language', 'spanish')->name('pdf-cv.spanish');
+});
 
 Route::get('/robots.txt', function () {
     return response()->view('robots')->header('Content-Type', 'text/plain');

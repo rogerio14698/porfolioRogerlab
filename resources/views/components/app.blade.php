@@ -78,12 +78,8 @@
         </script>
     @endif
 
-    <!--Carga de font awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <!-- Google Fonts: familias del sistema visual -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders:wght@600&family=Public+Sans:wght@400;600&display=swap">
+    <link rel="preload" href="{{ asset('fonts/big-shoulders-latin-600-v4.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ asset('fonts/public-sans-latin-v21.woff2') }}" as="font" type="font/woff2" crossorigin>
     <!--Enlace a la carpeta de public/css -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}?v={{ filemtime(public_path('css/app.css')) }}">
     <!--Fin del enlace a la carpeta de public/css -->

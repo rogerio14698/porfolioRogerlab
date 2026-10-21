@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'optimization_unavailable' => 'Ativa PHP GD com suporte WebP no servidor para otimizar as imagens.',
+    'optimization_failed' => 'Não é possível processar esta imagem com a memória disponível. Reduz as dimensões e tenta novamente.',
     'page_title' => 'Blog de desenvolvimento web | RogerLab',
     'heading' => 'Blog de desenvolvimento web',
     'intro' => 'Notas, projetos e aprendizagens sobre desenvolvimento de software.',
