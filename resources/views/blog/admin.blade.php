@@ -5,6 +5,18 @@
     </header>
     @include('blog.toolbar')
     @include('blog.messages')
+    <article class="blog-admin-row carousel-summary" aria-labelledby="carousel-summary-title">
+        <div>
+            <h2 id="carousel-summary-title">{{ __('portfolio.carousel_admin') }}</h2>
+            <p>{{ __('portfolio.carousel_summary', [
+                'mode' => __('portfolio.carousel_mode_'.$carouselSettings->mode),
+                'count' => $carouselCount,
+                'interval' => $carouselSettings->interval_seconds,
+            ]) }}
+            · {{ $carouselSettings->autoplay ? __('portfolio.carousel_autoplay_on') : __('portfolio.carousel_autoplay_off') }}</p>
+        </div>
+        <a class="blog-button" href="{{ route('admin.carousel.edit', ['lang' => app()->getLocale()]) }}">{{ __('portfolio.carousel_organize') }}</a>
+    </article>
     <div class="blog-admin-list">
         @forelse ($articles as $article)
             <article class="blog-admin-row">

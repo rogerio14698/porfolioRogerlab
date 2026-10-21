@@ -2,31 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Blog;
+use App\Models\CarouselSetting;
 use App\Models\Project;
 use App\Models\Skill;
+use App\Services\HomeCarousel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class PortfolioController extends Controller
 {
-    public function home()
+    public function home(HomeCarousel $carousel)
     {
-        $projects = Project::published()->where('is_featured', true)->orderBy('position')->orderBy('id')->limit(4)->get();
-        $articles = Blog::published()->with('images')->orderByDesc('published_at')->orderByDesc('id')->limit(4)->get();
-        $discoveries = collect();
-        for ($index = 0; $index < max($projects->count(), $articles->count()); $index++) {
-            foreach ([$projects, $articles] as $items) {
-                if (isset($items[$index])) {
-                    $discoveries->push($items[$index]);
-                }
-            }
-        }
+        $carouselSettings = CarouselSetting::current();
 
         return renderSection('home', __('portfolio.home_title'), __('portfolio.home_description'), 200, null, [
             'skills' => Skill::where('is_published', true)->orderBy('position')->orderBy('id')->get(),
-            'discoveries' => $discoveries,
+            'discoveries' => $carousel->slides($carouselSettings),
+            'carouselSettings' => $carouselSettings,
             ...$this->alternates('home'),
         ]);
     }

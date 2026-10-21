@@ -19,7 +19,9 @@ function initDiscovery(): void {
     let frame = 0;
     let active = 0;
     let requested: number | null = null;
-    let paused = false;
+    const interval = Math.max(2000, Number(carousel.dataset.interval) || 8000);
+    const pauseOnHover = carousel.dataset.pauseHover !== 'false';
+    let paused = carousel.dataset.autoplay === 'false';
     let hovered = false;
     let touching = false;
     let visible = false;
@@ -50,7 +52,7 @@ function initDiscovery(): void {
             timer = setTimeout(() => {
                 move(1);
                 schedule();
-            }, 8000);
+            }, interval);
         }
     };
     const goTo = (index: number): void => {
@@ -87,7 +89,7 @@ function initDiscovery(): void {
         schedule();
     }, { signal });
     carousel.addEventListener('pointerenter', (event) => {
-        if (event.pointerType === 'mouse') {
+        if (event.pointerType === 'mouse' && pauseOnHover) {
             hovered = true;
             schedule();
         }

@@ -223,7 +223,7 @@ class PortfolioContentTest extends TestCase
         $this->put("/admin/projects/{$project->id}", $this->payload() + ['media_alt' => [999 => ['es' => 'Invalid']]])->assertSessionHasErrors('media_alt');
     }
 
-    public function test_discovery_interleaves_only_published_featured_projects_and_articles_with_a_bound(): void
+    public function test_discovery_interleaves_all_published_featured_projects_and_articles_without_a_limit(): void
     {
         Project::query()->update(['is_featured' => false]);
         $project = $this->project('featured-project');
@@ -239,11 +239,79 @@ class PortfolioContentTest extends TestCase
         }
         Blog::create(['title' => 'Private article', 'content' => 'Hidden', 'link' => 'private-article', 'author_id' => $owner->id]);
         $response = $this->get('/home')->assertOk();
-        $response->assertSeeInOrder(['Project es', 'Article 0', 'Article 1', 'Article 2', 'Article 3']);
-        $response->assertDontSee('Article 4')->assertDontSee('Private article')->assertDontSee('future-project');
-        $this->assertSame(5, substr_count($response->getContent(), 'class="discovery__slide"'));
+        $response->assertSeeInOrder(['Project es', 'Article 0', 'Article 1', 'Article 2', 'Article 3', 'Article 4', 'Article 5']);
+        $response->assertDontSee('Private article')->assertDontSee('future-project');
+        $this->assertSame(7, substr_count($response->getContent(), 'class="discovery__slide"'));
         $project->update(['is_featured' => false]);
         $this->get('/home')->assertDontSee('featured-project');
+    }
+
+    public function test_carousel_panel_requires_owner_and_is_linked_from_blog_admin(): void
+    {
+        $this->project();
+        $this->get('/admin/carousel')->assertRedirect();
+        $this->put('/admin/carousel', [])->assertRedirect();
+        $this->actingAs($this->owner());
+        $this->get('/admin/blog?lang=es')->assertOk()->assertSee('Organizar carrusel')
+            ->assertSee(route('admin.carousel.edit', ['lang' => 'es']), false);
+        $this->get('/admin/carousel?lang=es')->assertOk()->assertSee('Carrusel de inicio')
+            ->assertSee('name="interval_seconds"', false)->assertSee('data-carousel-list', false)
+            ->assertSee('Project es');
+    }
+
+    public function test_manual_carousel_controls_order_visibility_timing_and_limit(): void
+    {
+        Project::query()->update(['is_featured' => false]);
+        $first = $this->project('first-project');
+        $second = $this->project('second-project');
+        $second->update(['translations' => ['es' => ['title' => 'Second project'] + $second->translations['es']] + $second->translations]);
+        $draft = $this->project('draft-project', false);
+        $owner = $this->owner();
+        $article = Blog::create([
+            'title' => 'Manual article', 'content' => 'Body', 'link' => 'manual-article',
+            'author_id' => $owner->id, 'is_published' => true, 'published_at' => now()->subMinute(),
+        ]);
+        $hidden = Blog::create([
+            'title' => 'Hidden article', 'content' => 'Body', 'link' => 'hidden-article',
+            'author_id' => $owner->id, 'is_published' => true, 'published_at' => now()->subMinute(),
+        ]);
+        $settings = [
+            'mode' => 'manual', 'autoplay' => 0, 'interval_seconds' => 12,
+            'pause_on_hover' => 0, 'show_indicators' => 0, 'max_slides' => 0,
+        ];
+        $slides = [
+            ['type' => 'project', 'id' => $first->id, 'position' => 3, 'visible' => 1],
+            ['type' => 'blog', 'id' => $article->id, 'position' => 1, 'visible' => 1],
+            ['type' => 'project', 'id' => $second->id, 'position' => 2, 'visible' => 1],
+            ['type' => 'blog', 'id' => $hidden->id, 'position' => 4, 'visible' => 0],
+            ['type' => 'project', 'id' => $draft->id, 'position' => 5, 'visible' => 1],
+        ];
+        $this->actingAs($owner)->put('/admin/carousel?lang=es', $settings + ['slides' => $slides])
+            ->assertRedirect(route('admin.carousel.edit', ['lang' => 'es']))->assertSessionHasNoErrors();
+
+        $response = $this->get('/home')->assertOk();
+        $response->assertSeeInOrder(['Manual article', 'Second project', 'Project es']);
+        $response->assertDontSee('Hidden article')->assertDontSee('draft-project');
+        $this->assertSame(3, substr_count($response->getContent(), 'class="discovery__slide"'));
+        $response->assertSee('data-interval="12000"', false)->assertSee('data-autoplay="false"', false)
+            ->assertSee('data-pause-hover="false"', false)->assertDontSee('data-discovery-index="0"', false);
+
+        $this->put('/admin/carousel', ['max_slides' => 2] + $settings + ['slides' => $slides])->assertSessionHasNoErrors();
+        $this->assertSame(2, substr_count($this->get('/home')->getContent(), 'class="discovery__slide"'));
+
+        $this->get('/admin/carousel?lang=es')->assertOk()
+            ->assertSeeInOrder(['Manual article', 'Second project', 'Project es', 'Hidden article']);
+    }
+
+    public function test_carousel_panel_rejects_invalid_settings_and_unknown_slides(): void
+    {
+        $this->actingAs($this->owner());
+        $valid = ['mode' => 'manual', 'autoplay' => 1, 'interval_seconds' => 8, 'pause_on_hover' => 1, 'show_indicators' => 1, 'max_slides' => 0];
+        $this->put('/admin/carousel', ['interval_seconds' => 1] + $valid)->assertSessionHasErrors('interval_seconds');
+        $this->put('/admin/carousel', ['mode' => 'random'] + $valid)->assertSessionHasErrors('mode');
+        $this->put('/admin/carousel', $valid + ['slides' => [['type' => 'project', 'id' => 999999, 'position' => 1, 'visible' => 1]]])
+            ->assertSessionHasErrors('slides');
+        $this->assertDatabaseHas('carousel_settings', ['mode' => 'automatic', 'interval_seconds' => 8]);
     }
 
     public function test_empty_or_single_item_discovery_does_not_require_javascript(): void

@@ -6,7 +6,7 @@ import { runInNewContext } from 'node:vm';
 
 const source = stripTypeScriptTypes(readFileSync(new URL('../../resources/js/portfolio.ts', import.meta.url), 'utf8'));
 
-function setup({ count = 3, reduced = false } = {}) {
+function setup({ count = 3, reduced = false, dataset = {} } = {}) {
     let now = 0;
     let nextId = 0;
     const timers = new Map();
@@ -29,6 +29,7 @@ function setup({ count = 3, reduced = false } = {}) {
     document.hidden = false;
     document.activeElement = null;
     const carousel = new Element();
+    Object.assign(carousel.dataset, dataset);
     const track = new Element();
     track.scrollLeft = 0;
     const playback = new Element();
@@ -90,6 +91,31 @@ test('advances at exactly eight seconds, wraps, and keeps automatic changes sile
     app.advance(16000);
     assert.deepEqual(app.moves.map((move) => move.left), [100, 200, 0]);
     assert.equal(app.track.getAttribute('aria-live'), 'off');
+});
+
+test('uses the configured interval from the admin panel', () => {
+    const app = setup({ dataset: { interval: '3000' } });
+    app.advance(2999);
+    assert.equal(app.moves.length, 0);
+    app.advance(1);
+    assert.equal(app.moves[0].at, 3000);
+});
+
+test('disabled autoplay starts paused until the visitor presses play', () => {
+    const app = setup({ dataset: { autoplay: 'false' } });
+    app.advance(24000);
+    assert.equal(app.moves.length, 0);
+    assert.equal(app.playback.getAttribute('aria-label'), 'Play');
+    app.playback.dispatchEvent(app.event('click'));
+    app.advance(8000);
+    assert.equal(app.moves.length, 1);
+});
+
+test('hover does not pause when pause on hover is disabled', () => {
+    const app = setup({ dataset: { pauseHover: 'false' } });
+    app.carousel.dispatchEvent(app.event('pointerenter', { pointerType: 'mouse' }));
+    app.advance(8000);
+    assert.equal(app.moves.length, 1);
 });
 
 test('explicit pause persists and resume gives a complete reading interval', () => {

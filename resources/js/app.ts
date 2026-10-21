@@ -6,3 +6,4 @@ import './practicas-modal';
 import './eventosBlog';
 import './main';
 import './portfolio';
+import './carousel-admin';

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminBlogController;
+use App\Http\Controllers\AdminCarouselController;
 use App\Http\Controllers\AdminProjectController;
 use App\Http\Controllers\AdminSkillController;
 use App\Http\Controllers\BlogController;
@@ -50,6 +51,8 @@ Route::middleware(BlogLocale::class)->group(function () {
             Route::get('/admin/projects/{project}/preview', [PortfolioController::class, 'preview'])->name('admin.projects.preview');
             Route::resource('/admin/projects', AdminProjectController::class)->except('show')->names('admin.projects');
             Route::resource('/admin/skills', AdminSkillController::class)->except('show')->names('admin.skills');
+            Route::get('/admin/carousel', [AdminCarouselController::class, 'edit'])->name('admin.carousel.edit');
+            Route::put('/admin/carousel', [AdminCarouselController::class, 'update'])->name('admin.carousel.update');
         });
     });
 });

@@ -1,5 +1,11 @@
 @if ($discoveries->isNotEmpty())
-    <section class="discovery" aria-label="{{ __('portfolio.carousel') }}" data-discovery>
+    @php
+        $carouselSettings ??= \App\Models\CarouselSetting::current();
+    @endphp
+    <section class="discovery" aria-label="{{ __('portfolio.carousel') }}" data-discovery
+        data-interval="{{ $carouselSettings->interval_seconds * 1000 }}"
+        data-autoplay="{{ $carouselSettings->autoplay ? 'true' : 'false' }}"
+        data-pause-hover="{{ $carouselSettings->pause_on_hover ? 'true' : 'false' }}">
         <div class="discovery__track" id="discovery-track" tabindex="0" aria-label="{{ __('portfolio.carousel') }}" aria-live="off">
             @foreach ($discoveries as $item)
                 @php
@@ -30,6 +36,7 @@
             @endforeach
         </div>
         <div class="discovery__navigation" data-discovery-navigation hidden>
+            @if ($carouselSettings->show_indicators)
             <div class="discovery__indicators" role="group" aria-label="{{ __('portfolio.carousel') }}">
                 @foreach ($discoveries as $item)
                     <button class="discovery__indicator" type="button" data-discovery-index="{{ $loop->index }}"
@@ -39,6 +46,7 @@
                     </button>
                 @endforeach
             </div>
+            @endif
         <button class="discovery__playback" type="button" data-discovery-playback hidden
             aria-controls="discovery-track" aria-label="{{ __('portfolio.pause') }}"
             data-pause-label="{{ __('portfolio.pause') }}" data-play-label="{{ __('portfolio.play') }}"

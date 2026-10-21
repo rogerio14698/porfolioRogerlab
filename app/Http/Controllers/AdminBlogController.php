@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveBlogRequest;
 use App\Models\Blog;
+use App\Models\CarouselSetting;
+use App\Services\HomeCarousel;
 use App\Services\UploadImageOptimizer;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -15,10 +17,14 @@ use Throwable;
 
 class AdminBlogController extends Controller
 {
-    public function index()
+    public function index(HomeCarousel $carousel)
     {
+        $carouselSettings = CarouselSetting::current();
+
         return renderSection('blogAdmin', __('blog.dashboard'), null, 200, 'noindex,nofollow', [
             'articles' => Blog::with('images')->latest()->paginate(12)->withQueryString(),
+            'carouselSettings' => $carouselSettings,
+            'carouselCount' => $carousel->slides($carouselSettings)->count(),
         ]);
     }
 
