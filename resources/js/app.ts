@@ -7,3 +7,5 @@ import './eventosBlog';
 import './main';
 import './portfolio';
 import './carousel-admin';
+import './contact-paths';
+import './admin-editor';

@@ -16,6 +16,8 @@
             <p id="slug-help">{{ __('blog.slug_help') }}</p>
         </div>
         @foreach (config('blog.locales') as $locale)
+            <details class="admin-language-panel" @if ($locale === app()->getLocale() || $errors->has("translations.$locale.*")) open @endif>
+            <summary>{{ __('blog.'.$locale) }}</summary>
             <fieldset class="blog-language" lang="{{ $locale }}">
                 <legend>{{ __('blog.'.$locale) }}</legend>
                 <div class="blog-field">
@@ -43,6 +45,7 @@
                     @endforeach
                 </details>
             </fieldset>
+            </details>
         @endforeach
         <fieldset class="blog-language">
             <legend>{{ __('blog.images') }}</legend>

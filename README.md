@@ -9,16 +9,23 @@
 
 ## Rendimiento y despliegue
 
-- Todas las vistas comparten las fuentes Big Shoulders y Public Sans alojadas
+- Todas las vistas comparten las fuentes JetBrains Mono y Public Sans alojadas
   localmente (WOFF2, con sus licencias en `public/fonts`); no dependen de Google
   Fonts ni de la hoja completa de Font Awesome. Los dos iconos sociales son SVG
   locales con la atribución de Font Awesome incluida.
+- La identidad visual usa grafito y verde mineral, con alternativa clara.
+  La portada prioriza proyectos y conserva los dos CV. Stripe/Strapi se presentan
+  como investigación en curso, no como experiencia comercial consolidada.
+  Los accesos de contacto para empleo y proyectos solo completan un asunto vacío;
+  no cambian el envío ni la verificación del correo.
 - El fondo conserva su efecto y sus controles, pero se inicializa después de
   cargar la página, en un turno libre del navegador. Aprovecha compilación paralela
   de shaders cuando WebGL la admite, sin bloquear esperando su estado.
   Conserva la densidad original de partículas, resolución y límite de 30 fps.
   Respeta pausa guardada, movimiento reducido, pestañas ocultas y pérdida de WebGL.
 - El retrato usa variantes WebP de 480 y 960 px sin eliminar el JPEG original.
+  Desde el panel se puede reemplazar por una subida optimizada; las variantes
+  anteriores solo se usan mientras siga seleccionada la foto inicial.
 - Los CV siguen siendo PDF vectoriales, con el mismo texto y enlaces. Se han
   recomprimido sin pérdida: inglés **1863338 → 1481053 bytes** y español
   **2166322 → 1743594 bytes**. No se regeneran en cada visita. Sus URL y nombres
@@ -42,6 +49,7 @@ compilación de la revisión antigua:
 git status --short
 git pull --ff-only
 npm run build
+php artisan migrate --force
 php artisan optimize:clear
 php artisan config:cache
 php artisan view:cache
@@ -65,13 +73,13 @@ Pruebas de entrega y controles:
 
 ```sh
 php vendor/bin/phpunit tests/Feature/PdfPerformanceTest.php tests/Feature/PortfolioPresentationTest.php
-node --test tests/Frontend/background.test.mjs tests/Frontend/portfolio.test.mjs
+node --test tests/Frontend/background.test.mjs tests/Frontend/portfolio.test.mjs tests/Frontend/contact-paths.test.mjs tests/Frontend/admin-editor.test.mjs
 ```
 
 ## Blog privado de RogerLab
 
 El blog es público en `/blog`. Solo el propietario puede acceder a `/login`
-y gestionar publicaciones en `/admin/blog`. No existe registro público ni recuperación
+y acceder al panel central en `/admin`, con publicaciones en `/admin/blog`. No existe registro público ni recuperación
 de contraseña por correo.
 
 ### Preparación y primer acceso
@@ -193,10 +201,62 @@ Pruebas enfocadas:
 php artisan test tests/Feature/BlogPublishingTest.php tests/Feature/PortfolioPresentationTest.php
 ```
 
-## Habilidades, proyectos y carrusel de inicio
+## Perfil, herramientas, proyectos y carrusel
+
+`/admin` es la entrada del panel. Comparte navegación lateral en escritorio,
+menú plegable en móvil, tipografía de lectura y controles consistentes entre
+todos los editores. Los idiomas se agrupan en bloques desplegables; los errores
+abren el bloque afectado. La web pública mantiene las partículas, pero el
+panel no carga el lienzo decorativo.
+
+### Perfil e inicio
+
+Ejecuta la migración aditiva `2026_10_23_130000_create_site_profiles` antes de
+servir esta versión. No modifica publicaciones, proyectos ni herramientas
+existentes. Crea un único perfil con los textos ES/EN/PT iniciales de
+[profile.php](./lang/es/profile.php). Tras migrar, edita el contenido en
+`/admin/profile`, no en esos valores iniciales.
+Ejecuta también `2026_10_23_150000_create_profile_project_evidence`: convierte
+las selecciones individuales existentes en relaciones múltiples sin perderlas.
+
+- Edita rol, presentación, disponibilidad, tres áreas de aportación y los
+  dos párrafos de biografía, en español, inglés y portugués.
+- Cada área admite varios proyectos como evidencia mediante casillas, sin
+  seleccionar ninguno si no corresponde. Un proyecto puede aparecer en varias
+  áreas. Se muestran en el orden global de proyectos, con su portada si tiene
+  imagen y un enlace a su ficha; sin imagen se conserva el enlace de texto.
+  Solo aparecen los publicados y no futuros; los borradores conservan su
+  selección para cuando se publiquen. Eliminar un proyecto limpia sus relaciones.
+- El bloque de exploración permite crear, leer, editar, ocultar y eliminar su
+  título, texto y enlace. El destino se elige entre Sobre mí, Proyectos, Blog y
+  Contacto para evitar enlaces inseguros. Se comparte con Sobre mí.
+- La foto admite subida, visualización, sustitución, ocultación y eliminación,
+  con texto alternativo por idioma. JPEG/PNG/WebP hasta 5 MB y 6000 × 6000 px,
+  optimizados por el servicio existente a WebP con límite de 1600 px.
+  Requiere GD con soporte WebP en el PHP del servidor. En XAMPP, habilita
+  `extension=gd` en el archivo de configuración PHP y detén/inicia Apache
+  para cargarla; cambiar el archivo sin reiniciar solo afecta a procesos nuevos.
+  Si no está disponible, se muestra un error y no se cambia la foto ni el perfil.
+  Los archivos están en `storage/app/blog/profile`, servidos por `/profile/photo`
+  con `nosniff` y sin caché. Sustituir o eliminar retira la subida anterior.
+  Eliminar la foto inicial deja de mostrarla, pero no borra los recursos
+  históricos versionados. Para añadirla de nuevo, sube un archivo.
+- Guardar publica los cambios inmediatamente; requiere las traducciones de
+  todos los campos visibles. No hay traducción automática. Se conserva el
+  texto escrito tras errores, salvo el archivo, que hay que volver a elegir.
+  Las eliminaciones requieren confirmación y se separan del guardado.
+- Inicio y Sobre mí tienen títulos y descripciones SEO editables. El HTML
+  renderizado en servidor, Open Graph, Twitter, canonical, hreflang y sitemap
+  son coherentes con cada idioma. JSON-LD describe `Person`, `WebSite`,
+  `WebPage`/`AboutPage` y tres `Service` basados en las áreas visibles, sin
+  reseñas, precios ni resultados inventados.
+- El contenido presenta empleo junior y proyectos freelance en Gijón/Asturias,
+  España y remoto internacional. No presenta WordPress como especialidad
+  acreditada ni convierte la investigación de Stripe/Strapi en experiencia comercial.
+  El SEO técnico no garantiza posiciones ni resultados enriquecidos.
 
 El mismo acceso de propietario permite gestionar `/admin/skills` y
-`/admin/projects`, con enlaces desde la barra del panel del blog. No se necesita
+`/admin/projects`, con enlaces desde la navegación del panel. No se necesita
 otra cuenta. Ejecuta `php artisan migrate` antes de servir esta versión:
 la migración añade las tablas y conserva las nueve habilidades y los siete
 proyectos actuales, sus traducciones, enlaces, descarga del flujo y capturas.
@@ -204,7 +264,8 @@ La instantánea inicial está en [portfolio.json](./database/data/portfolio.json
 después de migrar, los cambios se hacen en el panel, no en esa instantánea.
 
 - **Habilidades:** nombre ES/EN/PT, orden y borrador/publicación. Solo las publicadas
-  aparecen en `heroStack` y en `Person.knowsAbout` de la home.
+  aparecen como herramientas en Sobre mí y en `Person.knowsAbout`.
+  Ya no se acumulan en la portada: el inicio explica aportaciones y trabajo relacionado.
 - **Proyectos:** título, resumen, descripción, tipo, periodo, SEO y descripción
   general de imágenes por idioma; tecnologías (una por línea), repositorio,
   web, orden, estado y selección para la portada. Para publicar se exigen título,
@@ -225,7 +286,8 @@ después de migrar, los cambios se hacen en el panel, no en esa instantánea.
   paginado. Solo proyectos publicados y no futuros aparecen en el sitemap.
   No se prometen posiciones ni resultados enriquecidos. Evita cambiar un slug
   publicado: no se generan redirecciones automáticas.
-- En inicio, identidad, foto y CV permanecen fijos. Debajo se alternan hasta cuatro
+- En inicio, el nombre y los enlaces a CV permanecen fijos; el resto de la
+  presentación y la foto se editan en Perfil e inicio. En el carrusel se alternan
   proyectos publicados destacados (según orden) y cuatro artículos publicados
   recientes; si falta un tipo se muestra el otro, sin contenido inventado.
   El carrusel avanza cada ocho segundos, sin título adicional, barra de desplazamiento
@@ -246,9 +308,9 @@ después de migrar, los cambios se hacen en el panel, no en esa instantánea.
 Validación del contenido dinámico y regresiones relacionadas:
 
 ```sh
-php vendor/bin/phpunit tests/Feature/PortfolioContentTest.php tests/Feature/PortfolioPresentationTest.php tests/Feature/BlogPublishingTest.php
+php vendor/bin/phpunit tests/Feature/ProfileManagementTest.php tests/Feature/PortfolioContentTest.php tests/Feature/PortfolioPresentationTest.php tests/Feature/BlogPublishingTest.php
 npm run build
-node --test tests/Frontend/portfolio.test.mjs
+node --test tests/Frontend/portfolio.test.mjs tests/Frontend/admin-editor.test.mjs
 ```
 
 Las pruebas del carrusel usan el ejecutor integrado de Node 24, sin dependencias adicionales.

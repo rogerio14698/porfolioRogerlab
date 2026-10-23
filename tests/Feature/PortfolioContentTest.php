@@ -97,10 +97,10 @@ class PortfolioContentTest extends TestCase
         ]];
         $this->post('/admin/skills', $data)->assertSessionHasNoErrors()->assertRedirect();
         $skill = Skill::orderByDesc('id')->first();
-        $this->get('/home?lang=en')->assertSee('New skill')->assertDontSee('Nueva habilidad');
+        $this->get('/about?lang=en')->assertSee('New skill')->assertDontSee('Nueva habilidad');
         $this->get("/admin/skills/{$skill->id}/edit")->assertOk()->assertSee('New skill');
         $this->put("/admin/skills/{$skill->id}", array_replace($data, ['status' => 'draft']))->assertSessionHasNoErrors();
-        $this->get('/home')->assertDontSee('Nueva habilidad');
+        $this->get('/about')->assertDontSee('Nueva habilidad');
         $this->delete("/admin/skills/{$skill->id}")->assertSessionHasErrors('confirm_delete');
         $this->delete("/admin/skills/{$skill->id}", ['confirm_delete' => 1])->assertRedirect();
         $this->assertModelMissing($skill);

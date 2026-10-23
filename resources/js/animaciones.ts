@@ -20,6 +20,7 @@ const entranceObserver = 'IntersectionObserver' in window
 
 function initEntrances() {
     entranceObserver?.disconnect();
+    if (document.body.classList.contains('admin-shell')) return;
     if (motionPreference.matches || !entranceObserver) return;
 
     document.querySelectorAll(entranceSelector).forEach((element) => {

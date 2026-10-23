@@ -9,13 +9,16 @@
     --palette-graphite: #{v.$colorbtnDark};
     --palette-slate: #{v.$colorBordeLight};
     --palette-gray: #{v.$colorBorde};
+    --palette-mint: #86c7a3;
+    --palette-forest: #246342;
+    --palette-mist: #a4b4aa;
     --font-display: #{v.$fuenteTitulo};
     --font-body: #{v.$fuenteTexto};
     --text-small: 0.875rem;
     --text-body: 1rem;
     --text-lead: clamp(1.125rem, 1rem + 0.4vw, 1.375rem);
-    --text-heading: clamp(1.75rem, 1.3rem + 2vw, 3rem);
-    --text-display: clamp(2.25rem, 1.3rem + 3.5vw, 4.75rem);
+    --text-heading: clamp(1.375rem, 1.15rem + 1vw, 2rem);
+    --text-display: clamp(1.875rem, 1.35rem + 2vw, 3.25rem);
     --space-1: 0.25rem;
     --space-2: 0.5rem;
     --space-3: 0.75rem;
@@ -41,10 +44,11 @@ body {
     --surface-raised: var(--palette-graphite);
     --surface-media: var(--palette-ivory);
     --text-primary: var(--palette-silver);
-    --text-secondary: var(--palette-silver);
-    --action-bg: var(--palette-ivory);
+    --text-secondary: var(--palette-mist);
+    --accent: var(--palette-mint);
+    --action-bg: var(--accent);
     --action-text: var(--palette-ink);
-    --focus-ring: var(--palette-ivory);
+    --focus-ring: var(--accent);
     --field-border: var(--palette-gray);
     --button-bg: var(--action-bg);
     --button-text: var(--action-text);
@@ -59,9 +63,10 @@ body[data-theme="light"] {
     --surface-media: var(--palette-paper);
     --text-primary: var(--palette-ink);
     --text-secondary: var(--palette-slate);
-    --action-bg: var(--palette-charcoal);
-    --action-text: var(--palette-ivory);
-    --focus-ring: var(--palette-charcoal);
+    --accent: var(--palette-forest);
+    --action-bg: var(--accent);
+    --action-text: var(--palette-paper);
+    --focus-ring: var(--accent);
     --field-border: var(--palette-slate);
     color-scheme: light;
 }

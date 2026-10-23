@@ -1,6 +1,6 @@
 // --- Colores Fondo ---
-$colorModoDarkFondo: #222;
-$colorModoLightFondo: #ece8df;
+$colorModoDarkFondo: #101715;
+$colorModoLightFondo: #f4f7f5;
 
 // --- Fondos de panel ---
 $colorFondoPanelDark: rgba(34, 34, 34, .9);
@@ -11,16 +11,16 @@ $colorLineaLight: #999;
 $colorLineaDark: #fff;
 
 // --- Botones ---
-$colorbtnDark: #333;
+$colorbtnDark: #19221d;
 $colorbtnLight: #fff;
 $btnLight: #999;
 $btnDark: #222;
 
 // --- Textos y Bordes ---
-$colorTextoLight: #dddddd;
-$colorTextoDark: #1f1f1f;
-$colorBorde: #999999;
-$colorBordeLight: #444;
+$colorTextoLight: #e7eee9;
+$colorTextoDark: #18251e;
+$colorBorde: #82998c;
+$colorBordeLight: #51695b;
 $opacidadScrollbar: 45%;
 $opacidadScrollbarHover: $opacidadScrollbar + 20%;
 
@@ -32,7 +32,7 @@ $borde: 2px solid $colorBorde;
 
 // --- Fuentes (Tipografía) ---
 // Nota: Corregido el 'sans-serif3' que tenías por 'sans-serif'
-$fuenteTitulo: 'Big Shoulders', sans-serif;
+$fuenteTitulo: 'JetBrains Mono', monospace;
 $grosorTitulo: 600;
 $estiloTitulo: normal;
 

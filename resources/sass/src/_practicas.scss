@@ -9,6 +9,7 @@
     h3, h4, h5 { font-size: var(--text-lead); }
     p { max-width: 70ch; }
     > p:first-of-type { font-size: var(--text-lead); line-height: 1.6; }
+    .internshipContext { color: var(--text-secondary); }
     p + p { margin-top: var(--space-4); }
     hr { border: 0; }
     > div:not(.practicasModal) { min-width: 0; }

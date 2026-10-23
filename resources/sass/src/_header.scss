@@ -7,8 +7,13 @@
     padding-block: var(--space-6);
 
     .brandName {
-        font: 600 clamp(1.5rem, 1.25rem + 1vw, 2rem) / 1.1 var(--font-display);
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        font: 600 1.5rem / 1.1 var(--font-display);
         letter-spacing: -0.02em;
+        span { color: var(--accent); }
+        &:hover { text-decoration: underline; }
     }
 
     .brandRole {

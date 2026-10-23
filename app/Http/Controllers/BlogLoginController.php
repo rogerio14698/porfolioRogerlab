@@ -13,7 +13,7 @@ class BlogLoginController extends Controller
     public function create(Request $request)
     {
         if ($request->user() && strcasecmp($request->user()->email, config('blog.owner_email')) === 0) {
-            return redirect()->route('admin.blog.index');
+            return redirect()->route('admin.dashboard');
         }
 
         return renderSection('blogLogin', __('blog.login'), null, 200, 'noindex,nofollow');
@@ -32,7 +32,7 @@ class BlogLoginController extends Controller
         Auth::login($user);
         $request->session()->regenerate();
 
-        return redirect()->route('admin.blog.index', ['lang' => app()->getLocale()]);
+        return redirect()->route('admin.dashboard', ['lang' => app()->getLocale()]);
     }
 
     public function destroy(Request $request): RedirectResponse

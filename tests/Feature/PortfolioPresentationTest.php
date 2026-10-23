@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Project;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -34,7 +35,7 @@ class PortfolioPresentationTest extends TestCase
                 ->assertSee('data-motion-label="pause"', false)
                 ->assertSee('data-motion-label="reduced"', false)
                 ->assertSee('data-motion-label="unavailable"', false)
-                ->assertSee('fonts/big-shoulders-latin-600-v4.woff2', false)
+                ->assertSee('fonts/jetbrains-mono-latin-v24.woff2', false)
                 ->assertSee('fonts/public-sans-latin-v21.woff2', false)
                 ->assertDontSee('fonts.googleapis.com', false)
                 ->assertDontSee('cdnjs.cloudflare.com', false);
@@ -45,6 +46,59 @@ class PortfolioPresentationTest extends TestCase
                 "Expected exactly one h1 on {$path}",
             );
         }
+    }
+
+    public function test_terminal_home_has_localized_actions_and_honest_research_copy(): void
+    {
+        $this->withoutVite();
+
+        foreach ([
+            'es' => ['Ver proyectos', 'Descargar CV', 'Ahora estoy explorando', 'Una investigación en curso'],
+            'en' => ['View projects', 'Download CV', 'Currently exploring', 'Research in progress'],
+            'pt' => ['Ver projetos', 'Descarregar CV', 'Agora estou a explorar', 'Uma investigação em curso'],
+        ] as $locale => $copy) {
+            $response = $this->get('/home?lang='.$locale)->assertOk();
+            foreach ($copy as $text) {
+                $response->assertSee($text);
+            }
+            $response->assertSee('Stripe')->assertSee('Strapi')
+                ->assertSee(route('projects', ['lang' => $locale]), false)
+                ->assertSee(route('pdf-cv.english'), false)
+                ->assertSee(route('pdf-cv.spanish'), false);
+        }
+    }
+
+    public function test_contact_paths_and_not_found_remain_progressively_enhanced(): void
+    {
+        $this->withoutVite();
+        $this->get('/contact')->assertOk()
+            ->assertSee('data-contact-paths hidden', false)
+            ->assertSee('Una oportunidad laboral')
+            ->assertSee('Un proyecto para mi empresa');
+        $this->get('/missing-terminal-page')->assertNotFound()
+            ->assertSee('data-i18n="notfound.title"', false)
+            ->assertSee('Página no encontrada')
+            ->assertDontSee('Oops!');
+    }
+
+    public function test_project_list_uses_summary_but_detail_keeps_complete_content(): void
+    {
+        $this->withoutVite();
+        $project = Project::published()->firstOrFail();
+        $translations = $project->translations;
+        $translations['es']['summary'] = 'Resumen técnico breve de prueba.';
+        $translations['es']['content'] = 'Descripción completa exclusiva del caso de estudio.';
+        $project->update(['translations' => $translations]);
+
+        $this->get('/projects?lang=es')->assertOk()
+            ->assertSee($translations['es']['summary'])
+            ->assertDontSee($translations['es']['content']);
+        $detail = $this->get('/projects/'.$project->slug.'?lang=es')->assertOk()
+            ->assertSee($translations['es']['content']);
+        $this->assertLessThan(
+            strpos($detail->getContent(), 'project-card__media'),
+            strpos($detail->getContent(), 'project-detail__heading'),
+        );
     }
 
     public function test_projects_preserve_all_cases_gallery_hooks_and_destinations(): void

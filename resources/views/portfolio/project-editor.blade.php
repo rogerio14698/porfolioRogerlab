@@ -9,6 +9,8 @@
         @include('portfolio.field', ['name' => 'slug', 'label' => __('portfolio.slug'), 'value' => $project->slug, 'length' => 160, 'required' => true])
         <p>{{ __('blog.slug_help') }}</p>
         @foreach (config('blog.locales') as $locale)
+            <details class="admin-language-panel" @if ($locale === app()->getLocale() || $errors->has("translations.$locale.*")) open @endif>
+            <summary>{{ __('blog.'.$locale) }}</summary>
             <fieldset class="blog-language" lang="{{ $locale }}">
                 <legend>{{ __('blog.'.$locale) }}</legend>
                 @foreach (['title' => 200, 'summary' => 600, 'content' => 100000, 'image_alt' => 300, 'category' => 100, 'period' => 100] as $field => $length)
@@ -23,6 +25,7 @@
                     @endforeach
                 </details>
             </fieldset>
+            </details>
         @endforeach
         @include('portfolio.field', ['name' => 'technologies', 'label' => __('portfolio.technologies'), 'value' => $project->technologies, 'length' => 2000, 'multiline' => true])
         @foreach (['repository_url', 'website_url'] as $field)

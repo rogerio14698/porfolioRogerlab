@@ -5,21 +5,35 @@ Inherits [MASTER.md](../MASTER.md). Applies to all portfolio routes.
 ## Composition
 
 - Frame: compact wordmark/header, sticky navigation and horizontal preferences.
-- Home: the name is the main headline, the full professional role its supporting
-  line; identity, portrait and CV actions remain visible. The stack comes from
-  published, ordered skills. A discovery carousel follows the hero,
-  alternating up to four featured projects and four recent blog posts.
-  The complete introduction remains below in two columns on desktop.
-- Projects: unboxed, full-width case-study rows, media beside the complete description;
+- Home: the name is the main headline, followed by the role and Laravel/PHP
+  focus, a personal sentence and availability for employment/freelance. Projects are
+  the primary action; both CVs remain available with English first in EN and
+  Spanish first in ES/PT. The portrait can be replaced or removed from the panel.
+  Three contribution rows explain the work and link to published evidence:
+  custom development, maintenance/technical SEO and n8n automation.
+  Each area accepts multiple projects, with compact linked covers when available
+  and text-only links otherwise. Use native checkboxes in the profile editor.
+  Tools move to About rather than crowding the hero. The research note and
+  discovery carousel follow, using the managed carousel selection.
+  The complete, editable biography remains below in two columns on desktop.
+  Research describes learning in progress, never established commercial expertise.
+  All profile copy and SEO come from the localized server-rendered profile.
+- Projects: unboxed, full-width case-study rows, media beside the existing summary
+  (complete description when no summary exists). Detail pages retain all content
+  and open with the title and context before the cover image;
   galleries remain keyboard-operable controls with their existing lightbox.
 - Skills: typographic directory in a responsive grid, not proficiency meters.
-- Methodology: two complementary text columns beneath the directory.
-- Contact: title beside the form on desktop; stacked on phones.
+- Methodology: two complementary text columns before the technology directory,
+  with short localized headings and the current research.
+- Contact: title, audience context and optional subject shortcuts beside the form
+  on desktop; stacked on phones. Shortcuts fill only an empty subject and focus
+  that field; they never replace visitor text or change the verification flow.
+  Without JavaScript the shortcuts are hidden and the normal form remains usable.
 - FCT, blog and legal: readable document layouts using the shared type scale.
 - Footer: contact details lead on the page ground; legal navigation remains available.
 - Frame: maximum 1480px, matching outer gutters. Active navigation uses the inverse
   action colors. Open document layouts, square media and generous type replace
-  unnecessary raised text panels without changing the charcoal/ivory palette.
+  unnecessary raised text panels within the graphite/mineral-green palette.
 
 ## Responsive behavior
 
@@ -42,7 +56,7 @@ Inherits [MASTER.md](../MASTER.md). Applies to all portfolio routes.
 The original multipage/partial-navigation architecture is not turned into a
 new one-page site. Each route keeps its content and destinations.
 Do not add four unrelated images to the home page solely to satisfy a visual
-inspector; project screenshots remain on the projects route.
+inspector; only selected evidence projects add screenshots to contribution rows.
 Existing galleries and the discovery carousel supply the live interaction.
 The carousel advances after eight seconds of reading time, with no visible
 heading, intro, scrollbar, link row, counter or previous/next buttons, as requested.
@@ -60,16 +74,19 @@ Project details have localized canonical/hreflang, social metadata, CreativeWork
 JSON-LD and sitemap entries. Partial navigation replaces the complete SEO head.
 No new gimmick or scroll scene.
 Visual-inspector exceptions preserve the approved system: original long project titles,
-ivory/charcoal palette, and limited motion/video policy remain unchanged. Do not
+terminal monospace titles, and limited motion/video policy remain unchanged. Do not
 add unrelated photos to meet a picture-count floor. Native carousel overflow is
 intentional; offscreen slide coordinates are not page margin errors. The skill
 directory is content, not an eyebrow for the following discovery section.
-The same applies to the final Docker entry before the methodology section.
 The contact inspector's empty-screen heuristic does not count form fields;
 keep the real, labeled form instead of adding filler imagery or sales copy.
 Document pages intentionally prioritize reading rather than a first-fold CTA.
 The homepage role is set immediately under the name at lead size; a name-only
 warning is not evidence that the professional role is missing.
+Short contact and project-detail pages deliberately do not animate eight elements
+to satisfy a marketing-page counter. The actual particle background and existing
+entrances remain; the contact form fields count as content even when the inspector's
+empty-screen heuristic ignores them.
 The user's original particle background is restored by explicit request,
 subordinate to text and project media. It is decorative, ignores pointer
 events, and has pause/reduced-motion/hidden-tab fallbacks.

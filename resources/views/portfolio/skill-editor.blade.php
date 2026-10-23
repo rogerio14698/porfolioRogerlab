@@ -7,10 +7,13 @@
         @csrf
         @if ($skill->exists) @method('PUT') @endif
         @foreach (config('blog.locales') as $locale)
+            <details class="admin-language-panel" @if ($locale === app()->getLocale() || $errors->has("translations.$locale.*")) open @endif>
+            <summary>{{ __('blog.'.$locale) }}</summary>
             <fieldset class="blog-language" lang="{{ $locale }}">
                 <legend>{{ __('blog.'.$locale) }}</legend>
                 @include('portfolio.field', ['name' => "translations.$locale.label", 'label' => __('portfolio.label'), 'value' => $skill->translations[$locale]['label'] ?? '', 'length' => 100, 'required' => $locale === 'es'])
             </fieldset>
+            </details>
         @endforeach
         @include('portfolio.field', ['name' => 'position', 'label' => __('portfolio.position'), 'value' => $skill->position, 'type' => 'number', 'length' => 5, 'required' => true])
         @include('portfolio.save', ['record' => $skill])

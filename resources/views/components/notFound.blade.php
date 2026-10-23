@@ -1,10 +1,6 @@
 <div class="container">
-    <span class="icon">🔍</span>
     <h1>404</h1>
-    <h2>Oops! Page Not Found</h2>
-    <p>
-        The page you are looking for might have been removed, had its name changed,
-        or is temporarily unavailable.
-    </p>
-    <a href="{{ route('home') }}" data-partial-nav>Back to Home</a>
+    <h2 data-i18n="notfound.title">Página no encontrada</h2>
+    <p data-i18n="notfound.body">Esta dirección no está disponible. Puedes volver al inicio o explorar mis proyectos.</p>
+    <a href="{{ route('home') }}" data-partial-nav data-i18n="notfound.back">Volver al inicio</a>
 </div>

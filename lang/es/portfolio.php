@@ -1,13 +1,19 @@
 <?php
 
 return [
+    'focus_role' => 'Desarrollador Full Stack Junior · Laravel y PHP',
+    'personal_intro' => 'Me gusta entender cómo funcionan las cosas y seguir investigando para mejorar lo que construyo.',
+    'read_work' => 'Ver proyectos', 'cv' => 'Descargar CV',
+    'exploring' => 'Ahora estoy explorando',
+    'research' => 'Pagos con Stripe y contenido con Strapi, integrados con Laravel. Una investigación en curso para seguir mejorando mis proyectos.',
+    'approach' => 'Cómo trabajo y qué estoy aprendiendo',
     'pause' => 'Pausar carrusel', 'play' => 'Reproducir carrusel', 'reduced' => 'Carrusel pausado: movimiento reducido',
     'identity_name' => 'Rogerio Lucas Viana', 'identity_role' => 'Desarrollador Web Full Stack Junior',
     'home_title' => 'Rogerio Lucas Viana | Desarrollador Web Full Stack Junior en Gijón',
     'home_description' => 'Portfolio de Rogerio Lucas Viana, desarrollador web Full Stack Junior en Gijón, Asturias. Proyectos con Laravel, PHP, JavaScript, Docker, SQL y AWS.',
     'page_title' => 'Proyectos Full Stack | Rogerio Lucas Viana',
     'intro' => 'Proyectos, decisiones técnicas y trabajo con Laravel, PHP, JavaScript y automatización.',
-    'projects' => 'Proyectos', 'skills' => 'Habilidades de inicio',
+    'projects' => 'Proyectos', 'skills' => 'Herramientas de Sobre mí',
     'new_project' => 'Nuevo proyecto', 'new_skill' => 'Nueva habilidad',
     'edit_project' => 'Editar proyecto', 'edit_skill' => 'Editar habilidad',
     'saved' => 'Cambios guardados.', 'deleted' => 'Contenido eliminado.',

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminBlogController;
 use App\Http\Controllers\AdminCarouselController;
 use App\Http\Controllers\AdminProjectController;
+use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\AdminSkillController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BlogLoginController;
@@ -19,13 +20,8 @@ Route::redirect('/', '/home');
 
 Route::get('/home', [PortfolioController::class, 'home'])->middleware(BlogLocale::class)->name('home');
 
-Route::get('/about', function () {
-    return renderSection(
-        'about',
-        'Sobre Rogerio Lucas Viana | Desarrollador Web Full Stack Junior',
-        'Conoce la experiencia, competencias y metodología de Rogerio Lucas Viana, desarrollador web Full Stack Junior titulado en DAW y especializado en Laravel, PHP y JavaScript.'
-    );
-})->name('about');
+Route::get('/about', [PortfolioController::class, 'about'])->middleware(BlogLocale::class)->name('about');
+Route::get('/profile/photo', [PortfolioController::class, 'photo'])->name('profile.photo');
 
 Route::get('/mi-periodo-practicas', function () {
     return renderSection(
@@ -45,6 +41,11 @@ Route::middleware(BlogLocale::class)->group(function () {
         Route::get('/login', [BlogLoginController::class, 'create'])->name('login');
         Route::post('/login', [BlogLoginController::class, 'store'])->middleware('throttle:blog-login')->name('login.store');
         Route::middleware([BlogOwner::class, 'auth.session'])->group(function () {
+            Route::get('/admin', [AdminProfileController::class, 'dashboard'])->name('admin.dashboard');
+            Route::get('/admin/profile', [AdminProfileController::class, 'edit'])->name('admin.profile.edit');
+            Route::put('/admin/profile', [AdminProfileController::class, 'update'])->name('admin.profile.update');
+            Route::delete('/admin/profile/photo', [AdminProfileController::class, 'destroyPhoto'])->name('admin.profile.photo.destroy');
+            Route::delete('/admin/profile/exploration', [AdminProfileController::class, 'destroyResearch'])->name('admin.profile.research.destroy');
             Route::post('/logout', [BlogLoginController::class, 'destroy'])->name('logout');
             Route::get('/admin/blog/{blog}/preview', [BlogController::class, 'preview'])->name('admin.blog.preview');
             Route::resource('/admin/blog', AdminBlogController::class)->except('show')->names('admin.blog');
