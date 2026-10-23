@@ -5,6 +5,7 @@
     </header>
     @include('blog.toolbar')
     @include('blog.messages')
+    <p>{{ __('profile.admin.skills_help') }}</p>
     <p>{{ __('portfolio.order_help') }}</p>
     <div class="blog-admin-list">
         @forelse ($skills as $skill)

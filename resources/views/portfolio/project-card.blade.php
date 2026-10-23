@@ -1,27 +1,31 @@
 <article class="cardProject project-card">
+    @if ($detail)
+        <header class="project-detail__heading">
+            <h1>{{ $project->localized('title') }}</h1>
+            <p>{{ $project->localized('period') }} · {{ $project->localized('category') }}</p>
+        </header>
+    @endif
     <div class="project-card__media project-card__media--capture">
         <img src="{{ $project->coverUrl() }}" alt="{{ $project->imageAlt($project->cover_index ?? 0) }}"
             width="960" height="600" loading="{{ $detail ? 'eager' : 'lazy' }}" decoding="async">
     </div>
     <div class="project-card__body">
-        <div class="titleProject">
-            @if ($detail)
-                <h1>{{ $project->localized('title') }}</h1>
-            @else
+        @unless ($detail)
+            <div class="titleProject">
                 <h2><a href="{{ route('projects.show', ['project' => $project->slug, 'lang' => app()->getLocale()]) }}">{{ $project->localized('title') }}</a></h2>
-            @endif
-            <div class="project-card__meta">
-                <span>{{ $project->localized('period') }}</span>
-                <span>{{ $project->localized('category') }}</span>
+                <div class="project-card__meta">
+                    <span>{{ $project->localized('period') }}</span>
+                    <span>{{ $project->localized('category') }}</span>
+                </div>
             </div>
-        </div>
+        @endunless
         @if ($project->technologyList())
             <ul class="project-card__stack">
                 @foreach ($project->technologyList() as $technology)<li>{{ $technology }}</li>@endforeach
             </ul>
         @endif
         <div class="description">
-            @foreach (preg_split('/\R\s*\R/u', $project->localized('content')) as $paragraph)
+            @foreach (preg_split('/\R\s*\R/u', $detail ? $project->localized('content') : ($project->localized('summary') ?: $project->localized('content'))) as $paragraph)
                 <p>{{ $paragraph }}</p>
             @endforeach
         </div>

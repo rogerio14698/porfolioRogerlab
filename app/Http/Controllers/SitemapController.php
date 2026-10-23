@@ -11,11 +11,6 @@ class SitemapController extends Controller
     {
         $urls = [
             [
-                'loc' => route('about'),
-                'priority' => '0.8',
-                'changefreq' => 'monthly',
-            ],
-            [
                 'loc' => route('mi-periodo-practicas'),
                 'priority' => '0.8',
                 'changefreq' => 'monthly',
@@ -43,7 +38,7 @@ class SitemapController extends Controller
         ];
 
         foreach (config('blog.locales') as $locale) {
-            foreach (['home', 'projects'] as $route) {
+            foreach (['home', 'about', 'projects'] as $route) {
                 $urls[] = [
                     'loc' => route($route, ['lang' => $locale]),
                     'priority' => $route === 'home' ? '1.0' : '0.8', 'changefreq' => 'weekly',

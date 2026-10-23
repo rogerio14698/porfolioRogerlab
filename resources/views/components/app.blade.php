@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @php
         $profile = config('seo.profile');
+        $isAdmin = request()->routeIs('admin.*') && ! request()->routeIs('*.preview');
         $defaultTitle = "{$profile['name']} | {$profile['job_title']} en Gijón";
         $defaultDescription = $profile['description'];
         $defaultOgImage = asset($profile['image']);
@@ -69,7 +70,7 @@
     <meta name="twitter:title" content="@yield('twitter_title', $defaultTitle)">
     <meta name="twitter:description" content="@yield('twitter_description', $defaultDescription)">
     <meta name="twitter:image" content="@yield('twitter_image', $defaultOgImage)">
-    <meta name="theme-color" content="#222222">
+    <meta name="theme-color" content="#101715">
     @hasSection('schema_json_ld')
         @yield('schema_json_ld')
     @else
@@ -78,7 +79,7 @@
         </script>
     @endif
 
-    <link rel="preload" href="{{ asset('fonts/big-shoulders-latin-600-v4.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ asset('fonts/jetbrains-mono-latin-v24.woff2') }}" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="{{ asset('fonts/public-sans-latin-v21.woff2') }}" as="font" type="font/woff2" crossorigin>
     <!--Enlace a la carpeta de public/css -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}?v={{ filemtime(public_path('css/app.css')) }}">
@@ -91,13 +92,32 @@
     <link rel="manifest" href="{{ asset('img/favicon/site.webmanifest') }}">
 </head>
 
-<body data-theme="dark">
-    <canvas id="mainShaderBg" aria-hidden="true"></canvas>
+<body data-theme="dark" @class(['admin-shell' => $isAdmin])>
+    @unless ($isAdmin)
+        <canvas id="mainShaderBg" aria-hidden="true"></canvas>
+    @endunless
     <div class="mainContent contenedor">
+        @if ($isAdmin)
+            <header class="admin-topbar titulo">
+                <a class="brandName" href="{{ route('admin.dashboard', ['lang' => app()->getLocale()]) }}">RogerLab_</a>
+                <div class="admin-preferences">
+                    @include('components.secltLanguage')
+                    @include('components.aside')
+                </div>
+            </header>
+            <div class="admin-layout">
+                <details class="admin-menu" data-admin-menu open>
+                    <summary>{{ __('profile.admin.content') }}</summary>
+                    @include('portfolio.admin-navigation')
+                </details>
+                @yield('content')
+            </div>
+        @else
         @include('components.header')
         @include('components.nav')
         @yield('content')
         @include('components.footer')
+        @endif
     </div>
     @vite('resources/js/app.ts')
 </body>

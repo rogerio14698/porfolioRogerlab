@@ -1,5 +1,13 @@
 <section class="seccionContact">
-    <h1 data-i18n="contact.title">Contacto</h1>
+    <div class="contactIntro">
+        <h1 data-i18n="contact.title">Contacto profesional</h1>
+        <p data-i18n="contact.intro">Mi prioridad es crecer dentro de un equipo de desarrollo. También podemos hablar sobre un proyecto para tu empresa.</p>
+        <div class="contactPaths" data-contact-paths hidden>
+            <p data-i18n="contact.choose">¿Qué tienes en mente?</p>
+            <button type="button" data-contact-subject data-i18n="contact.job">Una oportunidad laboral</button>
+            <button type="button" data-contact-subject data-i18n="contact.project">Un proyecto para mi empresa</button>
+        </div>
+    </div>
     <form method="POST" action="{{ route('contact.submit') }}" class="contactForm" novalidate>
         @csrf
 

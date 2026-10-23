@@ -1,13 +1,19 @@
 <?php
 
 return [
+    'focus_role' => 'Junior Full Stack Developer · Laravel and PHP',
+    'personal_intro' => 'I enjoy understanding how things work and researching ways to improve what I build.',
+    'read_work' => 'View projects', 'cv' => 'Download CV',
+    'exploring' => 'Currently exploring',
+    'research' => 'Stripe payments and Strapi content, integrated with Laravel. Research in progress to keep improving my projects.',
+    'approach' => 'How I work and what I am learning',
     'pause' => 'Pause carousel', 'play' => 'Play carousel', 'reduced' => 'Carousel paused: reduced motion',
     'identity_name' => 'Rogerio Lucas Viana', 'identity_role' => 'Junior Full Stack Web Developer',
     'home_title' => 'Rogerio Lucas Viana | Junior Full Stack Web Developer in Gijón',
     'home_description' => 'Rogerio Lucas Viana, Junior Full Stack web developer in Gijón, Asturias. Projects using Laravel, PHP, JavaScript, Docker, SQL and AWS.',
     'page_title' => 'Full Stack projects | Rogerio Lucas Viana',
     'intro' => 'Projects, technical decisions and work with Laravel, PHP, JavaScript and automation.',
-    'projects' => 'Projects', 'skills' => 'Homepage skills',
+    'projects' => 'Projects', 'skills' => 'About page tools',
     'new_project' => 'New project', 'new_skill' => 'New skill',
     'edit_project' => 'Edit project', 'edit_skill' => 'Edit skill',
     'saved' => 'Changes saved.', 'deleted' => 'Content deleted.',

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CarouselSetting;
 use App\Models\Project;
 use App\Models\Skill;
+use App\Models\SiteProfile;
 use App\Services\HomeCarousel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -15,13 +16,86 @@ class PortfolioController extends Controller
     public function home(HomeCarousel $carousel)
     {
         $carouselSettings = CarouselSetting::current();
+        $profile = SiteProfile::current();
 
-        return renderSection('home', __('portfolio.home_title'), __('portfolio.home_description'), 200, null, [
+        return renderSection('home', $profile->text('seo_title'), $profile->text('seo_description'), 200, null, [
+            'siteProfile' => $profile,
             'skills' => Skill::where('is_published', true)->orderBy('position')->orderBy('id')->get(),
+            'proofProjects' => $profile->proofProjects()->published()->get()->groupBy('pivot.area'),
             'discoveries' => $carousel->slides($carouselSettings),
             'carouselSettings' => $carouselSettings,
+            'ogImage' => $profile->photoUrl() ?? asset('img/favicon/android-chrome-512x512.png'),
+            'schemaJsonLd' => $this->profileSchema($profile, 'home'),
             ...$this->alternates('home'),
         ]);
+    }
+
+    public function about()
+    {
+        $profile = SiteProfile::current();
+
+        return renderSection('about', $profile->text('about_seo_title'), $profile->text('about_seo_description'), 200, null, [
+            'siteProfile' => $profile,
+            'skills' => Skill::where('is_published', true)->orderBy('position')->orderBy('id')->get(),
+            'ogImage' => $profile->photoUrl() ?? asset('img/favicon/android-chrome-512x512.png'),
+            'schemaJsonLd' => $this->profileSchema($profile, 'about'),
+            ...$this->alternates('about'),
+        ]);
+    }
+
+    private function profileSchema(SiteProfile $profile, string $route): array
+    {
+        $identity = config('seo.profile');
+        $personId = $identity['portfolio'].'#person';
+        $websiteId = $identity['portfolio'].'#website';
+        $url = route($route, ['lang' => app()->getLocale()]);
+        $person = [
+            '@type' => 'Person', '@id' => $personId, 'name' => $identity['name'],
+            'url' => $identity['portfolio'], 'jobTitle' => $profile->text('role'),
+            'description' => $profile->text('bio1'),
+            'sameAs' => [$identity['linkedin'], $identity['github']],
+            'knowsAbout' => Skill::where('is_published', true)->orderBy('position')->orderBy('id')->get()
+                ->map(fn (Skill $skill) => $skill->label())->all(),
+            'address' => ['@type' => 'PostalAddress', 'addressLocality' => config('seo.city'),
+                'addressRegion' => config('seo.region'), 'addressCountry' => 'ES'],
+        ];
+        if ($profile->photoUrl()) {
+            $person['image'] = $profile->photoUrl();
+        }
+        $graph = [
+            $person,
+            ['@type' => 'WebSite', '@id' => $websiteId, 'name' => 'RogerLab',
+                'url' => $identity['portfolio'], 'author' => ['@id' => $personId]],
+            ['@type' => $route === 'about' ? 'AboutPage' : 'WebPage', '@id' => $url.'#page',
+                'url' => $url, 'name' => $profile->text($route === 'about' ? 'about_seo_title' : 'seo_title'),
+                'description' => $profile->text($route === 'about' ? 'about_seo_description' : 'seo_description'),
+                'inLanguage' => app()->getLocale(), 'about' => ['@id' => $personId],
+                'isPartOf' => ['@id' => $websiteId], 'dateModified' => $profile->updated_at->toIso8601String()],
+        ];
+        if ($route === 'home') {
+            foreach (range(1, 3) as $index) {
+                $graph[] = [
+                    '@type' => 'Service', '@id' => $url."#service-$index",
+                    'name' => $profile->text("offer{$index}_title"),
+                    'description' => $profile->text("offer{$index}_body"),
+                    'provider' => ['@id' => $personId], 'areaServed' => 'Worldwide',
+                    'url' => route('contact'),
+                ];
+            }
+        }
+
+        return ['@context' => 'https://schema.org', '@graph' => $graph];
+    }
+
+    public function photo()
+    {
+        $profile = SiteProfile::current();
+        abort_unless($profile->photo_enabled && $profile->photo_path && Storage::disk('blog')->exists($profile->photo_path), 404);
+
+        return response()->file(Storage::disk('blog')->path($profile->photo_path), [
+            'Content-Type' => 'image/webp', 'X-Content-Type-Options' => 'nosniff',
+            'Cache-Control' => 'no-store, private',
+        ])->setPrivate();
     }
 
     public function index()

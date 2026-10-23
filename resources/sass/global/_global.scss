@@ -34,7 +34,7 @@ h1, h2, h3, h4, h5, h6, p, ul, ol {
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
     font-weight: 600;
-    line-height: 1.1;
+    line-height: 1.25;
     letter-spacing: -0.02em;
     text-wrap: balance;
 }
@@ -72,12 +72,12 @@ input, textarea { caret-color: var(--text-primary); }
     height: 100%;
     pointer-events: none;
     z-index: 0;
-    opacity: 0.18;
+    opacity: 0.1;
     mix-blend-mode: screen;
 }
 
 body[data-theme="light"] #mainShaderBg {
-    opacity: 0.12;
+    opacity: 0.06;
     mix-blend-mode: multiply;
 }
 

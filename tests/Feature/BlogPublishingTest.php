@@ -87,7 +87,7 @@ class BlogPublishingTest extends TestCase
     public function test_first_valid_login_hashes_password_and_removes_only_the_environment_secret(): void
     {
         $this->post('/login', ['email' => config('blog.owner_email'), 'password' => $this->initialPassword])
-            ->assertRedirect(route('admin.blog.index', ['lang' => 'es']));
+            ->assertRedirect(route('admin.dashboard', ['lang' => 'es']));
         $user = User::sole();
         $this->assertAuthenticatedAs($user);
         $this->assertNotSame($this->initialPassword, $user->password);

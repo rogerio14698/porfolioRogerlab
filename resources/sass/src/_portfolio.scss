@@ -13,6 +13,25 @@
     .project-card__actions a { min-height: 44px; }
 }
 
+.project-detail .project-card {
+    .project-detail__heading {
+        grid-column: 1 / -1;
+        display: grid;
+        gap: var(--space-4);
+        margin-bottom: var(--space-6);
+        h1 { font-size: var(--text-display); max-width: 28ch; }
+        p { color: var(--text-secondary); }
+    }
+}
+
+@media (min-width: 64rem) {
+    .project-detail .project-card {
+        .project-card__media { grid-row: 2; }
+        .project-card__body, &:not(:has(.galeria)) .project-card__body { grid-row: 2 / 4; }
+        .galeria { grid-row: 3; }
+    }
+}
+
 .discovery {
     position: relative;
     min-width: 0;

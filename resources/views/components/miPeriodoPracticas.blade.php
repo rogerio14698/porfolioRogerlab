@@ -1,5 +1,6 @@
 <section class="seccionPracticas">
-    <h1 data-i18n="practicas.title">Prácticas FCT como desarrollador de aplicaciones web en MON EVENT SL</h1>
+    <h1 data-i18n="practicas.title">Experiencia en MON EVENT</h1>
+    <p class="internshipContext" data-i18n="practicas.context">Prácticas FCT · MON EVENT SL · Febrero–abril de 2026</p>
 
     <p>
         <span data-i18n="practicas.intro.start">Entre febrero y abril de 2026, participé en proyectos web en entorno real aportando mejoras en rendimiento,
