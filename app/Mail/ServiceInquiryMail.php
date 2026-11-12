@@ -24,8 +24,11 @@ class ServiceInquiryMail extends Mailable
 
     public function envelope(): Envelope
     {
+        // Enviamos a tu buzón oficial del dominio en IONOS (rogeriolucas@rogerlab.es),
+        // que IONOS reenvía de forma transparente y autenticada a tu Gmail.
+        // Si el remitente es tu propio dominio en IONOS, nunca será rechazado por SPF/DKIM.
         return new Envelope(
-            to: [new Address($this->inquiryData['notification_email'] ?? 'rogeriolucas14698@gmail.com', 'Rogerio Lucas')],
+            to: [new Address('rogeriolucas@rogerlab.es', 'Rogerio Lucas - RogerLab')],
             replyTo: [new Address($this->inquiryData['email'], $this->inquiryData['name'])],
             subject: '⚡ Nueva solicitud de servicio freelance DAW: ' . ($this->inquiryData['service_name'] ?? 'Presupuesto general'),
         );

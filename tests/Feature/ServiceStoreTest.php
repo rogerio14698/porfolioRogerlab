@@ -66,7 +66,7 @@ class ServiceStoreTest extends TestCase
         $response->assertSessionHas('service_success');
 
         Mail::assertSent(ServiceInquiryMail::class, function ($mail) {
-            return $mail->hasTo('rogeriolucas14698@gmail.com')
+            return $mail->hasTo('rogeriolucas@rogerlab.es')
                 && $mail->inquiryData['name'] === 'Sandra García';
         });
     }

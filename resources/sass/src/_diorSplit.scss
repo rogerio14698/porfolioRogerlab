@@ -1,59 +1,85 @@
 // ==========================================================================
 // Estilos: Landing Split-Screen Dior (Portal de Entrada RogerLab)
 // Estética de Lujo, Armonía, Fotografía Inmersiva y Tipografía Editorial
-// Totalmente contenida sin scroll en X, Y ni Z
+// Escritorio: Contenida y elegante / Móvil: Con scroll fluido y espaciado ergonómico
 // ==========================================================================
 
 .mainContent-welcome {
     width: 100vw;
-    height: 100vh;
     max-width: 100vw;
-    max-height: 100vh;
     margin: 0;
     padding: 0;
-    overflow: hidden !important;
+    overflow-x: hidden;
+
+    @media (min-width: 901px) {
+        height: 100vh;
+        max-height: 100vh;
+        overflow: hidden !important;
+    }
 }
 
 .dior-split-portal {
-    position: fixed;
-    top: 0;
-    left: 0;
+    position: relative;
     width: 100vw;
-    height: 100vh;
-    max-width: 100vw;
-    max-height: 100vh;
+    min-height: 100vh;
     background-color: #0b110f;
     color: #f3f4f6;
-    overflow: hidden !important;
     display: flex;
     flex-direction: column;
 
-    // Barra superior minimalista flotante
-    .dior-topbar {
-        position: absolute;
+    @media (min-width: 901px) {
+        position: fixed;
         top: 0;
         left: 0;
+        height: 100vh;
+        overflow: hidden !important;
+    }
+
+    // Barra superior minimalista flotante
+    .dior-topbar {
+        position: relative;
         width: 100%;
-        padding: calc(1rem + env(safe-area-inset-top, 0px)) 2.5rem 1rem 2.5rem;
+        padding: calc(1.25rem + env(safe-area-inset-top, 0px)) 2.5rem 1.25rem 2.5rem;
         display: flex;
         justify-content: space-between;
         align-items: center;
         z-index: 40;
-        background: linear-gradient(180deg, rgba(11, 17, 15, 0.92) 0%, rgba(11, 17, 15, 0) 100%);
-        backdrop-filter: blur(4px);
+        background: rgba(11, 17, 15, 0.95);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+        @media (min-width: 901px) {
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-bottom: none;
+            background: linear-gradient(180deg, rgba(11, 17, 15, 0.92) 0%, rgba(11, 17, 15, 0) 100%);
+            backdrop-filter: blur(4px);
+        }
 
         @media (max-width: 640px) {
-            padding: calc(0.75rem + env(safe-area-inset-top, 0px)) 1.25rem 0.5rem 1.25rem;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            padding: calc(1rem + env(safe-area-inset-top, 0px)) 1rem 1rem 1rem;
+            text-align: center;
         }
 
         .dior-brand {
             font-family: var(--font-primary, serif);
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             letter-spacing: 0.35em;
             font-weight: 700;
             color: #ffffff;
             text-decoration: none;
+            white-space: nowrap; // Nunca corta el texto
+            overflow: visible;
+            display: inline-block;
             transition: opacity 0.3s ease;
+
+            @media (max-width: 640px) {
+                font-size: 1.35rem;
+                letter-spacing: 0.25em;
+            }
 
             &:hover {
                 opacity: 0.8;
@@ -63,7 +89,13 @@
         .dior-topbar-actions {
             display: flex;
             align-items: center;
-            gap: 1.5rem;
+            gap: 1.25rem;
+
+            @media (max-width: 640px) {
+                flex-direction: column; // En columna en móvil tal como solicitado
+                width: 100%;
+                gap: 0.75rem;
+            }
 
             .dior-pill-link {
                 color: #d1d5db;
@@ -71,10 +103,18 @@
                 letter-spacing: 0.1em;
                 text-transform: uppercase;
                 text-decoration: none;
-                padding: 0.4rem 1.1rem;
+                padding: 0.45rem 1.4rem;
                 border: 1px solid rgba(255, 255, 255, 0.25);
                 border-radius: 9999px;
+                white-space: nowrap;
                 transition: all 0.3s ease;
+
+                @media (max-width: 640px) {
+                    display: inline-block;
+                    width: auto;
+                    min-width: 140px;
+                    text-align: center;
+                }
 
                 &:hover {
                     color: #ffffff;
@@ -89,35 +129,38 @@
     .dior-split-container {
         display: flex;
         width: 100%;
-        height: 100%;
         flex: 1;
         position: relative;
-        overflow: hidden;
 
         @media (max-width: 900px) {
             flex-direction: column;
+            min-height: auto;
+        }
+
+        @media (min-width: 901px) {
+            height: 100%;
+            overflow: hidden;
         }
     }
 
-    // Paneles 50 / 50: el tamaño del panel y la posición del texto son FIJOS.
-    // Solo la imagen de fondo se expande / hace zoom al hover.
+    // Paneles
     .dior-split-panel {
-        flex: 1 1 50%;
-        width: 50%;
-        height: 100%;
         position: relative;
         display: flex;
         align-items: flex-end;
-        padding: 4.5rem 3.5rem;
         cursor: pointer;
         text-decoration: none;
         outline: none;
         overflow: hidden;
 
         @media (min-width: 901px) {
+            flex: 1 1 50%;
+            width: 50%;
+            height: 100%;
+            padding: 4.5rem 3.5rem;
+
             &:hover,
             &:focus-visible {
-                // El tamaño del panel no cambia para que el texto NO se mueva
                 .dior-bg-image {
                     transform: scale(1.08);
                 }
@@ -129,10 +172,10 @@
         }
 
         @media (max-width: 900px) {
-            flex: 1 1 50%;
             width: 100%;
-            height: 50%;
-            padding: 1.5rem 1.25rem 2.25rem 1.25rem;
+            min-height: 72vh; // Altura generosa con scroll natural
+            padding: 3.5rem 1.5rem 4rem 1.5rem;
+            align-items: center;
             justify-content: center;
         }
 
@@ -154,7 +197,7 @@
             .dior-overlay {
                 position: absolute;
                 inset: 0;
-                background: linear-gradient(180deg, rgba(11, 17, 15, 0.35) 0%, rgba(11, 17, 15, 0.85) 100%);
+                background: linear-gradient(180deg, rgba(11, 17, 15, 0.35) 0%, rgba(11, 17, 15, 0.88) 100%);
                 transition: background 0.5s ease;
             }
         }
@@ -162,76 +205,79 @@
         .dior-content-box {
             position: relative;
             z-index: 10;
-            max-width: 520px;
+            max-width: 540px;
             pointer-events: auto;
 
             @media (max-width: 900px) {
                 max-width: 100%;
-                text-align: center;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
+                width: 100%;
+                background: rgba(11, 17, 15, 0.65);
+                backdrop-filter: blur(8px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 8px;
+                padding: 2.25rem 1.75rem;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             }
 
             .dior-kicker {
                 display: block;
-                font-size: 0.75rem;
+                font-size: 0.8rem;
                 font-weight: 600;
                 letter-spacing: 0.25em;
                 color: #10b981;
                 text-transform: uppercase;
-                margin-bottom: 0.5rem;
-
-                @media (max-width: 640px) {
-                    font-size: 0.68rem;
-                    margin-bottom: 0.25rem;
-                }
+                margin-bottom: 0.75rem;
+                text-align: left;
             }
 
             .dior-title {
                 font-family: var(--font-primary, serif);
-                font-size: clamp(1.6rem, 3.8vw, 3.2rem);
+                font-size: clamp(2rem, 3.8vw, 3.2rem);
                 font-weight: 500;
                 line-height: 1.15;
                 color: #ffffff;
-                margin: 0 0 0.5rem 0;
+                margin: 0 0 1rem 0;
                 letter-spacing: -0.01em;
+                text-align: left;
 
                 @media (max-width: 640px) {
-                    font-size: 1.45rem;
-                    margin-bottom: 0.35rem;
+                    font-size: 1.85rem;
                 }
             }
 
+            // Texto justificado como solicitó el usuario
             .dior-description {
-                font-size: 0.95rem;
-                line-height: 1.5;
+                font-size: 1rem;
+                line-height: 1.65;
                 color: #d1d5db;
-                margin-bottom: 1.25rem;
+                margin-bottom: 2rem;
+                text-align: justify; // Justificado
+                text-justify: inter-word;
+                hyphens: auto;
                 text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
 
                 @media (max-width: 640px) {
-                    font-size: 0.82rem;
-                    line-height: 1.4;
-                    margin-bottom: 0.85rem;
-                    display: -webkit-box;
-                    -webkit-line-clamp: 2;
-                    -webkit-box-orient: vertical;
-                    overflow: hidden;
+                    font-size: 0.95rem;
+                    line-height: 1.6;
+                    margin-bottom: 1.75rem;
                 }
             }
 
             .dior-btn-wrapper {
                 display: flex;
-                justify-content: center;
+
+                @media (max-width: 640px) {
+                    width: 100%;
+                }
             }
 
             .dior-btn {
                 display: inline-flex;
                 align-items: center;
-                gap: 0.6rem;
-                padding: 0.75rem 1.4rem;
-                font-size: 0.85rem;
+                justify-content: center;
+                gap: 0.75rem;
+                padding: 0.9rem 1.8rem;
+                font-size: 0.9rem;
                 font-weight: 600;
                 letter-spacing: 0.08em;
                 text-transform: uppercase;
@@ -243,8 +289,8 @@
                 transition: all 0.3s ease;
 
                 @media (max-width: 640px) {
-                    padding: 0.65rem 1.15rem;
-                    font-size: 0.78rem;
+                    width: 100%;
+                    padding: 0.85rem 1.5rem;
                 }
 
                 svg {
@@ -315,28 +361,35 @@
         }
     }
 
-    // Pie discreto
+    // Pie de la landing (relativo al final para que nunca solape el contenido)
     .dior-bottom-footer {
-        position: absolute;
-        bottom: 0;
-        left: 0;
+        position: relative;
         width: 100%;
-        padding: 0.75rem 1.5rem calc(0.75rem + env(safe-area-inset-bottom, 0px)) 1.5rem;
-        background: linear-gradient(0deg, rgba(11, 17, 15, 0.95) 0%, rgba(11, 17, 15, 0) 100%);
+        padding: 1.5rem 1.5rem calc(1.5rem + env(safe-area-inset-bottom, 0px)) 1.5rem;
+        background: #080d0c;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
         z-index: 30;
-        pointer-events: none;
         text-align: center;
 
+        @media (min-width: 901px) {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(0deg, rgba(11, 17, 15, 0.95) 0%, rgba(11, 17, 15, 0) 100%);
+            border-top: none;
+            pointer-events: none;
+        }
+
         p {
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             letter-spacing: 0.12em;
             text-transform: uppercase;
             color: #9ca3af;
             margin: 0;
 
             @media (max-width: 640px) {
-                font-size: 0.62rem;
-                letter-spacing: 0.08em;
+                font-size: 0.7rem;
+                line-height: 1.5;
             }
         }
     }

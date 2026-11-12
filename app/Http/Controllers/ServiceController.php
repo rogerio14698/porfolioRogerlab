@@ -6,6 +6,7 @@ use App\Mail\ServiceInquiryMail;
 use App\Models\ServiceSetting;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
@@ -88,6 +89,14 @@ class ServiceController extends Controller
      */
     public function submitInquiry(Request $request): RedirectResponse
     {
+        // Validación de seguridad Cloudflare Turnstile anti-spam
+        if (! $this->turnstilePassed($request)) {
+            return back()
+                ->withErrors(['security' => 'No se pudo validar la verificación de seguridad de Cloudflare. Inténtalo de nuevo.'])
+                ->withInput($request->except('cf-turnstile-response'))
+                ->withFragment('contacto-servicios');
+        }
+
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:120'],
             'email' => ['required', 'email:rfc', 'max:180'],
@@ -118,6 +127,43 @@ class ServiceController extends Controller
             ->route('services.index', ['lang' => app()->getLocale()])
             ->with('service_success', '¡Gracias por contactar! He recibido tu solicitud en mi correo. Te responderé en menos de 24 horas con una propuesta a medida.')
             ->withFragment('contacto-servicios');
+    }
+
+    /**
+     * Valida el token de Cloudflare Turnstile para evitar bots y spam.
+     */
+    protected function turnstilePassed(Request $request): bool
+    {
+        if (app()->environment('testing')) {
+            return true;
+        }
+
+        if (app()->isLocal() && blank(config('services.turnstile.secret_key'))) {
+            return true;
+        }
+
+        $token = $request->string('cf-turnstile-response')->toString();
+        if (blank($token)) {
+            return false;
+        }
+
+        $response = Http::asForm()
+            ->timeout(10)
+            ->post(config('services.turnstile.verify_url'), [
+                'secret' => config('services.turnstile.secret_key'),
+                'response' => $token,
+                'remoteip' => $request->ip(),
+            ]);
+
+        if (! $response->ok()) {
+            return false;
+        }
+
+        $result = $response->json();
+        $expectedHost = parse_url((string) config('app.url'), PHP_URL_HOST);
+
+        return (bool) data_get($result, 'success')
+            && (! $expectedHost || data_get($result, 'hostname') === $expectedHost);
     }
 
     /**

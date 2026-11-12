@@ -176,6 +176,12 @@
                 <p>{{ $settings->text('cta_desc') }} Recibiré tu consulta directamente en mi correo personal y te responderé con un presupuesto claro y plazos exactos.</p>
             </div>
 
+            @if ($errors->any())
+                <div class="service-alert-error" role="alert" style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 6px; padding: 1rem 1.5rem; margin-bottom: 2rem; color: #ef4444;">
+                    {{ $errors->first() }}
+                </div>
+            @endif
+
             <form action="{{ route('services.inquiry') }}" method="POST" class="service-inquiry-form" id="serviceInquiryForm">
                 @csrf
 
@@ -234,6 +240,10 @@
                     <textarea id="client_description" name="description" rows="5" required placeholder="Describe qué tipo de web quieres, qué problema tiene tu web actual, o qué proceso te gustaría automatizar...">{{ old('description') }}</textarea>
                     @error('description') <span class="form-error">{{ $message }}</span> @enderror
                 </div>
+
+                {{-- Widget de Cloudflare Turnstile para protección anti-spam --}}
+                <div class="contactTurnstile" data-turnstile-widget data-sitekey="{{ config('services.turnstile.site_key') }}"
+                    data-theme="auto" data-action="services" style="margin: 0.5rem auto 1rem auto; display: flex; justify-content: center;"></div>
 
                 <div class="form-footer-action">
                     <button type="submit" class="submit-inquiry-btn">
