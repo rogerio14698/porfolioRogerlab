@@ -4,6 +4,8 @@ html {
     box-sizing: border-box;
     scrollbar-gutter: stable;
     scroll-padding-top: 6rem;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
 }
 
 *, *::before, *::after {

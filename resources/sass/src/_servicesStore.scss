@@ -4,8 +4,12 @@
 // ==========================================================================
 
 .services-store {
-    padding: 3rem 0 6rem 0;
+    padding: 2rem 0 5rem 0;
     color: #e5e7eb;
+
+    @media (max-width: 640px) {
+        padding: 1rem 0 3.5rem 0;
+    }
 
     // Alerta de éxito al enviar consulta
     .service-alert-success {
@@ -38,6 +42,10 @@
         max-width: 860px;
         margin: 0 auto 5rem auto;
 
+        @media (max-width: 640px) {
+            margin-bottom: 3rem;
+        }
+
         .services-eyebrow {
             display: inline-block;
             font-size: 0.8rem;
@@ -46,15 +54,26 @@
             color: #10b981;
             font-weight: 600;
             margin-bottom: 1.25rem;
+
+            @media (max-width: 640px) {
+                font-size: 0.7rem;
+                letter-spacing: 0.15em;
+                margin-bottom: 0.75rem;
+            }
         }
 
         .services-main-title {
             font-family: var(--font-primary, serif);
-            font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+            font-size: clamp(1.8rem, 4.5vw, 3.6rem);
             line-height: 1.15;
             color: #ffffff;
-            margin: 0 0 1.5rem 0;
+            margin: 0 0 1.25rem 0;
             letter-spacing: -0.01em;
+
+            @media (max-width: 640px) {
+                font-size: 1.75rem;
+                line-height: 1.2;
+            }
         }
 
         .services-subtitle {
@@ -62,6 +81,12 @@
             line-height: 1.7;
             color: #9ca3af;
             margin-bottom: 2rem;
+
+            @media (max-width: 640px) {
+                font-size: 0.95rem;
+                line-height: 1.55;
+                margin-bottom: 1.5rem;
+            }
         }
 
         // Insignia de apertura tecnológica (no nos cerramos a ningún stack)
@@ -79,6 +104,12 @@
             text-align: left;
             line-height: 1.5;
 
+            @media (max-width: 640px) {
+                padding: 0.75rem 1rem;
+                font-size: 0.82rem;
+                margin-bottom: 2rem;
+            }
+
             svg {
                 color: #10b981;
                 flex-shrink: 0;
@@ -92,6 +123,12 @@
             gap: 1.25rem;
             flex-wrap: wrap;
 
+            @media (max-width: 640px) {
+                flex-direction: column;
+                width: 100%;
+                gap: 0.85rem;
+            }
+
             .service-primary-btn {
                 background: #10b981;
                 color: #0c1210;
@@ -101,7 +138,14 @@
                 text-decoration: none;
                 font-size: 0.95rem;
                 letter-spacing: 0.05em;
+                touch-action: manipulation;
                 transition: all 0.3s ease;
+
+                @media (max-width: 640px) {
+                    width: 100%;
+                    text-align: center;
+                    padding: 0.85rem 1.5rem;
+                }
 
                 &:hover {
                     background: #059669;
@@ -113,6 +157,7 @@
             .service-whatsapp-btn {
                 display: inline-flex;
                 align-items: center;
+                justify-content: center;
                 gap: 0.6rem;
                 background: rgba(255, 255, 255, 0.06);
                 border: 1px solid rgba(255, 255, 255, 0.15);
@@ -122,7 +167,13 @@
                 border-radius: 4px;
                 text-decoration: none;
                 font-size: 0.95rem;
+                touch-action: manipulation;
                 transition: all 0.3s ease;
+
+                @media (max-width: 640px) {
+                    width: 100%;
+                    padding: 0.85rem 1.5rem;
+                }
 
                 svg {
                     color: #25d366;
@@ -160,9 +211,15 @@
     // Catálogo de Servicios (Grid)
     .services-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 2rem;
-        margin-bottom: 6rem;
+        margin-bottom: 5rem;
+
+        @media (max-width: 640px) {
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
+            margin-bottom: 3.5rem;
+        }
 
         .service-card {
             background: #111815;
@@ -173,6 +230,10 @@
             flex-direction: column;
             justify-content: space-between;
             transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+
+            @media (max-width: 640px) {
+                padding: 1.5rem 1.25rem;
+            }
 
             &:hover {
                 transform: translateY(-4px);
@@ -290,7 +351,12 @@
         border: 1px solid #1f2d28;
         border-radius: 12px;
         padding: 3.5rem 3rem;
-        margin-bottom: 6rem;
+        margin-bottom: 5rem;
+
+        @media (max-width: 860px) {
+            padding: 2rem 1.25rem;
+            margin-bottom: 3.5rem;
+        }
 
         .maintenance-inner {
             display: grid;
@@ -300,6 +366,7 @@
 
             @media (max-width: 860px) {
                 grid-template-columns: 1fr;
+                gap: 2rem;
             }
 
             .maintenance-text {
@@ -396,12 +463,21 @@
 
     // Modalidades de Contratación (Planes)
     .pricing-plans-section {
-        margin-bottom: 6rem;
+        margin-bottom: 5rem;
+
+        @media (max-width: 640px) {
+            margin-bottom: 3.5rem;
+        }
 
         .plans-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
+
+            @media (max-width: 640px) {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
 
             .plan-card {
                 background: #111815;
@@ -413,6 +489,10 @@
                 justify-content: space-between;
                 position: relative;
                 transition: transform 0.3s ease;
+
+                @media (max-width: 640px) {
+                    padding: 1.75rem 1.25rem;
+                }
 
                 &.plan-card-featured {
                     border-color: #10b981;
@@ -600,7 +680,7 @@
                         border-radius: 4px;
                         padding: 0.75rem 1rem;
                         color: #ffffff;
-                        font-size: 0.95rem;
+                        font-size: 16px; // Evita el zoom automático en Safari iOS
                         font-family: inherit;
                         transition: border-color 0.2s ease, box-shadow 0.2s ease;
 
@@ -624,6 +704,7 @@
                     .submit-inquiry-btn {
                         display: inline-flex;
                         align-items: center;
+                        justify-content: center;
                         gap: 0.75rem;
                         background: #10b981;
                         color: #0c1210;
@@ -634,7 +715,15 @@
                         font-size: 1rem;
                         letter-spacing: 0.05em;
                         cursor: pointer;
+                        touch-action: manipulation;
+                        user-select: none;
+                        -webkit-user-select: none;
                         transition: all 0.3s ease;
+
+                        @media (max-width: 640px) {
+                            width: 100%;
+                            padding: 0.9rem 1.5rem;
+                        }
 
                         &:hover {
                             background: #059669;
