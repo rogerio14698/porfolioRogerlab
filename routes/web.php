@@ -4,19 +4,26 @@ use App\Http\Controllers\AdminBlogController;
 use App\Http\Controllers\AdminCarouselController;
 use App\Http\Controllers\AdminProjectController;
 use App\Http\Controllers\AdminProfileController;
+use App\Http\Controllers\AdminServiceController;
 use App\Http\Controllers\AdminSkillController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BlogLoginController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PdfCvController;
 use App\Http\Controllers\PortfolioController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Middleware\BlogLocale;
 use App\Http\Middleware\BlogOwner;
 use App\Http\Middleware\PrivateBlogResponse;
 use Illuminate\Support\Facades\Route;
 
-Route::redirect('/', '/home');
+// Ruta principal estilo Dior: Landing dividida interactiva
+Route::get('/', [ServiceController::class, 'welcome'])->middleware(BlogLocale::class)->name('welcome');
+
+// Tienda / Estudio de Servicios Freelance DAW
+Route::get('/servicios', [ServiceController::class, 'index'])->middleware(BlogLocale::class)->name('services.index');
+Route::post('/servicios/solicitud', [ServiceController::class, 'submitInquiry'])->middleware('throttle:contact-form')->name('services.inquiry');
 
 Route::get('/home', [PortfolioController::class, 'home'])->middleware(BlogLocale::class)->name('home');
 
@@ -54,6 +61,8 @@ Route::middleware(BlogLocale::class)->group(function () {
             Route::resource('/admin/skills', AdminSkillController::class)->except('show')->names('admin.skills');
             Route::get('/admin/carousel', [AdminCarouselController::class, 'edit'])->name('admin.carousel.edit');
             Route::put('/admin/carousel', [AdminCarouselController::class, 'update'])->name('admin.carousel.update');
+            Route::get('/admin/services', [AdminServiceController::class, 'edit'])->name('admin.services.edit');
+            Route::put('/admin/services', [AdminServiceController::class, 'update'])->name('admin.services.update');
         });
     });
 });

@@ -7,6 +7,7 @@
     @php
         $profile = config('seo.profile');
         $isAdmin = request()->routeIs('admin.*') && ! request()->routeIs('*.preview');
+        $isWelcome = request()->routeIs('welcome') || ($section ?? '') === 'welcomeDior';
         $defaultTitle = "{$profile['name']} | {$profile['job_title']} en Gijón";
         $defaultDescription = $profile['description'];
         $defaultOgImage = asset($profile['image']);
@@ -96,7 +97,7 @@
     @unless ($isAdmin)
         <canvas id="mainShaderBg" aria-hidden="true"></canvas>
     @endunless
-    <div class="mainContent contenedor">
+    <div @class(['mainContent contenedor' => ! $isWelcome, 'mainContent-welcome' => $isWelcome])>
         @if ($isAdmin)
             <header class="admin-topbar titulo">
                 <a class="brandName" href="{{ route('admin.dashboard', ['lang' => app()->getLocale()]) }}">RogerLab_</a>
@@ -112,11 +113,14 @@
                 </details>
                 @yield('content')
             </div>
+        @elseif ($isWelcome)
+            {{-- En la landing Dior split-screen mostramos una experiencia inmersiva limpia sin cabecera tradicional --}}
+            @yield('content')
         @else
-        @include('components.header')
-        @include('components.nav')
-        @yield('content')
-        @include('components.footer')
+            @include('components.header')
+            @include('components.nav')
+            @yield('content')
+            @include('components.footer')
         @endif
     </div>
     @vite('resources/js/app.ts')

@@ -35,6 +35,30 @@
             background: var(--action-bg);
             color: var(--action-text);
         }
+
+        &.nav-switch-services {
+            background: rgba(16, 185, 129, 0.15);
+            color: #10b981;
+            border-radius: 4px;
+            margin-left: var(--space-2);
+
+            &:hover {
+                background: #10b981;
+                color: #0c1210;
+            }
+        }
+
+        &.nav-switch-portfolio {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            border-radius: 4px;
+            margin-left: var(--space-2);
+
+            &:hover {
+                background: var(--surface-raised);
+                color: var(--text-primary);
+            }
+        }
     }
 
     .selectIdioma { display: flex; gap: var(--space-1); }

@@ -1,8 +1,14 @@
 <div id="dynamic-section" data-section="{{ $section }}"
-    @if (in_array($section, ['home', 'about', 'adminDashboard', 'profileEditor', 'projects', 'project', 'projectsAdmin', 'projectEditor', 'skillsAdmin', 'skillEditor', 'carouselAdmin', 'blog', 'blogLogin', 'blogAdmin', 'blogEditor'])) data-server-language="{{ app()->getLocale() }}" @endif
+    @if (in_array($section, ['welcomeDior', 'servicesStore', 'servicesAdmin', 'home', 'about', 'adminDashboard', 'profileEditor', 'projects', 'project', 'projectsAdmin', 'projectEditor', 'skillsAdmin', 'skillEditor', 'carouselAdmin', 'blog', 'blogLogin', 'blogAdmin', 'blogEditor'])) data-server-language="{{ app()->getLocale() }}" @endif
     data-page-title="{{ $pageTitle ?? 'RogerLab | Desarrollador Full Stack titulado en DAW' }}"
     data-meta-description="{{ $pageMetaDescription ?? 'Portfolio de Rogério Lucas, desarrollador Full Stack titulado en DAW. Proyectos con Laravel, PHP, JavaScript, bases de datos, Docker y AWS orientados a código mantenible y trabajo en equipo.' }}">
-    @if ($section === 'home')
+    @if ($section === 'welcomeDior')
+        @include('components.welcomeDior')
+    @elseif ($section === 'servicesStore')
+        @include('components.servicesStore')
+    @elseif ($section === 'servicesAdmin')
+        @include('portfolio.admin-services')
+    @elseif ($section === 'home')
         @include('components.textoAbout')
     @elseif ($section === 'about')
         @include('components.about')

@@ -9,3 +9,4 @@ import './portfolio';
 import './carousel-admin';
 import './contact-paths';
 import './admin-editor';
+import './dior-and-services';

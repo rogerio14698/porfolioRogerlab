@@ -1008,6 +1008,13 @@
             setStoredLanguage(language);
             var url = new URL(window.location.href);
             url.searchParams.set('lang', language);
+
+            // Transición suave SPA sin recarga completa de la ventana
+            if (window.__rogerlabNavigate) {
+                window.__rogerlabNavigate(url.href);
+                return;
+            }
+
             window.location.assign(url.href);
             return;
         }

@@ -5,6 +5,10 @@
     </header>
     @include('blog.messages')
     <div class="admin-destinations">
+        <a class="admin-destination" href="{{ route('admin.services.edit', ['lang' => app()->getLocale()]) }}">
+            <h2>Tienda & Servicios Freelance</h2>
+            <p>Gestiona textos de la tienda, catálogo de servicios DAW, tarifas de mantenimiento, bolsa de horas y correos de notificación.</p>
+        </a>
         @foreach ([
             ['admin.profile.edit', 'profile.admin.profile', 'profile.admin.profile_help'],
             ['admin.projects.index', 'portfolio.projects', 'profile.admin.projects_help'],

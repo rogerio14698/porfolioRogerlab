@@ -171,6 +171,7 @@
 
     function init() {
         updateActiveLinks();
+        window.__rogerlabNavigate = navigate;
         document.addEventListener('click', handleLinkClick);
         window.addEventListener('popstate', handleHistoryNavigation);
     }

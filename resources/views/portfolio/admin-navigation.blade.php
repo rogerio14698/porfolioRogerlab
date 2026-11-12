@@ -1,6 +1,7 @@
 <nav class="admin-navigation" aria-label="{{ __('profile.admin.content') }}">
     @foreach ([
         ['admin.dashboard', 'profile.admin.dashboard', 'admin.dashboard'],
+        ['admin.services.edit', 'Tienda & Servicios Freelance', 'admin.services.*'],
         ['admin.profile.edit', 'profile.admin.profile', 'admin.profile.*'],
         ['admin.projects.index', 'portfolio.projects', 'admin.projects.*'],
         ['admin.skills.index', 'profile.admin.tools', 'admin.skills.*'],
